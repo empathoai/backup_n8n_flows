@@ -1,0 +1,2029 @@
+{
+  "active": false,
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Moderador Data",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent Log Data",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent Log Data",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Moderador Data",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for Group Member": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Log Data",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent Create Message",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent Create Message",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Group?": {
+      "main": [
+        [
+          {
+            "node": "AI Moderador Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Moderador Data": {
+      "main": [
+        [
+          {
+            "node": "Normalize Data 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Need Actions?": {
+      "main": [
+        [
+          {
+            "node": "AI Agent Log Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent Log Data": {
+      "main": [
+        [
+          {
+            "node": "Normalize Data 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Log Data",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New Row": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent Log Data",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Data 1": {
+      "main": [
+        [
+          {
+            "node": "Need Actions?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Data 2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent Create Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Message": {
+      "main": [
+        [
+          {
+            "node": "Is Group?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Gmail_Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Validate If Allow Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate If Allow Message": {
+      "main": [
+        [
+          {
+            "node": "Send message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate If Group": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory3": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Message2": {
+      "main": [
+        [
+          {
+            "node": "Validate If Group",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [],
+        [],
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Audio1": {
+      "main": [
+        [
+          {
+            "node": "Audio transcription",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Audio transcription": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download API audio": {
+      "main": [
+        [
+          {
+            "node": "Analyze Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image + Text Prompt": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Image": {
+      "main": [
+        [
+          {
+            "node": "Image + Text Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Products": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Order": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory4": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-25T13:56:02.230Z",
+  "id": "fvs2DJIBYW5guPsn",
+  "isArchived": false,
+  "meta": null,
+  "name": "Community / Testing / AI WhatsApp",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c57b7734-8edf-4133-9166-b6ca7ba7fe1d",
+      "name": "AI Agent11",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        -512,
+        -256
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "content": "## WhatsApp Group Moderator - Setup Guide\n\n### Requirements\n- Wassenger account (Device ID + API Key)\n- Google Sheet with columns: Group Member | Group ID | Total Strikes | Status | Last violation Date | Last violation Type\n- OpenAI API Key (gpt-4o-mini recommended)\n\n### Configuration Steps\n\n**1. Wassenger Trigger**\n- Add API Key and Device ID\n- Event: \"message:in:new\"\n- Sample: \"group-inbound\"\n\n**2. OpenAI Models (3 nodes)**\n- Connect API Key to all 3 Chat Model nodes\n- Model: gpt-4o-mini\n\n**3. Google Sheets (3 nodes)**\n- Connect Google account\n- Link same spreadsheet to all 3:\n  - \"Check for Group Member\" (READ)\n  - \"Update Google Sheets\" (UPDATE)\n  - \"Create New Row\" (APPEND)\n\n**4. Wassenger Actions**\n- Add Device ID to action nodes\n\n### How It Works\nReceives message → AI detects violation → Logs to database → Deletes message → Sends warning → Kicks at 3 strikes\n\n### Critical Notes\n- Phone format: Database uses `34665104840` (no +), WhatsApp mentions use `+34665104840` (with +)\n- Always +1 strike per violation regardless of severity\n- 1 strike = warned_1 | 2 strikes = warned_2 | 3+ strikes = removed\n- One row per phone number in Google Sheets\n\n### Testing\n1. Acceptable message → No action\n2. First violation → Strike 1, warning sent\n3. Second violation → Strike 2, final warning\n4. Third violation → Strike 3, user kicked\n\n### Troubleshooting\n- Duplicate entries → AI using APPEND instead of UPDATE\n- Phone not found → Remove + from database column\n- Message not deleted → Check Device ID and permissions",
+        "height": 1160,
+        "width": 750,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4080,
+        -432
+      ],
+      "id": "22dbdc89-8670-4aff-aa36-d01a2163c2fc",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2688,
+        352
+      ],
+      "id": "5aa59850-602e-4c99-8c4f-ace016b6a361",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1888,
+        384
+      ],
+      "id": "6402a2ae-5fb1-4604-b8ac-c64f6f286dba",
+      "name": "OpenAI Chat Model1"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Is Group?').item.json.device.id }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1728,
+        384
+      ],
+      "id": "c7ce59f2-f93c-438f-9ca0-2059f2a8c168",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Is Group?').item.json.data.chat.id }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -2528,
+        352
+      ],
+      "id": "641f14a7-5fab-493c-802e-f4085308fd7f",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ",
+          "mode": "list",
+          "cachedResultName": "AI WhatsApp Group Moderator",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Group Member",
+              "lookupValue": "={{ $('Normalize Data 1').item.json.phone_number }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        -1600,
+        384
+      ],
+      "id": "c3b80c3f-3417-4a06-b49a-38f30cd6d0f2",
+      "name": "Check for Group Member"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -976,
+        384
+      ],
+      "id": "47785c73-a465-4bfa-98b0-03a9a4e4b40b",
+      "name": "OpenAI Chat Model2"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.group_id }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -816,
+        384
+      ],
+      "id": "475a26d2-064c-42b4-b7fc-cd12c8602b18",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "check-group",
+              "leftValue": "={{ $json.data.chat.type }}",
+              "rightValue": "group",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2912,
+        144
+      ],
+      "id": "62536c9c-0a2a-4261-a38c-0495a77699b9",
+      "name": "Is Group?"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze this Wassenger webhook data:\n\nPhone: {{ $json.data.fromNumber }}\nSent: {{ $json.data.events.sent.date }}\nMessage: {{ $json.data.body }}\nType: {{ $json.data.type }}\nTo: {{ $json.data.to }}\nID: {{ $json.data.id }}\n\nReturn complete JSON with data extraction AND moderation analysis.",
+        "options": {
+          "systemMessage": "=You are a dual-function AI agent for WhatsApp community moderation via Wassenger API.\n\nFUNCTION 1: DATA EXTRACTION\nExtract and structure message information into standardized format.\n\nFUNCTION 2: CONTENT MODERATION\nAnalyze message content for policy violations in professional business communities.\n\n═══════════════════════════════════════════════════════════\nCOMMUNITY GUIDELINES TO ENFORCE\n═══════════════════════════════════════════════════════════\n\n🔴 HIGH SEVERITY VIOLATIONS (immediate action):\n- Insults, offensive language, personal attacks\n- Discrimination (race, gender, religion, sexual orientation)\n- Threats, harassment, bullying\n- Sexual content or inappropriate material\n- Hate speech or incitement to violence\n- Sharing others' private information (doxxing)\n- Scams or fraudulent schemes\n\n🟡 MEDIUM SEVERITY VIOLATIONS (warning):\n- Unsolicited advertising or spam\n- Promotional links without context\n- Repetitive messages (same content >2 times)\n- Chain messages or pyramid schemes\n- Crude language (not directly offensive)\n- Persistent off-topic content after warnings\n- Excessive use of @mentions\n\n🟢 LOW SEVERITY VIOLATIONS (log only):\n- Message flooding (>5 messages in <2 minutes)\n- EXCESSIVE USE OF CAPS\n- Emoji spam (>10 emojis in single message)\n- Minor off-topic conversation\n- Low-value content but harmless\n\n✅ ACCEPTABLE CONTENT:\n- Professional discussions\n- Questions and answers related to community topic\n- Sharing experiences with products/services (natural context)\n- Constructive debates (respectful disagreement)\n- Educational resources and links\n- Appropriate humor among members\n- Networking and collaboration\n\n❓ REQUIRES HUMAN REVIEW:\n- Sarcasm or irony that's ambiguous\n- Cultural context that may be misunderstood\n- References to previous conversations\n- Technical jargon that could seem inappropriate\n- Borderline content (confidence < 0.7)\n- Disputes between regular members\n- Complex situations requiring nuanced judgment\n\n═══════════════════════════════════════════════════════════\nMODERATION LOGIC\n═══════════════════════════════════════════════════════════\n\nCONFIDENCE LEVELS:\n- 0.9-1.0: Clear violation, take automatic action\n- 0.7-0.89: Very likely violation, warn user\n- 0.5-0.69: Possible violation, requires human review\n- 0.3-0.49: Doubtful, probably acceptable\n- 0.0-0.29: Clearly acceptable content\n\nRECOMMENDED ACTIONS:\n- \"delete_and_warn\": Remove message + send warning (HIGH severity, confidence >0.8)\n- \"warn_only\": Send warning, keep message (MEDIUM severity, confidence >0.6)\n- \"log_only\": Just record for monitoring (LOW severity)\n- \"none\": No action needed (acceptable content)\n\n═══════════════════════════════════════════════════════════\nREQUIRED JSON OUTPUT FORMAT\n═══════════════════════════════════════════════════════════\n\nYou MUST return ONLY a valid JSON object with ALL these fields:\n\n{\n  \"phone_number\": \"string with country code (from fromNumber)\",\n  \"date\": \"YYYY-MM-DD (from events.sent.date)\",\n  \"time\": \"HH:mm:ss (from events.sent.date)\",\n  \"message_body\": \"exact message text (from body)\",\n  \"message_type\": \"text|image|video|audio|document|sticker (from type)\",\n  \"group_id\": \"group identifier (from to)\",\n  \"message_id\": \"unique id (from id)\",\n  \"moderation\": {\n    \"violation_detected\": boolean,\n    \"severity\": \"high\"|\"medium\"|\"low\"|\"none\",\n    \"violation_type\": \"offensive\"|\"spam\"|\"harassment\"|\"flood\"|\"offtopic\"|\"inappropriate_promo\"|\"scam\"|\"none\",\n    \"confidence\": number between 0.0 and 1.0,\n    \"reason\": \"brief explanation in English (max 150 chars)\",\n    \"recommended_action\": \"delete_and_warn\"|\"warn_only\"|\"log_only\"|\"none\",\n    \"keywords_detected\": [\"array\", \"of\", \"problematic\", \"words\"],\n    \"requires_human_review\": boolean,\n    \"context_notes\": \"additional observations or context\"\n  }\n}\n\n═══════════════════════════════════════════════════════════\nSTRICT RULES\n═══════════════════════════════════════════════════════════\n\nDATA EXTRACTION:\n1. Extract phone_number from \"fromNumber\" field (add + if missing)\n2. Extract date by splitting \"events.sent.date\" on 'T' (first part)\n3. Extract time by splitting \"events.sent.date\" on 'T' (second part, remove milliseconds)\n4. Copy message_body exactly as provided (do NOT modify)\n5. Extract message_type from \"type\" field\n6. Extract group_id from \"to\" field\n7. Extract message_id from \"id\" field\n8. If any field is missing, use null\n\nMODERATION ANALYSIS:\n1. Analyze message content against community guidelines\n2. Consider context, intent, and tone\n3. Be more lenient with unclear cases (set requires_human_review: true)\n4. Detect patterns (flooding, spam, repetition)\n5. Identify specific problematic keywords\n6. Provide clear, actionable reason for violations\n7. Set appropriate confidence level based on certainty\n\nOUTPUT FORMAT:\n1. Return ONLY valid JSON\n2. NO markdown code blocks\n3. NO explanations outside JSON\n4. NO extra text before or after JSON\n5. Ensure all required fields are present\n6. Use proper JSON types (boolean, number, string, array)\n\n═══════════════════════════════════════════════════════════\nEXAMPLES\n═══════════════════════════════════════════════════════════\n\nExample 1 - Acceptable Message:\nInput: \"Anyone know a good project management tool? We need something for our team.\"\nOutput:\n{\n  \"phone_number\": \"+34612345678\",\n  \"date\": \"2025-10-02\",\n  \"time\": \"14:30:00\",\n  \"message_body\": \"Anyone know a good project management tool? We need something for our team.\",\n  \"message_type\": \"text\",\n  \"group_id\": \"120012345905412345@g.us\",\n  \"message_id\": \"3EB0ABC123\",\n  \"moderation\": {\n    \"violation_detected\": false,\n    \"severity\": \"none\",\n    \"violation_type\": \"none\",\n    \"confidence\": 0.95,\n    \"reason\": \"Legitimate business question, on-topic for professional community\",\n    \"recommended_action\": \"none\",\n    \"keywords_detected\": [],\n    \"requires_human_review\": false,\n    \"context_notes\": \"Productive community engagement\"\n  }\n}\n\nExample 2 - High Severity Violation:\nInput: \"You're an idiot, stop posting this garbage\"\nOutput:\n{\n  \"phone_number\": \"+34698765432\",\n  \"date\": \"2025-10-02\",\n  \"time\": \"15:45:00\",\n  \"message_body\": \"You're an idiot, stop posting this garbage\",\n  \"message_type\": \"text\",\n  \"group_id\": \"120012345905412345@g.us\",\n  \"message_id\": \"3EB0DEF456\",\n  \"moderation\": {\n    \"violation_detected\": true,\n    \"severity\": \"high\",\n    \"violation_type\": \"offensive\",\n    \"confidence\": 0.96,\n    \"reason\": \"Direct insult and offensive language toward another member\",\n    \"recommended_action\": \"delete_and_warn\",\n    \"keywords_detected\": [\"idiot\", \"garbage\"],\n    \"requires_human_review\": false,\n    \"context_notes\": \"Clear personal attack, immediate moderation needed\"\n  }\n}\n\nExample 3 - Medium Severity Violation:\nInput: \"🔥 AMAZING OFFER! Click here to earn $5000/month working from home! Limited time! 💰💰💰 https://sketchy-link.com\"\nOutput:\n{\n  \"phone_number\": \"+34611223344\",\n  \"date\": \"2025-10-02\",\n  \"time\": \"16:20:00\",\n  \"message_body\": \"🔥 AMAZING OFFER! Click here to earn $5000/month working from home! Limited time! 💰💰💰 https://sketchy-link.com\",\n  \"message_type\": \"text\",\n  \"group_id\": \"120012345905412345@g.us\",\n  \"message_id\": \"3EB0GHI789\",\n  \"moderation\": {\n    \"violation_detected\": true,\n    \"severity\": \"medium\",\n    \"violation_type\": \"spam\",\n    \"confidence\": 0.92,\n    \"reason\": \"Unsolicited promotional content with suspicious link and get-rich-quick language\",\n    \"recommended_action\": \"warn_only\",\n    \"keywords_detected\": [\"AMAZING OFFER\", \"earn $5000\", \"Limited time\"],\n    \"requires_human_review\": false,\n    \"context_notes\": \"Typical spam pattern, no business context provided\"\n  }\n}\n\nExample 4 - Requires Review:\nInput: \"This idea is completely stupid, but I mean that in the most constructive way possible 😅\"\nOutput:\n{\n  \"phone_number\": \"+34655443322\",\n  \"date\": \"2025-10-02\",\n  \"time\": \"17:10:00\",\n  \"message_body\": \"This idea is completely stupid, but I mean that in the most constructive way possible 😅\",\n  \"message_type\": \"text\",\n  \"group_id\": \"120012345905412345@g.us\",\n  \"message_id\": \"3EB0JKL012\",\n  \"moderation\": {\n    \"violation_detected\": true,\n    \"severity\": \"low\",\n    \"violation_type\": \"offtopic\",\n    \"confidence\": 0.55,\n    \"reason\": \"Harsh language but appears self-aware and potentially joking\",\n    \"recommended_action\": \"log_only\",\n    \"keywords_detected\": [\"stupid\"],\n    \"requires_human_review\": true,\n    \"context_notes\": \"Ambiguous intent - could be friendly banter or veiled insult. Context from previous messages needed.\"\n  }\n}\n\n═══════════════════════════════════════════════════════════\n\nNow analyze the message data provided below and return the complete JSON output."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -2608,
+        144
+      ],
+      "id": "02be0fcb-3490-403e-9fa5-55751147fc20",
+      "name": "AI Moderador Data"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "check-skip",
+              "leftValue": "={{ $json.violation_detected }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2016,
+        144
+      ],
+      "id": "84dbcbdd-ed2b-4554-b9bd-b564645d8338",
+      "name": "Need Actions?"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Manage strike record for this violation:\n\nPhone: {{ $('Normalize Data 1').item.json.phone_number }}\nGroup: {{ $json.group_id }}\nSeverity: {{ $json.severity }}\nType: {{ $json.violation_type }}\nReason: {{ $json.reason }}\nTime: \n\nSearch user, calculate strikes, update database, and return status.",
+        "options": {
+          "systemMessage": "=You are a strike calculation and database management agent for WhatsApp group moderation.\n\nYour ONLY responsibilities:\n1. Search for user in Google Sheets by phone number\n2. Calculate strike points based on violation severity\n3. Update or create user record in database\n\nYou do NOT create warning messages - that's handled by another agent.\n\n═══════════════════════════════════════════════════════════\nAVAILABLE TOOLS - USE ALL 3 CORRECTLY\n═══════════════════════════════════════════════════════════\n\nYou have access to 3 Google Sheets tools:\n\n1. \"Check for Group Member\" - READ operation\n   Purpose: Search for existing users by phone number\n   When: ALWAYS use this FIRST to check if user exists\n\n2. \"Udate Google Sheets\" - UPDATE operation\n   Purpose: Update an EXISTING row\n   When: Use ONLY if user was FOUND in step 1 {{ $('Normalize Data 1').item.json.phone_number }}\n\n3. \"Google Sheets\" - APPEND operation\n   Purpose: Create a NEW row\n   When: Use ONLY if user was NOT FOUND in step 1 \n\n⚠️ CRITICAL WORKFLOW:\nStep 1: ALWAYS use \"Check for Group Member\" first\nStep 2a: If FOUND → use \"Udate Google Sheets (update: sheet)\" to UPDATE\nStep 2b: If NOT FOUND → use \"Create New Row (append: sheet)\" to APPEND\n\n═══════════════════════════════════════════════════════════\nGOOGLE SHEETS STRUCTURE\n═══════════════════════════════════════════════════════════\n\nColumns:\n- Group Member: Phone number with + and country code (e.g., 34665104840) - UNIQUE KEY\n- Group ID: WhatsApp group ID\n- Total Strikes: Integer (0-3+)\n- Last violation Date: ISO 8601 timestamp\n- Last violation Type: Violation category\n- Status: \"active\" | \"warned_1\" | \"warned_2\" | \"removed\"\n\n═══════════════════════════════════════════════════════════\nSTRIKE CALCULATION RULES\n═══════════════════════════════════════════════════════════\n\nCRITICAL: Always add EXACTLY 1 strike per violation, regardless of severity.\n\nStrike progression:\n- 1st violation = 1 strike → status = \"warned_1\"\n- 2nd violation = 2 strikes total → status = \"warned_2\"\n- 3rd violation = 3 strikes total → status = \"removed\"\n\n═══════════════════════════════════════════════════════════\nDETAILED WORKFLOW\n═══════════════════════════════════════════════════════════\n\nSTEP 1: SEARCH USER (MANDATORY)\nTool: \"Check for Group Member\"\nAction: Search by {{ $('Normalize Data 1').item.json.phone_number }}\nWait for result before proceeding.\n\nSTEP 2: EVALUATE RESULT\n\nCase A - User EXISTS (tool returns data):\n  - Proceed to STEP 3\n\nCase B - User DOES NOT EXIST (tool returns empty/null):\n  - Proceed to STEP 3\n\nSTEP 3: CALCULATE NEW STRIKES\nnew_total_strikes = previous_strikes + 1\n\nSTEP 4: DETERMINE STATUS\nif new_total_strikes >= 3:\n  new_status = \"removed\"\nelif new_total_strikes == 2:\n  new_status = \"warned_2\"\nelif new_total_strikes == 1:\n  new_status = \"warned_1\"\nelse:\n  new_status = \"active\"\n\nSTEP 5: WRITE TO DATABASE\n\nIf user is registered (user was found):\n  Use Tool: \"Udate Google Sheets\" (update: sheet)\n  Action: Update the existing row with:\n    - Total Strikes: new_total_strikes\n    - Last violation Date: current timestamp\n    - Last violation Type: violation_type\n    - Status: new_status\n\nIf does not exist (user was NOT found):\n  Use Tool: \"Create New Row\" (append: sheet)\n  Action: Create new row with:\n    - Group Member: phone_number\n    - Group ID: group_id\n    - Total Strikes: new_total_strikes\n    - Last violation Date: current timestamp\n    - Last violation Type: violation_type\n    - Status: new_status\n  The tool will add a new row to the sheet.\n\n═══════════════════════════════════════════════════════════\nCRITICAL RULES\n═══════════════════════════════════════════════════════════\n\n1. ⚠️ ALWAYS use \"Check for Group Member\" FIRST\n2. ⚠️ If user EXISTS → use \"Udate Google Sheets\" (UPDATE)\n3. ⚠️ If user NOT EXISTS → use \"Google Sheets\" (APPEND)\n4. ⚠️ Phone number must have + prefix for matching\n5. ⚠️ \"Group Member\" column is the unique identifier\n6. ⚠️ NEVER use APPEND for existing users\n7. ⚠️ NEVER use UPDATE for new users\n8. ⚠️ There should be ONE row per phone number\n\n═══════════════════════════════════════════════════════════\nEXAMPLE 1 - NEW USER\n═══════════════════════════════════════════════════════════\n\nInput: phone=\"{{ $('Normalize Data 1').item.json.phone_number }}\", group=\"120363402337148387@g.us\", type=\"offensive\"\n\nStep 1: [Tool: Check for Group Member]\n  Search phone: {{ $('Normalize Data 1').item.json.phone_number }}\n  Result: NOT FOUND\n\nStep 2: existed_before=false, previous_strikes=0\nStep 3: new_total_strikes = 0 + 1 = 1\nStep 4: new_status = \"warned_1\"\nStep 5: [Tool: Google Sheets - APPEND operation]\n  Create new row:\n  - Group Member: {{ $('Normalize Data 1').item.json.phone_number }}\n  - Group ID: 120363402337148387@g.us\n  - Total Strikes: 1\n  - Status: warned_1\n  - Last violation Date: 2025-10-06T20:00:00.000Z\n  - Last violation Type: offensive\n\nOutput JSON:\n{\n  \"phone_number\": \"{{ $('Normalize Data 1').item.json.phone_number }}\",\n  \"group_id\": \"120363402337148387@g.us\",\n  \"existed_before\": false,\n  \"previous_strikes\": 0,\n  \"strikes_added\": 1,\n  \"new_total_strikes\": 1,\n  \"new_status\": \"warned_1\",\n  \"database_updated\": true,\n  \"database_operation\": \"APPEND\",\n  \"update_timestamp\": \"2025-10-06T20:00:00.000Z\",\n  \"violation_severity\": \"high\",\n  \"violation_type\": \"offensive\"\n}\n\n═══════════════════════════════════════════════════════════\nEXAMPLE 2 - EXISTING USER (SECOND STRIKE)\n═══════════════════════════════════════════════════════════\n\nInput: phone=\"{{ $('Normalize Data 1').item.json.phone_number }}\", type=\"spam\"\n\nStep 1: [Tool: Check for Group Member]\n  Search phone=\"{{ $('Normalize Data 1').item.json.phone_number }}\"\n  Result: FOUND\n    - Total Strikes: 1\n    - Status: warned_1\n\nStep 2: existed_before=true, previous_strikes=1\nStep 3: new_total_strikes = 1 + 1 = 2\nStep 4: new_status = \"warned_2\"\nStep 5: [Tool: Udate Google Sheets - UPDATE operation]\n  Update existing row where Group Member = {{ $('Normalize Data 1').item.json.phone_number }}:\n  - Total Strikes: 2\n  - Status: warned_2\n  - Last violation Date: 2025-10-06T21:00:00.000Z\n  - Last violation Type: spam\n\nOutput JSON:\n{\n  \"phone_number\": \"{{ $('Normalize Data 1').item.json.phone_number }}\",\n  \"group_id\": \"120363402337148387@g.us\",\n  \"existed_before\": true,\n  \"previous_strikes\": 1,\n  \"strikes_added\": 1,\n  \"new_total_strikes\": 2,\n  \"new_status\": \"warned_2\",\n  \"database_updated\": true,\n  \"database_operation\": \"UPDATE\",\n  \"update_timestamp\": \"2025-10-06T21:00:00.000Z\",\n  \"violation_severity\": \"medium\",\n  \"violation_type\": \"spam\"\n}\n\n═══════════════════════════════════════════════════════════\nFINAL CHECKLIST\n═══════════════════════════════════════════════════════════\n\nBefore responding, verify:\n✓ Used \"Check for Group Member\" first?\n✓ If found → used \"Udate Google Sheets\" (UPDATE)?\n✓ If NOT found → used \"Google Sheets\" (APPEND)?\n✓ Phone number includes + prefix?\n✓ Returned valid JSON with database_operation?\n✓ Never used APPEND for existing user?\n✓ Never used UPDATE for new user?"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -1680,
+        144
+      ],
+      "id": "fdf7c613-9a3f-4d0b-a83c-d654586439e3",
+      "name": "AI Agent Log Data"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Create warning message for:\n\nPhone: {{ $json.phone_number }}\nStatus: {{ $json.new_status }}\nTotal Strikes: {{ $json.new_total_strikes }}\nViolation Type: {{ $json.violation_type }}\nSeverity: {{ $json.violation_severity }}\n\nGenerate appropriate warning message.",
+        "options": {
+          "systemMessage": "=You are a warning message creation specialist for WhatsApp group moderation.\n\nYour responsibility: Generate warning messages based on user strike status.\n\n═══════════════════════════════════════════════════════════\nMESSAGE TEMPLATES BY STRIKE LEVEL\n═══════════════════════════════════════════════════════════\n\nSTRIKE 1 (warned_1 status - Educational tone):\n⚠️ @{phone_number} Tu mensaje ha sido eliminado por violar las normas del grupo.\n\n📋 Motivo: {violation_reason}\n⚡ Strike actual: 1/3\n\nEste es tu primer aviso. Por favor, mantén un ambiente respetuoso y profesional. Revisa las normas del grupo para evitar futuras infracciones.\n\nLas violaciones repetidas resultarán en la expulsión del grupo.\n\n---\n\nSTRIKE 2 (warned_2 status - Firm warning):\n⚠️ @{phone_number} SEGUNDA ADVERTENCIA - Tu mensaje ha sido eliminado.\n\n📋 Motivo: {violation_reason}\n⚡ Strikes acumulados: 2/3\n\nEsta es tu segunda infracción. Una violación más resultará en tu expulsión inmediata del grupo. Por favor, lee y respeta las normas de la comunidad.\n\n---\n\nSTRIKE 3+ (removed status - Final, user will be kicked):\n🛑 @{phone_number} EXPULSIÓN INMEDIATA\n\n📋 Motivo de expulsión: {violation_reason}\n⚡ Strikes acumulados: {total_strikes}/3\n\nHas alcanzado el límite de infracciones. Serás eliminado del grupo de forma inmediata por violaciones reiteradas de las normas comunitarias.\n\nEsta decisión es definitiva.\n\n---\n\nLOW SEVERITY (0 strikes added - Friendly reminder):\nℹ️ @{phone_number} Recordatorio amistoso:\n\n{violation_reason}\n\nNo se ha asignado ningún strike por esta ocasión, pero te pedimos que sigas las normas del grupo para mantener un ambiente profesional.\n\n═══════════════════════════════════════════════════════════\nFORMATTING RULES\n═══════════════════════════════════════════════════════════\n\n1. ALWAYS start with @{phone_number} to mention the user\n2. Use emojis appropriately (⚠️ for warnings, 🛑 for removal, ℹ️ for info)\n3. Keep messages concise but clear\n4. Include strike count (X/3 format)\n5. State reason clearly\n6. Use appropriate tone based on severity\n\n═══════════════════════════════════════════════════════════\nCRITICAL OUTPUT RULE\n═══════════════════════════════════════════════════════════\n\nYou MUST respond with ONLY the warning message text.\nNO JSON formatting.\nNO markdown code blocks.\nNO explanations.\nNO extra text.\n\nJust the plain message that will be sent directly to WhatsApp.\n\n═══════════════════════════════════════════════════════════\nEXAMPLES\n═══════════════════════════════════════════════════════════\n\nExample 1 - First strike (warned_1):\nInput: phone=\"+12345678909\", status=\"warned_1\", strikes=1, reason=\"Lenguaje ofensivo\"\n\nYour response:\n⚠️ @+12345678909 Tu mensaje ha sido eliminado por violar las normas del grupo.\n\n📋 Motivo: Lenguaje ofensivo\n⚡ Strike actual: 1/3\n\nEste es tu primer aviso. Por favor, mantén un ambiente respetuoso y profesional. Revisa las normas del grupo para evitar futuras infracciones.\n\nLas violaciones repetidas resultarán en la expulsión del grupo.\n\n---\n\nExample 2 - Second strike (warned_2):\nInput: phone=\"+12345678909\", status=\"warned_2\", strikes=2, reason=\"Spam repetitivo\"\n\nYour response:\n⚠️ @+12345678909 SEGUNDA ADVERTENCIA - Tu mensaje ha sido eliminado.\n\n📋 Motivo: Spam repetitivo\n⚡ Strikes acumulados: 2/3\n\nEsta es tu segunda infracción. Una violación más resultará en tu expulsión inmediata del grupo. Por favor, lee y respeta las normas de la comunidad.\n\n---\n\nExample 3 - Removal (removed status):\nInput: phone=\"+12345678909\", status=\"removed\", strikes=3, reason=\"Insultos directos\"\n\nYour response:\n🛑 @+12345678909 EXPULSIÓN INMEDIATA\n\n📋 Motivo de expulsión: Insultos directos\n⚡ Strikes acumulados: 3/3\n\nHas alcanzado el límite de infracciones. Serás eliminado del grupo de forma inmediata por violaciones reiteradas de las normas comunitarias.\n\nEsta decisión es definitiva."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -912,
+        144
+      ],
+      "id": "e2fb56ba-4e02-4942-8f6f-3c0d2e16c5e8",
+      "name": "AI Agent Create Message"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ",
+          "mode": "list",
+          "cachedResultName": "AI WhatsApp Group Moderator",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Group Member": "={{ $('Normalize Data 1').item.json.phone_number }}",
+            "Total Strikes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Total_Strikes', ``, 'string') }}",
+            "Status": "={{ $fromAI('Status', ``, 'string') }}",
+            "Last violation Date": "={{ $fromAI('Last_violation_Date', ``, 'string') }}",
+            "Last violation Type": "={{ $fromAI('Last_violation_Type', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Group Member"
+          ],
+          "schema": [
+            {
+              "id": "Group Member",
+              "displayName": "Group Member",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Group ID",
+              "displayName": "Group ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Total Strikes",
+              "displayName": "Total Strikes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last violation Date",
+              "displayName": "Last violation Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last violation Type",
+              "displayName": "Last violation Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        -1456,
+        384
+      ],
+      "id": "aee4c85e-3671-49bb-9ef6-36cd85c3d039",
+      "name": "Update Google Sheets"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ",
+          "mode": "list",
+          "cachedResultName": "AI WhatsApp Group Moderator",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sNMtfixN3F4exUh8cnNVBf1cPYxwfWUbH67av3gJXkQ/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Group Member": "={{ $('Normalize Data 1').item.json.phone_number }}",
+            "Group ID": "={{ $fromAI('Group_ID', ``, 'string') }}",
+            "Total Strikes": "={{ $fromAI('Total_Strikes', ``, 'string') }}",
+            "Status": "={{ $fromAI('Status', ``, 'string') }}",
+            "Last violation Date": "={{ $fromAI('Last_violation_Date', ``, 'string') }}",
+            "Last violation Type": "={{ $fromAI('Last_violation_Type', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Group Member"
+          ],
+          "schema": [
+            {
+              "id": "Group Member",
+              "displayName": "Group Member",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Group ID",
+              "displayName": "Group ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Total Strikes",
+              "displayName": "Total Strikes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last violation Date",
+              "displayName": "Last violation Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last violation Type",
+              "displayName": "Last violation Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        -1312,
+        384
+      ],
+      "id": "ae66f6e5-92bd-4327-8b77-347d388268c9",
+      "name": "Create New Row"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Combined AI Output (Extraction + Moderation)\nconst input = $input.first().json;\n\nfunction parseAIOutput(output) {\n  let jsonString;\n  \n  if (typeof output === 'object' && output !== null) {\n    return output;\n  }\n  \n  if (typeof output === 'string') {\n    jsonString = output\n      .replace(/```json\\n?/gi, '')\n      .replace(/```\\n?/g, '')\n      .trim();\n    \n    const jsonMatch = jsonString.match(/\\{[\\s\\S]*\\}/);\n    if (jsonMatch) {\n      jsonString = jsonMatch[0];\n    }\n    \n    return JSON.parse(jsonString);\n  }\n  \n  throw new Error('Invalid output format');\n}\n\n// Helper function to remove only the + symbol (keep country code)\nfunction removeOnlyPlus(phone) {\n  if (!phone) return null;\n  return phone.toString().replace(/^\\+/, '');\n}\n\n// Helper function to ensure phone has + prefix\nfunction ensurePlus(phone) {\n  if (!phone) return null;\n  phone = phone.toString();\n  return phone.startsWith('+') ? phone : '+' + phone;\n}\n\n// Parse output\nlet result;\ntry {\n  result = parseAIOutput(input.output || input.text || input);\n} catch (error) {\n  // Fallback with safe defaults\n  result = {\n    phone_number: null,\n    date: null,\n    time: null,\n    message_body: null,\n    message_type: null,\n    group_id: null,\n    message_id: null,\n    moderation: {\n      violation_detected: false,\n      severity: \"none\",\n      violation_type: \"none\",\n      confidence: 0,\n      reason: \"Parsing error: \" + error.message,\n      recommended_action: \"none\",\n      keywords_detected: [],\n      requires_human_review: true,\n      context_notes: \"AI output parsing failed, manual review required\"\n    }\n  };\n}\n\n// Get current timestamp\nconst now = new Date();\nconst currentDate = now.toISOString().split('T')[0]; // YYYY-MM-DD\nconst currentTime = now.toISOString().split('T')[1].split('.')[0]; // HH:mm:ss\n\n// Validate and structure final output\n// Usage:\n// - Base de datos / lógica: usa phone_number → 34665104840\n// - Menciones WhatsApp / Google Sheets: usa phone_number_with_plus → +34665104840\nreturn {\n  json: {\n    // Data fields\n    phone_number: removeOnlyPlus(result.phone_number),        // Without +: 34665104840\n    phone_number_with_plus: ensurePlus(result.phone_number),  // With +: +34665104840\n    date: result.date || currentDate,                          // Use AI result or current date\n    time: result.time || currentTime,                          // Use AI result or current time\n    message_body: result.message_body,\n    message_type: result.message_type,\n    group_id: result.group_id,\n    message_id: result.message_id,\n    \n    // Moderation fields (flattened for easier use)\n    violation_detected: result.moderation?.violation_detected || false,\n    severity: result.moderation?.severity || \"none\",\n    violation_type: result.moderation?.violation_type || \"none\",\n    confidence: result.moderation?.confidence || 0,\n    reason: result.moderation?.reason || \"\",\n    recommended_action: result.moderation?.recommended_action || \"none\",\n    keywords_detected: result.moderation?.keywords_detected?.join(', ') || \"\",\n    requires_human_review: result.moderation?.requires_human_review || false,\n    context_notes: result.moderation?.context_notes || \"\",\n    \n    // Metadata\n    processed_at: now.toISOString()\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2256,
+        144
+      ],
+      "id": "56a0aaa5-e886-4088-93f6-779cb258911c",
+      "name": "Normalize Data 1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize AI Agent Strike Manager Output\nconst input = $input.first().json;\n\nfunction parseAIOutput(output) {\n  // If already an object, return it\n  if (typeof output === 'object' && output !== null && !output.output) {\n    return output;\n  }\n  \n  // Extract the output field if it exists\n  const rawOutput = output.output || output.text || output;\n  \n  // If it's already parsed\n  if (typeof rawOutput === 'object') {\n    return rawOutput;\n  }\n  \n  // If it's a string, clean and parse\n  if (typeof rawOutput === 'string') {\n    // Remove markdown code blocks\n    let cleaned = rawOutput\n      .replace(/```json\\n?/gi, '')\n      .replace(/```\\n?/g, '')\n      .trim();\n    \n    // Try to extract JSON object\n    const jsonMatch = cleaned.match(/\\{[\\s\\S]*\\}/);\n    if (jsonMatch) {\n      cleaned = jsonMatch[0];\n    }\n    \n    // Parse the JSON\n    try {\n      return JSON.parse(cleaned);\n    } catch (e) {\n      throw new Error('Failed to parse JSON: ' + e.message);\n    }\n  }\n  \n  throw new Error('Unexpected output format');\n}\n\n// Helper function to remove only the + symbol (keep country code)\nfunction removeOnlyPlus(phone) {\n  if (!phone) return null;\n  // Only remove the + symbol, keep everything else including country code\n  return phone.toString().replace(/^\\+/, '');\n}\n\n// Parse the output\nlet result;\ntry {\n  result = parseAIOutput(input);\n} catch (error) {\n  // Fallback with safe defaults\n  console.error('Parsing error:', error.message);\n  result = {\n    phone_number: null,\n    group_id: null,\n    existed_before: false,\n    previous_strikes: 0,\n    strikes_added: 0,\n    new_total_strikes: 0,\n    new_status: \"error\",\n    database_updated: false,\n    update_timestamp: new Date().toISOString(),\n    violation_severity: \"unknown\",\n    violation_type: \"unknown\",\n    error: error.message\n  };\n}\n\n// Validate required fields\nconst requiredFields = [\n  'phone_number',\n  'group_id',\n  'new_total_strikes',\n  'new_status'\n];\n\nfor (const field of requiredFields) {\n  if (!(field in result) || result[field] === undefined) {\n    console.warn(`Missing required field: ${field}`);\n    result[field] = null;\n  }\n}\n\n// Return normalized structure\n// Usage:\n// - Base de datos / lógica: usa phone_number → 34612345678\n// - Menciones WhatsApp: usa phone_number_with_plus → +34612345678\nreturn {\n  json: {\n    // User identification\n    phone_number: removeOnlyPlus(result.phone_number), // Without + but with country code: 34612345678\n    phone_number_with_plus: result.phone_number,        // Original with +: +34612345678\n    group_id: result.group_id,\n    \n    // Strike information\n    existed_before: result.existed_before || false,\n    previous_strikes: result.previous_strikes || 0,\n    strikes_added: result.strikes_added || 0,\n    new_total_strikes: result.new_total_strikes || 0,\n    \n    // Status\n    new_status: result.new_status,\n    database_updated: result.database_updated || false,\n    database_operation: result.database_operation || 'UNKNOWN',\n    \n    // Metadata\n    update_timestamp: result.update_timestamp || new Date().toISOString(),\n    violation_severity: result.violation_severity,\n    violation_type: result.violation_type,\n    \n    // Computed flags for next steps\n    should_warn: result.new_total_strikes > 0,\n    should_remove: result.new_status === 'removed' || result.new_total_strikes >= 3,\n    is_first_offense: !result.existed_before && result.new_total_strikes > 0,\n    \n    // Error handling\n    parsing_successful: !result.error,\n    error: result.error || null\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        144
+      ],
+      "id": "f070522c-3d08-4fbc-b498-8596eb1c9bf2",
+      "name": "Normalize Data 2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        -512,
+        368
+      ],
+      "id": "98ff6426-ec85-4af2-976e-5e66069b261a",
+      "name": "Delete Message",
+      "credentials": {}
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        400
+      ],
+      "id": "9e2d656f-3cee-40ee-a998-b756953156a5",
+      "name": "Send Message to Participant",
+      "credentials": {}
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        416,
+        144
+      ],
+      "id": "295e82f0-db9c-4c83-ae8c-b5925611ab3c",
+      "name": "Remove Group Participant",
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f936545-9a3f-4337-b5dd-ef517602d6d1",
+              "leftValue": "={{ $('Normalize Data 2').item.json.should_remove }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        128,
+        144
+      ],
+      "id": "25fc29fa-92d5-43d4-86f3-4ee6b5e13b74",
+      "name": "Check if Remove Group Participant"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3856,
+        -1440
+      ],
+      "id": "a701798c-36e6-4b23-b1ab-9c398a71616a",
+      "name": "WhatsApp Trigger",
+      "webhookId": "c164f203-988a-4a88-a041-51dbc9115ed9",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        -3856,
+        -1216
+      ],
+      "id": "1513e1ad-fc10-4778-808c-669359c343fa",
+      "name": "Send message",
+      "webhookId": "b4fbabc9-9f77-4b36-8ba6-c31498f5e09a",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.whatsAppTool",
+      "typeVersion": 1.1,
+      "position": [
+        -3856,
+        -992
+      ],
+      "id": "72675c70-762f-421e-b60e-c386e573c935",
+      "name": "Send template in WhatsApp Business Cloud",
+      "webhookId": "7dadd59c-e616-4956-8a11-3e2a71c78389",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        -3856,
+        -784
+      ],
+      "id": "6804b223-d4e9-401f-9868-6c917e02056a",
+      "name": "Send message and wait for response",
+      "webhookId": "e9619b58-a139-4cb9-9009-1202ba6a7a2f",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## WhatsApp Nodes Used and to Explore",
+        "height": 960,
+        "width": 528,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4048,
+        -1488
+      ],
+      "id": "e2edf347-20c1-4eac-8ddd-fba0e833d5a2",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3120,
+        144
+      ],
+      "id": "075faa86-6332-411d-93c7-1eee3e67ee01",
+      "name": "WhatsApp Message",
+      "webhookId": "c164f203-988a-4a88-a041-51dbc9115ed9"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "C08FJNLQP5G",
+          "cachedResultName": "test-automation-workflow"
+        },
+        "text": "=🎯 *New Lead Alert!*\n\n*Name:* {{ $json['Name Surname'] }}\n*Email:* {{ $json['E-Mail'] }}\n*Phone:* {{$json[\"Phone\"]}}\n*Interest Level:* {{ $json['  Interest Level  '] }}\n*Source:* {{ $json['  Lead Source  '] }}\n\n📝 Notes:\n{{ $json['Notes '] }}",
+        "otherOptions": {}
+      },
+      "id": "e5091aa2-7d9e-4e2c-b548-202e9b135077",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "position": [
+        -1920,
+        1392
+      ],
+      "webhookId": "82da9e95-343b-498c-887f-9b60da4b222e",
+      "typeVersion": 2.3
+    },
+    {
+      "parameters": {
+        "sendTo": "dataplusminuss@gmail.com",
+        "subject": "=📩 New Lead Received: {{ $json['Name Surname'] }}",
+        "message": "=<h3>New Lead Received!</h3> \n<ul>   \n<li><strong>Name:</strong> {{ $json['Name Surname'] }}</li>   \n<li><strong>Email:</strong> {{ $json['E-Mail'] }}</li>   \n<li><strong>Phone:</strong> {{$json[\"Phone\"]}}</li>   \n<li><strong>Interest Level:</strong> {{ $json['  Interest Level  '] }}</li>   \n<li><strong>Source:</strong> {{ $json['  Lead Source  '] }}</li> \n</ul> \n<p><strong>Notes:</strong> {{ $json['Notes '] }}</p>",
+        "options": {}
+      },
+      "id": "7f571e26-0310-491b-8e12-a224f66975cc",
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        -1920,
+        1584
+      ],
+      "webhookId": "005a02a6-49b2-49dd-8491-66195e5784b7",
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "email": "={{ $json['E-Mail'] }}",
+        "additionalFields": {
+          "message": "={{ $json['Notes '] }}",
+          "phoneNumber": "={{ $json.Phone }}",
+          "relationshipStatus": "={{ $json['  Interest Level  '] }}",
+          "salutation": "={{ $json['  Lead Source  '] }}"
+        },
+        "options": {}
+      },
+      "id": "8a8b7043-b576-4ab7-8383-db2d2b8ac449",
+      "name": "HubSpot",
+      "type": "n8n-nodes-base.hubspot",
+      "position": [
+        -2272,
+        1344
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "3d4b99e0-4b1e-4dd1-8775-7e89042c43a8",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json['Followed Up?'] }}",
+              "rightValue": ""
+            },
+            {
+              "id": "fe99deab-c331-46a2-8649-233600fcd36f",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "leftValue": "={{ $json['  Interest Level  '] }}",
+              "rightValue": "Hot"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b7c97546-ef67-49f2-8eeb-b0fcb11a76b3",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -1712,
+        1888
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {},
+      "id": "e7120225-006b-479f-90fe-9668aa514914",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        -1488,
+        1984
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "sendTo": "dataplusminuss@gmail.com",
+        "subject": "⏰ *Follow-up Reminder!*",
+        "message": "=<h3>🔔 The following lead has not been followed up yet! 🔥 Interest level is hot </h3>\n<ul>\n  <li><strong>Name:</strong> {{ $json['Name Surname'] }}</li>\n  <li><strong>Email:</strong> {{ $json['E-Mail'] }}</li>\n  <li><strong>Interest Level:</strong> {{ $json['  Interest Level  '] }}</li>\n</ul>\n<p><strong>Please follow up and update the spreadsheet ✅</p>\n\n",
+        "options": {
+          "senderName": "N_01_tester"
+        }
+      },
+      "id": "c7271524-2d2c-4062-907a-2115d78f4bea",
+      "name": "Gmail_Reminder",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        -1488,
+        1792
+      ],
+      "webhookId": "dad986ab-faec-4c85-b9e1-386f18a8b8ca",
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "amount": 3,
+        "unit": "minutes"
+      },
+      "id": "f8b6d0b9-bfec-44c1-96fc-f7ee298bf573",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        -1936,
+        1888
+      ],
+      "webhookId": "7e2f3053-7504-4197-8cc7-37e8f5c1a447",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "content": "# Automation Trigger (n8n)\n\n## n8n detects the new entry in the sheet and initiates the automation workflow.",
+        "height": 320,
+        "color": 4
+      },
+      "id": "cf75a9c9-c1a0-4af2-a724-7676d340e909",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2720,
+        1728
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# CRM Integration\n\n## The lead is automatically added to HubSpot with relevant fields (name, email, phone, interest level, etc.).",
+        "height": 780,
+        "width": 260
+      },
+      "id": "dbb39d15-eb0d-47ed-a2b1-13aa117c7911",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2352,
+        1248
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# Notifications\n\n## Simultaneous alerts are sent via:\n\n## * Slack (to a specific channel)\n\n## * Gmail (to a designated inbox)",
+        "height": 640,
+        "width": 460,
+        "color": 3
+      },
+      "id": "30f151b3-5c1c-4728-9a98-eb7cdf170960",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1952,
+        1104
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# Follow-up Tracking\n\n## A “Followed Up?” column in Google Sheets is used to track whether a lead has been contacted.\n\n\n### :warning: If empty after X days (e.g., 3), n8n sends a reminder notification.",
+        "height": 420,
+        "width": 260,
+        "color": 5
+      },
+      "id": "e5c42229-b1c9-4ee3-a5cc-bd8bfa09f903",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1296,
+        1728
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# Data Logging\n## Responses are automatically recorded into a connected [Wassenger number](https://app.wassener.com/number)",
+        "height": 280,
+        "width": 260,
+        "color": 4
+      },
+      "id": "9fcb11d4-b036-4e0c-bd74-d3274e7a7c7b",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2720,
+        1248
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2656,
+        1584
+      ],
+      "id": "4f4bf5bf-4347-48ed-acfe-1f3ae89e03bd",
+      "name": "WhatsApp Message1",
+      "webhookId": "c164f203-988a-4a88-a041-51dbc9115ed9"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.data.body }}",
+        "options": {
+          "systemMessage": "=Enhanced AI Agent System Message - WhatsApp Group Message Control\nYou are an AI agent integrated into an n8n workflow designed to prevent duplicate message sending to WhatsApp groups. Your primary responsibility is to verify whether a message has already been sent to a specific WhatsApp group within the last 24 hours before allowing a new message to be sent.\n\n\n\n###Current System Information\nCurrent Date & Time: {{ $now }}\nGroup ID to Check: {{ $json.data.chat.id }}\nGroup Name: {{ $json.data.chat.name }}\n\n###Your Tasks\n1. Data Extraction\nExtract the following information from the incoming message:\n\nWhatsApp group ID: {{ $json.data.chat.id }}\nGroup name: {{ $json.data.chat.name }}\nCurrent incoming message timestamp: {{ $json.data.date }}\nMessage ID: {{ $json.data.id }}\n\n2. Google Sheets Query Process\nUse the Google Sheets tool 'Read' to:\n\nREAD the message history sheet to find any previous messages sent to group ID: {{ $json.data.chat.id }}\nLook for the most recent entry with this group ID.\nExtract the timestamp of the last message sent to this group.\nCalculate the time difference between now {{ $now }} and the last message timestamp to that group.\n\nIMPORTANT!!: ALWAYS CHECK THE SHEETS FILE READ WHEN RECEIVING A NEW MESSAGE: read: sheet\n\n3. Decision Logic\nALLOW MESSAGE if meet one of these options:\n\n- No previous message found for this group ID in the message history sheet\n- This is the first message ever sent to this group\n- The last message to this group was sent more than 24 hours ago from the last message.\n\nBLOCK MESSAGE when:\n\nA message was already sent to this group id {{ $json.data.chat.id }} within the last 24 hours\n\n4. Action Required\nIf you determine to ALLOW MESSAGE:\n\nUse the Google Sheets tool 'Write' to WRITE a new entry in the message history sheet with:\n\nGroup ID: {{ $json.data.chat.id }}\nGroup Name: {{ $json.data.chat.name }}\nTimestamp: {{ $json.data.date }}\nInbound Message: {{ $json.data.body }}\nOutbound Message: SENT\n\nIf you determine to BLOCK MESSAGE:\n\nDo NOT write to the Google Sheets\nDo not respond and not pass any outbound message\n\nIf Google Sheets cannot be accessed: Respond with \"BLOCK - Unable to verify message history\"\nIf group ID is missing: Respond with \"BLOCK - Invalid group ID\"\nIf timestamp calculation fails: Respond with \"BLOCK - Unable to calculate time difference\"\n\nPriority Instructions\n\nALWAYS use the Google Sheets tool to check message history first.\nALWAYS write to Google Sheets when allowing a message.\nNEVER allow a message without checking the history.\nPRIORITIZE preventing spam over sending messages when in doubt.\nUse the exact timestamp format: YYYY-MM-DD HH:MM:SS.\n\nRemember: Your primary goal is to prevent spam and duplicate messages while maintaining accurate records in Google Sheets. Every allowed message MUST be logged to the sheet."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -3552,
+        3728
+      ],
+      "id": "6b2b870a-b5be-49a6-892e-09ffc129b294",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        -3312,
+        3968
+      ],
+      "id": "22ca4173-06f6-4a1a-902a-8eecd891e7f9",
+      "name": "Read"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $fromAI('Timestamp', ``, 'string') }}",
+            "Group Name": "={{ $fromAI('Group_Name', ``, 'string') }}",
+            "Group ID": "={{ $fromAI('Group_ID', ``, 'string') }}",
+            "Inbound Message": "={{ $('Validate If Group').item.json.data.body }}",
+            "Outbound Response": "={{ $fromAI('Outbound_Response', ``, 'string') }}"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        -3168,
+        3968
+      ],
+      "id": "b8dab8d1-5afe-4e27-bf53-473ccadb8c99",
+      "name": "Write"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "450e6b78-317c-4234-a61e-b2ea3a6586d2",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "ALLOW MESSAGE",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -3184,
+        3728
+      ],
+      "id": "8279a9a1-165e-43dc-b3e3-3d05f6e66414",
+      "name": "Validate If Allow Message"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6e41b664-d488-48fb-9d00-ae3c7a003cdb",
+              "leftValue": "={{ $json.data.chat.type }}",
+              "rightValue": "group",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -3872,
+        3728
+      ],
+      "id": "75fc32a9-7f03-4dfd-8820-36b333f5b4d8",
+      "name": "Validate If Group"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -3616,
+        3968
+      ],
+      "id": "fb92dd8a-3caa-4716-85db-0fb88a650ba2",
+      "name": "OpenAI Chat Model3"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.device.id }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -3456,
+        3968
+      ],
+      "id": "93e5e00b-5294-41bd-b4a7-18fced24cc5e",
+      "name": "Simple Memory3"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -2784,
+        3808
+      ],
+      "id": "9cf55bb2-291d-4c10-b4b8-fa9c1b7af50a",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "content": "# WhatsApp Group Message Control Workflow\n\n## Overview\n\nThis n8n workflow implements an intelligent **anti-spam system** for WhatsApp group messaging using AI-powered duplicate detection. The workflow prevents sending duplicate messages to the same WhatsApp group within a 24-hour period, maintaining message logs in Google Sheets for tracking and verification.\n\n## Key Features\n\n### 🛡️ **Duplicate Prevention**\n- Automatically checks if a message has already been sent to a specific WhatsApp group within the last 24 hours\n- Blocks duplicate messages to prevent spam and maintain group etiquette\n- Uses Google Sheets as a persistent message history database\n\n### 🤖 **AI-Powered Logic**\n- Leverages OpenAI's GPT-4o-mini model for intelligent message analysis\n- Maintains conversation context with buffer window memory\n- Makes smart decisions based on group ID, timestamps, and message history\n\n### 📊 **Google Sheets Integration**\n- **Read Operation**: Queries message history to find previous messages sent to specific groups\n- **Write Operation**: Logs new messages with timestamps, group details, and message content\n- Maintains a comprehensive audit trail of all group communications\n\n## How It Works\n\n### 1. **Message Reception**\nThe workflow triggers when a new message is received in a WhatsApp group via the Wassenger integration.\n\n### 2. **Group Validation**\nFirst validation check ensures the incoming message is from a group (not a direct message).\n\n### 3. **AI Analysis**\nThe AI agent performs several critical tasks:\n- Extracts group ID, name, and timestamp from the incoming message\n- Queries Google Sheets to find the most recent message sent to that group\n- Calculates the time difference between the current time and the last message\n- Makes a decision to either **ALLOW** or **BLOCK** the message\n\n### 4. **Decision Logic**\n\n**ALLOW MESSAGE** when:\n- No previous message exists for this group\n- This is the first message ever sent to the group\n- The last message was sent more than 24 hours ago\n\n**BLOCK MESSAGE** when:\n- A message was already sent to this group within the last 24 hours\n\n### 5. **Action Execution**\n- **If ALLOWED**: Sends the message via Wassenger and logs the interaction in Google Sheets\n- **If BLOCKED**: Takes no action, preventing spam\n\n## Technical Components\n\n### Core Nodes\n- **Wassenger Trigger**: Listens for incoming WhatsApp messages\n- **AI Agent**: Orchestrates the duplicate detection logic\n- **OpenAI Chat Model**: Provides AI decision-making capabilities\n- **Google Sheets Tools**: Handle read/write operations for message history\n- **Validation Nodes**: Ensure proper message routing and decision execution\n\n### Data Flow\n1. **Trigger** → **Group Validation** → **AI Agent** → **Decision Validation** → **Action**\n2. AI Agent communicates with Google Sheets for both reading history and writing new entries\n3. Memory buffer maintains conversation context across interactions\n\n## Benefits\n\n### For Administrators\n- **Prevents spam** and duplicate messaging automatically\n- **Maintains clean group communications** without manual intervention\n- **Provides audit trails** through Google Sheets logging\n\n### For Users\n- **Improved group experience** with reduced message duplication\n- **Consistent messaging** without overwhelming group members\n- **Intelligent filtering** that adapts to group-specific patterns\n\n## Configuration Requirements\n\nTo implement this workflow, you'll need:\n\n1. **Wassenger Account**: For WhatsApp integration\n2. **OpenAI API Key**: For AI decision-making\n3. **Google Sheets Access**: For message history storage\n4. **n8n Instance**: To run the workflow\n\nReplace the placeholder values:\n- `YOUR_DEVICE_ID`: Your Wassenger device identifier\n- `YOUR_SHEET_ID`: Your Google Sheets document ID\n\n## Use Cases\n\nThis workflow is ideal for:\n- **Community management**: Preventing spam in large WhatsApp groups\n- **Business communications**: Maintaining professional group messaging standards\n- **Event coordination**: Avoiding duplicate announcements and updates\n- **Customer support**: Ensuring consistent response timing across support groups\n\n---\n\n*This workflow represents a sophisticated approach to automated WhatsApp group management, combining AI intelligence with practical spam prevention to create a seamless messaging experience.*",
+        "height": 2600,
+        "width": 1080
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2016,
+        2832
+      ],
+      "id": "cf091fbc-25ac-45a2-ae1f-1eb2974894dc",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -4080,
+        3728
+      ],
+      "id": "4b865f12-30f7-418b-a0f3-8bccc79ca49c",
+      "name": "WhatsApp Message2",
+      "webhookId": "c164f203-988a-4a88-a041-51dbc9115ed9"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "recipientPhoneNumber": "={{ $('Validate If Group').item.json.data.chat.id }}",
+        "textBody": "={{ $('WhatsApp Message2').item.json.data.id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        -2784,
+        3584
+      ],
+      "id": "b7c3be69-9521-44f1-b40c-8c84deb1035e",
+      "name": "Send message1",
+      "webhookId": "3cfdea96-e024-4403-a1a3-08c778319a4a"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-wassenger.wassengerTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2080,
+        7008
+      ],
+      "id": "89879345-2b3e-4d20-bffb-913b72c7ea08",
+      "name": "Wassenger Trigger",
+      "webhookId": "9bfcf2fb-fcb8-40ab-a317-4d901633ed61",
+      "credentials": {}
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        7024
+      ],
+      "id": "fb790e9f-b191-40ad-9161-fab992d2f68f",
+      "name": "Wassenger",
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.data.media.type }}",
+                    "rightValue": "audio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "94a56d29-cb88-4eb0-8d6b-07b1b91bfc3f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Voice message"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e14c0da3-f892-46c2-af90-c81c963a0df5",
+                    "leftValue": "={{ $json.data.media.type }}",
+                    "rightValue": "image",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Image message"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6ce0d87f-bdfc-4c65-a3fb-8d86bb682c4e",
+                    "leftValue": "={{ $json.data.type }}",
+                    "rightValue": "text",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text message"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -1840,
+        7008
+      ],
+      "id": "5fc264b6-0c40-4ce8-a69e-7d9253126552",
+      "name": "Switch"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        6608
+      ],
+      "id": "9183b1ff-8ebc-48cc-9505-c9375deee1da",
+      "name": "Download Audio",
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "url": "=https://api.wassenger.com{{ $('Wassenger Trigger').item.json.data.media.links.download }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1312,
+        6608
+      ],
+      "id": "32e1cdc0-844c-4c05-965b-a1b4c35d9971",
+      "name": "Download Audio1"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "binaryPropertyName": "=data",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -1072,
+        6608
+      ],
+      "id": "a5d41e0c-da01-42eb-b6df-45cbc477af4b",
+      "name": "Audio transcription"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4aeaa661-b3e8-4587-851e-dac366a37d0c",
+              "name": "data.body",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": "=",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -832,
+        6608
+      ],
+      "id": "f8d069d1-b2bb-4012-9449-f29f77bcf4c0",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-wassenger.wassenger",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        6832
+      ],
+      "id": "6c5079fc-0b4d-4f24-b9b7-50d1e48c61bc",
+      "name": "Download image",
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "url": "=https://api.wassenger.com{{ $('Wassenger Trigger').item.json.data.media.links.download }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1312,
+        6832
+      ],
+      "id": "c5d6e86e-c76b-4e17-bbb9-50402cbaeb65",
+      "name": "Download API audio"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dcf61ad5-2b19-411d-8e84-b9a4cd9bc74c",
+              "name": "data.body",
+              "value": "=# The user provided the following image and text.\n\n## Image Description:\n{{ $json.content }}\n\n## User Message:\n{{ $('Wassenger Trigger').item.json.data.media.caption }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -832,
+        6832
+      ],
+      "id": "3e1b95cb-54af-4529-8d0f-84fb1d6a33e4",
+      "name": "Image + Text Prompt"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "chatgpt-4o-latest",
+          "mode": "list",
+          "cachedResultName": "CHATGPT-4O-LATEST"
+        },
+        "text": "Analyze the image",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -1072,
+        6832
+      ],
+      "id": "8b38eefd-1349-4cd1-8b68-67e338ef4ace",
+      "name": "Analyze Image"
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "resource": "product",
+        "operation": "getAll",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.shopifyTool",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        7344
+      ],
+      "id": "915bdd1e-7ae6-49c8-a3a2-096b6e12957d",
+      "name": "Get Products"
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "additionalFields": {
+          "shippingAddressUi": {
+            "shippingAddressValues": {
+              "firstName": "={{ $('Switch').item.json.data.chat.name }}",
+              "lastName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Last_Name', ``, 'string') }}",
+              "company": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Company', ``, 'string') }}",
+              "country": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Country', ``, 'string') }}",
+              "address1": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Address_Line_1', ``, 'string') }}",
+              "address2": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Address_Line_2', ``, 'string') }}",
+              "city": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('City', ``, 'string') }}",
+              "province": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Province', ``, 'string') }}",
+              "zip": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Zip_Code', ``, 'string') }}",
+              "phone": "={{ $('Switch').item.json.data.fromNumber }}"
+            }
+          }
+        },
+        "limeItemsUi": {
+          "lineItemValues": [
+            {
+              "productId": "={{ $fromAI('productId', ``, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.shopifyTool",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        7344
+      ],
+      "id": "e0c2d0bc-0d65-4fde-a54e-a328de8f0424",
+      "name": "Create Order"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.data.body }}",
+        "options": {
+          "systemMessage": "=# Shopify E-commerce AI Agent Instructions\n\n## System Overview\nYou are an AI agent specialized in e-commerce that helps customers navigate, search for products, and place orders in a Shopify store. You have access to specific tools to interact with the Shopify API.\n\n## Available Tools\n\n### 1. `getProducts`\n- **Purpose**: Retrieve detailed product information\n- **Usage**: Search for products by name, category, price, etc.\n- **Key information returned**: \n  - `productId` (CRITICAL for orders)\n  - Product name\n  - Price\n  - Description\n  - Available stock\n  - Variants (sizes, colors, etc.)\n  - Images\n\n### 2. `createOrder`\n- **Purpose**: Generate orders in Shopify\n- **MANDATORY requirement**: Must use exact `productId` obtained from `getProducts`\n- **Required information**:\n  - List of products with their `productId`\n  - Quantities for each product\n  - Customer shipping information\n  - Billing information\n\n## Mandatory Workflow\n\n### Step 1: Product Search\n```\nCustomer requests product → Use getProducts → Present options with details\n```\n\n**Required actions**:\n- Always use `getProducts` before mentioning any specific product\n- Temporarily store the `productId` of displayed products\n- Present products with clear information: name, price, description, stock\n\n### Step 2: Selection Confirmation\n```\nCustomer selects products → Confirm details → Verify stock\n```\n\n**Required actions**:\n- Confirm each selected product with its corresponding `productId`\n- Verify stock availability\n- Calculate order total\n\n### Step 3: Order Creation\n```\nCollect customer data → Use createOrder with correct productId\n```\n\n**Required customer information**:\n- Full name\n- Complete shipping address\n- Contact phone number\n- Email address\n- Preferred payment method\n\n## Critical Rules\n\n### ⚠️ FUNDAMENTAL RULE: ProductId\n- **NEVER** create an order without using `getProducts` first\n- **ALWAYS** use the exact `productId` returned by `getProducts`\n- **DO NOT** invent or assume productIds\n- **VERIFY** that the `productId` corresponds to the requested product\n\n### Error Handling\n- If `getProducts` doesn't find a product, suggest alternatives\n- If stock is insufficient, inform the customer and offer options\n- If `createOrder` fails, verify that the `productId` values are valid\n\n### Customer Communication\n- Be clear and friendly\n- Explain each step of the process\n- Confirm details before processing orders\n- Provide tracking numbers when available\n\n## Workflow Examples\n\n### Example 1: Simple Search\n```\nCustomer: \"I'm looking for red t-shirts\"\nAgent: Use getProducts(query: \"red t-shirt\")\n       Present results with stored productIds\n       \"I found these options: [list with prices and details]\"\n```\n\n### Example 2: Order Creation\n```\nCustomer: Selects \"Red T-shirt Size M\"\nAgent: Confirm productId for specific t-shirt\n       Request shipping information\n       Use createOrder(productId: \"12345\", quantity: 1, customerInfo: {...})\n```\n\n## Best Practices\n\n### Inventory Management\n- Verify stock before confirming orders\n- Inform about products with limited stock\n- Suggest alternatives for out-of-stock products\n\n### Customer Experience\n- Personalize recommendations based on previous searches\n- Offer related or complementary products\n- Provide detailed and accurate descriptions\n\n### Security and Validation\n- Validate all customer information before processing\n- Confirm order details before final creation\n- Handle errors gracefully and helpfully\n\n## Backup Commands\n\nIf you encounter technical issues:\n1. Verify connection with Shopify tools\n2. Validate format of sent data\n3. Check error logs if available\n4. Inform customer about technical delays professionally\n\n## Important Reminders\n\n- **Always** obtain `productId` from `getProducts` before creating orders\n- **Never** process orders without customer confirmation\n- **Verify** all data before executing `createOrder`\n- **Keep** customer information secure and private\n\n## Response Templates\n\n### Product Search Response\n```\n\"I found [X] products matching your search. Here are the options:\n\n1. [Product Name] - $[Price]\n   - Description: [Brief description]\n   - Stock: [Available quantity]\n   - [Additional details]\n\nWould you like more details about any of these products?\"\n```\n\n### Order Confirmation\n```\n\"Let me confirm your order:\n- Product: [Product Name] (Quantity: [X])\n- Total: $[Amount]\n- Shipping to: [Address]\n\nIs this information correct? I'll process the order once you confirm.\"\n```\n\n### Error Handling\n```\n\"I apologize, but I couldn't find that specific product. However, I found these similar options that might interest you: [alternatives]\"\n```\n\n## Integration Notes\n\n- Ensure all `productId` values are strings/integers as expected by Shopify API\n- Handle product variants correctly (different sizes/colors may have different productIds)\n- Maintain session state to track customer's shopping journey\n- Log all successful transactions for audit purposes"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -560,
+        7024
+      ],
+      "id": "f9c2fce8-483e-47fa-9f0b-c3b6f6ae3054",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -736,
+        7344
+      ],
+      "id": "acd56320-301b-4005-9d9e-ce691493bee4",
+      "name": "OpenAI Chat Model4"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Wassenger Trigger') }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -592,
+        7344
+      ],
+      "id": "1ee2964f-cea1-481b-8020-edb476a2a3da",
+      "name": "Simple Memory4"
+    },
+    {
+      "parameters": {
+        "content": "# WhatsApp Shopify E-commerce Workflow\n\n## Overview\n\nThis n8n workflow transforms WhatsApp into a complete e-commerce chatbot for Shopify stores. It handles text, voice, and image messages, enabling customers to browse products, get recommendations, and place orders directly through WhatsApp.\n\n## How It Works\n\n1. **Message Reception**: Receives WhatsApp messages via Wassenger trigger\n2. **Media Processing**: \n   - **Voice messages**: Downloads and transcribes audio to text\n   - **Images**: Downloads and analyzes images with AI vision\n   - **Text messages**: Processes directly\n3. **AI Shopping Assistant**: Handles customer inquiries using specialized e-commerce prompts\n4. **Shopify Integration**: Searches products and creates orders automatically\n5. **Response Delivery**: Sends personalized responses back to customers\n\n## Key Features\n\n- **Multi-format support**: Text, voice, and image messages\n- **AI-powered product search** with Shopify integration\n- **Automated order creation** with customer data collection\n- **Conversation memory** for personalized shopping experience\n- **Image analysis** for visual product searches\n\n## Components\n\n### Media Processing\n- **Audio Transcription**: OpenAI Whisper converts voice to text\n- **Image Analysis**: GPT-4o analyzes product images and descriptions\n- **Download Management**: Handles media file downloads from Wassenger\n\n### AI Shopping Assistant\n- **Product Search**: Retrieves Shopify products with detailed information\n- **Order Processing**: Creates orders with customer shipping/billing data\n- **Conversation Context**: Maintains shopping session memory\n- **Smart Recommendations**: Suggests products based on customer needs\n\n### Shopify Tools\n- **Get Products**: Searches and retrieves product catalog\n- **Create Order**: Processes customer orders with full details\n\n## Use Cases\n\nPerfect for:\n- **E-commerce stores** wanting WhatsApp sales integration\n- **Product discovery** through voice and image searches\n- **Order management** without leaving WhatsApp\n- **Customer service** with intelligent product recommendations\n- **Mobile-first shopping** experiences\n\n## Configuration Requirements\n\n- **Wassenger Account**: WhatsApp Business API access\n- **OpenAI API**: For transcription and image analysis\n- **Shopify Store**: With API access tokens\n- **n8n Instance**: To run the workflow\n\n## Setup Instructions\n\n1. Replace all placeholder values with your actual credentials:\n   - `YOUR_DEVICE_ID`: Your Wassenger device ID\n   - `YOUR_WEBHOOK_ID`: Your webhook ID\n   - `YOUR_WASSENGER_CREDENTIAL_ID`: Your Wassenger API credential\n   - `YOUR_OPENAI_CREDENTIAL_ID`: Your OpenAI API credential\n   - `YOUR_SHOPIFY_CREDENTIAL_ID`: Your Shopify API credential\n   - `YOUR_HTTP_HEADER_AUTH_ID`: Your HTTP header authentication credential\n\n2. Configure credentials in n8n:\n   - Add Wassenger API key\n   - Add OpenAI API key\n   - Add Shopify access token\n   - Add HTTP header authentication for Wassenger downloads\n\n3. Test the workflow with different message types (text, voice, image)\n\n4. Monitor and adjust the AI agent prompts based on your store's needs",
+        "height": 1500,
+        "width": 980
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3296,
+        6304
+      ],
+      "id": "fba7084f-c1ac-4fcf-86a5-04d2ea743ba2",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "# AI Agent",
+        "height": 740,
+        "width": 2360,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2176,
+        6512
+      ],
+      "id": "ffb922b4-56dd-4159-acf1-ff536a6688e2",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Shopify Agent",
+        "height": 280,
+        "width": 820,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        7296
+      ],
+      "id": "0f1611e0-842c-4c70-9081-2ce68b41105b",
+      "name": "Sticky Note10"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-25T13:56:02.233Z",
+      "updatedAt": "2025-10-25T13:56:02.233Z",
+      "role": "workflow:owner",
+      "workflowId": "fvs2DJIBYW5guPsn",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-10-25T12:21:59.038Z",
+      "updatedAt": "2025-10-25T12:21:59.038Z",
+      "id": "8DVyf0Hp9utHpCg5",
+      "name": "whatsapp"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-25T15:22:33.000Z",
+  "versionId": "b9d01a52-d612-43ea-b8be-522f02fc96e9"
+}
