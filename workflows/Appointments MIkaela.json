@@ -1,0 +1,611 @@
+{
+  "active": true,
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Extract Start & End Time",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Book Appointment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variables": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Book Appointment": {
+      "main": [
+        [
+          {
+            "node": "Appointment Success",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Appointment Denied",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Availability": {
+      "main": [
+        [
+          {
+            "node": "Check Availability successful",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Start & End Time": {
+      "main": [
+        [
+          {
+            "node": "Check Availability",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Appointment Success": {
+      "main": [
+        [
+          {
+            "node": "Setup Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setup Email": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-24T08:40:13.372Z",
+  "id": "cTukItkxApbvbeCe",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Appointments MIkaela",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "308f0eec-8459-4e6c-bf25-5cd9b2c31ad6",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "adcf5abe-4b1c-4158-b33a-caf0eb7aa1fa",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        -1488,
+        -608
+      ],
+      "webhookId": "308f0eec-8459-4e6c-bf25-5cd9b2c31ad6",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "813e4843-4769-4ed8-89d4-4a3969913d51",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $('Webhook').item.json.body.message.toolCallList[0].function.name }}",
+                    "rightValue": "check_availability"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "check_availability"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "ecb56d1d-336f-4504-b69b-ad635d1a6b24",
+                    "operator": {
+                      "name": "filter.operator.equals",
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $('Webhook').item.json.body.message.toolCallList[0].function.name }}",
+                    "rightValue": "confirm_appointment"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "confirm_appointment"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2b200522-192d-449d-a691-c24bd31433a2",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        -800,
+        -608
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d9554d41-2307-4f97-967b-ca8b72c181bb",
+              "name": "username",
+              "type": "string",
+              "value": "empathoai"
+            },
+            {
+              "id": "c6a7eb17-72bc-419a-a96b-232c3b00b3b8",
+              "name": "eventTypeSlug",
+              "type": "string",
+              "value": "=reserva-mikaela"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "508ed87e-2b71-43eb-b2ed-e584c51a6e13",
+      "name": "Set Variables",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -1152,
+        -608
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "url": "https://api.cal.com/v2/slots",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "start",
+              "value": "={{ $json[' start'] }}"
+            },
+            {
+              "name": "end",
+              "value": "={{ $json[' end'] }}"
+            },
+            {
+              "name": "username",
+              "value": "={{ $('Set Variables').item.json.username }}"
+            },
+            {
+              "name": "eventTypeSlug",
+              "value": "={{ $('Set Variables').item.json.eventTypeSlug }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-09-04"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "920df1bf-82b1-4497-99c5-f9c0fde2eb8a",
+      "name": "Check Availability",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -96,
+        -800
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Cal API test"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cal.com/v2/bookings",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-08-13"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"attendee\": {\n    \"language\": \"es\",\n    \"name\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.name }}\",\n    \"timeZone\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.timezone }}\",\n    \"email\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.email }}\"\n  },\n  \"start\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.appointment_request }}\",\n  \"eventTypeSlug\": \"{{ $json.eventTypeSlug }}\",\n  \"username\": \"{{ $json.username }}\"\n}\n",
+        "options": {}
+      },
+      "id": "b11e5b4f-951d-4ce9-ae6f-96946e26bfb8",
+      "name": "Book Appointment",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -512,
+        -464
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Cal API test"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"results\": [\n    {\n      \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCallList[0].id }}\",\n      \"result\": \"{{ $json.data }}\"\n    }\n  ]\n}\n",
+        "options": {}
+      },
+      "id": "d21f61fd-7fac-4eb8-a328-7eba717278c6",
+      "name": "Check Availability successful",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        288,
+        -800
+      ],
+      "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "872ef0bf-8111-44e5-8c8d-fbaa0c982519",
+              "name": " start",
+              "type": "string",
+              "value": "={{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.appointment_request }}"
+            },
+            {
+              "id": "57e9ef02-8748-4ab9-9dc3-39ee2f8c08d5",
+              "name": " end",
+              "type": "string",
+              "value": "={{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.appointment_request.toDateTime().plus(1,'day') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "88a0253c-a6cf-4016-9cce-7d0e01b1d3bf",
+      "name": "Extract Start & End Time",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -496,
+        -800
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "content": "Entry point from VAPI. This webhook receives user intent and entities from the voice agent in a structured format (e.g. action = \"book\" or \"check\").",
+        "height": 320
+      },
+      "id": "aa14416d-e643-46b4-9eef-a6236782aef2",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1552,
+        -768
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Extracts variables like eventtypeid, eventtypeslug and username.",
+        "height": 320,
+        "color": 4
+      },
+      "id": "00742fdd-24b8-4939-a44d-1ec895b661d4",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1232,
+        -768
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Routes the voice intent:\n\nIf the user said \"Check availability\", go to the check flow.\n\nIf the user said \"Book appointment\", go to the booking flow.",
+        "height": 416,
+        "color": 5
+      },
+      "id": "d6850e60-4bfb-41b7-b2eb-b7e064e0e7bf",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -880,
+        -848
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Parses and formats spoken date/time info from the voice assistant to match Cal.com API's time range requirements.",
+        "height": 304
+      },
+      "id": "049979ba-503a-4a00-b411-f4c6fd06708e",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -576,
+        -912
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Sends a GET request to Cal.com to fetch available time slots for the specified date range from the voice input.",
+        "height": 304,
+        "color": 7
+      },
+      "id": "26390c9d-6207-4b9d-bd79-663d39be0c57",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -160,
+        -928
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Returns a voice-ready response to VAPI (e.g. \"There’s availability at 3 PM and 4 PM. Would you like to book?\").",
+        "height": 320,
+        "color": 3
+      },
+      "id": "8c191f4e-4072-4aba-8239-b8958d99140e",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        224,
+        -928
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Sends a POST request to Cal.com to book the appointment using parsed info from the voice conversation.",
+        "height": 272,
+        "color": 4
+      },
+      "id": "372d3461-cbb2-4e87-9128-0e9fa757d373",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -576,
+        -576
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Returns a spoken confirmation via VAPI (e.g. \"Your appointment is confirmed for 3 PM on Tuesday\")",
+        "height": 416,
+        "width": 272,
+        "color": 6
+      },
+      "id": "6b03d265-69af-408d-a062-7463de401f33",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        -576
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"Succeseful Appointment.\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -96,
+        -480
+      ],
+      "id": "58b70a37-7b3a-4032-81cf-aa8ab2b44bd8",
+      "name": "Appointment Success"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.appointment_request }}\",\n            \"result\": \"The aapointment was not scheduled, try with another time or date.\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -96,
+        -336
+      ],
+      "id": "f588aef3-12d8-4790-b871-b36d73d0bc00",
+      "name": "Appointment Denied"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.sender }}",
+        "subject": "={{ $('Book Appointment').item.json.data.title }}",
+        "emailType": "text",
+        "message": "=¡Hola {{ $('Book Appointment').item.json.data.hosts[0].name }}! Soy Mikaela tu asistente virtual de EmpathoAI.\n\nTu demostración está confirmada para el {{ $('Book Appointment').item.json.data.start }} a las [hora en palabras, zona Guayaquil]. Un especialista te llamará al [teléfono] para mostrarte cómo automatizar reservas y reducir cancelaciones en tu negocio.  \n\nLa sesión durarará 60 minutos y es completamente personalizada. \n\nSi por alguna razón no puedes asistir, por favor avísanos con anticipación para reprogramar tu espacio.  \n\n¡Nos vemos pronto! \n\nGoogle Meeting:\n{{ $json['Ling para la reunión'] }}\n\nAtt.\nEmpathoAI",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        352,
+        -480
+      ],
+      "id": "1143281c-cafe-4525-876f-7a332222a703",
+      "name": "Send a message",
+      "webhookId": "1828cab4-6c04-44db-84eb-c40a093a9037",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lJvypbA2AJhKcdY5",
+          "name": "Gmail API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "90ab0c20-bcb8-47c3-859a-b86e9bf731b0",
+              "name": "name",
+              "value": "={{ $json.data.hosts[0].name }}",
+              "type": "string"
+            },
+            {
+              "id": "4a4520dc-3b5a-499d-bdf2-38e8838baaef",
+              "name": "email",
+              "value": "={{ $json.data.hosts[0].email }}",
+              "type": "string"
+            },
+            {
+              "id": "70c624a0-803c-48ae-a602-19574c443580",
+              "name": "hora",
+              "value": "={{ $json.data.start }}",
+              "type": "string"
+            },
+            {
+              "id": "cbf7d16a-e473-46ce-aeb3-2de33fc0162a",
+              "name": "data.duration",
+              "value": "={{ $json.data.duration }}",
+              "type": "number"
+            },
+            {
+              "id": "54c71e51-bd11-4c82-a8ae-729e9a4e65e3",
+              "name": "Ling para la reunión",
+              "value": "={{ $json.data.meetingUrl }}",
+              "type": "string"
+            },
+            {
+              "id": "7727b7b9-8e03-4464-a9be-887c1ba643fa",
+              "name": "sender",
+              "value": "={{ $json.data.attendees[0].email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        -480
+      ],
+      "id": "b669928c-7316-46b2-963d-342db04d305c",
+      "name": "Setup Email"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-24T08:40:13.375Z",
+      "updatedAt": "2025-10-24T08:40:13.375Z",
+      "role": "workflow:owner",
+      "workflowId": "cTukItkxApbvbeCe",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-10-25T13:32:32.045Z",
+      "updatedAt": "2025-10-25T13:32:32.045Z",
+      "id": "5BGAYZfNUsiacTtW",
+      "name": "Mikaela Assistante"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-25T13:32:33.000Z",
+  "versionId": "a89c1fe0-2044-4a0e-8908-1d11d76f3b1a"
+}
