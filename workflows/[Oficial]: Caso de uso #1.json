@@ -1,0 +1,1055 @@
+{
+  "active": false,
+  "connections": {
+    "¿Está Aprobado?": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Crear Registro de Ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargar Transcripción": {
+      "main": [
+        [
+          {
+            "node": "Leer Transcripción - PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[Respond.io]: Reporte Negativo -> \"Manager\"": {
+      "main": [
+        [
+          {
+            "node": "Generar \"ticket_id\"",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Transcripción - PDF": {
+      "main": [
+        [
+          {
+            "node": "Set Manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[Supervisor]: Análisis de Sentimiento": {
+      "main": [
+        [
+          {
+            "node": "Routing by \"Sentimiento\"",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar Reporte a Developer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[OpenAI]: 4.1-mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "[Supervisor]: Análisis de Sentimiento",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[OpenRouter]: Grok-4-Fast": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "[Supervisor]: Análisis de Sentimiento",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "ai_tool": [
+        [
+          {
+            "node": "[Supervisor]: Análisis de Sentimiento",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "[Supervisor]: Análisis de Sentimiento",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar \"ticket_id\"": {
+      "main": [
+        [
+          {
+            "node": "¿Está Aprobado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Routing by \"Sentimiento\"": {
+      "main": [
+        [],
+        [],
+        [
+          {
+            "node": "[Respond.io]: Reporte Negativo -> \"Manager\"",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar Reporte a Developer1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asignación by Departamento": {
+      "main": [
+        [
+          {
+            "node": "[SD]: Crear Ticket + Asignación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "[GC]: Crear Ticket + Asignación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "[Auto.]: Crear Ticket + Asignación2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Manager": {
+      "main": [
+        [
+          {
+            "node": "[Supervisor]: Análisis de Sentimiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-23T05:37:15.579Z",
+  "id": "VvgjBKyRpeDoTH5W",
+  "isArchived": false,
+  "meta": null,
+  "name": "[Oficial]: Caso de uso #1",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "640da51d-d478-4515-82b7-bbc65c40e165",
+              "leftValue": "={{ $node['[Respond.io]: Reporte Negativo -> \"Manager\"'].data.data['Dar Respuesta'] }}",
+              "rightValue": "Aprobar Ticket",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2608,
+        544
+      ],
+      "id": "958f4828-f81d-47c6-ae93-313c3e3239e4",
+      "name": "¿Está Aprobado?"
+    },
+    {
+      "parameters": {},
+      "type": "@respond-io/n8n-nodes-respond-io.respondioTrigger",
+      "typeVersion": 1,
+      "position": [
+        32,
+        464
+      ],
+      "id": "6c6e2ac3-c0c3-47e3-a587-d942abd00198",
+      "name": "[Respond.io]: Conversación Cerrada",
+      "webhookId": "72372ecc-156b-4685-9dce-e0fbb5255f36",
+      "credentials": {},
+      "notes": "- Se considera una conversación cerrada por el Colaborador para ventas/atención al cliente."
+    },
+    {
+      "parameters": {},
+      "type": "@respond-io/n8n-nodes-respond-io.respondio",
+      "typeVersion": 1,
+      "position": [
+        240,
+        464
+      ],
+      "id": "70c1a8a0-7ab3-4c53-808e-5f3e8c492030",
+      "name": "[Respond.io]: Buscar Contacto",
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $node['[Respond.io]: Buscar Contacto'].data.custom_fields[0].value }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        448,
+        464
+      ],
+      "id": "83523ce1-bd2c-4881-8fee-9fb5c8097d30",
+      "name": "Descargar Transcripción"
+    },
+    {
+      "parameters": {},
+      "type": "@respond-io/n8n-nodes-respond-io.respondio",
+      "typeVersion": 1,
+      "position": [
+        2176,
+        176
+      ],
+      "id": "69a150a5-9c60-4220-8c09-094d6790f194",
+      "name": "[Respond.io]: Reporte Positivo -> \"Manager\"",
+      "credentials": {},
+      "notes": "⚠️ Colocar el número del Manager/Supervisor de Ventas\n\n1. Se recomienda usar ID para Messenger, Instagram, TikTok y Telegram\n2. Para WhatsApp se recomienda usar \"Phone\"\n3. Se recomienda usar \"Email\" siempre que esté almacenado dentro del CRM (Respond.io)"
+    },
+    {
+      "parameters": {},
+      "type": "@respond-io/n8n-nodes-respond-io.respondio",
+      "typeVersion": 1,
+      "position": [
+        2176,
+        352
+      ],
+      "id": "9de2d127-8c38-400c-bccd-ccc35c13e32b",
+      "name": "[Respond.io]: Reporte Neutral -> \"Manager\"",
+      "credentials": {},
+      "notes": "⚠️ Colocar el número del Manager/Supervisor de Ventas\n\n1. Se recomienda usar ID para Messenger, Instagram, TikTok y Telegram\n2. Para WhatsApp se recomienda usar \"Phone\"\n3. Se recomienda usar \"Email\" siempre que esté almacenado dentro del CRM (Respond.io)"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "dev.automation@difejosatechnologies.com",
+        "subject": "Aprobación Requerida",
+        "message": "={{\n(() => {\n  const raw = String($node[\"[Supervisor]: Análisis de Sentimiento\"].data.output.reporte_manager.cuerpo_mensaje ?? \"\");\n\n  // 1) Escapar HTML básico\n  let s = raw\n    .replace(/&/g,\"&amp;\")\n    .replace(/</g,\"&lt;\")\n    .replace(/>/g,\"&gt;\");\n\n  // 2) Links y correos\n  s = s\n    .replace(/(https?:\\/\\/[^\\s<]+)/g,'<a href=\"$1\">$1</a>')\n    .replace(/\\b([A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,})\\b/gi,'<a href=\"mailto:$1\">$1</a>');\n\n  // 3) Títulos estilo Markdown (#, ##, ###)\n  s = s\n    .replace(/^\\s*###\\s+(.+)$/gm,'<h3 style=\"margin:12px 0 6px 0\">$1</h3>')\n    .replace(/^\\s*##\\s+(.+)$/gm,'<h2 style=\"margin:14px 0 8px 0\">$1</h2>')\n    .replace(/^\\s*#\\s+(.+)$/gm, '<h1 style=\"margin:16px 0 10px 0\">$1</h1>');\n\n  // 4) Negritas, itálicas e inline code\n  s = s\n    .replace(/\\*\\*(.+?)\\*\\*/g,'<strong>$1</strong>')   // **bold**\n    .replace(/__(.+?)__/g,'<strong>$1</strong>')       // __bold__\n    .replace(/`(.+?)`/g,'<code style=\"font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:0 2px;border:1px solid #eee;border-radius:4px\">$1</code>')\n    .replace(/(^|[^\\w*])\\*(?!\\s)([^*]+?)\\*(?!\\*)(?=[^\\w*]|$)/g,'$1<em>$2</em>') // *italics*\n    .replace(/(^|[^\\w_])_(?!\\s)([^_]+?)_(?=[^\\w_]|$)/g,'$1<em>$2</em>');       // _italics_\n\n  // 5) Citas: líneas que comienzan con '>'\n  s = s.replace(/^\\s*>\\s?(.+)$/gm,'<blockquote style=\"margin:8px 0;padding-left:10px;border-left:3px solid #ddd\">$1</blockquote>');\n\n  // 6) Listas con '-' o '*'\n  s = s.replace(/(?:^|\\n)([-*]\\s+.+(?:\\n[-*]\\s+.+)*)/g, (m) => {\n    const items = m.trim().split(/\\n/).map(l => l.replace(/^[-*]\\s+/, '').trim()).map(t => `<li>${t}</li>`).join('');\n    return `\\n<ul style=\"margin:8px 0 8px 20px;padding:0\">${items}</ul>`;\n  });\n\n  // 7) Listas numeradas \"1. ...\"\n  s = s.replace(/(?:^|\\n)((?:\\d+\\.\\s+.+\\n?)+)/g, (m, g1) => {\n    const items = g1.trim().split(/\\n/).map(l => l.replace(/^\\d+\\.\\s+/, '').trim()).map(t => `<li>${t}</li>`).join('');\n    return `\\n<ol style=\"margin:8px 0 8px 20px;padding:0\">${items}</ol>`;\n  });\n\n  // 8) Párrafos y saltos de línea\n  s = s\n    .replace(/\\r/g,'')\n    .replace(/\\n{2,}/g,'</p><p>')\n    .replace(/\\n/g,'<br>');\n\n  // 9) Contenedor final para Gmail\n  return '<div style=\"font-family:Inter,Segoe UI,Arial,sans-serif;font-size:14px;line-height:1.5\"><p>' + s + '</p></div>';\n})()\n}}",
+        "responseType": "customForm",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Manager Asignado",
+              "placeholder": "Introduce tu Nombre",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Dar Respuesta",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Aprobar Ticket"
+                  },
+                  {
+                    "option": "Desaprobar Ticket"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Justificacion_Decision",
+              "placeholder": "Justifica tu Aprobación/Desaprobación",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "limitWaitTime": {
+            "values": {
+              "resumeAmount": 10,
+              "resumeUnit": "days"
+            }
+          },
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2176,
+        544
+      ],
+      "id": "eff9171e-1436-4bd4-9713-ce0b43da1ba4",
+      "name": "[Respond.io]: Reporte Negativo -> \"Manager\"",
+      "webhookId": "a75b02a8-bb25-43c1-a112-e3e8ba1b5a18"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        656,
+        464
+      ],
+      "id": "b5dda79f-6862-4c68-b50a-9c6a1d1bb8ab",
+      "name": "Leer Transcripción - PDF"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C09J8H36S1W",
+          "mode": "list",
+          "cachedResultName": "comunidad-orion"
+        },
+        "text": "=Bug Identificado 👾\n\n¡Time-Out por posible caída de API, Rotación/Expiración de Token, etc.!",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1856,
+        672
+      ],
+      "id": "7a1acf78-2dfa-43f7-9842-91af6bde60ec",
+      "name": "Enviar Reporte a Developer",
+      "webhookId": "0f22133f-e837-4f12-8bff-124126fe719a"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "teamId": "1475ff18-8e9c-4caa-9da1-664f40b6477b",
+        "title": "=Ticket - {{ $node['Generar \"ticket_id\"'].data.ticket_id }}",
+        "additionalFields": {
+          "assigneeId": "db68b228-8525-4fa9-a01b-be7970fde1b5",
+          "description": "={{\n(() => {\n  // 0) Entrada base\n  const root = ($('[Supervisor]: Análisis de Sentimiento').dat?.json?.output) || {};\n  let data = root.ticket_negativo;\n  if (typeof data === 'string') { try { data = JSON.parse(data); } catch(e) {} }\n  if (!data || typeof data !== 'object') data = {};\n\n  // Aux: ¿objeto vacío o solo valores nulos/vacíos?\n  const isEmptyObj = (o) => {\n    const ks = Object.keys(o);\n    if (!ks.length) return true;\n    return ks.every(k => o[k] === null || o[k] === undefined || (typeof o[k] === 'string' && o[k].trim() === ''));\n  };\n\n  // 1) Orden sugerido\n  const prefer = [\n    'titulo_ticket','asunto','resumen','descripcion_problema','historia_usuario',\n    'criterios_aceptacion','sentimiento','intensidad','emociones',\n    'departamento','prioridad','severidad','estado','cliente','contacto','email',\n    'telefono','canal','agente','created_at','fecha','updated_at','causa',\n    'acciones','siguientes_pasos','recomendaciones','tags','evidencias','enlaces'\n  ];\n\n  const seen = new Set();\n  const out = [];\n  out.push('=== Ticket Negativo ===');\n\n  // 2) Utils\n  const tt = (k) => k\n    .replace(/[_\\-]+/g,' ')\n    .replace(/([a-z])([A-Z])/g,'$1 $2')\n    .replace(/\\s+/g,' ')\n    .trim()\n    .replace(/^./, c => c.toUpperCase());\n\n  const isDateLike = (v) => typeof v === 'string' && (\n    /^\\d{4}-\\d{2}-\\d{2}(?:[T\\s]\\d{2}:\\d{2}(?::\\d{2}(?:\\.\\d{3})?)?Z?)?$/.test(v)\n  );\n\n  const fmtDate = (s) => {\n    try {\n      const d = new Date(s);\n      if (!isNaN(d)) {\n        return d.toLocaleString('es-CO', {\n          dateStyle: 'medium',\n          timeStyle: s.length > 10 ? 'short' : undefined,\n          hour12: false\n        });\n      }\n    } catch {}\n    return s;\n  };\n\n  const maskPII = (str) => {\n    let s = String(str);\n    s = s.replace(/\\b([A-Z0-9._%+-])([A-Z0-9._%+-]*)(@[A-Z0-9.-]+\\.[A-Z]{2,})\\b/gi,\n                  (m,a,b,dom) => a + (b ? '***' : '') + dom);\n    s = s.replace(/\\+?\\d[\\d\\s\\-().]{6,}\\d/g, (m) => {\n      const chars = m.split('');\n      let digitsSeen = 0;\n      for (let i = chars.length - 1; i >= 0; i--) {\n        if (/\\d/.test(chars[i])) {\n          digitsSeen++;\n          if (digitsSeen > 4) chars[i] = '*';\n        }\n      }\n      return chars.join('');\n    });\n    return s;\n  };\n\n  const fmtVal = (v, indent = 0) => {\n    const pad = ' '.repeat(indent);\n    if (v === null || v === undefined || v === '') return '—';\n    if (typeof v === 'boolean') return v ? 'Sí' : 'No';\n    if (typeof v === 'number') return String(v);\n\n    if (Array.isArray(v)) {\n      if (!v.length) return '—';\n      const lines = [];\n      for (const it of v) {\n        if (it && typeof it === 'object') {\n          lines.push(pad + '•');\n          lines.push(fmtObj(it, indent + 2));\n        } else {\n          const s = String(it).trim();\n          lines.push(pad + '• ' + maskPII(isDateLike(s) ? fmtDate(s) : s));\n        }\n      }\n      return lines.join('\\n');\n    }\n\n    if (typeof v === 'object') {\n      return '\\n' + fmtObj(v, indent + 2);\n    }\n\n    const s = String(v).trim();\n    return maskPII(isDateLike(s) ? fmtDate(s) : s);\n  };\n\n  const fmtObj = (o, indent = 0) => {\n    const pad = ' '.repeat(indent);\n    const lines = [];\n    for (const k of Object.keys(o)) {\n      lines.push(pad + tt(k) + ': ' + fmtVal(o[k], indent + 2));\n    }\n    return lines.join('\\n');\n  };\n\n  const pushKV = (k, v) => {\n    if (v === undefined) return;\n    seen.add(k);\n    out.push(tt(k) + ': ' + fmtVal(v, 2));\n  };\n\n  // 3) Si ticket_negativo está vacío, construir un resumen desde analisis_sentimiento + reporte_manager\n  if (isEmptyObj(data)) {\n    const an = root.analisis_sentimiento || {};\n    const rm = root.reporte_manager || {};\n    out.push('Asunto: ' + (rm.asunto || '—'));\n    out.push('Sentimiento: ' + (an.sentimiento_general || '—'));\n    out.push('Nivel de incidencia: ' + (an.nivel_de_incidencia || '—'));\n    out.push('Emociones: ' + ((an.emociones_detectadas && an.emociones_detectadas.join(', ')) || '—'));\n    out.push('Resumen: ' + (an.resumen_analisis || '—'));\n    out.push('Departamento: ' + ((root.asignacion_interna && root.asignacion_interna.departamento_responsable) || '—'));\n    if (rm.cuerpo_mensaje) {\n      out.push('\\nMensaje al manager:\\n' + maskPII(String(rm.cuerpo_mensaje)));\n    }\n    out.push('\\n—— Fin del ticket ——');\n    return out.join('\\n');\n  }\n\n  // 4) Imprime primero las claves preferidas (sin usar prototype)\n  const keysData = Object.keys(data);\n  for (const k of prefer) {\n    if (keysData.includes(k)) pushKV(k, data[k]);\n  }\n  // 5) Resto de claves\n  for (const k of keysData.sort()) {\n    if (!seen.has(k)) pushKV(k, data[k]);\n  }\n\n  out.push('\\n—— Fin del ticket ——');\n  return out.join('\\n');\n})()\n}}"
+        }
+      },
+      "type": "n8n-nodes-base.linear",
+      "typeVersion": 1.1,
+      "position": [
+        3344,
+        256
+      ],
+      "id": "ec45730e-bba1-416b-b5a8-f2b275ca3463",
+      "name": "[SD]: Crear Ticket + Asignación"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "teamId": "1475ff18-8e9c-4caa-9da1-664f40b6477b",
+        "title": "=Ticket - {{ $node['Generar \"ticket_id\"'].data.ticket_id }}",
+        "additionalFields": {
+          "assigneeId": "5ec3a898-f910-442c-a3cc-f61623f12494",
+          "description": "={{\n(() => {\n  // 0) Entrada base\n  const root = ($('[Supervisor]: Análisis de Sentimiento').item?.json?.output) || {};\n  let data = root.ticket_negativo;\n  if (typeof data === 'string') { try { data = JSON.parse(data); } catch(e) {} }\n  if (!data || typeof data !== 'object') data = {};\n\n  // Aux: ¿objeto vacío o solo valores nulos/vacíos?\n  const isEmptyObj = (o) => {\n    const ks = Object.keys(o);\n    if (!ks.length) return true;\n    return ks.every(k => o[k] === null || o[k] === undefined || (typeof o[k] === 'string' && o[k].trim() === ''));\n  };\n\n  // 1) Orden sugerido\n  const prefer = [\n    'titulo_ticket','asunto','resumen','descripcion_problema','historia_usuario',\n    'criterios_aceptacion','sentimiento','intensidad','emociones',\n    'departamento','prioridad','severidad','estado','cliente','contacto','email',\n    'telefono','canal','agente','created_at','fecha','updated_at','causa',\n    'acciones','siguientes_pasos','recomendaciones','tags','evidencias','enlaces'\n  ];\n\n  const seen = new Set();\n  const out = [];\n  out.push('=== Ticket Negativo ===');\n\n  // 2) Utils\n  const tt = (k) => k\n    .replace(/[_\\-]+/g,' ')\n    .replace(/([a-z])([A-Z])/g,'$1 $2')\n    .replace(/\\s+/g,' ')\n    .trim()\n    .replace(/^./, c => c.toUpperCase());\n\n  const isDateLike = (v) => typeof v === 'string' && (\n    /^\\d{4}-\\d{2}-\\d{2}(?:[T\\s]\\d{2}:\\d{2}(?::\\d{2}(?:\\.\\d{3})?)?Z?)?$/.test(v)\n  );\n\n  const fmtDate = (s) => {\n    try {\n      const d = new Date(s);\n      if (!isNaN(d)) {\n        return d.toLocaleString('es-CO', {\n          dateStyle: 'medium',\n          timeStyle: s.length > 10 ? 'short' : undefined,\n          hour12: false\n        });\n      }\n    } catch {}\n    return s;\n  };\n\n  const maskPII = (str) => {\n    let s = String(str);\n    s = s.replace(/\\b([A-Z0-9._%+-])([A-Z0-9._%+-]*)(@[A-Z0-9.-]+\\.[A-Z]{2,})\\b/gi,\n                  (m,a,b,dom) => a + (b ? '***' : '') + dom);\n    s = s.replace(/\\+?\\d[\\d\\s\\-().]{6,}\\d/g, (m) => {\n      const chars = m.split('');\n      let digitsSeen = 0;\n      for (let i = chars.length - 1; i >= 0; i--) {\n        if (/\\d/.test(chars[i])) {\n          digitsSeen++;\n          if (digitsSeen > 4) chars[i] = '*';\n        }\n      }\n      return chars.join('');\n    });\n    return s;\n  };\n\n  const fmtVal = (v, indent = 0) => {\n    const pad = ' '.repeat(indent);\n    if (v === null || v === undefined || v === '') return '—';\n    if (typeof v === 'boolean') return v ? 'Sí' : 'No';\n    if (typeof v === 'number') return String(v);\n\n    if (Array.isArray(v)) {\n      if (!v.length) return '—';\n      const lines = [];\n      for (const it of v) {\n        if (it && typeof it === 'object') {\n          lines.push(pad + '•');\n          lines.push(fmtObj(it, indent + 2));\n        } else {\n          const s = String(it).trim();\n          lines.push(pad + '• ' + maskPII(isDateLike(s) ? fmtDate(s) : s));\n        }\n      }\n      return lines.join('\\n');\n    }\n\n    if (typeof v === 'object') {\n      return '\\n' + fmtObj(v, indent + 2);\n    }\n\n    const s = String(v).trim();\n    return maskPII(isDateLike(s) ? fmtDate(s) : s);\n  };\n\n  const fmtObj = (o, indent = 0) => {\n    const pad = ' '.repeat(indent);\n    const lines = [];\n    for (const k of Object.keys(o)) {\n      lines.push(pad + tt(k) + ': ' + fmtVal(o[k], indent + 2));\n    }\n    return lines.join('\\n');\n  };\n\n  const pushKV = (k, v) => {\n    if (v === undefined) return;\n    seen.add(k);\n    out.push(tt(k) + ': ' + fmtVal(v, 2));\n  };\n\n  // 3) Si ticket_negativo está vacío, construir un resumen desde analisis_sentimiento + reporte_manager\n  if (isEmptyObj(data)) {\n    const an = root.analisis_sentimiento || {};\n    const rm = root.reporte_manager || {};\n    out.push('Asunto: ' + (rm.asunto || '—'));\n    out.push('Sentimiento: ' + (an.sentimiento_general || '—'));\n    out.push('Nivel de incidencia: ' + (an.nivel_de_incidencia || '—'));\n    out.push('Emociones: ' + ((an.emociones_detectadas && an.emociones_detectadas.join(', ')) || '—'));\n    out.push('Resumen: ' + (an.resumen_analisis || '—'));\n    out.push('Departamento: ' + ((root.asignacion_interna && root.asignacion_interna.departamento_responsable) || '—'));\n    if (rm.cuerpo_mensaje) {\n      out.push('\\nMensaje al manager:\\n' + maskPII(String(rm.cuerpo_mensaje)));\n    }\n    out.push('\\n—— Fin del ticket ——');\n    return out.join('\\n');\n  }\n\n  // 4) Imprime primero las claves preferidas (sin usar prototype)\n  const keysData = Object.keys(data);\n  for (const k of prefer) {\n    if (keysData.includes(k)) pushKV(k, data[k]);\n  }\n  // 5) Resto de claves\n  for (const k of keysData.sort()) {\n    if (!seen.has(k)) pushKV(k, data[k]);\n  }\n\n  out.push('\\n—— Fin del ticket ——');\n  return out.join('\\n');\n})()\n}}"
+        }
+      },
+      "type": "n8n-nodes-base.linear",
+      "typeVersion": 1.1,
+      "position": [
+        3344,
+        448
+      ],
+      "id": "bcaff42e-e4ae-4ea7-9879-17b096842104",
+      "name": "[GC]: Crear Ticket + Asignación"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "teamId": "1475ff18-8e9c-4caa-9da1-664f40b6477b",
+        "title": "=Ticket - {{ $node['Generar \"ticket_id\"'].data.ticket_id }}",
+        "additionalFields": {
+          "assigneeId": "93506781-4635-4434-8b32-1b0ff53f5a37",
+          "description": "={{\n(() => {\n  // 0) Entrada base\n  const root = ($('[Supervisor]: Análisis de Sentimiento').item?.json?.output) || {};\n  let data = root.ticket_negativo;\n  if (typeof data === 'string') { try { data = JSON.parse(data); } catch(e) {} }\n  if (!data || typeof data !== 'object') data = {};\n\n  // Aux: ¿objeto vacío o solo valores nulos/vacíos?\n  const isEmptyObj = (o) => {\n    const ks = Object.keys(o);\n    if (!ks.length) return true;\n    return ks.every(k => o[k] === null || o[k] === undefined || (typeof o[k] === 'string' && o[k].trim() === ''));\n  };\n\n  // 1) Orden sugerido\n  const prefer = [\n    'titulo_ticket','asunto','resumen','descripcion_problema','historia_usuario',\n    'criterios_aceptacion','sentimiento','intensidad','emociones',\n    'departamento','prioridad','severidad','estado','cliente','contacto','email',\n    'telefono','canal','agente','created_at','fecha','updated_at','causa',\n    'acciones','siguientes_pasos','recomendaciones','tags','evidencias','enlaces'\n  ];\n\n  const seen = new Set();\n  const out = [];\n  out.push('=== Ticket Negativo ===');\n\n  // 2) Utils\n  const tt = (k) => k\n    .replace(/[_\\-]+/g,' ')\n    .replace(/([a-z])([A-Z])/g,'$1 $2')\n    .replace(/\\s+/g,' ')\n    .trim()\n    .replace(/^./, c => c.toUpperCase());\n\n  const isDateLike = (v) => typeof v === 'string' && (\n    /^\\d{4}-\\d{2}-\\d{2}(?:[T\\s]\\d{2}:\\d{2}(?::\\d{2}(?:\\.\\d{3})?)?Z?)?$/.test(v)\n  );\n\n  const fmtDate = (s) => {\n    try {\n      const d = new Date(s);\n      if (!isNaN(d)) {\n        return d.toLocaleString('es-CO', {\n          dateStyle: 'medium',\n          timeStyle: s.length > 10 ? 'short' : undefined,\n          hour12: false\n        });\n      }\n    } catch {}\n    return s;\n  };\n\n  const maskPII = (str) => {\n    let s = String(str);\n    s = s.replace(/\\b([A-Z0-9._%+-])([A-Z0-9._%+-]*)(@[A-Z0-9.-]+\\.[A-Z]{2,})\\b/gi,\n                  (m,a,b,dom) => a + (b ? '***' : '') + dom);\n    s = s.replace(/\\+?\\d[\\d\\s\\-().]{6,}\\d/g, (m) => {\n      const chars = m.split('');\n      let digitsSeen = 0;\n      for (let i = chars.length - 1; i >= 0; i--) {\n        if (/\\d/.test(chars[i])) {\n          digitsSeen++;\n          if (digitsSeen > 4) chars[i] = '*';\n        }\n      }\n      return chars.join('');\n    });\n    return s;\n  };\n\n  const fmtVal = (v, indent = 0) => {\n    const pad = ' '.repeat(indent);\n    if (v === null || v === undefined || v === '') return '—';\n    if (typeof v === 'boolean') return v ? 'Sí' : 'No';\n    if (typeof v === 'number') return String(v);\n\n    if (Array.isArray(v)) {\n      if (!v.length) return '—';\n      const lines = [];\n      for (const it of v) {\n        if (it && typeof it === 'object') {\n          lines.push(pad + '•');\n          lines.push(fmtObj(it, indent + 2));\n        } else {\n          const s = String(it).trim();\n          lines.push(pad + '• ' + maskPII(isDateLike(s) ? fmtDate(s) : s));\n        }\n      }\n      return lines.join('\\n');\n    }\n\n    if (typeof v === 'object') {\n      return '\\n' + fmtObj(v, indent + 2);\n    }\n\n    const s = String(v).trim();\n    return maskPII(isDateLike(s) ? fmtDate(s) : s);\n  };\n\n  const fmtObj = (o, indent = 0) => {\n    const pad = ' '.repeat(indent);\n    const lines = [];\n    for (const k of Object.keys(o)) {\n      lines.push(pad + tt(k) + ': ' + fmtVal(o[k], indent + 2));\n    }\n    return lines.join('\\n');\n  };\n\n  const pushKV = (k, v) => {\n    if (v === undefined) return;\n    seen.add(k);\n    out.push(tt(k) + ': ' + fmtVal(v, 2));\n  };\n\n  // 3) Si ticket_negativo está vacío, construir un resumen desde analisis_sentimiento + reporte_manager\n  if (isEmptyObj(data)) {\n    const an = root.analisis_sentimiento || {};\n    const rm = root.reporte_manager || {};\n    out.push('Asunto: ' + (rm.asunto || '—'));\n    out.push('Sentimiento: ' + (an.sentimiento_general || '—'));\n    out.push('Nivel de incidencia: ' + (an.nivel_de_incidencia || '—'));\n    out.push('Emociones: ' + ((an.emociones_detectadas && an.emociones_detectadas.join(', ')) || '—'));\n    out.push('Resumen: ' + (an.resumen_analisis || '—'));\n    out.push('Departamento: ' + ((root.asignacion_interna && root.asignacion_interna.departamento_responsable) || '—'));\n    if (rm.cuerpo_mensaje) {\n      out.push('\\nMensaje al manager:\\n' + maskPII(String(rm.cuerpo_mensaje)));\n    }\n    out.push('\\n—— Fin del ticket ——');\n    return out.join('\\n');\n  }\n\n  // 4) Imprime primero las claves preferidas (sin usar prototype)\n  const keysData = Object.keys(data);\n  for (const k of prefer) {\n    if (keysData.includes(k)) pushKV(k, data[k]);\n  }\n  // 5) Resto de claves\n  for (const k of keysData.sort()) {\n    if (!seen.has(k)) pushKV(k, data[k]);\n  }\n\n  out.push('\\n—— Fin del ticket ——');\n  return out.join('\\n');\n})()\n}}"
+        }
+      },
+      "type": "n8n-nodes-base.linear",
+      "typeVersion": 1.1,
+      "position": [
+        3344,
+        640
+      ],
+      "id": "bd3e6990-6f0a-4b07-ad35-900916435410",
+      "name": "[Auto.]: Crear Ticket + Asignación2"
+    },
+    {
+      "parameters": {},
+      "type": "@respond-io/n8n-nodes-respond-io.respondio",
+      "typeVersion": 1,
+      "position": [
+        2816,
+        448
+      ],
+      "id": "c1bb2447-ea40-4c3a-b095-fd5f02cf22d9",
+      "name": "[Respond.io]: Notificar al Cliente",
+      "credentials": {},
+      "notes": "⚠️ Colocar el número del cliente final; viene en el segundo nodo.\n\n1. Se recomienda usar ID para Messenger, Instagram, TikTok y Telegram\n2. Para WhatsApp se recomienda usar \"Phone\"\n3. Se recomienda usar \"Email\" siempre que esté almacenado dentro del CRM (Respond.io)"
+    },
+    {
+      "parameters": {},
+      "type": "@respond-io/n8n-nodes-respond-io.respondio",
+      "typeVersion": 1,
+      "position": [
+        3552,
+        256
+      ],
+      "id": "b1acba5b-c19a-418f-bbdf-721b1eab622c",
+      "name": "[Respond.io]: Añadir Ticket \"SD\" -> Comentario",
+      "credentials": {},
+      "notes": "1. Se recomienda usar ID para Messenger, Instagram, TikTok y Telegram\n2. Para WhatsApp se recomienda usar \"Phone\"\n3. Se recomienda usar \"Email\" siempre que esté almacenado dentro del CRM (Respond.io)"
+    },
+    {
+      "parameters": {},
+      "type": "@respond-io/n8n-nodes-respond-io.respondio",
+      "typeVersion": 1,
+      "position": [
+        3552,
+        448
+      ],
+      "id": "70e2d9e1-10eb-45df-adb6-6cca8661cea3",
+      "name": "[Respond.io]: Añadir Ticket \"GC\" -> Comentario",
+      "credentials": {},
+      "notes": "1. Se recomienda usar ID para Messenger, Instagram, TikTok y Telegram\n2. Para WhatsApp se recomienda usar \"Phone\"\n3. Se recomienda usar \"Email\" siempre que esté almacenado dentro del CRM (Respond.io)"
+    },
+    {
+      "parameters": {},
+      "type": "@respond-io/n8n-nodes-respond-io.respondio",
+      "typeVersion": 1,
+      "position": [
+        3552,
+        640
+      ],
+      "id": "484d1345-4c34-451c-8bf3-025ef41ef9d1",
+      "name": "[Respond.io]: Añadir Ticket \"Auto.\" -> Comentario",
+      "credentials": {},
+      "notes": "1. Se recomienda usar ID para Messenger, Instagram, TikTok y Telegram\n2. Para WhatsApp se recomienda usar \"Phone\"\n3. Se recomienda usar \"Email\" siempre que esté almacenado dentro del CRM (Respond.io)"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "xN1h4GyRoZUlMk4X",
+          "mode": "list",
+          "cachedResultName": "Gestión de Tickets Desaprobados",
+          "cachedResultUrl": "/projects/8oUezFfUrgJhiogU/datatables/xN1h4GyRoZUlMk4X"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID_Ticket": "=Ticket - {{ $node['Generar \"ticket_id\"'].data.ticket_id }}",
+            "Nivel_Incidencia_IA": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.analisis_sentimiento.nivel_de_incidencia }}",
+            "Estado_Ticket": "Desaprobar Ticket",
+            "Departamento_Sugerido_IA": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.asignacion_interna.departamento_responsable }}",
+            "Resumen_IA": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.analisis_sentimiento.resumen_analisis }}",
+            "Decision_Manager": "={{ $node['[Respond.io]: Reporte Negativo -> \"Manager\"'].data.data['Dar Respuesta'] }}",
+            "Manager_Asignado": "={{ $node['[Respond.io]: Reporte Negativo -> \"Manager\"'].data.data['Manager Asignado'] }}",
+            "Justificacion_Decision": "={{ $node['[Respond.io]: Reporte Negativo -> \"Manager\"'].data.data.Justificacion_Decision }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID_Ticket",
+              "displayName": "ID_Ticket",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado_Ticket",
+              "displayName": "Estado_Ticket",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Nivel_Incidencia_IA",
+              "displayName": "Nivel_Incidencia_IA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Departamento_Sugerido_IA",
+              "displayName": "Departamento_Sugerido_IA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resumen_IA",
+              "displayName": "Resumen_IA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Manager_Asignado",
+              "displayName": "Manager_Asignado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Decision_Manager",
+              "displayName": "Decision_Manager",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Justificacion_Decision",
+              "displayName": "Justificacion_Decision",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        2816,
+        656
+      ],
+      "id": "2758540a-8bb6-41f1-8d13-0d9c81759f77",
+      "name": "Crear Registro de Ticket",
+      "notes": "⚠️ Uso óptimo hasta 500 registros. Métrica hasta el día 29/09/2025"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C09J8H36S1W",
+          "mode": "list",
+          "cachedResultName": "comunidad-orion"
+        },
+        "text": "=Bug Identificado 👾\n\n¡Nuevo sentimiento no definido dentro del Agente!",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        2176,
+        736
+      ],
+      "id": "af039eb9-26c0-4b3e-bd92-83aedae68698",
+      "name": "Enviar Reporte a Developer1",
+      "webhookId": "0f22133f-e837-4f12-8bff-124126fe719a"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $node['Leer Transcripción - PDF'].data.text }}",
+        "hasOutputParser": true,
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=#### **ROL Y OBJETIVO**\n\nActúa como un experto Analista de Experiencia de Cliente (CX) y Calidad (QA). Tu objetivo es analizar la transcripción de una reunión para clasificar el sentimiento, las emociones, el nivel de incidencia y el departamento responsable. Finalmente, debes **generar un reporte completo para un manager**, **crear un ticket de seguimiento para casos negativos** y enmascarar toda la Información de Identificación Personal (PII).\n\n-----\n\n#### **REGLAS DE PROTECCIÓN DE DATOS (PII GUARDRAILS)**\n\nAntes de cualquier análisis, enmascara la siguiente información sensible (PII) en el texto, reemplazando los datos con los placeholders estandarizados correspondientes:\n\n  - Nombres de personas: `{{ $node['[Respond.io]: Buscar Contacto'].data.firstName}}`\n  - Correos electrónicos: `[EMAIL]`\n  - Números de teléfono: `{{ $node['[Respond.io]: Buscar Contacto'].data.phone}}`\n  - Números de identificación o cliente: `[ID_CLIENTE]`\n  - Direcciones: `[DIRECCION]`\n\n-----\n\n#### **INSTRUCCIONES DE ANÁLISIS Y REPORTE**\n\nSigue estos pasos en orden:\n\n1.  **Enmascarar PII**: Procesa la transcripción original y genera la `transcripcion_anonimizada`.\n2.  **Análisis de Sentimiento**: Clasifica el sentimiento general en una de estas categorías: **\"Positivo\", \"Neutral\", \"Negativo\", \"Mixto\"**.\n3.  **Detección de Emociones**: Identifica y lista hasta 3 emociones dominantes del cliente (ej. `Frustración`, `Satisfacción`, `Confusión`).\n4.  **Nivel de Incidencia**: Evalúa el impacto usando una de las siguientes categorías: **\"Bajo\", \"Medio\", \"Alto\", \"Crítico\"**.\n5.  **Departamento Responsable**: Asigna el tema a: **\"Software Developer\", \"Generative Content\", o \"Automations\"**.\n6.  **Resumen del Análisis**: Escribe un resumen conciso (máximo 50 palabras) explicando tu clasificación.\n7.  **Generación del Reporte para Manager**: Basado en el `sentimiento_general` que clasificaste, **construye el `asunto`, `cuerpo_mensaje` y `accion_sugerida`** usando las plantillas provistas.\n      * **Si el sentimiento es \"Positivo\" ✅:**\n          * **Asunto:** `Feedback Positivo | Reunión con Cliente`\n          * **Cuerpo:** `Hola, {{ $node['Set Manager'].data.manager }},\\n\\nQuería compartir un resultado positivo de una reciente interacción con un cliente.\\n\\n- Análisis General: La conversación demostró un alto nivel de satisfacción.\\n- Emociones Detectadas: [Lista de emociones detectadas].\\n- Puntos Clave: [Usa el resumen del análisis aquí].\\n- Departamento Implicado: [Departamento responsable].\\n\\nEste es un excelente ejemplo del buen trabajo del equipo. ¡Gran trabajo!\\n\\nSaludos,\\nAI CX Supervisor`\n          * **Acción Sugerida:** `Felicitar al equipo por el excelente resultado.`\n      * **Si el sentimiento es \"Neutral\" 📝:**\n          * **Asunto:** `Resumen de Reunión Informativa | Cliente`\n          * **Cuerpo:** `Hola, [Nombre del Manager],\\n\\nTe comparto un resumen de una reunión de carácter neutral e informativo.\\n\\n- Análisis General: La conversación fue principalmente funcional y de seguimiento.\\n- Puntos Clave: [Usa el resumen del análisis aquí].\\n- Departamento Implicado: [Departamento responsable].\\n\\nEl equipo continuará con las tareas según lo planeado.\\n\\nSaludos,\\nAI CX Supervisor`\n          * **Acción Sugerida:** `No se requiere ninguna acción de supervisión en este momento.`\n      * **Si el sentimiento es \"Negativo\" o \"Mixto\" ⚠️:**\n          * **Asunto:** `⚠️ Alerta de Incidencia | Feedback Negativo de Cliente`\n          * **Cuerpo:** `Hola, [Nombre del Manager],\\n\\nSe ha detectado una interacción con un cliente con sentimiento negativo que requiere tu atención.\\n\\n- Nivel de Incidencia: [Nivel de incidencia].\\n- Análisis General: El cliente expresó frustración/descontento.\\n- Emociones Detectadas: [Lista de emociones detectadas].\\n- Problema Principal: [Usa el resumen del análisis aquí].\\n- Departamento Implicado: [Departamento responsable].\\n\\nLa situación podría escalar si no se atiende.\\n\\nSaludos,\\nAI CX Supervisor`\n          * **Acción Sugerida:** `Se recomienda una intervención prioritaria para analizar la causa raíz y contactar al cliente con una solución.`\n8.  **Creación de Ticket (Solo para Sentimiento Negativo/Mixto)**: Si el sentimiento es **\"Negativo\"** o **\"Mixto\"**, genera el contenido para un ticket de seguimiento usando un formato ágil y lenguaje no técnico:\n      * **Título del Ticket**: Crea un título corto y descriptivo del problema principal (ej. \"Fallo en el sistema de facturación del cliente\").\n      * **Historia de Usuario**: Redacta una historia en el formato: \"Como [rol del cliente], quiero [acción o solución] para poder [beneficio o resultado esperado]\".\n      * **Descripción del Problema**: Explica de forma sencilla qué está experimentando el cliente y cuál es el impacto en su operación, evitando jerga técnica.\n      * **Criterios de Aceptación**: Lista 2 o 3 condiciones claras y verificables que deben cumplirse para considerar el problema resuelto (ej. \"El cliente puede generar facturas sin errores\").\n      * Si el sentimiento es **Positivo** o **Neutral**, deja los campos de este objeto como `null`.\n\n-----\n\n#### **FORMATO DE SALIDA**\n\nTu respuesta debe ser **exclusivamente un objeto JSON válido**, sin texto adicional. La estructura debe ser la siguiente:\n\n```json\n{\n  \"analisis_sentimiento\": {\n    \"sentimiento_general\": \"string\",\n    \"emociones_detectadas\": [\n      \"string\"\n    ],\n    \"nivel_de_incidencia\": \"string\",\n    \"resumen_analisis\": \"string\"\n  },\n  \"asignacion_interna\": {\n    \"departamento_responsable\": \"string\"\n  },\n  \"texto_procesado\": {\n    \"transcripcion_anonimizada\": \"string\"\n  },\n  \"reporte_manager\": {\n    \"asunto\": \"string\",\n    \"cuerpo_mensaje\": \"string\",\n    \"accion_sugerida\": \"string\"\n  },\n  \"ticket_negativo\": {\n    \"titulo_ticket\": \"string\",\n    \"historia_usuario\": \"string\",\n    \"descripcion_problema\": \"string\",\n    \"criterios_aceptacion\": [\n      \"string\"\n    ]\n  }\n}\n```\n\n-----"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1248,
+        464
+      ],
+      "id": "53d86036-ba65-4630-8e0e-3f66f2b5abf1",
+      "name": "[Supervisor]: Análisis de Sentimiento",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {
+          "frequencyPenalty": 0,
+          "responseFormat": "json_object",
+          "presencePenalty": 0,
+          "temperature": 0.7,
+          "maxRetries": 3,
+          "topP": 0.8
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1104,
+        672
+      ],
+      "id": "7af78567-371c-4a99-8213-17a888d15363",
+      "name": "[OpenAI]: 4.1-mini"
+    },
+    {
+      "parameters": {
+        "model": "x-ai/grok-4-fast",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        672
+      ],
+      "id": "81284843-d6e8-49c1-9b41-1a054c3d463d",
+      "name": "[OpenRouter]: Grok-4-Fast"
+    },
+    {
+      "parameters": {
+        "outputFieldName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Output_Field_Name', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTimeTool",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        672
+      ],
+      "id": "a82d5556-eef9-4d0f-844c-6d6e62bcfb52",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"analisis_sentimiento\": {\n    \"sentimiento_general\": \"string\",\n    \"emociones_detectadas\": [\n      \"string\"\n    ],\n    \"nivel_de_incidencia\": \"string\",\n    \"resumen_analisis\": \"string\"\n  },\n  \"asignacion_interna\": {\n    \"departamento_responsable\": \"string\"\n  },\n  \"texto_procesado\": {\n    \"transcripcion_anonimizada\": \"string\"\n  },\n  \"reporte_manager\": {\n    \"asunto\": \"string\",\n    \"cuerpo_mensaje\": \"string\",\n    \"accion_sugerida\": \"string\"\n  },\n  \"ticket_negativo\": {\n    \"titulo_ticket\": \"string\",\n    \"historia_usuario\": \"string\",\n    \"descripcion_problema\": \"string\",\n    \"criterios_aceptacion\": [\n      \"string\"\n    ]\n  }\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1600,
+        672
+      ],
+      "id": "aafb998d-f645-488c-ae34-d1a8d1e534bd",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5af7cd7b-a2bf-4991-a081-e40441794db3",
+              "name": "ticket_id",
+              "value": "=NEG-{{ Math.random().toString(36).substring(2, 10).toUpperCase() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2384,
+        544
+      ],
+      "id": "996e255f-3276-4f26-8c0b-b50d86f44020",
+      "name": "Generar \"ticket_id\""
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.analisis_sentimiento.sentimiento_general }}",
+                    "rightValue": "Positivo",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "6ebeb99a-62b5-4228-bdbc-2c58bd8df385"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Positivo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ec08d51e-ac45-43b4-a967-c195f2d88bff",
+                    "leftValue": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.analisis_sentimiento.sentimiento_general }}",
+                    "rightValue": "Neutral",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Neutral"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ef0d7f19-2283-42bc-a5ca-608236a2fa07",
+                    "leftValue": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.analisis_sentimiento.sentimiento_general }}",
+                    "rightValue": "Negativo",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Negativo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        1856,
+        416
+      ],
+      "id": "498e52ab-0e41-48ff-85c7-414b82f1d45b",
+      "name": "Routing by \"Sentimiento\"",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.asignacion_interna.departamento_responsable }}",
+                    "rightValue": "Software Developer",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "abaf375c-0fc7-41fe-b631-eda6d01ca4d1"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Software Developer"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "c0c3ec15-6e05-4363-b971-1de8bdefe765",
+                    "leftValue": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.asignacion_interna.departamento_responsable }}",
+                    "rightValue": "Generative Content",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Generative Content"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5e54f960-894b-4458-b3d1-9f04246c7904",
+                    "leftValue": "={{ $node['[Supervisor]: Análisis de Sentimiento'].data.output.asignacion_interna.departamento_responsable }}",
+                    "rightValue": "Automations",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Automations"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        3040,
+        432
+      ],
+      "id": "f6e5390f-f997-4ce7-b20e-80999048c0f8",
+      "name": "Asignación by Departamento"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d5a4d4bf-fa62-426f-b825-8ba50e3529a2",
+              "name": "manager",
+              "value": "Rodrigo de La Torre",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        864,
+        464
+      ],
+      "id": "5f478e80-be84-4619-9e02-5d0ed4e74d50",
+      "name": "Set Manager",
+      "notes": "⚠️ Considerar que este nodo se puede sustituir por un nodo \"Code\" con la lógica de negocio necesaria para definir el valor de la variable \"manager\"."
+    },
+    {
+      "parameters": {
+        "content": "## Gestión de Acciones Correctivas y Notificaciones\n\nUna vez que la inteligencia artificial analiza la llamada, el sistema activa automáticamente una serie de acciones inteligentes para asegurar que cada caso reciba la atención adecuada sin que tengas que gestionarlo manualmente.\n\nAquí te explicamos lo que ocurre según el resultado:\n\nPara Llamadas Positivas o Neutrales:\nRecibirás un resumen informativo directamente en tu canal de comunicación principal (ej. WhatsApp, Email).\n\nNo se requiere ninguna acción de tu parte. El objetivo es mantenerte al tanto del buen desempeño y de las interacciones estándar.\n\nPara Llamadas Negativas o Problemáticas (Tu Intervención es Clave):\nEste es el escenario diseñado para resolver problemas de forma rápida y eficiente.\n\nRecibes una Alerta por Correo: Se te envía un email con el resumen del problema, el análisis de la IA y el impacto potencial.\n\nTomas una Decisión Rápida: Directamente desde el correo, se te presentará una opción simple para Aprobar o Desaprobar la creación de un ticket de soporte técnico.\n\n¿Qué pasa si Apruebas el Ticket?\n\nEl sistema crea y asigna automáticamente la tarea al equipo correcto (desarrollo, contenido, etc.), sin necesidad de reuniones o correos adicionales.\n\nSimultáneamente, se notifica proactivamente al cliente, informándole que su problema ya está siendo atendido y proporcionándole un número de ticket para su tranquilidad.\n\nTodo el proceso queda registrado en el historial del cliente para futuras consultas.\n\n¿Qué pasa si Desapruebas el Ticket?\n\nSi consideras que el problema no requiere acción técnica (por ejemplo, ya fue resuelto o es un malentendido), el caso simplemente se archiva en un registro interno para fines de auditoría, sin generar ruido innecesario para el equipo técnico.\n\n¿Y si el Sistema Detecta un Error?\nEn el raro caso de que la IA no pueda clasificar una conversación, se envía una notificación automática al equipo de desarrollo para que lo revisen manualmente. Esto asegura que ningún caso se pierda y que el sistema mejore continuamente.",
+        "height": 720,
+        "width": 1824,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1888,
+        912
+      ],
+      "id": "cdb80aaf-974b-414c-8843-927f322fe41b",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## El Cerebro del Sistema: Tu Supervisor de Calidad con IA\n\nEste módulo es el corazón de la automatización. Imagina tener un supervisor experto en experiencia del cliente que lee y analiza cada una de las transcripciones de tus reuniones, de forma instantánea y objetiva. Su función es entender a fondo lo que ocurrió en la llamada y preparar toda la información para que tú y tu equipo puedan actuar de forma rápida y precisa.\n\nEn esencia, esto es lo que el Agente Analizador hace por ti:\n\nProtege la Privacidad del Cliente: Antes de cualquier análisis, el sistema anonimiza todos los datos personales (nombres, correos, teléfonos). Esto garantiza que la información sensible de tus clientes esté siempre segura y se cumplan las normativas de privacidad.\n\nEntiende el Clima Real de la Conversación: No se limita a clasificar la llamada como Positiva, Neutral o Negativa. Va más allá, detectando las emociones clave del cliente (como frustración, confusión o satisfacción) para darte un contexto mucho más humano y profundo de la interacción.\n\nEvalúa la Urgencia y el Impacto: Determina qué tan crítica es una incidencia (desde \"Bajo\" hasta \"Crítico\"). Esto te ayuda a priorizar lo que realmente importa y a enfocarte en los casos que podrían escalar si no se atienden a tiempo.\n\nIdentifica al Equipo Responsable: Analiza la raíz del problema y sugiere qué equipo interno debe hacerse cargo (Desarrollo, Contenido, etc.), eliminando las dudas y retrasos sobre a quién asignar la tarea.\n\nPrepara tu Resumen Ejecutivo: Redacta automáticamente un resumen claro y conciso y prepara el cuerpo del correo o la notificación que recibirás. Te entrega la información clave ya digerida y lista para consumir.\n\nRedacta el Ticket Técnico por Ti (en Casos Negativos): Para los problemas complejos, el agente prepara un borrador completo del ticket de soporte, incluyendo el título, la descripción del problema y los criterios para considerarlo resuelto. Esto ahorra horas de comunicación entre el área de negocio y el equipo técnico.\n\nEn resumen, este agente no solo te informa sobre \"qué\" pasó en una llamada, sino que te explica el \"porqué\", evalúa la \"gravedad\", sugiere \"quién\" debe actuar y prepara el \"cómo\" se debe comunicar. Es tu primera línea de defensa para garantizar la calidad y la satisfacción del cliente a escala.\n ",
+        "height": 720,
+        "width": 816,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        912
+      ],
+      "id": "b10f5110-5ceb-40ab-b862-70ccaf99519e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Justificación\n\n**El Desafío de la Tercerización en Ventas**\nLa decisión de tercerizar la fuerza de ventas o los centros de contacto es una estrategia común para escalar operaciones y reducir costos. Sin embargo, esta estrategia introduce desafíos significativos que pueden impactar directamente en la reputación de la marca y en los ingresos. Investigaciones y análisis de la industria consistentemente señalan varios puntos de fricción:\n\n**Pérdida de Control sobre la Calidad**: Según estudios de consultoras como Deloitte, uno de los mayores riesgos de la tercerización es la dilución del control sobre los procesos y la calidad del servicio. Los agentes externos pueden no estar alineados con la cultura de la empresa, el tono de voz o los valores de la marca.\n\n**Desalineación del Mensaje de Marca**: Un reporte de Harvard Business Review sobre la gestión de canales de venta indirectos destaca cómo la falta de una supervisión rigurosa puede llevar a una comunicación inconsistente y a la erosión de la propuesta de valor de la marca.\n\n**Dificultad en la Medición del Desempeño Real**: Más allá de métricas cuantitativas como el número de llamadas o citas agendadas, es complejo medir aspectos cualitativos como la empatía, la correcta resolución de objeciones o la adhesión al guion de ventas. La supervisión manual es costosa, consume tiempo y no es escalable.\n\n**Brecha de Conocimiento del Producto**: Los equipos externos, al no estar inmersos en el día a día de la empresa, a menudo poseen un conocimiento más superficial del producto o servicio, lo que limita su capacidad para manejar preguntas complejas y objeciones de manera efectiva.\n\nEste workflow de Supervisión y Análisis Automatizado nace como una solución directa a estos problemas, creando un sistema de control de calidad (QA) escalable y basado en datos que permite a las empresas aprovechar los beneficios de la tercerización mientras mitigan sus riesgos más significativos.",
+        "height": 544,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        32,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "af3163a1-f449-49ba-bb27-a82fe9a4be90",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## 1. Contexto y Arquitectura del Flujo \n\n**Objetivo General**\nImplementar un sistema automatizado de Quality Assurance (QA) para interacciones de ventas, enfocado en analizar y evaluar el desempeño de los agentes. Este workflow está diseñado para procesar cualquier reunión de ventas, ya sea gestionada por un equipo interno, freelance o un call center tercerizado, garantizando un estándar de calidad y un ciclo de mejora continua.\n\nFase Previa: Calificación y Agendamiento por IA (Lead-Gen Bot)\nAntes de la intervención del agente humano, el flujo se inicia con una etapa de calificación automatizada. Un agente de IA conversacional gestiona las interacciones iniciales con los prospectos:\n\nClasificación de Leads: Evalúa el potencial del lead basándose en respuestas y datos predefinidos.\n\nGestión de FAQ y Objeciones: Resuelve preguntas frecuentes y maneja objeciones comunes de forma instantánea.\n\nAgendamiento Autónomo: Si el lead es calificado como APTO, la IA accede a los calendarios de los agentes de ventas y agenda la reunión directamente.\n\nEsta fase asegura que los agentes humanos inviertan su tiempo únicamente en leads con alto potencial, optimizando la eficiencia del proceso comercial.",
+        "height": 432,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        32,
+        656
+      ],
+      "id": "9767f6cb-f07f-43b0-b06e-ab7d448dcdef",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Fuentes y Referencias de Investigación\n\nAquí están las citas que respaldan la justificación del workflow, como solicitaste.\n\nSobre la Pérdida de Control y Calidad en la Tercerización:\n\nFuente: Deloitte. (2023). Deloitte's 2023 Global Outsourcing Survey.\n\nReferencia: Si bien las encuestas se actualizan, el hallazgo es perenne. La encuesta de Deloitte sobre tercerización global consistentemente resalta que \"la mejora de la calidad del servicio\" a menudo no cumple las expectativas y la \"gestión de la relación con el proveedor\" es un desafío clave. Esto implica una lucha por mantener el control de calidad deseado. La documentación pública se puede encontrar en el sitio web de Deloitte buscando las encuestas globales de outsourcing por año.\n\nSobre la Desalineación del Mensaje de Marca en Canales Indirectos:\n\nFuente: Narayandas, D., & Rangan, V. K. (2004). Building and Sustaining a Successful Distributor Network. Harvard Business Review.\n\nReferencia: Este artículo clásico de HBR, aunque enfocado en distribuidores, presenta principios aplicables a cualquier fuerza de ventas tercerizada. Explica cómo los socios de canal (como un call center externo) pueden no comunicar la propuesta de valor de la marca de manera efectiva si no están debidamente gestionados y supervisados, llevando a una \"dilución de la marca\".\n\nSobre la Dificultad en la Medición del Desempeño Cualitativo:\n\nFuente: De Ruyter, K., & Wetzels, M. (2000). The impact of perceived listening behavior in voice-to-voice service encounters. Journal of Service Research, 2(3), 276-284.\n\nReferencia: Esta investigación académica subraya la importancia de comportamientos cualitativos como la \"escucha percibida\" en la satisfacción del cliente durante las interacciones de servicio (como las llamadas de ventas). Demuestra que medir solo métricas cuantitativas (ej. duración de la llamada) es insuficiente, justificando la necesidad de herramientas que puedan analizar la calidad de la interacción en sí.\n\nSobre la Brecha de Conocimiento del Producto en Equipos Externos:\n\nFuente: Anderson, E., & Weitz, B. A. (1992). The use of pledges to build and sustain commitment in distribution channels. Journal of Marketing Research, 29(1), 18-34.\n\nReferencia: Este estudio influyente explora el compromiso en los canales de distribución. Una de las conclusiones es que el compromiso del socio externo está directamente relacionado con las inversiones que la empresa hace en ellos, incluido el entrenamiento. La falta de una inmersión profunda (como la que tienen los empleados internos) conduce naturalmente a una brecha de conocimiento que puede dañar la confianza del cliente.",
+        "height": 928,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        32,
+        1136
+      ],
+      "typeVersion": 1,
+      "id": "25eb74a7-e739-43bf-846a-c44a9c228a7f",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-23T05:37:15.591Z",
+      "updatedAt": "2025-10-23T05:37:15.591Z",
+      "role": "workflow:owner",
+      "workflowId": "VvgjBKyRpeDoTH5W",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-10-23T05:37:12.555Z",
+      "updatedAt": "2025-10-23T05:37:12.555Z",
+      "id": "XyMoxEC7iJONu1qk",
+      "name": "Respondio"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-23T05:37:15.579Z",
+  "versionId": "bb8c2acd-4a80-43b9-a543-e2d7b5503b07"
+}
