@@ -1,0 +1,175 @@
+{
+  "active": false,
+  "connections": {
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Memory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Send",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Save User Message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Save Bot Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Memory": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save User Message": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-25T12:07:37.931Z",
+  "id": "PWhWhSMwgnPH1NYR",
+  "isArchived": true,
+  "meta": null,
+  "name": "AI Agent Chatbot with Memory storage (MVP)",
+  "nodes": [
+    {
+      "id": "whatsapp_trigger",
+      "name": "WhatsApp Trigger",
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        100
+      ],
+      "parameters": {
+        "updates": [
+          "messages"
+        ]
+      }
+    },
+    {
+      "id": "ai_agent",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        550,
+        100
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.messages[0].text.body }}",
+        "options": {
+          "systemMessage": "You are a helpful WhatsApp chatbot assistant. Provide concise, friendly responses suitable for WhatsApp messaging."
+        }
+      }
+    },
+    {
+      "id": "whatsapp_send",
+      "name": "WhatsApp Send",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        850,
+        100
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "textBody": "={{ $json.output }}"
+      }
+    },
+    {
+      "id": "get_memory",
+      "name": "Get Memory",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        400,
+        100
+      ],
+      "parameters": {
+        "operation": "read"
+      }
+    },
+    {
+      "id": "save_message_user",
+      "name": "Save User Message",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        700,
+        250
+      ],
+      "parameters": {
+        "operation": "create"
+      }
+    },
+    {
+      "id": "save_message_bot",
+      "name": "Save Bot Response",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        700,
+        350
+      ],
+      "parameters": {
+        "operation": "create"
+      }
+    }
+  ],
+  "pinData": null,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-25T12:07:37.964Z",
+      "updatedAt": "2025-10-25T12:07:37.964Z",
+      "role": "workflow:owner",
+      "workflowId": "PWhWhSMwgnPH1NYR",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-25T13:31:35.000Z",
+  "versionId": "78d210b0-ed55-4162-8619-a8b625df7fc3"
+}
