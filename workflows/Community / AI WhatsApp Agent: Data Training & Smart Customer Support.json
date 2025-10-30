@@ -1,0 +1,870 @@
+{
+  "active": false,
+  "connections": {
+    "Check If Training": {
+      "main": [
+        [
+          {
+            "node": "Extract URL from Text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent -  Customer Support Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract URL from Text": {
+      "main": [
+        [
+          {
+            "node": "Fetch HTML Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch HTML Page": {
+      "main": [
+        [
+          {
+            "node": "Clean HTML Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean HTML Content": {
+      "main": [
+        [
+          {
+            "node": "Save Raw Product Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Raw Product Info": {
+      "main": [
+        [
+          {
+            "node": "AI Agent - Enhance Product Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Enhance Product Details",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Short-Term Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent - Enhance Product Details",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Product Sheet": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Enhance Product Details",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent -  Customer Support Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conversation Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent -  Customer Support Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Product Sheet": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent -  Customer Support Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Customer Issues": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent -  Customer Support Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check If Training",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent -  Customer Support Agent": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-25T12:21:52.487Z",
+  "id": "fKEn0XCSiINF0JF5",
+  "isArchived": false,
+  "meta": null,
+  "name": "Community / AI WhatsApp Agent: Data Training & Smart Customer Support",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## STEP 1 – Incoming WhatsApp Message\nListens for new WhatsApp messages.\nIf the message starts with train:, it triggers the product training flow.\nOtherwise, it goes to the customer support flow.\n**WhatsApp Business Cloud node**",
+        "height": 1240,
+        "width": 400
+      },
+      "id": "d7e5732a-b375-450f-94ec-b851f2529268",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -800,
+        336
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## STEP 3 – Customer Support Flow\n\nTriggered when the message **does NOT start with `train:`**  \nThis branch manages customer inquiries, analyzes intent, and provides intelligent responses.\n\n\n1. **AI Analyzes the Message**  \n   Interprets the customer’s question or issue using natural language understanding.\n\n2. **Fetch Product Data if Needed**  \n   Retrieves relevant product details from **Google Sheets** to provide accurate context.\n\n3. **Detect Issues Automatically**  \n   Determines whether the message describes a problem, feedback, or a general query.\n\n4. **Suggest Solutions**  \n   Generates a clear, actionable response tailored to the detected issue.\n\n5. **Log Customer Problems**  \n   Records the original message, AI-generated solution, and issue category in **Google Sheets** for tracking.\n\n6. **Respond to the User**  \n   Sends a professional, empathetic reply via **WhatsApp**, maintaining conversational flow.\n\n",
+        "height": 532,
+        "width": 1180,
+        "color": 4
+      },
+      "id": "01f4eaa5-bca7-464c-80ab-35ad13a33e99",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -352,
+        1040
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## STEP 2 – Product Data Training (Triggered by train:)\n\nTriggered when the message starts with `train:`  \nUsed to scrape, clean, and enrich product information through AI.\n\n**OpenAI API Keys:** [Access Here](https://platform.openai.com/api-keys)\n\n\n\n\n\n\n\n\n\n\n\n\n1. **Extract URL from Message**  \n   Uses **regex** to detect and extract the product link sent by the user.\n\n2. **Fetch HTML Content**  \n   Performs an **HTTP Request** to retrieve the full page HTML.\n\n3. **Clean HTML Data**  \n   Removes tags, scripts, and extra formatting — leaving only clean text.\n\n4. **Save Raw Product Info**  \n   Appends the cleaned content and source URL to **Google Sheets**.\n\n5. **AI: Enhance Product Details**  \n   - Extracts **Product Name**  \n   - Detects **Pricing Model** (subscription or one-time)  \n   - Identifies **Main Topic / Category**  \n   - Generates **FAQs** automatically\n\n6. **Update Product Sheet**  \n   Enriches the same row in **Google Sheets** with structured and validated product data.\n",
+        "height": 660,
+        "width": 1180,
+        "color": 4
+      },
+      "id": "c7f1d32a-eede-46d7-ba0f-e69cfc09fa20",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -352,
+        336
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## STEP 4 – Client Response\n\nFinal step of the automation flow.  \nResponsible for delivering the AI-generated answer to the customer through WhatsApp.\n\n- **Send Response via WhatsApp**  \n  Delivers the message back to the user using the configured WhatsApp node.\n\n- **Ensure Clarity and Personalization**  \n  The reply is refined for tone, accuracy, and helpfulness — maintaining a natural, conversational style.\n",
+        "height": 1240,
+        "width": 320,
+        "color": 4
+      },
+      "id": "a269f2f2-0d6d-486b-9431-3b343afa14f7",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        880,
+        336
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "9865cb5b-33da-490c-afc3-186457d5b564",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "leftValue": "={{ $json.data.body }}",
+                    "rightValue": "test:"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "train"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "11ca94c6-bd11-4d29-8920-0a0b0709f4d8",
+                    "leftValue": "={{ $json.data.body }}",
+                    "rightValue": "test:",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notStartsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4a185f47-2611-4e1f-adc8-6357a0d3faa9",
+      "name": "Check If Training",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        -544,
+        1056
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the text to analyze from the first input item\nconst exampleText = $input.first().json.data.body;\n\n// Regular expression to capture URLs with or without protocol\nconst regex = /((?:https?:\\/\\/)?(?:www\\.)?[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}(?:\\/\\S*)?)/g;\n\n// Extract URLs from the text\nconst matches = exampleText.match(regex) || [];\n\n// If URLs were found, map them into objects\nif (matches.length > 0) {\n  return matches.map(url => ({ json: { url } }));\n} else {\n  // If no URLs are found, return all input items so the workflow can continue\n  return $input.all();\n}\n"
+      },
+      "id": "bbd25600-549b-476e-b74d-b4b774979534",
+      "name": "Extract URL from Text",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -288,
+        512
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "42ad9ce3-11b2-491a-85f4-6dfd5762126b",
+      "name": "Fetch HTML Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -128,
+        512
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "jsCode": "// Exemple : récupération du contenu HTML depuis le premier item\n// Si vous avez un champ nommé \"html\" dans un noeud précédent.\nconst htmlContent = $input.first().json.html;\n\n// Fonction de nettoyage du HTML\nfunction nettoyerHTML(input) {\n  if (typeof input !== 'string') {\n    throw new Error(\"Expected HTML content as a string.\");\n  }\n  let cleanedText = input;\n\n  // 1. Retirer les liens <a> et leur contenu\n  cleanedText = cleanedText.replace(/<a[^>]*>.*?<\\/a>/gs, '');\n\n  // 2. Retirer <script>, <style>, commentaires, etc.\n  cleanedText = cleanedText.replace(/<script[^>]*>.*?<\\/script>/gs, '');\n  cleanedText = cleanedText.replace(/<style[^>]*>.*?<\\/style>/gs, '');\n  cleanedText = cleanedText.replace(/<!--[\\s\\S]*?-->/g, '');\n\n  // 3. Insérer des retours à la ligne pour certaines balises\n  cleanedText = cleanedText.replace(/<h[1-6][^>]*>/gi, '\\n');\n  cleanedText = cleanedText.replace(/<\\/h[1-6]>/gi, '\\n');\n  cleanedText = cleanedText.replace(/<p[^>]*>/gi, '\\n');\n  cleanedText = cleanedText.replace(/<\\/p>/gi, '\\n');\n  cleanedText = cleanedText.replace(/<ul[^>]*>/gi, '\\n');\n  cleanedText = cleanedText.replace(/<\\/ul>/gi, '\\n');\n  cleanedText = cleanedText.replace(/<ol[^>]*>/gi, '\\n');\n  cleanedText = cleanedText.replace(/<\\/ol>/gi, '\\n');\n  cleanedText = cleanedText.replace(/<li[^>]*>/gi, '- ');\n  cleanedText = cleanedText.replace(/<\\/li>/gi, '\\n');\n\n  // 4. Supprimer toutes les balises HTML restantes\n  cleanedText = cleanedText.replace(/<[^>]+>/g, '');\n\n  // 5. Supprimer (ou ajuster) les caractères spéciaux\n  cleanedText = cleanedText.replace(/[^\\w\\sÀ-ÖØ-öø-ÿ]+/g, '');\n\n  // 6. Normaliser les espaces multiples et trim\n  cleanedText = cleanedText.replace(/\\s+/g, ' ').trim();\n\n  return cleanedText;\n}\n\n// Nettoyage\nconst result = nettoyerHTML($input.first().json.data);\n\n// Retour d'un tableau contenant l'objet final\nreturn [\n  {\n    json: {\n      cleanedText: result\n    }\n  }\n];\n"
+      },
+      "id": "43339be8-e4bd-463d-a399-8443c3797b64",
+      "name": "Clean HTML Content",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        48,
+        496
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ/edit?usp=drivesdk",
+          "cachedResultName": "Product Sales - AI Agent WhatsApp"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 689245338,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ/edit#gid=689245338",
+          "cachedResultName": "Products"
+        },
+        "columns": {
+          "value": {
+            "Product Link": "={{ $('Extract URL from Text').item.json.url }}",
+            "Product Description": "={{ $json.cleanedText }}"
+          },
+          "schema": [
+            {
+              "id": "Product Link",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Product Link",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Name",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Product Name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Price",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Product Price",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Description",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Product Description",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Topic",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Product Topic",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "226981a5-24d0-4565-a922-d19b1622e559",
+      "name": "Save Raw Product Info",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        224,
+        496
+      ],
+      "typeVersion": 4.5
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "978cfcd9-fa83-446f-9f7b-e1d1ac002265",
+      "name": "OpenAI Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        320,
+        704
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Check If Training').item.json.data.id }}",
+        "contextWindowLength": 50
+      },
+      "id": "1565e763-dfbe-44c9-8e1f-e13e7a0c223e",
+      "name": "Short-Term Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        464,
+        704
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ/edit?usp=drivesdk",
+          "cachedResultName": "Product Sales - AI Agent WhatsApp"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 689245338,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ/edit#gid=689245338",
+          "cachedResultName": "Products"
+        },
+        "columns": {
+          "value": {
+            "F&Q": "={{ $fromAI(\"product_faq\", \"these are the most common questions users might have about the product, including answers if available\") }}\n",
+            "Product Link": "={{ $fromAI(\"product_url\",\"this is the website link of the product\") }}",
+            "Product Name": "={{ $fromAI(\"product_name\",\"this is the name of the product\") }}",
+            "Product Price": "={{ $fromAI(\"product_price\",\"this is the price of the product\") }}",
+            "Product Topic": "={{ $fromAI(\"product_topic\",\"this is the topic of the product that specifies what it is for, who it is for and what the key benefits are\") }}"
+          },
+          "schema": [
+            {
+              "id": "Product Link",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Product Link",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Name",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Product Name",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Price",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Product Price",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Description",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "Product Description",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product Topic",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Product Topic",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "F&Q",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "F&Q",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "Product Link"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "c13b8a31-8f9c-47a4-a591-a39225ac73f3",
+      "name": "Update Product Sheet",
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "position": [
+        640,
+        688
+      ],
+      "typeVersion": 4.5
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.data.body }}",
+        "options": {
+          "systemMessage": "You are a helpful and intelligent customer support assistant.\n\nYou have access to a Google Sheets tool that allows you to read any content from a specific sheet to gather necessary information.\nNever mention to the user that you accessed Google Sheets to retrieve any data.\n\nYour main responsibilities:\n\nUnderstand the user’s request or issue.\n\nIf the user is asking about a product, retrieve the relevant product name, price, and details as needed.\n\nDetermine whether the product price is a subscription or a one-time payment, based on the description.\n\nIf you detect that the user is facing a problem:\n\nIdentify and describe the problem clearly.\n\nPropose a practical and helpful solution.\n\nLog this interaction by adding a new row to the Google Sheet with the following columns:\n\nProblem\n\nSuggested Solution\n\nCategory (e.g., payment, login, access, delivery, technical issue, etc.)\n\nBe professional, concise, and empathetic in your responses.\nAlways aim to resolve the issue or provide the next best action."
+        }
+      },
+      "id": "fbacd529-f78d-48dc-aace-924f98a45aba",
+      "name": "AI Agent -  Customer Support Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        464,
+        1072
+      ],
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=My product description :  {{ $json['Product Description'] }}\n\nMy product link : {{ $json['Product Link'] }}",
+        "options": {
+          "systemMessage": "You are a helpful and intelligent assistant.\n\nYou receive the text content of a product page.\n\nYour tasks are:\n\nExtract the product name.\n\nExtract the product price, and determine whether it is a subscription or a one-time payment.\n\nIdentify the product topic.\n\nExtract the most frequently asked questions (FAQs) related to the product.\n\nYou have access to a Google Sheets tool that allows you to update specific columns and cells.\n\nAlways add the following data to the same row as the product URL in the Google Sheet:\n\nProduct Name\n\nProduct Price (with subscription/one-time label)\n\nProduct Topic\n\nFAQs\n\nBe accurate, structured, and consistent when filling in the sheet.\nDo not mention Google Sheets in your responses."
+        }
+      },
+      "id": "0dc209c1-7f4b-4f06-b5bc-a4c90dd434df",
+      "name": "AI Agent - Enhance Product Details",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        416,
+        480
+      ],
+      "typeVersion": 1.8
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "549934f5-e0a1-4395-8a70-13e0d91307c3",
+      "name": "OpenAI Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        288,
+        1296
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.data.body }}",
+        "contextWindowLength": 50
+      },
+      "id": "a91c6380-f178-44bc-9eac-5e2c114af142",
+      "name": "Conversation Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        432,
+        1296
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ/edit?usp=drivesdk",
+          "cachedResultName": "Product Sales - AI Agent WhatsApp"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 689245338,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ/edit#gid=689245338",
+          "cachedResultName": "Products"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "detectAutomatically",
+              "readRowsUntil": "firstEmptyRow"
+            }
+          }
+        }
+      },
+      "id": "0f325d44-6e5f-4dde-8676-17530ff32fbc",
+      "name": "Read Product Sheet",
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "position": [
+        576,
+        1296
+      ],
+      "typeVersion": 4.5
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ/edit?usp=drivesdk",
+          "cachedResultName": "Product Sales - AI Agent WhatsApp"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": 1725207764,
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wa41S888Ya3sqEkBdzYiDq-5FOu_V30BOe-toX_78xQ/edit#gid=1725207764",
+          "cachedResultName": "Customer Issues"
+        },
+        "columns": {
+          "value": {
+            "Category": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Category', ``, 'string') }}",
+            "Solution": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Solution', ``, 'string') }}",
+            "Support Problem": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Support_Problem', ``, 'string') }}"
+          },
+          "schema": [
+            {
+              "id": "Support Problem",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Support Problem",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Solution",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Solution",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Category",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Category",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "6341756c-60bd-4454-bc4e-4ebad4d6c3f1",
+      "name": "Log Customer Issues",
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "position": [
+        720,
+        1296
+      ],
+      "typeVersion": 4.5
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -736,
+        1056
+      ],
+      "id": "db3dfb3e-b487-4f05-9029-9fe64feb431a",
+      "name": "WhatsApp Trigger",
+      "webhookId": "10b16130-ce64-4ef1-8b5c-c03018b5ac5e"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        992,
+        1072
+      ],
+      "id": "cca2424f-37bc-4436-aa4f-601e91a7fa13",
+      "name": "Send message",
+      "webhookId": "98fb8507-aae3-4f62-9c63-d0b05563bd43"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.whatsAppTool",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        48
+      ],
+      "id": "174c1408-406c-48b7-8b89-f382180886a5",
+      "name": "Send template in WhatsApp Business Cloud",
+      "webhookId": "7dadd59c-e616-4956-8a11-3e2a71c78389",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        48
+      ],
+      "id": "91b90a32-cc25-45d6-a857-1dd7977352a8",
+      "name": "Send message and wait for response",
+      "webhookId": "e9619b58-a139-4cb9-9009-1202ba6a7a2f",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        48
+      ],
+      "id": "bb2f1d6b-c19e-4501-a729-ca1b225ae716",
+      "name": "WhatsApp Trigger1",
+      "webhookId": "c164f203-988a-4a88-a041-51dbc9115ed9",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        32,
+        48
+      ],
+      "id": "c8fce46a-8b53-4ad6-a521-4c894aa074b9",
+      "name": "Send message1",
+      "webhookId": "b4fbabc9-9f77-4b36-8ba6-c31498f5e09a",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## WhatsApp Nodes Used and to Explore",
+        "height": 384,
+        "width": 1168,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        -80
+      ],
+      "id": "5f25437f-69e9-4204-9aa2-6867dafa11cd",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-25T12:21:52.491Z",
+      "updatedAt": "2025-10-25T12:21:52.491Z",
+      "role": "workflow:owner",
+      "workflowId": "fKEn0XCSiINF0JF5",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-10-25T12:21:59.038Z",
+      "updatedAt": "2025-10-25T12:21:59.038Z",
+      "id": "8DVyf0Hp9utHpCg5",
+      "name": "whatsapp"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-25T13:34:58.000Z",
+  "versionId": "ebdd3b76-b586-40a9-b1d1-89863d8a530f"
+}
