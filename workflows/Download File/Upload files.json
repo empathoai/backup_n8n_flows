@@ -1,0 +1,564 @@
+{
+  "active": false,
+  "connections": {
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        []
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-29T00:53:05.106Z",
+  "id": "DuPkjgBRUIiPQO5n",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Download File/Upload files",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "133ANtOIK7GlEYT6U6GF6fEG4C30Nk-r0IEoXRafx0do",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Templates",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/133ANtOIK7GlEYT6U6GF6fEG4C30Nk-r0IEoXRafx0do/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -560,
+        -192
+      ],
+      "id": "ff531669-343f-42f7-9b94-c0fdc68fb257",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xNFvs1wDAUU6io65",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5552d7b0-f68d-4f8b-82ff-43b205e0c0cc",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "9897d157-faaa-4437-8754-0a76087fe985",
+              "name": "description",
+              "value": "={{ $json.description }}",
+              "type": "string"
+            },
+            {
+              "id": "019bd107-45a6-4a81-bb31-6346e2475976",
+              "name": "url",
+              "value": "={{ $json.url }}",
+              "type": "string"
+            },
+            {
+              "id": "542b8203-74a4-4978-b815-87beaab178eb",
+              "name": "score",
+              "value": "={{ $json.score }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -160,
+        -192
+      ],
+      "id": "bde93bf1-43e7-4bb6-8f1d-69a67cb5eec1",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        224
+      ],
+      "id": "01c10aa9-7d17-443b-a21a-6162d49c2807",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg",
+          "mode": "list",
+          "cachedResultName": "N8N Flows 3000",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        80,
+        -192
+      ],
+      "id": "2bee5d6f-9132-410f-922e-66a86bd4de85",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xNFvs1wDAUU6io65",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "name, row_number, description, url, score",
+        "include": "=",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        -192
+      ],
+      "id": "cf259fa5-b2bf-4d1d-8de9-831acffaea0e",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg",
+          "mode": "list",
+          "cachedResultName": "N8N Flows 3000",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -656,
+        224
+      ],
+      "id": "566f1a4a-1f0f-424d-acb9-e0f4b75be3c7",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xNFvs1wDAUU6io65",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1bTthoCkhvDp2tckxAkIiT5cttTQgdenQ",
+          "mode": "list",
+          "cachedResultName": "N8N Flows Json",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1bTthoCkhvDp2tckxAkIiT5cttTQgdenQ"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        272,
+        224
+      ],
+      "id": "ab1ef315-f991-49b0-b3be-ada99c7c6b37",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        224
+      ],
+      "id": "6b67ee70-34eb-4df8-a693-6440e121d4c8",
+      "name": "Wait1",
+      "webhookId": "72fd26de-18e1-44d4-a023-93956537ac76"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg",
+          "mode": "list",
+          "cachedResultName": "N8N Flows 3000",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hjNLnpiJLyb5nTir1Mqt1TDVGWtuBtFSGd7wCEj-rCg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": 0,
+            "downloaded": "Done",
+            "name": "={{ $('Download file').item.json.name }}"
+          },
+          "matchingColumns": [
+            "name"
+          ],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "downloaded",
+              "displayName": "downloaded",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        688,
+        224
+      ],
+      "id": "9e0310b6-6b44-4293-bccf-cf3053d56103",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xNFvs1wDAUU6io65",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.url }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        64,
+        224
+      ],
+      "id": "64e01452-e5e0-4593-a49d-42d761a50ec8",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -192,
+        224
+      ],
+      "id": "7d98e79d-dd1a-417a-947a-e433d5aa27d8",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eda03fce-871c-487f-ad6b-bfa9e089594b",
+              "leftValue": "={{ $json.downloaded }}",
+              "rightValue": "Done",
+              "operator": {
+                "type": "string",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -464,
+        224
+      ],
+      "id": "489b1171-5447-48e2-801b-7b9470be332d",
+      "name": "If"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-29T00:53:05.113Z",
+      "updatedAt": "2025-10-29T00:53:05.113Z",
+      "role": "workflow:owner",
+      "workflowId": "DuPkjgBRUIiPQO5n",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-10-30T00:31:09.409Z",
+      "updatedAt": "2025-10-30T00:31:09.409Z",
+      "id": "rYp8wGFkzwcPfZdK",
+      "name": "Drive Storage"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-30T00:31:10.000Z",
+  "versionId": "43d51700-d67c-41aa-b0af-3cc2011fe0d7"
+}
