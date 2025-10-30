@@ -1,0 +1,303 @@
+{
+  "active": false,
+  "connections": {
+    "Get Memory": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Memory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Save User Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save User Message": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-25T12:20:52.578Z",
+  "id": "cvqzpgVc6GFMoNuW",
+  "isArchived": false,
+  "meta": null,
+  "name": "AI Agent Chatbot with Memory storage",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "id": "bba1aa30-2eeb-45ba-800e-d99c1bb1b1b9",
+      "name": "WhatsApp Trigger",
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1104,
+        48
+      ],
+      "webhookId": "e78b516c-b799-444d-97a5-5ab5ca075999"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "id": "7a30eaab-a2d3-4b45-81a2-af103699f11d",
+      "name": "Get Memory",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -912,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "3e582646-8fe8-48ba-9573-8c258501a62f",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -736,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.messages[0].text.body }}",
+        "options": {
+          "systemMessage": "You are a helpful, professional WhatsApp assistant. You have access to previous conversation history in the conversation context. Answer concisely and professionally. Always maintain context from previous messages in the conversation."
+        }
+      },
+      "id": "fd4bbec9-ab92-48af-8295-049e41ac577f",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -544,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ecc03c8f-6a63-48ab-a27e-24b10805c250",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        240
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "dc07e2c0-f0ce-49e7-9c93-60c8bbf0e229",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "columns": [
+            {
+              "key": "phone_number",
+              "value": "={{ $json.messages[0].from }}"
+            },
+            {
+              "key": "message_text",
+              "value": "={{ $json.messages[0].text.body }}"
+            },
+            {
+              "key": "sender",
+              "value": "user"
+            },
+            {
+              "key": "timestamp",
+              "value": "={{ new Date().toISOString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "89af3650-3f0e-4b5e-845c-856cf58d283a",
+      "name": "Save User Message",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "columns": [
+            {
+              "key": "phone_number",
+              "value": "={{ $json.messages[0].from }}"
+            },
+            {
+              "key": "message_text",
+              "value": "={{ $json.output }}"
+            },
+            {
+              "key": "sender",
+              "value": "bot"
+            },
+            {
+              "key": "timestamp",
+              "value": "={{ new Date().toISOString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "80fd6f90-391d-4216-9a3e-5ed8f5461605",
+      "name": "Save Bot Response",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "{{ env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $json.messages[0].from }}",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {
+          "previewUrl": false
+        }
+      },
+      "id": "6fe7a1b5-69cf-4f28-b4d5-cea46eea7ea4",
+      "name": "WhatsApp Send",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        48
+      ],
+      "webhookId": "30f71f09-f469-4c97-90fb-3a56d90c2948",
+      "credentials": {
+        "whatsAppApi": {
+          "id": null,
+          "name": "{{ env.WHATSAPP_API_CREDENTIAL }}"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-25T12:20:52.581Z",
+      "updatedAt": "2025-10-25T12:20:52.581Z",
+      "role": "workflow:owner",
+      "workflowId": "cvqzpgVc6GFMoNuW",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-25T12:20:52.578Z",
+  "versionId": "5f022b13-51f2-4101-bd66-19d1f3b119de"
+}
