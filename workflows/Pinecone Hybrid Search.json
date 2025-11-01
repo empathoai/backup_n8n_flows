@@ -1,0 +1,2089 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Generate Dense Embedding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hybrid Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hybrid Search1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Full Text Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent5",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sparse Embedding Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent5",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dense Embedding From Query": {
+      "main": [
+        [
+          {
+            "node": "Trigger Hybrid Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dense Embedding": {
+      "main": [
+        [
+          {
+            "node": "Trigger Dynamic Hybrid Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Vars": {
+      "main": [
+        [
+          {
+            "node": "Generate Sparse Embedding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Sparse Embedding": {
+      "main": [
+        [
+          {
+            "node": "Query Pinecone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Hybrid Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Hybrid Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formula 1 Knowledgebase": {
+      "ai_tool": [
+        [
+          {
+            "node": "Hybrid Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Chunking",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chunking": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Convert Format",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Format": {
+      "main": [
+        [
+          {
+            "node": "Generate Dense Embedding2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Vector Array": {
+      "main": [
+        [
+          {
+            "node": "Upsert Vectors",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upsert Vectors": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download File": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledgebase": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent4",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dense Embedding1": {
+      "main": [
+        [
+          {
+            "node": "Generate Sparse Embedding1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Vars1": {
+      "main": [
+        [
+          {
+            "node": "Generate Dense Embedding1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Sparse Embedding1": {
+      "main": [
+        [
+          {
+            "node": "Query Pinecone1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dense Embedding2": {
+      "main": [
+        [
+          {
+            "node": "Generate Sparse Embedding2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Vars2": {
+      "main": [
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent4",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent4",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Sparse Embedding2": {
+      "main": [
+        [
+          {
+            "node": "Build Vector Array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-01T05:46:44.394Z",
+  "id": "Eq4BTf2cPgSW8qI7",
+  "isArchived": false,
+  "meta": null,
+  "name": "Pinecone Hybrid Search",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        768,
+        1024
+      ],
+      "id": "2c77b01c-e224-4d00-bdd8-9d4868c70b06",
+      "name": "When chat message received",
+      "webhookId": "145e7e82-ed21-4e68-ba91-f37edef6659c"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        3616,
+        1504
+      ],
+      "id": "740be2fa-6c8c-4990-9d33-ca2f166ad733",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        3616,
+        1760
+      ],
+      "id": "c13544c5-001b-4c82-9e39-5f184febbd6f",
+      "name": "Anthropic Chat Model"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "vector store retrieval",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_v2",
+          "mode": "list",
+          "cachedResultName": "documents_v2"
+        },
+        "topK": 10,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        416,
+        1696
+      ],
+      "id": "a49e69ab-a8b3-498f-b07b-2270838659dc",
+      "name": "Supabase Vector Store"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        416,
+        1856
+      ],
+      "id": "2b82570d-ca70-4b77-a484-c2d8a79618ce",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            },
+            {
+              "name": "type"
+            },
+            {
+              "name": "session_id"
+            },
+            {
+              "name": "dense_weight",
+              "type": "number"
+            },
+            {
+              "name": "sparse_weight",
+              "type": "number"
+            },
+            {
+              "name": "ilike_weight",
+              "type": "number"
+            },
+            {
+              "name": "fuzzy_weight",
+              "type": "number"
+            },
+            {
+              "name": "fuzzy_threshold",
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        1216,
+        992
+      ],
+      "id": "9ede573e-7e3c-48cf-92cc-09b256f95469",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "description": "=You can set different weights of this hybrid search depending on the type of query.\n\ndense_weight float DEFAULT 0.5,\nsparse_weight float DEFAULT 0.5,\nilike_weight float DEFAULT 0\nfuzzy_weight float DEFAULT 0\nfuzzy_threshold float DEFAULT 0.8\n\nFor semantic natural lanauge queries you can prioritise dense embeddings, \nFor technical terms and more traditional search you can priorize sparse lexical search\nFor exact matches for codes and IDs you can prioritze ilike wildcard matching\nFor typos that aren't picked up by semantic search, you can prioritize fuzzy matching\n\nIf looking for matches via ilike or fuzzy matches, the query should be extremely focused and short, as otherwise it will likely return zero results. (e.g. exact ID or code)\n\nAs pattern matching and fuzzy matching can add latency, I recommend defaulting this to zero unless you want to actually use it.\n\nTotal of the 4 weights much equal 1\n\nFuzzy Threshold adds significant latency should should be as high as possible - Default to 0.8",
+        "workflowId": {
+          "__rl": true,
+          "value": "UXWu8CrMXpKVIneU",
+          "mode": "list",
+          "cachedResultName": "My workflow 6"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}",
+            "session_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('session_id', ``, 'string') }}",
+            "sparse_weight": "={{ $fromAI('sparse_weight', ``, 'number', 0.5) }}",
+            "dense_weight": "={{ $fromAI('dense_weight', ``, 'number', 0.5) }}",
+            "fuzzy_threshold": "={{ $fromAI('fuzzy_threshold', `this is the word similarity threshold in postgres - lower means more candidates however the call may time out`, 'number', 0.8) }}",
+            "fuzzy_weight": "={{ $fromAI('fuzzy_weight', ``, 'number', 0) }}",
+            "ilike_weight": "={{ $fromAI('ilike_weight', ``, 'number', 0) }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "dense_weight",
+              "displayName": "dense_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "sparse_weight",
+              "displayName": "sparse_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "ilike_weight",
+              "displayName": "ilike_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "fuzzy_weight",
+              "displayName": "fuzzy_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "fuzzy_threshold",
+              "displayName": "fuzzy_threshold",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        3792,
+        1760
+      ],
+      "id": "7991149a-fbf5-46c5-80ba-cf1b5c3f1697",
+      "name": "Hybrid Search"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        256,
+        1488
+      ],
+      "id": "802487f7-7a58-458a-b6fe-7945d7fa8093",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        144,
+        1712
+      ],
+      "id": "654c773a-8eef-45d0-9de0-098086006bed",
+      "name": "Anthropic Chat Model1"
+    },
+    {
+      "parameters": {
+        "content": "## 1. Semantic Search\nDense Vector Embeddings",
+        "height": 944,
+        "width": 784,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        1328
+      ],
+      "id": "af4e703c-3033-49e7-aa96-8e75712941d3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        2752,
+        1504
+      ],
+      "id": "e6e4d993-237d-4be4-a370-e1e0012507b7",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        2752,
+        1728
+      ],
+      "id": "28dda653-12c8-4d6b-a648-97c64f576e1a",
+      "name": "Anthropic Chat Model2"
+    },
+    {
+      "parameters": {
+        "content": "## 4. Traditional Hybrid Search (Semantic & Full Text Search)\nDense Vector Embeddings & TS Vector",
+        "height": 944,
+        "width": 784,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2432,
+        1328
+      ],
+      "id": "7fce2744-f339-417a-98e9-bcaa1d7d127f",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "description": "=Call this to query data from our vector store knowledgebase",
+        "workflowId": {
+          "__rl": true,
+          "value": "WA8Vhuct15StLWEF",
+          "mode": "list",
+          "cachedResultName": "TheAIAutomators.com - Dynamic Hybrid Search"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}",
+            "session_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('session_id', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "vector_weight",
+              "displayName": "vector_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "keyword_weight",
+              "displayName": "keyword_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "ilike_weight",
+              "displayName": "ilike_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2928,
+        1744
+      ],
+      "id": "895ad67e-2398-43ed-b488-878a2f968f81",
+      "name": "Hybrid Search1"
+    },
+    {
+      "parameters": {
+        "content": "## 5. Dynamic Hybrid Search v2 (Semantic, Full Text & Pattern Matching)\nDense Vector Embeddings & TS Vector & Trigram",
+        "height": 944,
+        "width": 784
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3264,
+        1328
+      ],
+      "id": "455b8f7f-1e76-4234-9321-ec0514677b88",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1088,
+        1488
+      ],
+      "id": "62b3cabd-7993-49a9-8b88-1cbc93356e6a",
+      "name": "AI Agent3"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1088,
+        1712
+      ],
+      "id": "d66f58d5-50c7-4d8a-814f-70b7c301b85b",
+      "name": "Anthropic Chat Model3"
+    },
+    {
+      "parameters": {
+        "content": "## 2. Full Text Search\nTS Vector",
+        "height": 944,
+        "width": 784,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        768,
+        1328
+      ],
+      "id": "4fd1f5e8-84e3-490b-9eaa-3f746349ecdb",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkrfwcplubvqbtqoytsd.supabase.co/functions/v1/fts-search",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n        \"query_text\": \"{{ $fromAI(\"query\") }}\",\n        \"match_count\": 10\n      }",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1248,
+        1712
+      ],
+      "id": "a19a742e-e7a0-4ae0-ba58-d2474b7b5888",
+      "name": "Full Text Search"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Set Vars').item.json.INDEX_HOST }}/query",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "pineconeApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"namespace\": \"{{ $('Set Vars').item.json.NAMESPACE }}\",\n    \"sparseVector\": {\"indices\":{{ JSON.stringify($json.data[0].sparse_indices) }},\"values\":{{ JSON.stringify($json.data[0].sparse_values) }}},\n    \"topK\": 10,\n    \"includeValues\": false,\n    \"includeMetadata\": true\n  }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2192,
+        2000
+      ],
+      "id": "f612d483-6478-4c29-b1f3-386318bee986",
+      "name": "Query Pinecone",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "content": "## 3. Sparse Embedding Search\nPinecone Sparse English",
+        "height": 944,
+        "width": 784,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        1328
+      ],
+      "id": "cd8ddf36-3cf7-4736-83c3-fcaa9f967c8b",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1920,
+        1488
+      ],
+      "id": "94271da1-9968-4d43-848d-0bbafa3c0ec4",
+      "name": "AI Agent5"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1920,
+        1728
+      ],
+      "id": "69a885b4-af61-4f49-9972-23c3b5fd6192",
+      "name": "Anthropic Chat Model4"
+    },
+    {
+      "parameters": {
+        "description": "=Call this to query data from our vector store knowledgebase",
+        "workflowId": {
+          "__rl": true,
+          "value": "WA8Vhuct15StLWEF",
+          "mode": "list",
+          "cachedResultName": "TheAIAutomators.com - Dynamic Hybrid Search"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}",
+            "session_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('session_id', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "dense_weight",
+              "displayName": "dense_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "sparse_weight",
+              "displayName": "sparse_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "pattern_weight",
+              "displayName": "pattern_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2064,
+        1728
+      ],
+      "id": "678d5fdd-be3a-4008-b2da-e8a3d9adcdfe",
+      "name": "Sparse Embedding Search"
+    },
+    {
+      "parameters": {
+        "content": "# Connect Triggers",
+        "height": 384,
+        "width": 1024,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        560,
+        880
+      ],
+      "id": "1ee7d894-13f5-4285-a05b-4e041830a0e7",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkrfwcplubvqbtqoytsd.supabase.co/functions/v1/dynamic_hybrid_search_edge",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n        \"query_text\": \"{{ $('When Executed by Another Workflow').item.json.query }}\",\n        \"query_embedding\": [{{ $json.data[0].embedding }}],\n        \"match_count\": 10,\n\"dense_weight\": {{ $('When Executed by Another Workflow').item.json.dense_weight }},\n\"sparse_weight\": {{ $('When Executed by Another Workflow').item.json.sparse_weight }},\n\"ilike_weight\": {{ $('When Executed by Another Workflow').item.json.ilike_weight }},\n\"fuzzy_weight\": {{ $('When Executed by Another Workflow').item.json.fuzzy_weight }},\n\"fuzzy_threshold\": {{ $('When Executed by Another Workflow').item.json.fuzzy_threshold }}\n      }",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3808,
+        2000
+      ],
+      "id": "2aeb4d23-6733-425e-a399-cd5d8af1b549",
+      "name": "Trigger Dynamic Hybrid Search",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkrfwcplubvqbtqoytsd.supabase.co/functions/v1/hybrid-search",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n        \"query_text\": \"{{ $('When Executed by Another Workflow').item.json.query }}\",\n        \"query_embedding\": [{{ $json.data[0].embedding }}],\n        \"match_count\": 10\n      }",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2960,
+        2000
+      ],
+      "id": "7b60cbc9-6797-44bb-bef4-dbfc0e3d9563",
+      "name": "Trigger Hybrid Search",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={{ $('When Executed by Another Workflow').item.json.query }}"
+            },
+            {
+              "name": "model",
+              "value": "text-embedding-3-small"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2752,
+        2000
+      ],
+      "id": "af43dfb4-ad5d-4fad-93d7-1396b7000b3d",
+      "name": "Generate Dense Embedding From Query"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={{ $('When Executed by Another Workflow').item.json.query }}"
+            },
+            {
+              "name": "model",
+              "value": "text-embedding-3-small"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3600,
+        2000
+      ],
+      "id": "3ede1d5d-f4be-4926-9982-938a29418f32",
+      "name": "Generate Dense Embedding"
+    },
+    {
+      "parameters": {
+        "content": "@[youtube](FgUJ2kzhmKQ)",
+        "height": 1840,
+        "width": 3024,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1536,
+        -1024
+      ],
+      "id": "742a33c2-c2eb-4127-a775-cfa1aa0baa40",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dac7c8e1-2e8a-4f46-942c-f187dbd533c1",
+              "name": "INDEX_HOST",
+              "value": "<ENTER HOST>",
+              "type": "string"
+            },
+            {
+              "id": "ac26a320-fd99-48ac-a627-50e4211aa21e",
+              "name": "NAMESPACE",
+              "value": "n8n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1872,
+        2000
+      ],
+      "id": "bfb98721-3582-477e-9f52-74ccb32a02f2",
+      "name": "Set Vars"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pinecone.io/embed",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "pineconeApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"pinecone-sparse-english-v0\",\n  \"parameters\": {\n    \"input_type\": \"query\",\n    \"truncate\": \"END\"\n  },\n   \"inputs\": [\n        {\"text\": {{ JSON.stringify($('When Executed by Another Workflow').item.json.query) }}}]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2032,
+        2000
+      ],
+      "id": "3626da71-95f6-4dc2-860e-373db206407b",
+      "name": "Generate Sparse Embedding"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        656,
+        4448
+      ],
+      "id": "595f1762-1e48-4f1b-b531-a4c0086ee32f",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        4672
+      ],
+      "id": "3cc6413a-2ada-40a8-9e45-cc4af1175a9e",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        4896
+      ],
+      "id": "2c241298-5c78-498e-b014-dec13db3a14c",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "url": "https://www.fia.com/sites/default/files/documents/fia_2025_formula_1_technical_regulations_-_issue_03_-_2025-04-07.pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        4448
+      ],
+      "id": "9b84030f-5ffa-4d47-9cc1-e9b0c974ffba",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        5440
+      ],
+      "id": "bb067bc1-a94c-494c-9533-4e116074ecbe",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1056,
+        5456
+      ],
+      "id": "ddfe2aba-2c46-4b84-8394-c21409ca5251",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Use this to fetch data from our knowledgebase",
+        "method": "POST",
+        "url": "<ADD SUPABASE EDGE FUNCTION URL>",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer <ADD SUPABASE API KEY>"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1248,
+        5488
+      ],
+      "id": "de18ba27-813b-47ff-bc02-7a0e2ed83785",
+      "name": "Formula 1 Knowledgebase"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant.\n\nOnly generate an answer based on results from the connected knowldgebase.\n\nIf you're not sure what to say, then simply output \"Sorry, I dont know\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1024,
+        5248
+      ],
+      "id": "4a81dd56-6b57-4eee-9601-0a66059eeda6",
+      "name": "Hybrid Agent"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        1104,
+        4448
+      ],
+      "id": "b28c664a-5f28-4873-81d6-ddae1d8f2d48",
+      "name": "Supabase Vector Store1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "96p8oDSuMXWNZPNL",
+          "name": "n8nrag_alexguajoai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1008,
+        4672
+      ],
+      "id": "4c0d6edb-436a-4301-8a2d-8d2e35dfae74",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Supabase Hybrid Search Agent\n",
+        "height": 600,
+        "width": 1020,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        576,
+        5136
+      ],
+      "id": "dc2cd8cc-6f72-4ba5-be2a-8561d54d732c",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "## Supabase Hybrid Search Ingestion\n",
+        "height": 720,
+        "width": 1020,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        576,
+        4368
+      ],
+      "id": "f5a28404-843a-4314-975e-68bc53780743",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.text;\nconst chunkSize = 500;\nconst chunkOverlap = 100;\nconst overlapBoundary = 'word'; // Change to 'sentence' to use sentence boundaries\nconst separators = ['\\n\\n', '\\n', ' ', ''];\n\n/**\n * Adjusts the overlap text so it starts at a word or sentence boundary.\n * For 'word', it backs up to the nearest whitespace.\n * For 'sentence', it looks for a sentence terminator (. ! or ?) in the overlap range,\n * and if found, starts the overlap after that punctuation (skipping extra whitespace).\n *\n * @param {string} prevChunk - The previous chunk of text.\n * @param {number} overlap - The desired minimum number of characters to overlap.\n * @param {string} type - 'word' or 'sentence'.\n * @returns {string} The adjusted overlap text.\n */\nfunction getOverlapBoundary(prevChunk, overlap, type) {\n  // Start candidate position from the end minus the desired overlap length\n  let candidateStart = prevChunk.length - overlap;\n  if (candidateStart < 0) candidateStart = 0;\n  \n  if (type === 'sentence') {\n    const substring = prevChunk.slice(candidateStart);\n    const sentenceRegex = /[.!?]\\s*/g;\n    let lastIndex = -1;\n    let match;\n    // Find the last sentence terminator in the candidate substring.\n    while ((match = sentenceRegex.exec(substring)) !== null) {\n      lastIndex = match.index + match[0].length;\n    }\n    if (lastIndex !== -1 && lastIndex < substring.length) {\n      // Start overlap after the punctuation and any following whitespace.\n      return prevChunk.slice(candidateStart + lastIndex);\n    }\n    // Fallback to word boundary if no sentence terminator is found.\n  }\n  \n  // For word boundaries: back up until you hit whitespace.\n  while (candidateStart > 0 && !/\\s/.test(prevChunk[candidateStart - 1])) {\n    candidateStart--;\n  }\n  return prevChunk.slice(candidateStart);\n}\n\n/**\n * Recursively splits the text into chunks of maximum length, applying overlap that respects word/sentence boundaries.\n * @param {string} text - The text to split.\n * @param {number} chunkSize - The maximum length of each chunk.\n * @param {number} overlap - The number of characters to overlap between chunks.\n * @param {string[]} seps - Array of separators to use for splitting.\n * @returns {string[]} An array of text chunks.\n */\nfunction recursiveSplit(text, chunkSize, overlap, seps) {\n  for (const sep of seps) {\n    const splits = sep ? text.split(sep) : text.split('');\n    let chunks = [];\n    let current = '';\n\n    for (const part of splits) {\n      // Build a tentative chunk (only add the separator if current already has content)\n      const tentative = current ? current + sep + part : part;\n      if (tentative.length <= chunkSize) {\n        current = tentative;\n      } else {\n        if (current) {\n          chunks.push(current);\n        }\n        // If a single part is too large, split it further with the next separator\n        if (part.length > chunkSize) {\n          const subChunks = recursiveSplit(part, chunkSize, overlap, seps.slice(1));\n          chunks.push(...subChunks);\n          current = '';\n        } else {\n          current = part;\n        }\n      }\n    }\n    if (current) {\n      chunks.push(current);\n    }\n\n    // Apply overlap between consecutive chunks while respecting the desired boundary.\n    const finalChunks = chunks.map((chunk, i) => {\n      if (i > 0 && overlap > 0) {\n        const prevChunk = chunks[i - 1];\n        const overlapText = getOverlapBoundary(prevChunk, overlap, overlapBoundary);\n        return overlapText + chunk;\n      }\n      return chunk;\n    });\n\n    if (finalChunks.length > 0) {\n      return finalChunks;\n    }\n  }\n  return [text]; // Fallback: return the full text as a single chunk if no splitting occurred\n}\n\nreturn recursiveSplit(text, chunkSize, chunkOverlap, separators)\n  .map(chunk => ({ json: { chunk } }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        4480
+      ],
+      "id": "a748da17-b96b-405b-93e7-5df94dcd77d9",
+      "name": "Chunking"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        2384,
+        4480
+      ],
+      "id": "b2807922-1395-43f9-8a4b-5f72289e2a38",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "batchSize": 96,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2816,
+        4480
+      ],
+      "id": "ec9151cc-da2d-4baa-9d75-6441d5dc5d17",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "chunk",
+              "renameField": true,
+              "outputFieldName": "inputs"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3056,
+        4576
+      ],
+      "id": "97af55a6-b30a-45b0-a3f7-c6a7ac9cb582",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Create the final array of { text: ... } objects\nconst inputs = [];\n\nfor (const item of $input.all()) {\n  for (const inputText of item.json.inputs) {\n    inputs.push({ text: inputText });\n  }\n}\n\nreturn [{ json: { inputs } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3264,
+        4576
+      ],
+      "id": "eab18391-4411-451c-99a5-712ca6b77ff8",
+      "name": "Convert Format"
+    },
+    {
+      "parameters": {
+        "jsCode": "function generateUUID() {\n  // RFC4122 version 4 UUID\n  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\n    const r = Math.random() * 16 | 0;\n    const v = c === 'x' ? r : (r & 0x3 | 0x8);\n    return v.toString(16);\n  });\n}\n\n// Assume input[0] = Dense, input[1] = Sparse\nconst denseEmbeddings = $('Generate Dense Embedding2').first().json.data;\nconst sparseEmbeddings = $input.first().json.data;\nconst chunks = $('Convert Format').first().json.inputs;\n\nconst vectors = [];\n\nfor (let i = 0; i < denseEmbeddings.length; i++) {\n  const dense = denseEmbeddings[i];\n  const sparse = sparseEmbeddings[i];\n  const chunk = chunks[i];\n\n  vectors.push({\n    id: generateUUID(),\n    values: dense.values,\n    sparseValues: {\n      indices: sparse.sparse_indices,\n      values: sparse.sparse_values\n    },\n    metadata: {\n      text: chunk.text\n    }\n  });\n}\n\nreturn [ \n  {\n    output: {\n      vectors,\n      namespace: $('Set Vars2').first().json.NAMESPACE\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3968,
+        4608
+      ],
+      "id": "f253500c-9610-4830-a729-4b386f1993e1",
+      "name": "Build Vector Array"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Set Vars2').item.json.INDEX_HOST }}/vectors/upsert",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.output) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4208,
+        4608
+      ],
+      "id": "311015c0-5165-4808-81c0-47c0ff32ca88",
+      "name": "Upsert Vectors"
+    },
+    {
+      "parameters": {
+        "url": "https://www.fia.com/sites/default/files/documents/fia_2025_formula_1_technical_regulations_-_issue_03_-_2025-04-07.pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2160,
+        4480
+      ],
+      "id": "e31ca189-705f-4b53-888f-10e50806a7e5",
+      "name": "Download File"
+    },
+    {
+      "parameters": {
+        "description": "Use this tool to search the knowledgebase",
+        "workflowId": {
+          "__rl": true,
+          "value": "b7tigQxqZsjXZM3s",
+          "mode": "list",
+          "cachedResultName": "Pinecone Hybrid Search"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "query"
+          ],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2384,
+        5248
+      ],
+      "id": "2c4b8a39-7bd9-433d-b7c2-f0e819a39a86",
+      "name": "Knowledgebase"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pinecone.io/embed",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"multilingual-e5-large\",\n  \"parameters\": {\n    \"input_type\": \"query\",\n    \"truncate\": \"END\"\n  },\n  \"inputs\": [\n        {\"text\": {{ JSON.stringify($('When Executed by Another Workflow').item.json.query) }}}]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3600,
+        5088
+      ],
+      "id": "6f9bebd1-4b0f-42b8-8954-396aa252c145",
+      "name": "Generate Dense Embedding1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dac7c8e1-2e8a-4f46-942c-f187dbd533c1",
+              "name": "INDEX_HOST",
+              "value": "<ADD PINECONE HOST>",
+              "type": "string"
+            },
+            {
+              "id": "ac26a320-fd99-48ac-a627-50e4211aa21e",
+              "name": "NAMESPACE",
+              "value": "n8n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3344,
+        5088
+      ],
+      "id": "f5ec8ed0-d303-4bc7-888f-5c1167d14987",
+      "name": "Set Vars1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pinecone.io/embed",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"pinecone-sparse-english-v0\",\n  \"parameters\": {\n    \"input_type\": \"query\",\n    \"truncate\": \"END\"\n  },\n   \"inputs\": [\n        {\"text\": {{ JSON.stringify($('When Executed by Another Workflow').item.json.query) }}}]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3840,
+        5088
+      ],
+      "id": "b8037b29-61be-441c-ab62-76138d6ac820",
+      "name": "Generate Sparse Embedding1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pinecone.io/embed",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"multilingual-e5-large\",\n  \"parameters\": {\n    \"input_type\": \"passage\",\n    \"truncate\": \"END\"\n  },\n  \"inputs\": {{ JSON.stringify($json.inputs) }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3504,
+        4608
+      ],
+      "id": "d2402eef-fb26-4c09-99ad-46ff69d14673",
+      "name": "Generate Dense Embedding2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dac7c8e1-2e8a-4f46-942c-f187dbd533c1",
+              "name": "INDEX_HOST",
+              "value": "<ADD PINECONE HOST>",
+              "type": "string"
+            },
+            {
+              "id": "ac26a320-fd99-48ac-a627-50e4211aa21e",
+              "name": "NAMESPACE",
+              "value": "n8n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1984,
+        4480
+      ],
+      "id": "27d9c3e1-72c1-408c-84dc-9c870e481e07",
+      "name": "Set Vars2"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Only base your answers on information retrieved from the knowledgebase.\n\nOtherwise say \"Sorry I dont know\"\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        2208,
+        4976
+      ],
+      "id": "3c7e2912-dd40-4a73-932c-c11980b04b14",
+      "name": "AI Agent4"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2064,
+        5264
+      ],
+      "id": "cf68ee3b-1519-4aaa-a39a-7b4bdc11c981",
+      "name": "OpenAI Chat Model1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2224,
+        5248
+      ],
+      "id": "0bc7690c-8726-4705-b0f8-92191b3cf0e8",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Set Vars1').item.json.INDEX_HOST }}/query",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"namespace\": \"{{ $('Set Vars1').item.json.NAMESPACE }}\",\n    \"vector\": {{ JSON.stringify($('Generate Dense Embedding1').item.json.data[0].values) }},\n    \"sparseVector\": {\"indices\":{{ JSON.stringify($json.data[0].sparse_indices) }},\"values\":{{ JSON.stringify($json.data[0].sparse_values) }}},\n    \"topK\": 10,\n    \"includeValues\": false,\n    \"includeMetadata\": true\n  }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4064,
+        5088
+      ],
+      "id": "f61cf3d5-ab2f-4fdb-95c7-bb97a10c346d",
+      "name": "Query Pinecone1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "content": "## Pinecone Hybrid Search Ingestion\n",
+        "height": 500,
+        "width": 2720,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1696,
+        4368
+      ],
+      "id": "6bd4726a-eb05-4678-b22c-51f8176d2d4a",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "## Pinecone Hybrid Search Agent\n",
+        "height": 500,
+        "width": 1100,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1696,
+        4896
+      ],
+      "id": "0ec3902b-7b5c-4529-b5b9-3baeffbb3b96",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "## Pinecone Hybrid Search Query\n",
+        "height": 500,
+        "width": 1580,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2848,
+        4896
+      ],
+      "id": "106ee733-0688-4aed-86c6-ae4c225ed1a3",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pinecone.io/embed",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"pinecone-sparse-english-v0\",\n  \"parameters\": {\n    \"input_type\": \"passage\",\n    \"truncate\": \"END\"\n  },\n  \"inputs\": {{ JSON.stringify($('Convert Format').item.json.inputs) }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3744,
+        4608
+      ],
+      "id": "46eda338-5bee-4ab0-9a47-9613aeaf332a",
+      "name": "Generate Sparse Embedding2"
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "query": "news",
+          "type": null,
+          "session_id": "news_search_001",
+          "dense_weight": 0.6,
+          "sparse_weight": 0.4,
+          "ilike_weight": 0,
+          "fuzzy_weight": 0,
+          "fuzzy_threshold": 0.8
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-11-01T05:46:44.396Z",
+      "updatedAt": "2025-11-01T05:46:44.396Z",
+      "role": "workflow:owner",
+      "workflowId": "Eq4BTf2cPgSW8qI7",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-01T06:28:10.000Z",
+  "versionId": "25313d92-fd4b-478d-b537-24261d6e6324"
+}
