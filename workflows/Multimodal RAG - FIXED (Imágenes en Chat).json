@@ -1,0 +1,1136 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Code - Insert Public URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Insert Public URLs": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Signed URL Mistral": {
+      "main": [
+        [
+          {
+            "node": "Get OCR Result Mistral",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get OCR Result Mistral": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File to Mistral": {
+      "main": [
+        [
+          {
+            "node": "Get Signed URL Mistral",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file1": {
+      "main": [
+        [
+          {
+            "node": "Upload File to Mistral",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Upload Image to Supabase1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Image to Supabase1": {
+      "main": [
+        [
+          {
+            "node": "Get response file name1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Images1": {
+      "main": [
+        [
+          {
+            "node": "Set file name1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages2": {
+      "main": [
+        [
+          {
+            "node": "Split Out Images1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get response file name1": {
+      "main": [
+        [
+          {
+            "node": "Merge results1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge results1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set file name1": {
+      "main": [
+        [
+          {
+            "node": "Prep base64 string1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge results1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Prep base64 string1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages3": {
+      "main": [
+        [
+          {
+            "node": "Code2 - Generate Public URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase_account_details1": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge3": {
+      "main": [
+        [
+          {
+            "node": "Upload File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request6": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Code2 - Generate Public URLs": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Markdown with Page Numbers1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Supabase_account_details1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-31T19:29:04.634Z",
+  "id": "5A15JmE7zbQ1Kyyi",
+  "isArchived": true,
+  "meta": null,
+  "name": "Multimodal RAG - FIXED (Imágenes en Chat)",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hola! 👋 Mi nombre es Alex experto en refrigeradores refrigeradores whirlpool, en que puedo asistirte hoy?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1456,
+        320
+      ],
+      "id": "a470b59a-0438-46c3-bdf2-eb08a114bc4a",
+      "name": "When chat message received",
+      "webhookId": "9470c505-58f2-438e-96b9-c37240c6a9e9"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a Whirlpool REFRIGERATOR expert.\n\nYou are tasked with answering a question using the information retrieved from the attached vector store.\n\nYour goal is to provide an accurate answer based on this information ONLY.\n\nIf you cannot answer the question using the provided information or if no information is returned from the vector store, say \"Sorry I don't know\"."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        320
+      ],
+      "id": "4c5286e8-1a36-451a-9d46-c2a4e8e5fc91",
+      "name": "AI Agent",
+      "notes": "🔧 NOTA: El agente ahora recibirá imágenes con URLs públicas completas"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1280,
+        560
+      ],
+      "id": "fcb8f1d2-a35f-49a9-a00f-63f9c111337c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1136,
+        560
+      ],
+      "id": "6bb9a950-7f48-43f3-95a8-a5e878147997",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Vector store containing embedded product manuals for semantic search and retrieval",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        -976,
+        576
+      ],
+      "id": "1554f489-e5b8-423a-8520-258fc6ec1d9c",
+      "name": "Supabase Vector Store1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "96p8oDSuMXWNZPNL",
+          "name": "n8nrag_alexguajoai"
+        }
+      },
+      "notes": "✅ Ahora recupera markdown con URLs públicas de imágenes"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -896,
+        784
+      ],
+      "id": "7a08f393-f91d-42c4-9f9d-9a2d789d120b",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        992
+      ],
+      "id": "ca17ed16-705b-47ad-95f6-1f36a8bbd615",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// 🔧 FIX: Ahora reemplaza referencias con URLs públicas completas\nlet markdown = $json.markdown;\nconst images = $json.images || [];\n\nfor (const image of images) {\n  const fileName = image.id; // e.g. \"img-35.jpeg\"\n  const annotation = image.image_annotation || '';\n  const publicUrl = image.public_url || ''; // ✅ URL pública de Supabase\n\n  // Buscar referencia local\n  const localReference = `![${fileName}](${fileName})`;\n  \n  // Reemplazar con URL pública + anotación\n  if (publicUrl) {\n    const imageMarkdown = `![${fileName}](${publicUrl})`;\n    const annotatedMarkdown = `${imageMarkdown}\\n\\n${annotation}`;\n    markdown = markdown.replaceAll(localReference, annotatedMarkdown);\n  } else {\n    // Si no hay URL, solo agregar anotación\n    const annotatedMarkdown = `${localReference}\\n\\n${annotation}`;\n    markdown = markdown.replaceAll(localReference, annotatedMarkdown);\n  }\n}\n\nreturn {\n  json: {\n    ...$json,\n    markdown\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2576,
+        992
+      ],
+      "id": "42cb33b5-0c23-4eb9-a537-9627c3f98382",
+      "name": "Code - Insert Public URLs",
+      "notes": "✅ FIX APLICADO: Ahora inserta URLs públicas completas en lugar de referencias locales"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        3072,
+        992
+      ],
+      "id": "cc03b939-4dbb-4165-9f16-ac099291f10f",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "96p8oDSuMXWNZPNL",
+          "name": "n8nrag_alexguajoai"
+        }
+      },
+      "notes": "✅ Ahora guarda markdown con URLs públicas de imágenes"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $('Code - Insert Public URLs').item.json.markdown }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        3168,
+        1152
+      ],
+      "id": "4a82faa2-b0e6-4f51-a26a-e6d15e4b27f7",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 200,
+        "options": {
+          "splitCode": "markdown"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        3232,
+        1312
+      ],
+      "id": "3936d60c-4cff-4ef4-94ae-d14aac41f899",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2928,
+        1232
+      ],
+      "id": "2dbf8701-8585-41e8-a942-84d66b6d29f9",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.mistral.ai/v1/files/{{ $json.id }}/url",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "expiry",
+              "value": "24"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1296,
+        992
+      ],
+      "id": "47faec25-d5ad-441f-91fc-f6e216cca851",
+      "name": "Get Signed URL Mistral",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/ocr",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"model\": \"mistral-ocr-latest\",\n    \"document\": {\n        \"type\": \"document_url\",\n        \"document_url\": \"{{ $json.url }}\"\n    },\n    \"include_image_base64\": true,\n    \"bbox_annotation_format\": {\n        \"type\": \"text\",\n        \"json_schema\": {\n            \"name\": \"visual_descriptions_only\",\n            \"description\": \"Extract concise natural-language descriptions for each distinct visual element (image, chart, table, diagram, etc.) on the page. Focus on summarizing what each visual element contains or conveys.\",\n            \"schema\": {\n                \"type\": \"array\",\n                \"items\": {\n                    \"type\": \"string\",\n                    \"description\": \"A concise description of a single visual element.\"\n                }\n            },\n            \"strict\": false\n        }\n    }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1856,
+        992
+      ],
+      "id": "4bf29afd-dc02-4b36-9c00-afb0a900a16f",
+      "name": "Get OCR Result Mistral",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "purpose",
+              "value": "ocr"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        992
+      ],
+      "id": "adf5434e-7d28-4022-b192-39c60095b6a9",
+      "name": "Upload File to Mistral",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.file_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        992
+      ],
+      "id": "554dd452-5d10-40c9-b535-2fc1736a39e7",
+      "name": "Download file1"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Supabase_account_details1').item.json.anon_key }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $json.anon_key }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.anon_key }}"
+            }
+          ]
+        },
+        "options": {
+          "batching": {
+            "batch": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        272
+      ],
+      "id": "46fb053e-b4c7-48dc-b2b8-fc793f40585a",
+      "name": "Upload File1"
+    },
+    {
+      "parameters": {
+        "operation": "toFile"
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1168,
+        112
+      ],
+      "id": "eebd7d0d-5737-40b3-8f4b-f4e191334f9c",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Supabase_account_details1').item.json.bucket_url }}/object/{{ $('Supabase_account_details1').item.json.bucket_name }}/{{ $json.image_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        112
+      ],
+      "id": "c991b4a9-072b-40e5-b370-3e61c2c6f0ec",
+      "name": "Upload Image to Supabase1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Cal API test"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "=images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        80,
+        112
+      ],
+      "id": "cad40d67-6735-461f-9ebb-d5f703413c71",
+      "name": "Split Out Images1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        112
+      ],
+      "id": "3bb95dbe-2430-4c6a-a266-1f7014e66be0",
+      "name": "Split Out Pages2"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Extract the filename from the path returned by Supabase\nconst fullPath = $json.body.fullPath;\nconst pathParts = fullPath.split('/');\nconst fileName = pathParts[pathParts.length - 1];\n\nreturn {\n  json: {\n    ...$json,\n    file_name: fileName\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1696,
+        112
+      ],
+      "id": "63a14f32-93d6-480a-b6b6-923f079a2210",
+      "name": "Get response file name1"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1968,
+        160
+      ],
+      "id": "639fa308-5366-42e9-8675-22e42a3c2d86",
+      "name": "Merge results1"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "image_id",
+              "renameField": true,
+              "outputFieldName": "id"
+            },
+            {
+              "fieldToAggregate": "image_annotation"
+            },
+            {
+              "fieldToAggregate": "public_url"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2192,
+        160
+      ],
+      "id": "a3c7ffc9-2b44-4b76-8d1a-55f196b715fc",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        2416,
+        288
+      ],
+      "id": "d4a8ca0d-edbb-4755-90e0-3af0c1d42755",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Extract the image ID and annotation from the input data\nconst imageId = $json.image.id;\nconst imageAnnotation = $json.image.image_annotation || '';\n\nreturn {\n  json: {\n    ...$json,\n    image_id: imageId,\n    image_annotation: imageAnnotation\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        320,
+        112
+      ],
+      "id": "15dc8400-7ab9-48db-84ab-8602f8df31e8",
+      "name": "Set file name1"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Remove the prefix from the base64 string\nconst base64String = $json.image.image_base64;\nconst base64Data = base64String.replace(/^data:image\\/[a-z]+;base64,/, '');\n\nreturn {\n  json: {\n    ...$json,\n    base64: base64Data\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        112
+      ],
+      "id": "6c7c7317-e671-4f77-ae31-68ac7932a21a",
+      "name": "Prep base64 string1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2624,
+        288
+      ],
+      "id": "2227d5b2-8918-4cc6-a9ce-8fecdb247df1",
+      "name": "Split Out Pages3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e4c929b8-d166-41b5-acd2-0e1ab4d87f1a",
+              "name": "bucket_url",
+              "value": "https://gwxzvbqwwgwpmugvawey.supabase.co/storage/v1",
+              "type": "string"
+            },
+            {
+              "id": "6ee87eea-c9ca-4b33-9c0d-d0ef26b6e1f4",
+              "name": "bucket_name",
+              "value": "manual",
+              "type": "string"
+            },
+            {
+              "id": "5a9ba8bd-00e4-4c76-b9eb-a83734e98aa9",
+              "name": "anon_key",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3eHp2YnF3d2d3cG11Z3Zhd2V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAxMTU5OTYsImV4cCI6MjA0NTY5MTk5Nn0.SxZ0-HJaFckHNTBn8Eu-i-F7zBkVqH9zG0iMLbaqQKg",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -368,
+        -48
+      ],
+      "id": "fe63af7e-4444-46b5-923d-dbe5367cc55d",
+      "name": "Supabase_account_details1"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1392,
+        272
+      ],
+      "id": "73ef826c-f8a6-46e3-bda1-6c6e4132147f",
+      "name": "Merge3"
+    },
+    {
+      "parameters": {
+        "operation": "text"
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1424,
+        464
+      ],
+      "id": "d27468cf-7778-4d49-b907-fd1fc661595a",
+      "name": "Convert to Binary1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Supabase_account_details1').item.json.bucket_url }}/object/{{ $('Supabase_account_details1').item.json.bucket_name }}/{{ $json.pdf_name }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1808,
+        272
+      ],
+      "id": "ef065a79-2f5d-4959-9248-1523cb315327",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Cal API test"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "={{ $('Supabase_account_details1').item.json.bucket_url }}/object/{{ $('Supabase_account_details1').item.json.bucket_name }}/{{ $json.pdf_name }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2032,
+        272
+      ],
+      "id": "400c2b7f-7976-4529-b940-a355966792ee",
+      "name": "HTTP Request6",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Cal API test"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// 🔧 FIX CRÍTICO: Generar URLs públicas completas de Supabase\nconst bucket_url = $('Supabase_account_details1').item.json.bucket_url;\nconst bucket_name = $('Supabase_account_details1').item.json.bucket_name;\nconst pageNumber = $json.page_number;\n\n// Obtener las imágenes agregadas\nconst aggregatedImages = $json.id || [];\nconst aggregatedAnnotations = $json.image_annotation || [];\n\n// Crear array de imágenes con URLs públicas\nconst images = [];\nfor (let i = 0; i < aggregatedImages.length; i++) {\n  const image_id = aggregatedImages[i];\n  const image_annotation = aggregatedAnnotations[i] || '';\n  \n  // ✅ Generar URL pública completa\n  const image_public_url = image_id;\n  const publicUrl = `${bucket_url}/object/public/${bucket_name}/${image_public_url}`;\n\n  images.push({\n    id: image_id,\n    image_annotation: image_annotation,\n    public_url: publicUrl  // ✅ NUEVO: URL pública completa\n  });\n}\n\nreturn {\n  json: {\n    page_number: pageNumber,\n    markdown: $json.markdown,\n    images: images\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2832,
+        288
+      ],
+      "id": "2e52f0e5-d096-45bc-9937-f42795684477",
+      "name": "Code2 - Generate Public URLs",
+      "notes": "✅ FIX CRÍTICO: Ahora genera las URLs públicas completas de Supabase para cada imagen"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3056,
+        288
+      ],
+      "id": "d677d1e2-c84f-4018-98f1-fe9cc515d131",
+      "name": "Aggregate Markdown with Page Numbers1"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.file_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -368,
+        272
+      ],
+      "id": "f4dc43df-aeb4-4bfd-9164-0b33ba6dec5e",
+      "name": "Download file"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        272
+      ],
+      "id": "4852f3db-054b-4103-bb8e-fc874df717f4",
+      "name": "When clicking 'Execute workflow'"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-31T19:29:04.637Z",
+      "updatedAt": "2025-10-31T19:29:04.637Z",
+      "role": "workflow:owner",
+      "workflowId": "5A15JmE7zbQ1Kyyi",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-31T19:33:46.000Z",
+  "versionId": "c3e6fd2e-00ab-4d68-b460-4645d16c97de"
+}
