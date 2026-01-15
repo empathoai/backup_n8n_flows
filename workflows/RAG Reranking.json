@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Download File": {
       "main": [
@@ -27,29 +29,7 @@
       "main": [
         [
           {
-            "node": "Code",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code": {
-      "main": [
-        [
-          {
-            "node": "Upload to Supabase",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When chat message received": {
-      "main": [
-        [
-          {
-            "node": "RAG Agent",
+            "node": "Code2",
             "type": "main",
             "index": 0
           }
@@ -116,17 +96,6 @@
         ]
       ]
     },
-    "Embeddings OpenAI2": {
-      "ai_embedding": [
-        [
-          {
-            "node": "Supabase Vector Store1",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Supabase Vector Store1": {
       "ai_tool": [
         [
@@ -171,22 +140,35 @@
         ]
       ]
     },
-    "Manual Trigger": {
+    "Code2": {
       "main": [
         [
           {
-            "node": "Download File",
+            "node": "Upload to Supabase",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI10": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
             "index": 0
           }
         ]
       ]
     }
   },
-  "createdAt": "2025-10-30T09:03:02.831Z",
-  "id": "4nEZkH2ZkTbMTeEI",
+  "createdAt": "2025-11-01T04:14:08.171Z",
+  "id": "STpYimNP7VfBGMrR",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "RAG Reranking",
   "nodes": [
     {
@@ -204,22 +186,17 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        864,
-        656
+        1088,
+        17696
       ],
-      "id": "46f32d98-73c4-47e7-92f0-a0f73898c10f",
+      "id": "53175e4a-59fe-40f4-ace6-4c76bfa51337",
       "name": "Download File",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "BcBZ0GrlNhnoa3MJ",
-          "name": "Google Drive account"
-        }
-      }
+      "disabled": true
     },
     {
       "parameters": {
         "jsonMode": "expressionData",
-        "jsonData": "={{ $('Code').item.json.fullText }}",
+        "jsonData": "={{ $('Code2').item.json.fullText }}",
         "options": {
           "metadata": {
             "metadataValues": [
@@ -234,11 +211,12 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        1424,
-        832
+        1648,
+        17840
       ],
-      "id": "bf95d6e2-cafd-421a-9b88-4a6b40f13f0d",
-      "name": "Default Data Loader"
+      "id": "41d96b0f-d8a8-45b3-aad3-db82b92ceddc",
+      "name": "Default Data Loader",
+      "disabled": true
     },
     {
       "parameters": {
@@ -248,38 +226,12 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        1008,
-        656
+        1232,
+        17696
       ],
-      "id": "76ed6257-868d-499d-bf2d-3e31403ebe9d",
-      "name": "Extract from File"
-    },
-    {
-      "parameters": {
-        "jsCode": "// n8n Code Node - Split Golf Rules\n// This code takes the input text and splits it into separate items for each rule\n\n// Get the input text from the first item\nconst inputText = $input.first().json.text;\n\n// Split the text by \"Rule\" pattern, keeping the \"Rule\" text with each section\nconst ruleSections = inputText.split(/(?=Rule \\d+)/);\n\n// Remove the first empty element (everything before the first \"Rule\")\nconst cleanedSections = ruleSections.filter(section => section.trim().startsWith('Rule'));\n\n// Create output items - one for each rule\nconst outputItems = cleanedSections.map((ruleText, index) => {\n  // Extract rule number from the text\n  const ruleMatch = ruleText.match(/Rule (\\d+)/);\n  const ruleNumber = ruleMatch ? ruleMatch[1] : (index + 1).toString();\n  \n  // Extract rule title (everything between \"Rule X –\" and the first numbered item)\n  const titleMatch = ruleText.match(/Rule \\d+ – (.+?)(?=\\n1\\.|\\n\\d+\\.)/);\n  const ruleTitle = titleMatch ? titleMatch[1].trim() : 'Unknown Rule';\n  \n  return {\n    json: {\n      ruleNumber: ruleNumber,\n      ruleTitle: ruleTitle,\n      fullText: ruleText.trim(),\n      originalIndex: index\n    }\n  };\n});\n\nreturn outputItems;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1152,
-        656
-      ],
-      "id": "00b04c56-73bf-4083-9c8f-a93e09e307a2",
-      "name": "Code"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        688,
-        -208
-      ],
-      "id": "b603c4b4-0da1-44e2-a271-ba7e6344fb4c",
-      "name": "When chat message received",
-      "webhookId": "79772045-628b-4cf6-b2ec-cecceca9fe24"
+      "id": "bf669765-2edf-49df-82e4-fc63616d3699",
+      "name": "Extract from File",
+      "disabled": true
     },
     {
       "parameters": {
@@ -288,22 +240,24 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        864,
-        -64
+        1088,
+        16976
       ],
-      "id": "9f5f5d5c-cef4-4e2f-b655-0a0d580a21d6",
-      "name": "GPT 4.1-mini"
+      "id": "bde9cb7d-7bf5-4dc6-9702-aff2f240127f",
+      "name": "GPT 4.1-mini",
+      "disabled": true
     },
     {
       "parameters": {},
       "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
       "typeVersion": 1,
       "position": [
-        1488,
-        -64
+        1712,
+        16976
       ],
-      "id": "3f675869-033c-4fcb-929f-f9de1b9b1af3",
-      "name": "Reranker Cohere"
+      "id": "b44b5e42-365f-41db-b9ae-a2bcae806b40",
+      "name": "Reranker Cohere",
+      "disabled": true
     },
     {
       "parameters": {
@@ -321,11 +275,12 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
       "typeVersion": 1.3,
       "position": [
-        1280,
-        656
+        1504,
+        17696
       ],
-      "id": "64650d3f-ce63-49b0-9dd2-9073fab9387d",
-      "name": "Upload to Supabase"
+      "id": "22195317-9fcf-4ca0-859b-19d45037e871",
+      "name": "Upload to Supabase",
+      "disabled": true
     },
     {
       "parameters": {
@@ -344,11 +299,12 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
       "typeVersion": 1.3,
       "position": [
-        1328,
-        -208
+        1552,
+        16848
       ],
-      "id": "7212c337-5526-4f85-8cf9-1729ee062196",
-      "name": "Supabase Vector Store"
+      "id": "09f049e4-3c85-4fed-bb2e-392b6d312351",
+      "name": "Supabase Vector Store",
+      "disabled": true
     },
     {
       "parameters": {
@@ -357,35 +313,24 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1184,
-        384
+        1408,
+        17424
       ],
-      "id": "69846fc4-e742-4b7d-b1f1-93a20704204d",
-      "name": "GPT 4.1-mini1"
+      "id": "2e595fb5-63bd-48dc-9779-ca7831e208ac",
+      "name": "GPT 4.1-mini1",
+      "disabled": true
     },
     {
       "parameters": {},
       "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
       "typeVersion": 1,
       "position": [
-        1744,
-        368
+        1968,
+        17408
       ],
-      "id": "d173e4ec-8996-4974-adef-8f00fe00a38c",
-      "name": "Reranker Cohere1"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        1584,
-        368
-      ],
-      "id": "b7311089-ed8f-4839-a425-eac03328cf46",
-      "name": "Embeddings OpenAI2"
+      "id": "644f68f2-8ac3-4f3f-af6f-420ba86aa8a5",
+      "name": "Reranker Cohere1",
+      "disabled": true
     },
     {
       "parameters": {
@@ -413,59 +358,12 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
       "typeVersion": 1.3,
       "position": [
-        1584,
-        224
+        1808,
+        17264
       ],
-      "id": "012afc0c-6a28-4299-919b-f0c243378abd",
-      "name": "Supabase Vector Store1"
-    },
-    {
-      "parameters": {
-        "content": "# Vectorize Document w/ Metadata\n(this code node is set up for the golf rules PDF specifically)",
-        "height": 440,
-        "width": 1000,
-        "color": 2
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        640,
-        528
-      ],
-      "id": "e0f26547-44f2-4edd-909b-25e55a7a682b",
-      "name": "Sticky Note"
-    },
-    {
-      "parameters": {
-        "content": "# RAG Agent\n",
-        "height": 380,
-        "width": 620,
-        "color": 4
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        640,
-        -304
-      ],
-      "id": "c16fc740-c283-45de-97d2-afebdd30e48a",
-      "name": "Sticky Note1"
-    },
-    {
-      "parameters": {
-        "content": "## Vector Store w/ Reranker\n",
-        "height": 380,
-        "width": 380,
-        "color": 5
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1264,
-        -304
-      ],
-      "id": "854c3f5d-2c5c-446d-8f71-977859b42656",
-      "name": "Sticky Note2"
+      "id": "98a3e62e-8644-40ee-963b-01b3ad7f4dbf",
+      "name": "Supabase Vector Store1",
+      "disabled": true
     },
     {
       "parameters": {
@@ -474,17 +372,12 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1264,
-        800
+        1488,
+        17840
       ],
-      "id": "8f050369-65f6-4476-96b2-034158d4c681",
+      "id": "b222b7e8-31fc-4b6b-a485-7365ced86d44",
       "name": "Embeddings OpenAI1",
-      "credentials": {
-        "openAiApi": {
-          "id": "xenY6K4Lpy47eCcn",
-          "name": "OpenAi ApPollos"
-        }
-      }
+      "disabled": true
     },
     {
       "parameters": {
@@ -493,11 +386,12 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1328,
-        -64
+        1552,
+        16976
       ],
-      "id": "794aa35f-dd57-4caa-adfe-7c6953afe047",
-      "name": "Embeddings OpenAI"
+      "id": "41ca9f27-f0c7-4a0b-a5bd-a35d38393893",
+      "name": "Embeddings OpenAI",
+      "disabled": true
     },
     {
       "parameters": {
@@ -508,11 +402,12 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        752,
-        224
+        976,
+        17264
       ],
-      "id": "0509afd3-8e55-4536-ad97-a988f046f740",
-      "name": "Metadata Agent"
+      "id": "335e99e2-84b7-4b97-9cdd-938de8aa6097",
+      "name": "Metadata Agent",
+      "disabled": true
     },
     {
       "parameters": {
@@ -523,11 +418,12 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        880,
-        -208
+        1104,
+        16848
       ],
-      "id": "83f3ced0-1ee7-4838-839b-9a421feb5c1c",
-      "name": "RAG Agent"
+      "id": "320ddb09-b69e-4dd9-9d62-1dc2d05fa13f",
+      "name": "RAG Agent",
+      "disabled": true
     },
     {
       "parameters": {
@@ -540,11 +436,91 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        1168,
-        224
+        1392,
+        17264
       ],
-      "id": "fa0b8e13-b98d-4709-be3b-d4c4dfdfd071",
-      "name": "RAG Agent 2"
+      "id": "48e99f25-3ce1-4e4f-9f71-45165d60e2cc",
+      "name": "RAG Agent 2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code Node - Split Golf Rules\n// This code takes the input text and splits it into separate items for each rule\n\n// Get the input text from the first item\nconst inputText = $input.first().json.text;\n\n// Split the text by \"Rule\" pattern, keeping the \"Rule\" text with each section\nconst ruleSections = inputText.split(/(?=Rule \\d+)/);\n\n// Remove the first empty element (everything before the first \"Rule\")\nconst cleanedSections = ruleSections.filter(section => section.trim().startsWith('Rule'));\n\n// Create output items - one for each rule\nconst outputItems = cleanedSections.map((ruleText, index) => {\n  // Extract rule number from the text\n  const ruleMatch = ruleText.match(/Rule (\\d+)/);\n  const ruleNumber = ruleMatch ? ruleMatch[1] : (index + 1).toString();\n  \n  // Extract rule title (everything between \"Rule X –\" and the first numbered item)\n  const titleMatch = ruleText.match(/Rule \\d+ – (.+?)(?=\\n1\\.|\\n\\d+\\.)/);\n  const ruleTitle = titleMatch ? titleMatch[1].trim() : 'Unknown Rule';\n  \n  return {\n    json: {\n      ruleNumber: ruleNumber,\n      ruleTitle: ruleTitle,\n      fullText: ruleText.trim(),\n      originalIndex: index\n    }\n  };\n});\n\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1376,
+        17696
+      ],
+      "id": "102a7c47-ce69-4360-a61a-1647fcfa221f",
+      "name": "Code2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1808,
+        17408
+      ],
+      "id": "ffdec5e4-5046-4511-82fd-2f07d1b7ea25",
+      "name": "Embeddings OpenAI10",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Vectorize Document w/ Metadata\n(this code node is set up for the golf rules PDF specifically)",
+        "height": 440,
+        "width": 1000,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        864,
+        17568
+      ],
+      "id": "058db1da-0777-4673-b251-b33f8840ba2d",
+      "name": "Sticky Note11",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# RAG Agent\n",
+        "height": 380,
+        "width": 620,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        864,
+        16736
+      ],
+      "id": "6a97c155-7d6f-49ec-a5db-73d77d548fbd",
+      "name": "Sticky Note12",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Vector Store w/ Reranker\n",
+        "height": 380,
+        "width": 380,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1488,
+        16736
+      ],
+      "id": "fa76da56-89d2-488b-b62a-b6f6ae2a89d4",
+      "name": "Sticky Note13",
+      "disabled": true
     },
     {
       "parameters": {
@@ -556,11 +532,12 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1088,
-        96
+        1312,
+        17136
       ],
-      "id": "e6d9bffe-c2a0-400a-a394-74e1134ceb01",
-      "name": "Sticky Note3"
+      "id": "4f7cfa67-afc8-4236-8bd6-afc1210363e2",
+      "name": "Sticky Note14",
+      "disabled": true
     },
     {
       "parameters": {
@@ -572,11 +549,12 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1520,
-        96
+        1744,
+        17136
       ],
-      "id": "bcb750e2-3646-4fc3-aff5-49e763a72b37",
-      "name": "Sticky Note4"
+      "id": "e010ba94-de6d-4a19-8e2a-468d598e2ec9",
+      "name": "Sticky Note15",
+      "disabled": true
     },
     {
       "parameters": {
@@ -588,22 +566,12 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        640,
-        96
+        864,
+        17136
       ],
-      "id": "fef3fa20-5392-413c-808d-0e84b22aa345",
-      "name": "Sticky Note5"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        720,
-        656
-      ],
-      "id": "c743b8f0-e3be-417a-aa22-ff1e22b7357b",
-      "name": "Manual Trigger"
+      "id": "a4c6238d-8e26-4b35-902c-0c0028eb09aa",
+      "name": "Sticky Note16",
+      "disabled": true
     },
     {
       "parameters": {
@@ -614,11 +582,11 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -80,
-        -304
+        144,
+        16736
       ],
-      "id": "1c516024-f79f-4428-8fb4-0a907dc390f7",
-      "name": "Sticky Note6"
+      "id": "c859578b-e90e-4378-9023-8e21e4dd7d1b",
+      "name": "Sticky Note17"
     }
   ],
   "pinData": {},
@@ -627,23 +595,23 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-30T09:03:02.845Z",
-      "updatedAt": "2025-10-30T09:03:02.845Z",
+      "updatedAt": "2025-11-01T04:14:08.174Z",
+      "createdAt": "2025-11-01T04:14:08.174Z",
       "role": "workflow:owner",
-      "workflowId": "4nEZkH2ZkTbMTeEI",
+      "workflowId": "STpYimNP7VfBGMrR",
       "projectId": "zIvgruNDMJwjqAqX"
     }
   ],
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2025-10-25T13:14:44.642Z",
       "updatedAt": "2025-10-25T13:14:44.642Z",
+      "createdAt": "2025-10-25T13:14:44.642Z",
       "id": "0oNuANLPfnSkzFDA",
       "name": "DatabaseStorage"
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-30T11:25:43.000Z",
-  "versionId": "8861e214-a65e-48be-8b68-f8d3bfe2f6a9"
+  "updatedAt": "2025-12-02T18:43:59.000Z",
+  "versionId": "4c7397ae-2603-4b9b-92e5-ea6950f71f65"
 }
