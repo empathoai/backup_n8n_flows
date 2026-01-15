@@ -1,0 +1,443 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Calendar Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server – Calendar",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Calendar Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server – Calendar",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Calendar Events": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server – Calendar",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server – Knowledge Base",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Calendar Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server – Calendar",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Incoming Webhook (VAPI)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook (VAPI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email Notification": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server – Gmail",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-06T10:19:40.273Z",
+  "id": "E5jvq9XdSH5sjh3c",
+  "isArchived": false,
+  "meta": null,
+  "name": "Demo- Whatsapp Voice Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Retrieve this tool to get pricing Informatio or any other General Inquiry.",
+        "tableName": {
+          "__rl": true,
+          "mode": "list",
+          "value": "documents",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "id": "de9f6c34-9328-497a-b94b-88ae1a599254",
+      "name": "Supabase Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "position": [
+        560,
+        176
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "d155219a-048b-4eaf-8ea3-0fd84d8b8c49",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "position": [
+        560,
+        320
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": "nabin.busines@gmail.com",
+          "cachedResultName": "nabin.busines@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "id": "6e42921f-f2fd-4cc7-80ea-f56e7602d822",
+      "name": "Create Calendar Event",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "position": [
+        -896,
+        240
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": "nabin.busines@gmail.com",
+          "cachedResultName": "nabin.busines@gmail.com"
+        },
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "id": "e7ed0235-0205-43ce-9d58-295b1c2ee186",
+      "name": "Fetch Calendar Events",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "position": [
+        -752,
+        240
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": "nabin.busines@gmail.com",
+          "cachedResultName": "nabin.busines@gmail.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "updateFields": {}
+      },
+      "id": "d3110a17-0f75-44ca-97b7-08033897512e",
+      "name": "Update Calendar Event",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "position": [
+        -608,
+        256
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": "nabin.busines@gmail.com",
+          "cachedResultName": "nabin.busines@gmail.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "id": "a42a7794-c484-4029-a54f-703fcfc68c63",
+      "name": "Delete Calendar Event",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "position": [
+        -480,
+        288
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "emailType": "text",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "id": "2bac5d28-9d18-40cd-af3f-672a55e85de7",
+      "name": "Send Email Notification",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        64,
+        560
+      ],
+      "webhookId": "028d9f35-e95f-48db-98cd-d5fbe5e5ddef",
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "path": "1902a1d2-f8a8-4601-b20c-90e824fe478d"
+      },
+      "id": "2f90e949-e591-4a5b-b3a4-240078b906c1",
+      "name": "MCP Server – Calendar",
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "position": [
+        -896,
+        -32
+      ],
+      "webhookId": "1902a1d2-f8a8-4601-b20c-90e824fe478d",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "path": "41a2ab5f-1a7d-440b-a1e3-1b2308dee744"
+      },
+      "id": "fddf2ce1-ae7e-40e5-9e5e-4b2871fe8f0d",
+      "name": "MCP Server – Gmail",
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "position": [
+        -80,
+        368
+      ],
+      "webhookId": "41a2ab5f-1a7d-440b-a1e3-1b2308dee744",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "path": "3643c062-c554-43d8-84d1-692b886b780f"
+      },
+      "id": "38b6d827-72a1-4633-958a-b17f8407243a",
+      "name": "MCP Server – Knowledge Base",
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "position": [
+        496,
+        -32
+      ],
+      "webhookId": "3643c062-c554-43d8-84d1-692b886b780f",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "81e240fc-d3fb-4ccd-b91a-0aacbf2d8f2a",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "5b3a537b-5a64-433d-bb7c-bcd1f9d0c206",
+      "name": "Incoming Webhook (VAPI)",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        -176,
+        96
+      ],
+      "webhookId": "81e240fc-d3fb-4ccd-b91a-0aacbf2d8f2a",
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n   <Dial>\n      <Sip>sip:15795503867@sip.vapi.ai</Sip>\n   </Dial>\n</Response>\n",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/xml"
+              }
+            ]
+          }
+        }
+      },
+      "id": "625286c6-b665-45dc-82dc-1de8c9740218",
+      "name": "Respond to Webhook (VAPI)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        160,
+        96
+      ],
+      "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "content": "📅 Calendar MCP\nHandles Calendar actions:\n- Create\n- Fetch\n- Update\n- Delete\n",
+        "height": 768,
+        "width": 592,
+        "color": 4
+      },
+      "id": "bb42ef8b-7c3e-48cf-bbeb-a13906062d5e",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -928,
+        -224
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "📧 Gmail MCP\nSends confirmation/reminder emails\nbased on voice commands.\n",
+        "height": 448,
+        "width": 496,
+        "color": 5
+      },
+      "id": "92e12190-7ec5-4d51-bef6-864a8a854b97",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -192,
+        272
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "📚 Knowledge Base MCP\nOpenAI generates embeddings from content.\nSupabase Vector Store saves/retrieves data\nfor knowledge base queries.\n",
+        "height": 656,
+        "width": 400,
+        "color": 6
+      },
+      "id": "63d0480e-b604-4102-a57f-2904f15e9cd0",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -176
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Entry Point – Incoming Webhook (VAPI)\n\nThis is the starting point of the workflow.  \n- A WhatsApp message or voice input is received via Twilio.  \n- Twilio routes the audio stream to VAPI through the TwiML app.  \n- VAPI processes the voice command and decides which MCP Server (Calendar, Gmail, Knowledge Base) should handle the request.  \n- The request is then passed into this webhook in n8n for execution.  \n\n### Flow:\nWhatsApp → Twilio (TwiML app) → VAPI → n8n Incoming Webhook  \n",
+        "height": 624,
+        "width": 640,
+        "color": 2
+      },
+      "id": "9d0c7d4c-cd7c-4da3-8a91-2c68fd44e0b7",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -272,
+        -384
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "This webhook is triggered by VAPI when a WhatsApp voice command is received via Twilio. \nVAPI interprets the user’s request and forwards it here. \nFrom this point, the workflow decides which MCP server (Calendar, Gmail, Knowledge Base) should process the action.\n",
+        "height": 336,
+        "width": 272,
+        "color": 3
+      },
+      "id": "58a5d37e-8c37-4cef-be7c-e91eba1b9134",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -272,
+        -96
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "This node sends the processed response back to VAPI. \nIt ensures that the result of the MCP server execution (e.g., calendar update, email confirmation, knowledge base query) \nis returned to the user via WhatsApp.\n",
+        "height": 336,
+        "width": 272,
+        "color": 3
+      },
+      "id": "94ee4d66-d609-463c-900f-47c5ffc1a7d1",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        96,
+        -96
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-06T10:19:40.277Z",
+      "createdAt": "2025-11-06T10:19:40.277Z",
+      "role": "workflow:owner",
+      "workflowId": "E5jvq9XdSH5sjh3c",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-10-25T13:36:30.247Z",
+      "createdAt": "2025-10-25T13:36:30.247Z",
+      "id": "FNYyaeLlFmpf7wss",
+      "name": "VAPI"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-06T10:19:40.273Z",
+  "versionId": "4260741c-fa07-4ca6-8add-9708783c43d1"
+}
