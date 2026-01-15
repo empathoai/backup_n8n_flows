@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "WhatsApp Trigger": {
       "main": [
@@ -160,8 +162,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-25T12:07:37.964Z",
       "updatedAt": "2025-10-25T12:07:37.964Z",
+      "createdAt": "2025-10-25T12:07:37.964Z",
       "role": "workflow:owner",
       "workflowId": "PWhWhSMwgnPH1NYR",
       "projectId": "zIvgruNDMJwjqAqX"
