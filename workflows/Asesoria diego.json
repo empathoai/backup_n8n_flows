@@ -1,0 +1,1029 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        []
+      ]
+    },
+    "Set 'Text'": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "Embeddings": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Knowledge Base",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Knowledge Base",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Base": {
+      "ai_tool": [
+        [
+          {
+            "node": "knowledgeAgent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "knowledgeAgent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "knowledgeAgent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "calendarAgent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "calendarAgent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Lead": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "qualifierAgent": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Set message": {
+      "main": [
+        [
+          {
+            "node": "Buscar Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "lead_cualificado": {
+      "ai_tool": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getQuestions": {
+      "ai_tool": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-21T01:02:53.829Z",
+  "id": "3muFqvsO67i80lWL",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Asesoria diego",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        784,
+        1072
+      ],
+      "id": "901b7b80-69e7-44fe-8022-321d9c3f2ec7",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "content": "# Parent Agent\n\n",
+        "height": 276,
+        "width": 436,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1632,
+        208
+      ],
+      "typeVersion": 1,
+      "id": "53ac2d29-6902-48bf-8e4e-faf370e33963",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "description": "Usa think para asegurar la secuencia de las preguntas usando el campo Indet de la herramiensta getQuestions"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        784,
+        944
+      ],
+      "id": "cd332c17-0680-4c93-a6ee-fec5f0b0a2e0",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "content": "# Think\n",
+        "height": 584,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        704,
+        624
+      ],
+      "id": "37b197ef-15ab-4055-8da8-b2e6a0c22fb6",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe7ecc99-e1e8-4a5e-bdd6-6fce9757b234",
+              "name": "text",
+              "value": "={{ $json.messages[0].text.body }}",
+              "type": "string"
+            },
+            {
+              "id": "e48e8a63-952b-4b4a-8871-6a35498bb397",
+              "name": "sessionId",
+              "value": "={{ $json.contacts[0].wa_id }}",
+              "type": "string"
+            },
+            {
+              "id": "e026eb0d-b746-4bec-8b71-ca824d69c848",
+              "name": "datetime",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "96f942d8-f65d-4d14-af42-2e0aae95fad6",
+      "name": "Set 'Text'",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        0
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8c844924-b2ed-48b0-935c-c66a8fd0c778",
+                    "leftValue": "={{ $json.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c0309c33-6100-4cdf-bfda-47b056db8e25",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        144,
+        0
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# 🛠️ Setup Guide  \n**Author:** [Nate Herk](https://www.youtube.com/@nateherk)\n\nFollow the steps below to set up your Ultimate Assistant with its supporting agents:\n\n### ✅ Step 1: Download the JSON Files  \nGet the [workflow JSON files](https://www.skool.com/ai-automation-society/new-video-i-built-the-ultimate-team-of-ai-agents-in-n8n-with-no-code-free-template?p=975cad50) for the following agents:  \n- **Email Agent**  \n- **Calendar Agent**  \n- **Contact Agent**  \n- **Content Creator Agent**  \n\nMake sure you have all four ready to import.\n\n### ✅ Step 2: Import & Link the Workflows  \nImport each JSON file into n8n as a separate workflow.  \nOnce imported, connect each agent to the main assistant workflow using the appropriate tool node. This ensures seamless delegation and response routing.\n\n### ✅ Step 3: Connect a Chat Model to Each Agent  \nFor full functionality, attach a chat model to each of the agents:  \n- One for the **main assistant**  \n- One each for the **email**, **calendar**, **contact**, and **content** agents  \n\nYou can use models from OpenRouter, Anthropic, or any other supported provider.\n\n### ✅ Step 4: Add Required Credentials  \nLink the necessary credentials to each agent’s flow:  \n- **Gmail** (Email Agent)  \n- **Google Calendar** (Calendar Agent)  \n- **Airtable** (Contact Agent)  \n- **Tavily** (Ultimate Assistant & Content Creator Agent)  \n\n### ✅ Step 5: Connect Telegram  \nIntegrate your **Telegram account** so you can interact with the assistant and receive messages in real time.  \n\n### 💡 You're All Set  \nOnce everything is connected, start chatting with your assistant and let it manage your tasks across email, calendar, contacts, and content!\n",
+        "height": 940,
+        "width": 1000
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2048,
+        -352
+      ],
+      "id": "303219a1-24ec-411a-aeca-26f6ede5f018",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "frequencyPenalty": 2,
+          "maxTokens": 200,
+          "presencePenalty": 0.1,
+          "temperature": 0.2,
+          "topP": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        784,
+        688
+      ],
+      "id": "77273410-5085-42a9-a4aa-6a7ca054c650",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "databaseName": "agent_ai",
+        "contextWindowLength": 50
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        784,
+        800
+      ],
+      "id": "05baeb1c-fd46-4945-8002-abc862818de0",
+      "name": "MongoDB Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        720,
+        0
+      ],
+      "id": "410d5f32-bbc5-4a79-844a-dd9a0e4a1699",
+      "name": "WhatsApp Trigger",
+      "webhookId": "10459b7c-c180-45da-a4a2-6477efa218c0",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "cZyb6dr4x4ekScrv",
+          "name": "WhatsApp IntiMenoni"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2800,
+        1072
+      ],
+      "id": "3f81c203-545e-4e1c-ac6e-1f1dbb9f6e90",
+      "name": "Embeddings",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        3024,
+        1056
+      ],
+      "id": "fa397485-881f-4f6b-95d4-bcdae22dc1bd",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "MDpMWvH8CuNBd9uu",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Usa los datos de Milvus Vector Store para proporcionar informacion al usuario",
+        "milvusCollection": {
+          "__rl": true,
+          "value": "knowledge_base",
+          "mode": "list",
+          "cachedResultName": "knowledge_base"
+        },
+        "useReranker": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+      "typeVersion": 1.3,
+      "position": [
+        2864,
+        864
+      ],
+      "id": "35eb58d0-9f61-44f7-b5fd-15898f124423",
+      "name": "Knowledge Base",
+      "credentials": {
+        "milvusApi": {
+          "id": "YbwPcrTxudipd6F0",
+          "name": "MilvusRag"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2496,
+        896
+      ],
+      "id": "f724de2e-9c7b-4400-a89b-19189ab3105c",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "# identidad\nEres **knowledgAgent** especialista en DANIA para Property Management. Tono natural, humanizado, sin exposición técnica.\n\n# instrucciones\n- Consulta KnowledgeBase sobre DANIA antes de responder\n- Respuestas claras, breves y conclusivas\n- Sin preguntas abiertas al final\n- Sugiere especialista cuando sea necesario (de forma natural)\n- Verifica precisión factual\n\n# ejemplos\n\n<user>\n¿Qué es DANIA?\n</user>\n\n<assistant>\nDANIA es una IA que automatiza operaciones inmobiliarias: gestión de datos, \ncomunicación con inquilinos y tareas administrativas. Básicamente, libera tiempo \npara crecer tu negocio.\n</assistant>\n\n<user>\n¿Funciona con nuestro software?\n</user>\n\n<assistant>\nSe integra con las principales plataformas de PM. ¿Cuál usas? Te confirmo \ncompatibilidad.\n</assistant>\n\n<user>\nQueremos implementar DANIA.\n</user>\n\n<assistant>\nPerfecto. Un especialista evaluará tu caso y diseñará la mejor implementación \npara ti.\n</assistant>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        2592,
+        704
+      ],
+      "id": "b265814b-e98a-40e1-a96b-587a439ba667",
+      "name": "knowledgeAgent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        2112,
+        976
+      ],
+      "id": "b60806f9-d68a-4ea4-8ac8-6783218e03b5",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Agente para agendar citas, modificar citas, cancelar citas",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "=# contexto\nFecha y hora actual: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        2192,
+        720
+      ],
+      "id": "bd97e99d-9c77-46ef-9ec8-d1ddd5337356",
+      "name": "calendarAgent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        832,
+        288
+      ],
+      "id": "c963092f-08c5-4679-844c-589f5459d1b3",
+      "name": "When chat message received",
+      "webhookId": "b971298e-b7c0-4d4e-b1b8-fc482085c184"
+    },
+    {
+      "parameters": {
+        "collection": "leads",
+        "options": {
+          "limit": 1
+        },
+        "query": "={ \"sessionId\": \"{{ $json.sessionId }}\" }"
+      },
+      "id": "99e1e847-c6d8-46aa-91a1-6b41c14a2f7e",
+      "name": "Buscar Lead",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        1216,
+        -80
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "AI Agent que usa la herrmienta Qualifier para realizar las preguntas del usario",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Eres QualifierAgent, tu unica funncions es usar la herramienta **Qualifier** para enviar las preguntas al usuario.\n\nIdentifica la intencios, si es agendar una cita continua\n\n**Input desde DANIA Assistant**\n\n## Herramientas\n- Usa **Qualifier** para hacer las preguntas al usuario\n\n# Fomato de respuesta para enviar las preguntas\n\n{\n  \"sessionId\": \"562ede9427c245ee9cc289154848f7db\",\n  \"message\": \"¿Podrías decirme tu nombre completo?\",\n}\n\n# REGLA CRITICA\n\n- Envias una pregunta a la Vez\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        3040,
+        -64
+      ],
+      "id": "b385f28d-e28c-407c-864a-0c8a3e9e1157",
+      "name": "qualifierAgent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "247e2dd8-fd6d-4c89-a9ee-acde3c1e8482",
+              "name": "sessionId",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "string"
+            },
+            {
+              "id": "24ac7549-dc8f-4b14-9413-80a57edf5b0c",
+              "name": "message",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        992,
+        -80
+      ],
+      "id": "09dbfad7-00ab-40e1-bb85-55ecd6573f42",
+      "name": "Set message"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Set message').item.json.sessionId }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2400,
+        240
+      ],
+      "id": "c268776b-06d8-4cd5-8399-fc9000b57b11",
+      "name": "Send a text message",
+      "webhookId": "9b9dcc65-2e8e-4747-a278-c84c9332761b",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZnnqJZvoQL8Ki07s",
+          "name": "Telegram empathoai_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Llama a esta herramienta para cualificar al lead",
+        "workflowId": {
+          "__rl": true,
+          "value": "fpj8cW0A70klcVJK",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/fpj8cW0A70klcVJK",
+          "cachedResultName": "lead_cualificado"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('name', `Respuesta pregunta 1`, 'string') }}",
+            "sessionId": "={{ $('When chat message received').item.json.sessionId }}",
+            "createdAt": "={{$now}}",
+            "email": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('email', `Respuesta pregunta 2`, 'string') }}",
+            "country": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('country', `Respuesta pregunta 3`, 'string') }}",
+            "work_type": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('work_type', `Respuesta pregunta 4`, 'string') }}",
+            "business_name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('business_name', `Respuesta pregunta 5`, 'string') }}",
+            "role": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('role', `Respuesta pregunta 6`, 'string') }}",
+            "business_model": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('business_model', `Respuesta pregunta 7`, 'string') }}",
+            "team_size": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('team_size', `Respuesta pregunta 8`, 'string') }}",
+            "ai_knowledge": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('ai_knowledge', `Respuesta pregunta 9`, 'string') }}",
+            "main_challenge": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('main_challenge', `Respuesta pregunta 10`, 'string') }}",
+            "past_attempt": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('past_attempt', `Respuesta pregunta 11`, 'string') }}",
+            "status": "quialified"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "country",
+              "displayName": "country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "work_type",
+              "displayName": "work_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "business_name",
+              "displayName": "business_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "business_model",
+              "displayName": "business_model",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "team_size",
+              "displayName": "team_size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "ai_knowledge",
+              "displayName": "ai_knowledge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "main_challenge",
+              "displayName": "main_challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "past_attempt",
+              "displayName": "past_attempt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "createdAt",
+              "displayName": "createdAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1696,
+        576
+      ],
+      "id": "e52b0270-03f5-4ef4-ae79-2a169b1707fb",
+      "name": "lead_cualificado"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=message: {{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=# Agente Cualificador - DANIA Property Management\n\n## Identidad\nEres el asistente de cualificación de DANIA Property Management. Tu estilo es profesional, directo y amable. Mensajes cortos, una pregunta por turno.\n\n## Herramientas\n- `getQuestions`: Obtiene las preguntas de la Data Table (columnas: `index`, `question`)\n- `lead_cualificado`: Envía el lead cuando el flujo termina\n\n## Flujo\n\n### 1. Inicio\nPregunta: \"¿Tienes unos minutos para responder 11 preguntas rápidas?\"\n- **Sí** → Harás 11 preguntas (index 0-10)\n- **No tiene tiempo** → Solo 3 preguntas (index 0-2)\n\n### 2. Cualificación\n- Llama a `getQuestions` para obtener todas las preguntas\n- Haz una pregunta por mensaje, en orden de `index`\n- Usa el texto exacto de `question`, sin modificar\n- Guarda cada respuesta en su campo correspondiente\n\n### 3. Mapeo de campos\n| index | Campo |\n|-------|-------|\n| 0 | name |\n| 1 | email |\n| 2 | country |\n| 3 | work_type |\n| 4 | business_name |\n| 5 | role |\n| 6 | business_model |\n| 7 | team_size |\n| 8 | ai_knowledge |\n| 9 | main_challenge |\n| 10 | past_attempt |\n\n### 4. Finalización\n\n**Si completó 11 preguntas:**\nMuestra resumen:\n```\nPerfecto, esto es lo que tengo:\n👤 Nombre: {name}\n📧 Email: {email}\n🌍 País: {country}\n🏢 Trabajo: {work_type}\n💼 Empresa: {business_name}\n👔 Rol: {role}\n💡 Modelo: {business_model}\n👥 Equipo: {team_size}\n🤖 IA: {ai_knowledge}\n⚙️ Desafío: {main_challenge}\n🧠 Intentos previos: {past_attempt}\n\n¿Todo correcto?\n```\n- **Sí** → Llama `lead_cualificado` con todos los campos\n- **No** → Pregunta qué corregir, actualiza, muestra resumen de nuevo\n\n**Si solo completó 3 preguntas:**\nLlama `lead_cualificado` con: name, email, country\n\n## Reglas\n- Una pregunta por mensaje\n- No repetir preguntas ya hechas\n- No modificar el texto de las preguntas\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1744,
+        288
+      ],
+      "id": "eb4477f1-fc51-40bb-a091-afd9fcf32e0b",
+      "name": "Dania Assistant"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "245ddbbc-1612-4b91-b0a0-f7be3af12060"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        1440,
+        -80
+      ],
+      "id": "80d24d61-8b79-4983-bd4f-e9df6cafa10f",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=message: {{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=# Identidad\nEres el Orquestador oficial de DANIA Property Management.\nTu única función es cualificar al cliente a partir de ciertas preguntas\n\n#REGLAS\n- Debes hacer una cantidad de 11 preguntas\n- Debes realizar las preguntas una por una no todas a la vez\n- No repitas mas de una vez la pregunta\n\n#HERRAMIENTAS DISPONIBLES:\n-Think: usar esta herramienta SIEMPRE antes de hacer las preguntas y no perdeer el orden\n-lead_cualificado: una vez se hagan todas las preguntas se usa esta herramienta\n\n# INSTRUCCIONES ESPECIFICAS\n##Antes de cualificar\n-Preguntar al usuario si tiene unos minutos para responder 11 preguntas\n- Si la respuesta es afirmativa haz las 11 preguntas\n- Si el usuario te dice que no tiene tiempo, hazle solo las 3 primeras preguntas\n##Hacer preguntas para cualificar\n1.\t¿Podrías decirme tu nombre completo?\t\n-------------------------------------------------------\n2.\t¿Cual es tu correo electronico?\temail\t\n-------------------------------------------------------\n3.\t¿De que pais nos contactas?\tcountry\t\n-------------------------------------------------------\n4.\t¿Tienes actualmente un negocio o trabajas dentro de una empresa?\t\n----------------------------------------------------------------------------\n5.\tSi tienes un negocio, ¿cómo se llama y a qué se dedica principalmente?\t\n-------------------------------------------------------------------------\n6.\t¿Cuál es tu rol dentro de la empresa o proyecto?\t\n------------------------------------------------------------------------------\n7.\t¿Tu empresa ofrece productos físicos, servicios, o es un negocio digital?\t\n------------------------------------------------------------------------------\n8.\t¿Cuántas personas forman parte actualmente de tu equipo o negocio?\t\n-------------------------------------------------------------------------------\n9.\t¿Qué tan familiarizado estás con el uso de la inteligencia artificial en tu negocio o sector?\n--------------------------------------------------------------------------------\n10.\t¿Cuál es el principal desafío que estás buscando resolver ahora mismo en tu empresa?\n---------------------------------------------------------------------------------\n11.\t¿Has intentado implementar alguna herramienta o estrategia digital para resolverlo? Si es así, ¿cuál?\n \n- Una vez realizada todas las preguntas utilizar la herramienta \"lead_cualificado\"\n\n## Fecha y hora actual\n{{ $now }}\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        2032,
+        -160
+      ],
+      "id": "04b94287-4027-46cc-8870-2cd8f2a94381",
+      "name": "Atendder lead registrado"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=La herramienta `getQuestions` devuelve una lista de registros, donde cada fila tiene como mínimo las siguientes columnas:\n\n- `index` → valores del **0 al 10**  \n- `question` → texto que debes usar como pregunta al usuario\n",
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pxnG5d50cxlkcbxj",
+          "mode": "list",
+          "cachedResultName": "questions",
+          "cachedResultUrl": "/projects/zIvgruNDMJwjqAqX/datatables/pxnG5d50cxlkcbxj"
+        },
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}"
+      },
+      "type": "n8n-nodes-base.dataTableTool",
+      "typeVersion": 1,
+      "position": [
+        1856,
+        576
+      ],
+      "id": "64673a6d-139d-4046-a8f4-0d77ad765e61",
+      "name": "getQuestions"
+    }
+  ],
+  "pinData": {
+    "WhatsApp Trigger": [
+      {
+        "json": {
+          "messaging_product": "whatsapp",
+          "metadata": {
+            "display_phone_number": "64274362367",
+            "phone_number_id": "845366772000034"
+          },
+          "contacts": [
+            {
+              "profile": {
+                "name": "AGR"
+              },
+              "wa_id": "593987143469"
+            }
+          ],
+          "messages": [
+            {
+              "from": "593987143469",
+              "id": "wamid.HBgMNTkzOTg3MTQzNDY5FQIAEhgUM0ZGRjA5OTkzODc2QUI3RkRBNjMA",
+              "timestamp": "1763688562",
+              "text": {
+                "body": "quiero una cita"
+              },
+              "type": "text"
+            }
+          ],
+          "field": "messages"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-21T01:02:53.833Z",
+      "createdAt": "2025-11-21T01:02:53.833Z",
+      "role": "workflow:owner",
+      "workflowId": "3muFqvsO67i80lWL",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-11-21T01:03:02.917Z",
+      "createdAt": "2025-11-21T01:03:02.917Z",
+      "id": "kMspMt7kL0IeLEcz",
+      "name": "Certificacion"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-09T20:11:23.000Z",
+  "versionId": "bba4e228-9f0a-4500-9cd5-017df454e1a0"
+}
