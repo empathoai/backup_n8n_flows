@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Schedule Trigger": {
       "main": [
@@ -75,7 +77,7 @@
   },
   "createdAt": "2025-10-21T07:48:08.495Z",
   "id": "LmNrqtudXwMAEcyb",
-  "isArchived": false,
+  "isArchived": true,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -445,8 +447,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-21T07:48:08.500Z",
       "updatedAt": "2025-10-21T07:48:08.500Z",
+      "createdAt": "2025-10-21T07:48:08.500Z",
       "role": "workflow:owner",
       "workflowId": "LmNrqtudXwMAEcyb",
       "projectId": "zIvgruNDMJwjqAqX"
@@ -455,6 +457,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-21T09:13:21.000Z",
-  "versionId": "283c8d66-1933-467e-b339-0d4a2f0f1fe9"
+  "updatedAt": "2025-11-11T04:20:12.000Z",
+  "versionId": "a687b8c5-a0fd-4670-a715-377e23252586"
 }
