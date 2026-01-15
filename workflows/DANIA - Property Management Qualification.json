@@ -1,0 +1,234 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Normalize Input": {
+      "main": [
+        [
+          {
+            "node": "AI Qualification Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Qualification Agent": {
+      "main": [
+        [
+          {
+            "node": "Prepare MongoDB Document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare MongoDB Document": {
+      "main": [
+        [
+          {
+            "node": "MongoDB Insert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Insert": {
+      "main": [
+        [
+          {
+            "node": "Response Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response Message": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Qualification Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-18T00:37:49.516Z",
+  "id": "L3al25dlaq7ACJRR",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "DANIA - Property Management Qualification",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "enriched",
+        "options": {}
+      },
+      "id": "9ff1865a-3f2d-405e-b9db-feee6b1e008a",
+      "name": "Normalize Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        -80,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "options": {
+          "systemMessage": "You are DANIA, an expert in property management qualification. Your task is to guide the user through 11 sequential questions to qualify their business needs.\n\nAsk questions ONE AT A TIME in this order:\n1. Name: ¿Cuál es tu nombre completo?\n2. Email: ¿Cuál es tu correo electrónico?\n3. Country: ¿De qué país nos contactas?\n4. Work Type: ¿Tienes negocio propio o trabajas en empresa?\n5. Business Name: ¿Cómo se llama tu negocio y a qué se dedica?\n6. Role: ¿Cuál es tu rol?\n7. Business Model: ¿Ofreces productos, servicios o es digital?\n8. Team Size: ¿Cuántas personas en tu equipo?\n9. AI Knowledge: ¿Qué tan familiarizado estás con IA?\n10. Main Challenge: ¿Cuál es tu principal desafío ahora?\n11. Past Attempt: ¿Has intentado herramientas digitales antes?\n\nWhen user completes all 11 questions, show a summary and ask: ¿Confirmas que todo es correcto?\n\n**CRITICAL**: Always respond ONLY in this exact JSON format:\n{\"message_1\": \"your_response_here\", \"message_2\": \"\", \"message_3\": \"\"}\n\nNever deviate from this format. Save answers with: {{ $fromAI('variable_name', `label`, 'string') }}"
+        }
+      },
+      "id": "d6454cfb-9ba3-45e9-8835-5d487cea44ca",
+      "name": "AI Qualification Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.4,
+      "position": [
+        144,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "enriched",
+        "options": {}
+      },
+      "id": "84a963bf-8993-4b75-ab04-e292caa3bf49",
+      "name": "Prepare MongoDB Document",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        464,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "leads_dania",
+        "options": {}
+      },
+      "id": "72db182f-e71f-4d1d-a0c2-9d7a80d8aa06",
+      "name": "MongoDB Insert",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        688,
+        80
+      ],
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "mode": "enriched",
+        "options": {}
+      },
+      "id": "f8f76311-4178-42e7-89be-14e5a6304e6c",
+      "name": "Response Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        912,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        304
+      ],
+      "id": "95b89531-0c5c-4934-b0a5-3348314e7e62",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        192,
+        192
+      ],
+      "id": "9c3bec4f-b1b4-49e3-834c-fe24810a386e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -320,
+        80
+      ],
+      "id": "81e66ae1-43a5-40c7-a5c2-4524ca8e3833",
+      "name": "When chat message received",
+      "webhookId": "31534fb0-dcb4-4701-96f3-b1753c668e99"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-18T00:37:49.519Z",
+      "createdAt": "2025-11-18T00:37:49.519Z",
+      "role": "workflow:owner",
+      "workflowId": "L3al25dlaq7ACJRR",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-02T18:41:28.000Z",
+  "versionId": "1b9a354f-086c-47d1-a699-c6aee779fafe"
+}
