@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When chat message received": {
       "main": [
@@ -415,8 +417,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-28T22:22:14.691Z",
       "updatedAt": "2025-10-28T22:22:14.691Z",
+      "createdAt": "2025-10-28T22:22:14.691Z",
       "role": "workflow:owner",
       "workflowId": "HVCZLnw1EE1LmA9P",
       "projectId": "zIvgruNDMJwjqAqX"
@@ -425,8 +427,8 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2025-10-28T22:08:08.254Z",
       "updatedAt": "2025-10-28T22:08:08.254Z",
+      "createdAt": "2025-10-28T22:08:08.254Z",
       "id": "bnbbAbAbadWtcPIp",
       "name": "Ai Automation Society"
     }
