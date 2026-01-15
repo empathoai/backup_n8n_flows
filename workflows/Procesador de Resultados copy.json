@@ -1,0 +1,2945 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Variables": {
+      "main": [
+        [
+          {
+            "node": "Llamada Asistente VAPI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Llamada Asistente VAPI": {
+      "main": [
+        [
+          {
+            "node": "Exito",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gmail - Notificar Error Llamada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Esperar 60s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Variables Post-Llamada": {
+      "main": [
+        [
+          {
+            "node": "Evaluar Logica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API Key": {
+      "main": [
+        [
+          {
+            "node": "¿Llamada Finalizada?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar 60s": {
+      "main": [
+        [
+          {
+            "node": "API Key",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluar Logica": {
+      "main": [
+        [
+          {
+            "node": "Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decision": {
+      "main": [
+        [
+          {
+            "node": "¿Se Agendó Cita?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GHL - Obtener Datos del Contacto para Reintento",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GHL - Obtener Datos del Contacto para Reintento",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Avisar error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Detalles Llamada - Contextual": {
+      "main": [
+        [
+          {
+            "node": "Variables Post-Llamada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Oportunidades del Contacto": {
+      "main": [
+        [
+          {
+            "node": "GHL - Obtener Pipelines de la Sub-cuenta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Pipelines de la Sub-cuenta": {
+      "main": [
+        [
+          {
+            "node": "Preparar Actualizaciones (Con Cita)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Datos del Contacto": {
+      "main": [
+        [
+          {
+            "node": "GHL - Obtener Oportunidades del Contacto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Mover Oportunidad Final (Con Cita)": {
+      "main": [
+        [
+          {
+            "node": "Añadir Llamada Contestada (Con Cita)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Actualizar Contacto Final (Con Cita)": {
+      "main": [
+        [
+          {
+            "node": "GHL - Añadir Nota al Contacto (Con Cita)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Actualizaciones (Con Cita)": {
+      "main": [
+        [
+          {
+            "node": "GHL - Crear Cita en Calendario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Tags para Siguiente Intento": {
+      "main": [
+        [
+          {
+            "node": "GHL - Añadir Nota de Actividad (Reintento)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Marcar como No Contactado?": {
+      "main": [
+        [
+          {
+            "node": "GHL - Obtener Oportunidades del Contacto2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Llamada Finalizada?": {
+      "main": [
+        [
+          {
+            "node": "Obtener Detalles Llamada - Contextual",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation,do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Se Agendó Cita?": {
+      "main": [
+        [
+          {
+            "node": "Conversión Cita a ISO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GHL - Obtener Datos del Contacto2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conversión Cita a ISO": {
+      "main": [
+        [
+          {
+            "node": "GHL - Obtener Datos del Contacto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Datos del Contacto2": {
+      "main": [
+        [
+          {
+            "node": "GHL - Obtener Oportunidades del Contacto1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Oportunidades del Contacto1": {
+      "main": [
+        [
+          {
+            "node": "GHL - Obtener Pipelines de la Sub-cuenta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Añadir Nota al Contacto (Con Cita)": {
+      "main": [
+        [
+          {
+            "node": "GHL - Mover Oportunidad Final (Con Cita)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Crear Cita en Calendario": {
+      "main": [
+        [
+          {
+            "node": "GHL - Actualizar Contacto Final (Con Cita)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Pipelines de la Sub-cuenta1": {
+      "main": [
+        [
+          {
+            "node": "¿Nunca Volver a Llamar?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Nunca Volver a Llamar?": {
+      "main": [
+        [
+          {
+            "node": "GHL - Set Contacto DND",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code - Preparar Tags para Ciclo de Nutricion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Set Contacto DND": {
+      "main": [
+        [
+          {
+            "node": "GHL - Crear Nota DND",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Mover Oportunidad a No Interesado": {
+      "main": [
+        [
+          {
+            "node": "GHL - Añadir Tag DNC y Nota",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Añadir Tag DNC y Nota": {
+      "main": [
+        [
+          {
+            "node": "Añadir Llamada Contestada (No Cita, No Llamar)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Actualizar Contacto para Nutricion": {
+      "main": [
+        [
+          {
+            "node": "GHL - Añadir Nota al Contacto para Nutricion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Añadir Nota al Contacto para Nutricion": {
+      "main": [
+        [
+          {
+            "node": "GHL - Mover Oportunidad a \"Contactado\"",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Mover Oportunidad a \"Contactado\"": {
+      "main": [
+        [
+          {
+            "node": "Añadir Llamada Contestada (No Cita)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Preparar Tags para Ciclo de Nutricion": {
+      "main": [
+        [
+          {
+            "node": "GHL - Actualizar Contacto para Nutricion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Crear Nota DND": {
+      "main": [
+        [
+          {
+            "node": "GHL - Mover Oportunidad a No Interesado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Datos del Contacto para Reintento": {
+      "main": [
+        [
+          {
+            "node": "Preparar Tags para Siguiente Intento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Actualizar Tags de Reintento": {
+      "main": [
+        [
+          {
+            "node": "¿Marcar como No Contactado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Oportunidades del Contacto2": {
+      "main": [
+        [
+          {
+            "node": "GHL - Obtener Pipelines de la Sub-cuenta2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Obtener Pipelines de la Sub-cuenta2": {
+      "main": [
+        [
+          {
+            "node": "Preparar Tags No Contactado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Tags No Contactado": {
+      "main": [
+        [
+          {
+            "node": "GHL – Actualizar Tags de No Contactado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL – Actualizar Tags de No Contactado": {
+      "main": [
+        [
+          {
+            "node": "GHL – Mover Oportunidad a No Contactado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL - Añadir Nota de Actividad (Reintento)": {
+      "main": [
+        [
+          {
+            "node": "GHL - Actualizar Tags de Reintento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-05T14:52:08.507Z",
+  "id": "FRnUQ3PLqeaHTdtJ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Procesador de Resultados copy",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "llamar-asistente",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        288,
+        576
+      ],
+      "id": "20061efb-2086-4553-acac-6ce17709d345",
+      "name": "Webhook",
+      "webhookId": "0556a229-cbf4-4660-b504-bf5e928db321"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a494b2ab-401f-4719-b426-42d8cbc3742f",
+              "name": "clientName",
+              "value": "={{ $json.body.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "d6782531-83e6-49cf-a2c7-9f8c15a736e5",
+              "name": "vapi_api_key",
+              "value": "={{ $json.body.customData.vapi_api_key }}",
+              "type": "string"
+            },
+            {
+              "id": "dd70cd2a-348b-4fd1-847e-2df144b60675",
+              "name": "assistantId",
+              "value": "={{ $json.body.customData.vapi_assistant_id }}",
+              "type": "string"
+            },
+            {
+              "id": "09cb77e2-bf29-4ff0-9db1-bdf3dbddc48c",
+              "name": "phoneNumberId",
+              "value": "={{ $json.body.customData.phone_number_id }}",
+              "type": "string"
+            },
+            {
+              "id": "f80075de-116e-40ca-aad6-b2ac9957700a",
+              "name": "phoneNumber",
+              "value": "={{ $json.body.customData.phone_number }}",
+              "type": "string"
+            },
+            {
+              "id": "f3073a62-efc2-4782-8623-c4fb5e0fa5b6",
+              "name": "contactId",
+              "value": "={{ $json.body.contact_id }}",
+              "type": "string"
+            },
+            {
+              "id": "6375ea98-091b-44fe-adec-a2f8b98ae8d2",
+              "name": "contactTags",
+              "value": "={{ $json.body.tags }}",
+              "type": "string"
+            },
+            {
+              "id": "fc92fb14-45a1-4c0e-93ce-f6fc797ba41f",
+              "name": "locationId",
+              "value": "={{ $json.body.location.id }}",
+              "type": "string"
+            },
+            {
+              "id": "514cbb30-036b-49b5-bf27-e67f5517d878",
+              "name": "calendarId",
+              "value": "={{ $json.body.customData.calendar_id }}",
+              "type": "string"
+            },
+            {
+              "id": "bde27990-3a21-45db-897e-06bd87578422",
+              "name": "ghl_api_key",
+              "value": "={{ $json.body.customData.ghl_api_key }}",
+              "type": "string"
+            },
+            {
+              "id": "7635fb6a-b017-4020-973c-74b8cc2dd126",
+              "name": "agentName",
+              "value": "Nombre Agente",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        592,
+        576
+      ],
+      "id": "993c00c2-9681-40ca-ad8c-f9a3cb5ba057",
+      "name": "Variables"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e7d7d568-14dc-49ff-9525-473cd2fa74f3",
+              "name": "resultado",
+              "value": "success",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1232,
+        368
+      ],
+      "id": "07ae568c-16e6-47d6-b597-6022c83f4f37",
+      "name": "Exito"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vapi.ai/call",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$json.vapi_api_key}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"assistantId\": \"{{ $json.assistantId }}\",\n  \"phoneNumberId\": \"{{ $json.phoneNumberId }}\",\n  \"customer\": {\n    \"number\": \"{{ $json.phoneNumber }}\"\n  },\n  \"assistantOverrides\": {\n    \"variableValues\": {\n      \"current_day\": \"{{ $now.format('yyyy-MM-dd HH:mm:ss') }}\",\n      \"contactId\": \"{{ $json.contactId }}\",\n      \"client_name\": \"{{ $json.clientName }}\",\n      \"agent_name\": \"{{ $json.agentName }}\",\n      \"contactTags\": \"{{ $json.contactTags }}\",\n      \"locationId\": \"{{ $json.locationId }}\"\n    }\n  },\n  \"metadata\": {\n    \"contactId\": \"{{ $json.contactId }}\",\n    \"locationId\": \"{{ $json.locationId }}\",\n    \"agentName\": \"{{ $json.agentName }}\",\n    \"clientName\": \"{{ $json.clientName }}\",\n    \"ghl_api_key\": \"{{ $json.ghl_api_key }}\",\n    \"ghl_calendar_id\": \"{{ $json.calendarId }}\" \n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        864,
+        576
+      ],
+      "id": "184713e0-58b5-4abb-a316-ccd561b04e7c",
+      "name": "Llamada Asistente VAPI",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "victorperezsanz2004@gmail.com",
+        "subject": "Problema en: ",
+        "message": "A",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1232,
+        720
+      ],
+      "id": "391b021f-9dc0-4053-a575-709be05aca72",
+      "name": "Gmail - Notificar Error Llamada",
+      "webhookId": "271c22c4-85a0-4fa3-aab5-592f5863ade2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "abaee597-7842-4233-8fef-5c110106f8ef",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1456,
+        -352
+      ],
+      "webhookId": "abaee597-7842-4233-8fef-5c110106f8ef",
+      "id": "945f9dc9-44a1-450a-8841-fd96c658fe26"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8e5ef101-b063-44b3-b98c-72e54a4cc5ee",
+              "name": "foundHome",
+              "value": "={{ $json.analysis.structuredData.foundHome }}",
+              "type": "string"
+            },
+            {
+              "id": "cfbd16cb-774d-4298-9631-a4efef79cc2d",
+              "name": "hasPropertyForSale",
+              "value": "={{ $json.analysis.structuredData.hasPropertyForSale }}",
+              "type": "string"
+            },
+            {
+              "id": "2454ea47-4509-435e-a4e1-0dd17ba63839",
+              "name": "needsMortgage",
+              "value": "={{ $json.analysis.structuredData.needsMortgage }}",
+              "type": "string"
+            },
+            {
+              "id": "7f6ebb17-6473-4ebe-a3c8-b3bf6c09f616",
+              "name": "otherNeeds",
+              "value": "={{ $json.analysis.structuredData.otherNeeds }}",
+              "type": "string"
+            },
+            {
+              "id": "ec60593f-6e19-4b85-8383-3f259385fd04",
+              "name": "scheduled",
+              "value": "={{ $json.analysis.structuredData.scheduled }}",
+              "type": "string"
+            },
+            {
+              "id": "71784ea5-fbe4-4190-9017-ef1f1dcf72ad",
+              "name": "=scheduledDate",
+              "value": "={{ $json.analysis.structuredData.scheduledDate }}",
+              "type": "string"
+            },
+            {
+              "id": "0b8e9560-3e0c-48d8-af17-7062abc40f0e",
+              "name": "scheduledTime",
+              "value": "={{ $json.analysis.structuredData.scheduledTime }}",
+              "type": "string"
+            },
+            {
+              "id": "e1452acc-944e-487c-ad06-cfd5db18a393",
+              "name": "reasonNotScheduled",
+              "value": "={{ $json.analysis.structuredData.reasonNotScheduled }}",
+              "type": "string"
+            },
+            {
+              "id": "b59e5a75-cda1-4f1b-932f-767704381bb9",
+              "name": "mainTopics",
+              "value": "={{ $json.analysis.structuredData.mainTopics }}",
+              "type": "string"
+            },
+            {
+              "id": "0fcbba15-f718-4f76-94c5-9d827b302273",
+              "name": "importantQnA",
+              "value": "={{ $json.analysis.structuredData.importantQnA }}",
+              "type": "string"
+            },
+            {
+              "id": "953889ed-6717-4e61-a216-38e5e36ad1fa",
+              "name": "extraInfo",
+              "value": "={{ $json.analysis.structuredData.extraInfo }}",
+              "type": "string"
+            },
+            {
+              "id": "a84adb12-486e-49c1-a431-900160c99713",
+              "name": "messageType",
+              "value": "={{ $('Webhook Trigger').item.json.body.message.type }}",
+              "type": "string"
+            },
+            {
+              "id": "c80739f6-6efb-4991-b610-19ffb6427f23",
+              "name": "endedReason",
+              "value": "={{ $json.endedReason }}",
+              "type": "string"
+            },
+            {
+              "id": "9b98729b-daeb-46ff-a313-8b24e80a9eb8",
+              "name": "transcript",
+              "value": "={{ $json.transcript }}",
+              "type": "string"
+            },
+            {
+              "id": "e1a111ba-25f3-4c19-800a-eee11c8ba096",
+              "name": "agentName",
+              "value": "={{ $json.metadata.agentName }}",
+              "type": "string"
+            },
+            {
+              "id": "bd4767d5-39bf-4424-a0f1-195e30bbd215",
+              "name": "clientName",
+              "value": "={{ $json.analysis.structuredData.clientName }}",
+              "type": "string"
+            },
+            {
+              "id": "0ea6df77-7725-4ff7-9b82-b87e336d44c5",
+              "name": "phoneNumber",
+              "value": "={{ $json.customer.number }}",
+              "type": "string"
+            },
+            {
+              "id": "ecb672d9-9580-4eb1-84ba-6c5f138e589c",
+              "name": "recordingURL",
+              "value": "={{ $json.recordingUrl }}",
+              "type": "string"
+            },
+            {
+              "id": "b4524dbe-2940-45f4-80d2-7a6a282be2b1",
+              "name": "contactId",
+              "value": "={{ $json.metadata.contactId }}",
+              "type": "string"
+            },
+            {
+              "id": "9c686331-5af3-4e31-80c4-af5c07a46720",
+              "name": "locationId",
+              "value": "={{ $json.metadata.locationId }}",
+              "type": "string"
+            },
+            {
+              "id": "da88768c-de64-4f5e-aa7b-f66473fc8079",
+              "name": "ghlCalendarId",
+              "value": "={{ $json.metadata.ghl_calendar_id }}",
+              "type": "string"
+            },
+            {
+              "id": "9cc14f27-e721-4b4c-9162-221767fa548c",
+              "name": "summary",
+              "value": "={{ $json.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "f8237e49-e98c-4144-8f39-3dbb4449e40d",
+              "name": "ghlApiKey",
+              "value": "={{ $json.metadata.ghl_api_key }}",
+              "type": "string"
+            },
+            {
+              "id": "0a49ed2d-06fa-4ad3-b709-d61db8b7de5d",
+              "name": "scheduledPhrase",
+              "value": "={{ $json.analysis.structuredData.scheduledPhrase }}",
+              "type": "string"
+            },
+            {
+              "id": "613c2ede-c9b7-491c-8624-fb8852570707",
+              "name": "doNotCall",
+              "value": "={{ $json.analysis.structuredData.doNotCall.toString() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -336,
+        -448
+      ],
+      "id": "68f58384-2560-43b7-98c5-dee235d91326",
+      "name": "Variables Post-Llamada"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8acd4315-784a-4b8c-bf9b-6745cb48b3cc",
+              "name": "vapi_api_key",
+              "value": "VUESTA_CLAVE_DE_API",
+              "type": "string"
+            },
+            {
+              "id": "77796a97-fe2f-4ce8-ac79-dbfe7d9b4720",
+              "name": "call_id",
+              "value": "={{ $('Webhook Trigger').item.json.body.message.call.id }}",
+              "type": "string"
+            },
+            {
+              "id": "5438517a-8e1b-4fe1-a4ac-04b484ebda58",
+              "name": "assistant_id",
+              "value": "={{ $('Webhook Trigger').item.json.body.message.call.assistantId }}",
+              "type": "string"
+            },
+            {
+              "id": "32b0fc5d-a56a-4a47-94a4-719ddddfd4b4",
+              "name": "call_status",
+              "value": "={{ $json.body.message.status }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1008,
+        -352
+      ],
+      "id": "86f7651f-8524-4016-9367-5a29e0d0a885",
+      "name": "API Key"
+    },
+    {
+      "parameters": {
+        "unit": "seconds"
+      },
+      "name": "Esperar 60s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        -1232,
+        -352
+      ],
+      "id": "1fb35e48-8e36-4e78-906f-59a9e038593f",
+      "webhookId": "eb50715b-80ed-4b70-8cee-29ff4dcfae06"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\n\nlet decision = \"sin_clasificar\";\nlet noteBody = \"\"; // Inicializamos la variable para la nota\nconst timestamp = $now.toFormat('dd/MM/yyyy HH:mm');\n\n// Extraer desde nivel raíz\nconst type = input.messageType || null;\nconst endedReason = input.endedReason || null;\nconst summary = input.summary || \"\";\nconst transcript = input.transcript || \"\";\n\n// ¿Hay al menos una frase del usuario en el transcript?\nconst hayRespuestaDelUsuario = transcript.includes(\"User:\");\n\n// ¿Detectamos buzón de voz?\nconst esBuzon = (\n  endedReason === \"silence-timed-out\" ||\n  summary.toLowerCase().includes(\"buzón de voz\")\n);\n\n// --- LÓGICA DE DECISIÓN (la que ya tenías) ---\nif (type === \"status-update\" && [\"customer-ended-call\", \"assistant-ended-call\"].includes(endedReason) && hayRespuestaDelUsuario) {\n  decision = \"llamada_cogida\";\n} else if (type === \"status-update\" && (([\"customer-ended-call\", \"assistant-ended-call\"].includes(endedReason) && !hayRespuestaDelUsuario && summary.trim() === \"\") || esBuzon)) {\n  decision = \"llamada_falsa\";\n} else if (type === \"status-update\" && [\"no-answer\", \"timeout\", \"failed\", \"busy\", \"user-hangup\", \"customer-did-not-answer\"].includes(endedReason)) {\n  decision = \"no_respondida\";\n}\n\n// --- NUEVA LÓGICA: GENERAR CUERPO DE LA NOTA ---\nswitch (decision) {\n  case \"llamada_cogida\":\n    const motivo = input.reasonNotScheduled ? `Motivo no agendado: ${input.reasonNotScheduled}` : \"Cita agendada con éxito.\";\n    noteBody = `Llamada IA - ${timestamp} - Resultado: Conversación.\\n${motivo}\\nResumen IA: ${summary}`;\n    break;\n  case \"llamada_falsa\":\n    noteBody = `Llamada IA - ${timestamp} - Resultado: Buzón de voz o llamada sin respuesta útil. Siguiente intento programado.`;\n    break;\n  case \"no_respondida\":\n    noteBody = `Llamada IA - ${timestamp} - Resultado: No contesta (${endedReason}). Siguiente intento programado.`;\n    break;\n  default:\n    noteBody = `Llamada IA - ${timestamp} - Resultado: Sin clasificar (${endedReason}). Requiere revisión.`;\n    break;\n}\n\n// --- DEVOLVER RESULTADO ---\nreturn [{\n  json: {\n    ...input,\n    decision,\n    noteBody // Añadimos la nota al output para usarla después\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -112,
+        -448
+      ],
+      "id": "83500b9c-0cd7-44c6-87db-b248a69eb06d",
+      "name": "Evaluar Logica"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.decision }}",
+                    "rightValue": "llamada_cogida",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "57de9a2f-88f5-499f-85ad-9650e1984edf"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Respondida"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7f012736-d4dd-466b-99c0-7edd93958829",
+                    "leftValue": "={{ $json.decision }}",
+                    "rightValue": "llamada_falsa",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Falsa Llamada"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4e29d1bb-c5a7-41a4-b993-1a822b340a37",
+                    "leftValue": "={{ $json.decision }}",
+                    "rightValue": "no_respondida",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "No Respondida"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "921983af-e8fc-4667-8324-a6fc2b435179",
+                    "leftValue": "={{ $json.decision }}",
+                    "rightValue": "sin_clasificar",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sin Clasificar"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        112,
+        -480
+      ],
+      "id": "33a91357-a971-4386-8c32-091cf764c8cd",
+      "name": "Decision",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "sendTo": "victorperezsanz2004@gmail.com",
+        "subject": "Error en X",
+        "message": "Ha fallado X en Y",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        336,
+        -256
+      ],
+      "id": "1bdbb9a1-b215-4d11-9602-aa31afd395eb",
+      "name": "Avisar error",
+      "webhookId": "a27ce162-c6fe-44e7-a23c-2a97d429f1ba"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1VB5n0sUhB7yjhYDD4YkPAO3OQ36qlZfg0x9HLgb78-I",
+          "mode": "list",
+          "cachedResultName": "Análisis Post-Llamada",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VB5n0sUhB7yjhYDD4YkPAO3OQ36qlZfg0x9HLgb78-I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VB5n0sUhB7yjhYDD4YkPAO3OQ36qlZfg0x9HLgb78-I/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha y Hora": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.current_day }}",
+            "Call ID": "={{ $('API Key').item.json.call_id }}",
+            "Agente": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.agent_name }}",
+            "Teléfono": "={{ $('Webhook Trigger').item.json.body.message.call.customer.number }}",
+            "foundHome": "={{ $('Variables Post-Llamada').item.json.foundHome }}",
+            "needsMortgage": "={{ $('Variables Post-Llamada').item.json.needsMortgage }}",
+            "otherNeeds": "={{ $('Variables Post-Llamada').item.json.otherNeeds }}",
+            "Transcripción": "={{ $('Variables Post-Llamada').item.json.transcript }}",
+            "URL Llamada": "={{ $('Variables Post-Llamada').item.json.recordingURL }}",
+            "Resumen": "={{ $('Variables Post-Llamada').item.json.summary }}",
+            "hasPropertyForSale": "={{ $('Variables Post-Llamada').item.json.hasPropertyForSale }}",
+            "Programada": "={{ $('Variables Post-Llamada').item.json.scheduled }}",
+            "Fecha reserva": "={{ $('Conversión Cita a ISO').item.json.message.content.date }}",
+            "Hora reserva": "={{ $('Conversión Cita a ISO').item.json.message.content.time }}",
+            "Razón no reserva": "={{ $('Variables Post-Llamada').item.json.reasonNotScheduled }}",
+            "Temas principales": "={{ $('Variables Post-Llamada').item.json.mainTopics }}",
+            "QnA": "={{ $('Variables Post-Llamada').item.json.importantQnA }}",
+            "Extrainfo": "={{ $('Variables Post-Llamada').item.json.extraInfo }}",
+            "Cliente": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.client_name }}",
+            "Contact ID": "={{ $('Variables Post-Llamada').item.json.contactId }}"
+          },
+          "matchingColumns": [
+            "Call ID"
+          ],
+          "schema": [
+            {
+              "id": "Fecha y Hora",
+              "displayName": "Fecha y Hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Call ID",
+              "displayName": "Call ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Contact ID",
+              "displayName": "Contact ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Cliente",
+              "displayName": "Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Agente",
+              "displayName": "Agente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "foundHome",
+              "displayName": "foundHome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "hasPropertyForSale",
+              "displayName": "hasPropertyForSale",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "needsMortgage",
+              "displayName": "needsMortgage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "otherNeeds",
+              "displayName": "otherNeeds",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Transcripción",
+              "displayName": "Transcripción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "URL Llamada",
+              "displayName": "URL Llamada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resumen",
+              "displayName": "Resumen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Programada",
+              "displayName": "Programada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha reserva",
+              "displayName": "Fecha reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hora reserva",
+              "displayName": "Hora reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Razón no reserva",
+              "displayName": "Razón no reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Temas principales",
+              "displayName": "Temas principales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "QnA",
+              "displayName": "QnA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Extrainfo",
+              "displayName": "Extrainfo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2704,
+        -1120
+      ],
+      "id": "0ffe19af-f657-438f-957e-cbcc427e8582",
+      "name": "Añadir Llamada Contestada (Con Cita)"
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://api.vapi.ai/call/' + $json.call_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $json.vapi_api_key }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "name": "Obtener Detalles Llamada - Contextual",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -560,
+        -448
+      ],
+      "id": "63c082cd-e83d-4359-b25c-a8fd4048746a"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/opportunities/search?contact_id={{ $('Variables Post-Llamada').item.json.contactId }}&location_id={{ $('Variables Post-Llamada').item.json.locationId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Location-Id",
+              "value": "={{ $('Variables Post-Llamada').item.json.locationId }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1136,
+        -1120
+      ],
+      "id": "bd60089a-0b38-4b0b-aa56-1963e26c2a05",
+      "name": "GHL - Obtener Oportunidades del Contacto"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/opportunities/pipelines",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "locationId",
+              "value": "={{ $('Variables Post-Llamada').item.json.locationId }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        -1120
+      ],
+      "id": "afddfffd-22bc-4b6c-bbec-cc2bd64dd22c",
+      "name": "GHL - Obtener Pipelines de la Sub-cuenta",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Location-Id",
+              "value": "={{ $('Variables Post-Llamada').item.json.locationId }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        912,
+        -1120
+      ],
+      "id": "e1532457-045c-4b71-a33c-0c41faba3e7d",
+      "name": "GHL - Obtener Datos del Contacto"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/opportunities/{{ $('Preparar Actualizaciones (Con Cita)').item.json.prepared.opportunityId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Preparar Actualizaciones (Con Cita)').item.json.prepared.opportunityUpdateBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2480,
+        -1120
+      ],
+      "id": "310f6da3-85d5-4769-9d9b-b33f347a7347",
+      "name": "GHL - Mover Oportunidad Final (Con Cita)"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Preparar Actualizaciones (Con Cita)').item.json.prepared.contactUpdateBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2032,
+        -1120
+      ],
+      "id": "abd76e87-e882-48f5-93ec-6254d4efdd8a",
+      "name": "GHL - Actualizar Contacto Final (Con Cita)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Recopilamos los datos de todos los nodos anteriores\nconst contactData = $('GHL - Obtener Datos del Contacto').item.json.contact;\nconst opportunities = $('GHL - Obtener Oportunidades del Contacto').item.json.opportunities;\nconst opportunityData = opportunities && opportunities.length > 0 ? opportunities[0] : null;\nconst pipelinesList = $('GHL - Obtener Pipelines de la Sub-cuenta').item.json.pipelines;\nconst postCallVars = $('Variables Post-Llamada').item.json;\n\n// --- Obtener la fecha y hora del nodo de conversión ISO ---\nconst isoDateTime = $('Conversión Cita a ISO').item.json.message.content;\n\n// --- BUSCAR IDs DE PIPELINE Y STAGE ---\nlet pipelineId = null;\nlet stageId = null;\nconst targetPipeline = pipelinesList.find(p => p.name === \"Reactivación de Cartera IA\");\nif (targetPipeline) {\n  pipelineId = targetPipeline.id;\n  const targetStage = targetPipeline.stages.find(s => s.name === \"Cita Agendada\");\n  if (targetStage) {\n    stageId = targetStage.id;\n  }\n}\n\n// --- 1. Preparar Payload para Actualizar Tags del Contacto ---\nlet currentTags = contactData.tags || [];\ncurrentTags = currentTags.filter(tag => !tag.startsWith('[Ciclo]'));\ncurrentTags.push('[Estado] Cita Agendada');\nconst finalTags = [...new Set(currentTags)];\nconst contactUpdatePayload = {\n  tags: finalTags\n};\n\n// --- 2. Preparar Payload para CREAR la Nota (usando los datos ISO) ---\nconst noteBody = `CITA AGENDADA POR IA - ${isoDateTime.date} a las ${isoDateTime.time}\\n\\nResumen: ${postCallVars.mainTopics}\\nFrase clave del cliente: \"${postCallVars.importantQnA}\"`;\nconst noteCreationPayload = {\n  body: noteBody\n};\n\n// --- 3. Preparar Payload para Actualizar Oportunidad ---\nconst opportunityUpdatePayload = (opportunityData && pipelineId && stageId) ? {\n  pipelineId: pipelineId,\n  pipelineStageId: stageId,\n  name: opportunityData.name,\n  status: 'won'\n} : null;\n\nconst opportunityId = opportunityData ? opportunityData.id : null;\n\n// --- 4. Preparar Payload para CREAR el Evento en el Calendario (Método Manual) ---\n\n// Construimos la cadena de fecha/hora de inicio directamente. \n// AÑADIMOS la zona horaria de España (+02:00) para que GHL la interprete correctamente.\nconst startTimeString = `${isoDateTime.date}T${isoDateTime.time}:00+02:00`;\n\n// Para la hora de fin, necesitamos un poco de JavaScript nativo.\nconst startDate = new Date(startTimeString);\n// Añadimos 30 minutos a la fecha de inicio.\nconst endDate = new Date(startDate.getTime() + 30 * 60000);\n\nconst eventCreationPayload = {\n  locationId: postCallVars.locationId,           // ← obligatorio\n  calendarId: postCallVars.ghlCalendarId,\n  contactId: postCallVars.contactId,\n  title:    `Cita IA: ${postCallVars.clientName} / ${postCallVars.agentName}`,\n  startTime: startDate.toISOString(),             // ISO con offset Z\n  endTime:   endDate.toISOString(),\n  appointmentStatus: 'confirmed',\n  notes:    `Resumen de la llamada...`\n};\n\n\n// --- 5. Devolver todo en un objeto final ---\nconst inputItem = $input.item;\ninputItem.json.prepared = {\n  contactUpdateBody: contactUpdatePayload,\n  noteCreationBody: noteCreationPayload,\n  opportunityId: opportunityId,\n  opportunityUpdateBody: opportunityUpdatePayload,\n  eventCreationBody: eventCreationPayload\n};\n\nreturn inputItem;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1584,
+        -1120
+      ],
+      "id": "8876cc54-f7c3-4b79-ae88-683be58d2967",
+      "name": "Preparar Actualizaciones (Con Cita)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Items entrantes\nconst item = $input.first().json.contact;\nconst currentTags = item.tags || [];\nconst contactId  = item.id;\n\n// Define los nombres EXACTOS de tus tags en GHL:\nconst TAG1 = \"[ciclo] primera llamada\";\nconst TAG2 = \"[ciclo] segunda llamada\";\nconst TAG3 = \"[ciclo] tercera llamada\";\nconst TAG_NUT = \"[nutrición] iniciar seguimiento\";\n\n// Calcula el nuevo array de tags:\nlet newTags = currentTags.filter(t => \n  t !== TAG1 && t !== TAG2 && t !== TAG3\n);\n\nlet isFinalAttempt = false;\n\nif (currentTags.includes(TAG1)) {\n  newTags.push(TAG2);\n} else if (currentTags.includes(TAG2)) {\n  newTags.push(TAG3);\n} else if (currentTags.includes(TAG3)) {\n  newTags.push(TAG_NUT);\n  isFinalAttempt = true;\n} else {\n  // Si no traía ningún TAG de ciclo, arrancamos en Primera\n  newTags.push(TAG1);\n}\n\nreturn [{\n  json: {\n    contactId,\n    newTags,\n    isFinalAttempt\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        -448
+      ],
+      "id": "09a7bca7-9dea-4b0a-9b91-03b271b5186a",
+      "name": "Preparar Tags para Siguiente Intento"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "16f34291-f190-4fee-82b6-2867fb64c7ce",
+              "leftValue": "={{ $('Preparar Tags para Siguiente Intento').item.json.isFinalAttempt.toString() }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1360,
+        -448
+      ],
+      "id": "2dc5e1c9-9eff-4a56-b6d9-20b8072e3adb",
+      "name": "¿Marcar como No Contactado?"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1584,
+        -352
+      ],
+      "id": "1a89b5f4-bddc-410f-a1b4-7d3c8fb9f57a",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "55080a5a-0f05-4f7b-93f7-a5f99903dc53",
+              "leftValue": "={{ $json.call_status }}",
+              "rightValue": "ended",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -784,
+        -352
+      ],
+      "id": "36386a5f-9d5f-4651-8c5c-fa8b4459ac18",
+      "name": "¿Llamada Finalizada?"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -256
+      ],
+      "id": "d12000a1-5094-4a7d-bd8f-1d100906b959",
+      "name": "No Operation,do nothing"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bcf9932e-b457-4d11-b76a-8d967e0027f6",
+              "leftValue": "={{ $json.scheduled }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        336,
+        -1024
+      ],
+      "id": "95c15611-e978-4ba6-9397-c3202f9b4645",
+      "name": "¿Se Agendó Cita?"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Tu tarea es convertir una frase humana sobre fechas/horas en una cita ISO.\n\nContexto:\n- Fecha y hora de referencia (hoy): {{ $now }}\n- Zona horaria: Europe/Madrid\n\nFrase del cliente: \"{{ $('Variables Post-Llamada').item.json.scheduledPhrase }}\"\n\nDevuelve UN solo objeto JSON:\n\n{\n  \"date\": \"YYYY-MM-DD\",   // vacío si no hay fecha clara\n  \"time\": \"HH:MM\"         // vacío si no hay hora clara\n}\n\nReglas:\n- “mañana” = {{ $now }} +1\n- “pasado mañana” = {{ $now }} +2\n- “este viernes” = próximo viernes >= {{ $now }}\n- Si solo hay hora, usa {{ $now }}."
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        560,
+        -1120
+      ],
+      "id": "e2a343de-de80-4560-92cb-233859981657",
+      "name": "Conversión Cita a ISO"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Location-Id",
+              "value": "={{$json[\"locationId\"]}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        624,
+        -832
+      ],
+      "id": "a410fec6-eabd-4f13-8b03-c7fe21516376",
+      "name": "GHL - Obtener Datos del Contacto2"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/opportunities/search?contact_id={{ $('Variables Post-Llamada').item.json.contactId }}&location_id={{ $('Variables Post-Llamada').item.json.locationId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Location-Id",
+              "value": "={{ $('Variables Post-Llamada').item.json.locationId }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        912,
+        -832
+      ],
+      "id": "766f7ceb-28ef-4286-b42d-0aba3e4a16df",
+      "name": "GHL - Obtener Oportunidades del Contacto1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}/notes",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Preparar Actualizaciones (Con Cita)').item.json.prepared.noteCreationBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2256,
+        -1120
+      ],
+      "id": "bace2434-0b95-45ab-b2b7-d33e498d018c",
+      "name": "GHL - Añadir Nota al Contacto (Con Cita)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/calendars/events/appointments",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accep",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Preparar Actualizaciones (Con Cita)').item.json.prepared.eventCreationBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1808,
+        -1120
+      ],
+      "id": "100daf22-f482-4a8c-ac9c-022fcff654aa",
+      "name": "GHL - Crear Cita en Calendario"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/opportunities/pipelines",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "locationId",
+              "value": "={{ $('Variables Post-Llamada').item.json.locationId }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1136,
+        -832
+      ],
+      "id": "74b6fa74-8753-4263-91bd-7da273394b66",
+      "name": "GHL - Obtener Pipelines de la Sub-cuenta1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Rhua-x0MfX25IpUcQioydfn4EoDCSjQimJqjFqDpV2M",
+          "mode": "list",
+          "cachedResultName": "Análisis Post-Llamada (Sin Cita)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Rhua-x0MfX25IpUcQioydfn4EoDCSjQimJqjFqDpV2M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Rhua-x0MfX25IpUcQioydfn4EoDCSjQimJqjFqDpV2M/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha y Hora": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.current_day }}",
+            "Call ID": "={{ $('API Key').item.json.call_id }}",
+            "Agente": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.agent_name }}",
+            "Teléfono": "={{ $('Webhook Trigger').item.json.body.message.call.customer.number }}",
+            "foundHome": "={{ $('Variables Post-Llamada').item.json.foundHome }}",
+            "needsMortgage": "={{ $('Variables Post-Llamada').item.json.needsMortgage }}",
+            "otherNeeds": "={{ $('Variables Post-Llamada').item.json.otherNeeds }}",
+            "Transcripción": "={{ $('Variables Post-Llamada').item.json.transcript }}",
+            "URL Llamada": "={{ $('Variables Post-Llamada').item.json.recordingURL }}",
+            "Resumen": "={{ $('Variables Post-Llamada').item.json.summary }}",
+            "hasPropertyForSale": "={{ $('Variables Post-Llamada').item.json.hasPropertyForSale }}",
+            "Programada": "={{ $('Variables Post-Llamada').item.json.scheduled }}",
+            "Fecha reserva": "={{ $('Variables Post-Llamada').item.json.scheduledDate }}",
+            "Hora reserva": "={{ $('Variables Post-Llamada').item.json.scheduledTime }}",
+            "Razón no reserva": "={{ $('Variables Post-Llamada').item.json.reasonNotScheduled }}",
+            "Temas principales": "={{ $('Variables Post-Llamada').item.json.mainTopics }}",
+            "QnA": "={{ $('Variables Post-Llamada').item.json.importantQnA }}",
+            "Extrainfo": "={{ $('Variables Post-Llamada').item.json.extraInfo }}",
+            "Cliente": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.client_name }}",
+            "Contact ID": "={{ $('Variables Post-Llamada').item.json.contactId }}",
+            "doNotCall": "={{ $('Variables Post-Llamada').item.json.doNotCall }}"
+          },
+          "matchingColumns": [
+            "Call ID"
+          ],
+          "schema": [
+            {
+              "id": "Fecha y Hora",
+              "displayName": "Fecha y Hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Call ID",
+              "displayName": "Call ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Contact ID",
+              "displayName": "Contact ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Cliente",
+              "displayName": "Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Agente",
+              "displayName": "Agente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "foundHome",
+              "displayName": "foundHome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "hasPropertyForSale",
+              "displayName": "hasPropertyForSale",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "needsMortgage",
+              "displayName": "needsMortgage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "otherNeeds",
+              "displayName": "otherNeeds",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Transcripción",
+              "displayName": "Transcripción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "URL Llamada",
+              "displayName": "URL Llamada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resumen",
+              "displayName": "Resumen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Programada",
+              "displayName": "Programada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha reserva",
+              "displayName": "Fecha reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hora reserva",
+              "displayName": "Hora reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Razón no reserva",
+              "displayName": "Razón no reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Temas principales",
+              "displayName": "Temas principales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "QnA",
+              "displayName": "QnA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Extrainfo",
+              "displayName": "Extrainfo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "doNotCall",
+              "displayName": "doNotCall",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2480,
+        -928
+      ],
+      "id": "b82ab02b-cfd0-4d3c-8037-9d97022cbd48",
+      "name": "Añadir Llamada Contestada (No Cita, No Llamar)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3ae77f92-7b63-4a27-86b7-fbe026ba8baa",
+              "leftValue": "={{ $('Variables Post-Llamada').item.json.doNotCall }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1360,
+        -832
+      ],
+      "id": "26f10584-6544-47ed-b699-f8c4408e3bc6",
+      "name": "¿Nunca Volver a Llamar?"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('GHL - Obtener Datos del Contacto2').item.json.contact.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ dnd: true }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1584,
+        -928
+      ],
+      "id": "aa5d41c7-a63d-4c4f-9a64-eb1d623b89f1",
+      "name": "GHL - Set Contacto DND"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/opportunities/{{ $node[\"GHL - Obtener Oportunidades del Contacto1\"].json.opportunities[0].id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  pipelineId: $node[\"GHL - Obtener Pipelines de la Sub-cuenta1\"]\n    .json.pipelines\n    .find(p => p.name === \"Reactivación de Cartera IA\").id,\n  pipelineStageId: $node[\"GHL - Obtener Pipelines de la Sub-cuenta1\"]\n    .json.pipelines\n    .find(p => p.name === \"Reactivación de Cartera IA\")\n    .stages.find(s => s.name === \"No Interesado\").id\n}) }}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2032,
+        -928
+      ],
+      "id": "4dba4407-2cab-4127-902e-5c73a6465ece",
+      "name": "GHL - Mover Oportunidad a No Interesado"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('GHL - Obtener Datos del Contacto2').item.json.contact.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  tags: [\"[estado] no contactar\"]\n}) }}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2256,
+        -928
+      ],
+      "id": "fe6d5b9b-67ea-43be-994b-45af5d37fc9d",
+      "name": "GHL - Añadir Tag DNC y Nota"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  tags: $json.tagsParaActualizar\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1808,
+        -736
+      ],
+      "id": "67a24fb3-b0de-4060-933d-a286f5310ee5",
+      "name": "GHL - Actualizar Contacto para Nutricion"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}/notes\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  body: `Llamada IA completada el ${$now.toFormat('DD/MM/YYYY HH:mm')}. Cliente contactado, sin cita agendada.\n\nMotivo: ${$('Variables Post-Llamada').item.json.reasonNotScheduled}\nResumen: ${$('Variables Post-Llamada').item.json.mainTopics}\n\nEl contacto ha sido movido al flujo de nutrición a largo plazo.`\n}) }}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2032,
+        -736
+      ],
+      "id": "5edaa509-d267-4c93-9d7d-c8ed4845dad0",
+      "name": "GHL - Añadir Nota al Contacto para Nutricion"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/opportunities/{{ $('GHL - Obtener Oportunidades del Contacto2').item.json.opportunities.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify(\n   $node['Code - Preparar Tags para Ciclo de Nutricion'].json.opportunityUpdateBody\n) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2256,
+        -736
+      ],
+      "id": "baac0fe8-79dc-478b-ba0e-ab4edfbdaee7",
+      "name": "GHL - Mover Oportunidad a \"Contactado\""
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1) Tags: quitar [ciclo]* y [estado]*, y añadir los dos nuevos\nconst contactData = $node[\"GHL - Obtener Datos del Contacto2\"].json.contact;\nconst currentTags = Array.isArray(contactData.tags) ? contactData.tags : [];\nconst filteredTags = currentTags.filter(tag =>\n  !tag.toLowerCase().startsWith('[ciclo]') &&\n  !tag.toLowerCase().startsWith('[estado]')\n);\nconst tagsSet = new Set(filteredTags);\ntagsSet.add('[nutrición] iniciar seguimiento');\ntagsSet.add('[estado] contactado');\nconst tagsParaActualizar = Array.from(tagsSet);\n\n// 2) Oportunidad\nconst opportunities = $node[\"GHL - Obtener Oportunidades del Contacto1\"].json.opportunities;\nconst opportunityData = Array.isArray(opportunities) && opportunities.length > 0\n  ? opportunities[0]\n  : null;\nconst opportunityId = opportunityData?.id || null;\n\n// 3) Pipelines & stages\nconst pipelinesList = $node[\"GHL - Obtener Pipelines de la Sub-cuenta1\"].json.pipelines;\nconst targetPipeline = pipelinesList.find(p => p.name === \"Reactivación de Cartera IA\");\nconst pipelineId = targetPipeline?.id || null;\nconst targetStage = targetPipeline?.stages.find(s =>\n  s.name.toLowerCase().startsWith('contactado')\n) || null;\nconst pipelineStageId = targetStage?.id || null;\n\n// 4) Payload para mover oportunidad (solo si hay todo lo anterior)\nconst opportunityUpdateBody = (opportunityId && pipelineId && pipelineStageId)\n  ? { pipelineId, pipelineStageId }\n  : null;\n\n// 5) Devolver para los HTTP Request siguientes\nreturn [\n  {\n    json: {\n      tagsParaActualizar,\n      opportunityId,\n      opportunityUpdateBody,\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1584,
+        -736
+      ],
+      "id": "2630c210-032b-4a28-8310-6541a6d65452",
+      "name": "Code - Preparar Tags para Ciclo de Nutricion"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Rhua-x0MfX25IpUcQioydfn4EoDCSjQimJqjFqDpV2M",
+          "mode": "list",
+          "cachedResultName": "Análisis Post-Llamada (Sin Cita)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Rhua-x0MfX25IpUcQioydfn4EoDCSjQimJqjFqDpV2M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Rhua-x0MfX25IpUcQioydfn4EoDCSjQimJqjFqDpV2M/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha y Hora": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.current_day }}",
+            "Call ID": "={{ $('API Key').item.json.call_id }}",
+            "Agente": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.agent_name }}",
+            "Teléfono": "={{ $('Webhook Trigger').item.json.body.message.call.customer.number }}",
+            "foundHome": "={{ $('Variables Post-Llamada').item.json.foundHome }}",
+            "needsMortgage": "={{ $('Variables Post-Llamada').item.json.needsMortgage }}",
+            "otherNeeds": "={{ $('Variables Post-Llamada').item.json.otherNeeds }}",
+            "Transcripción": "={{ $('Variables Post-Llamada').item.json.transcript }}",
+            "URL Llamada": "={{ $('Variables Post-Llamada').item.json.recordingURL }}",
+            "Resumen": "={{ $('Variables Post-Llamada').item.json.summary }}",
+            "hasPropertyForSale": "={{ $('Variables Post-Llamada').item.json.hasPropertyForSale }}",
+            "Programada": "={{ $('Variables Post-Llamada').item.json.scheduled }}",
+            "Fecha reserva": "={{ $('Variables Post-Llamada').item.json.scheduledDate }}",
+            "Hora reserva": "={{ $('Variables Post-Llamada').item.json.scheduledTime }}",
+            "Razón no reserva": "={{ $('Variables Post-Llamada').item.json.reasonNotScheduled }}",
+            "Temas principales": "={{ $('Variables Post-Llamada').item.json.mainTopics }}",
+            "QnA": "={{ $('Variables Post-Llamada').item.json.importantQnA }}",
+            "Extrainfo": "={{ $('Variables Post-Llamada').item.json.extraInfo }}",
+            "Cliente": "={{ $('Webhook Trigger').item.json.body.message.call.assistantOverrides.variableValues.client_name }}",
+            "Contact ID": "={{ $('Variables Post-Llamada').item.json.contactId }}",
+            "doNotCall": "={{ $('Variables Post-Llamada').item.json.doNotCall }}"
+          },
+          "matchingColumns": [
+            "Call ID"
+          ],
+          "schema": [
+            {
+              "id": "Fecha y Hora",
+              "displayName": "Fecha y Hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Call ID",
+              "displayName": "Call ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Contact ID",
+              "displayName": "Contact ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Cliente",
+              "displayName": "Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Agente",
+              "displayName": "Agente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "foundHome",
+              "displayName": "foundHome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "hasPropertyForSale",
+              "displayName": "hasPropertyForSale",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "needsMortgage",
+              "displayName": "needsMortgage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "otherNeeds",
+              "displayName": "otherNeeds",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Transcripción",
+              "displayName": "Transcripción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "URL Llamada",
+              "displayName": "URL Llamada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resumen",
+              "displayName": "Resumen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Programada",
+              "displayName": "Programada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha reserva",
+              "displayName": "Fecha reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hora reserva",
+              "displayName": "Hora reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Razón no reserva",
+              "displayName": "Razón no reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Temas principales",
+              "displayName": "Temas principales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "QnA",
+              "displayName": "QnA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Extrainfo",
+              "displayName": "Extrainfo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "doNotCall",
+              "displayName": "doNotCall",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2480,
+        -736
+      ],
+      "id": "acf58920-2f57-4010-b76e-01baf8142a86",
+      "name": "Añadir Llamada Contestada (No Cita)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('GHL - Obtener Datos del Contacto2').item.json.contact.id }}/notes",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  body: `El contacto ha sido marcado como “No molestar” y no volverá a ser contactado según petición del cliente. Resumen Llamada: $('Variables Post-Llamada').item.json.summary`\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1808,
+        -928
+      ],
+      "id": "3965188f-c231-4929-be6c-c2e2abe597b7",
+      "name": "GHL - Crear Nota DND"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Location-Id",
+              "value": "={{$json[\"locationId\"]}}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        336,
+        -448
+      ],
+      "id": "257e4b2e-d67f-4989-992b-bd1fed6502ba",
+      "name": "GHL - Obtener Datos del Contacto para Reintento"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  tags: $('Preparar Tags para Siguiente Intento').item.json.newTags\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1136,
+        -448
+      ],
+      "id": "db3b2843-6942-44a4-9454-53b3ff769ac7",
+      "name": "GHL - Actualizar Tags de Reintento"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/opportunities/search?contact_id={{ $('Variables Post-Llamada').item.json.contactId }}&location_id={{ $('Variables Post-Llamada').item.json.locationId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Location-Id",
+              "value": "={{ $('Variables Post-Llamada').item.json.locationId }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1584,
+        -544
+      ],
+      "id": "82634368-467b-43e8-a749-768f4193d773",
+      "name": "GHL - Obtener Oportunidades del Contacto2"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/opportunities/pipelines",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "locationId",
+              "value": "={{ $('Variables Post-Llamada').item.json.locationId }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1808,
+        -544
+      ],
+      "id": "e153c672-92a1-4499-b263-b2cd15af3543",
+      "name": "GHL - Obtener Pipelines de la Sub-cuenta2",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Extraer la oportunidad del nodo \"GHL - Obtener Oportunidades del Contacto2\"\nconst oppNode = $node[\"GHL - Obtener Oportunidades del Contacto2\"];\nconst opp = oppNode.json.opportunities[0];\n\n// 2. Extraer los pipelines del nodo \"GHL - Obtener Pipelines de la Sub-cuenta2\"\nconst pipeNode = $node[\"GHL - Obtener Pipelines de la Sub-cuenta2\"];\nconst pipelines = pipeNode.json.pipelines;\n\n// 3. Identificar el pipeline correcto y el stage \"No Contactado\"\nconst pipeline = pipelines.find(p => p.id === opp.pipelineId);\nconst noContactadoStage = pipeline.stages.find(s => s.name === \"No Contactado\");\n\n// 4. Construir la salida\nreturn [{\n  json: {\n    contactId:     opp.contactId,\n    opportunityId: opp.id,\n    newTags:       [\"[estado] no contactado\"],\n    newStageId:    noContactadoStage.id\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2032,
+        -544
+      ],
+      "id": "e4c1e521-54bc-437b-a7f1-ce87e151d544",
+      "name": "Preparar Tags No Contactado"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ tags: $json.newTags }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2256,
+        -544
+      ],
+      "id": "14ede9b7-2743-430c-bf37-4cd10dddf298",
+      "name": "GHL – Actualizar Tags de No Contactado"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/opportunities/{{ $('GHL - Obtener Oportunidades del Contacto2').item.json.opportunities[0].id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ pipelineStageId:$('Preparar Tags No Contactado').item.json.newStageId}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2480,
+        -544
+      ],
+      "id": "15b1bd7f-f089-49e3-b468-6041d3c55b13",
+      "name": "GHL – Mover Oportunidad a No Contactado"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Variables Post-Llamada').item.json.contactId }}/notes",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Variables Post-Llamada').item.json.ghlApiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"body\": $('Evaluar Logica').item.json.noteBody } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        912,
+        -448
+      ],
+      "id": "720bc91e-814a-40b9-b4af-24e90cce29ec",
+      "name": "GHL - Añadir Nota de Actividad (Reintento)"
+    },
+    {
+      "parameters": {
+        "content": "## Buenas, aquí Víctor :)\n\n📌 Este flujo es una solución real de un cliente.\nHe tenido que rediseñar algunas partes porque contenía información sensible.\n\n👉 Seguid el vídeo y los pasos con calma, uno a uno.\nEs posible que tengáis que adaptar variables y corregir detalles hasta que os funcione en vuestro caso.\n\n⚠️ No compartas esto fuera de la comunidad.\n",
+        "height": 256,
+        "width": 608,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1472,
+        -736
+      ],
+      "typeVersion": 1,
+      "id": "fd0d37a6-c26b-4ab0-b53e-0dfaa03eb99b",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-05T14:52:08.523Z",
+      "createdAt": "2025-11-05T14:52:08.523Z",
+      "role": "workflow:owner",
+      "workflowId": "FRnUQ3PLqeaHTdtJ",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-11-05T14:52:39.688Z",
+      "createdAt": "2025-11-05T14:52:39.688Z",
+      "id": "0uL9IcA3ZBRSpsGy",
+      "name": "vapi_assistant"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-06T06:03:36.000Z",
+  "versionId": "12a33d20-29e9-49ea-98cb-553d8f24967f"
+}
