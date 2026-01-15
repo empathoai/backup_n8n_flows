@@ -1,0 +1,1128 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Enviar Correo": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Correo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Correos": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Correo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Borrador": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Correo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Responder Correo": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Correo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Etiquetas": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Correo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Etiquetar Correos": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Correo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Evento con Asistente": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Calendario",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Evento": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Calendario",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Eventos": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Calendario",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eliminar Evento": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Calendario",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Actualizar Evento": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Calendario",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Contactos": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Contactos",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Contenido",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude 3.7": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agente de Contenido",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asistente Definitivo": {
+      "main": [
+        [
+          {
+            "node": "Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculadora": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pensar": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT 4.1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disparador de Telegram": {
+      "main": [
+        [
+          {
+            "node": "Conmutador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Establecer 'Texto'": {
+      "main": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargar Archivo de Voz": {
+      "main": [
+        [
+          {
+            "node": "Transcribir Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribir Audio": {
+      "main": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conmutador": {
+      "main": [
+        [
+          {
+            "node": "Descargar Archivo de Voz",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Establecer 'Texto'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memoria Simple": {
+      "ai_memory": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agente de Calendario": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agente de Contactos": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agente de Contenido": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT4o": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agente de Correo",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT4o1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agente de Calendario",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT4o2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agente de Contactos",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agente de Correo": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente Definitivo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anadir o Actualizar Contacto": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Contactos",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar como no leido": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente de Correo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-10T23:13:54.406Z",
+  "id": "RztpvWS6cTGR0JCy",
+  "isArchived": false,
+  "meta": null,
+  "name": "Asistente Personal Definitivo",
+  "nodes": [
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ $fromAI(\"emailBody\") }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -480,
+        608
+      ],
+      "id": "0cecf5ea-1513-43b0-84cc-b688dc9e2a3d",
+      "name": "Enviar Correo",
+      "webhookId": "86c8c4b1-13bb-4ebe-acb9-30e1d7082d55"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": "={{ $fromAI(\"limit\",\"cuántos correos quiere el usuario\") }}",
+        "simple": false,
+        "filters": {
+          "sender": "={{ $fromAI(\"sender\",\"de quién son los correos\") }}"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -352,
+        608
+      ],
+      "id": "1b4ec153-f7d1-45dd-8236-2411cc069034",
+      "name": "Obtener Correos",
+      "webhookId": "af4b3298-9037-44b0-aa12-2acbfbb5e66f"
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $fromAI(\"subject\") }}",
+        "emailType": "html",
+        "message": "={{ $fromAI(\"emailBody\") }}",
+        "options": {
+          "threadId": "={{ $fromAI(\"threadID\") }}",
+          "sendTo": "={{ $fromAI(\"emailAddress\") }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        608
+      ],
+      "id": "f8edea7b-a336-4003-9278-0bcca473231a",
+      "name": "Crear Borrador",
+      "webhookId": "17016bce-d7d7-428a-a56c-f6ea122db8be"
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $fromAI(\"ID\",\"el ID del mensaje\") }}",
+        "message": "={{ $fromAI(\"emailBody\") }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -96,
+        608
+      ],
+      "id": "eb1dcfc6-f1e5-4632-ba4f-efaa06a5b632",
+      "name": "Responder Correo",
+      "webhookId": "114785e6-a859-432b-81b4-c490c1c35b1c"
+    },
+    {
+      "parameters": {
+        "resource": "label",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        32,
+        608
+      ],
+      "id": "c7495238-cdcc-4ebb-a33b-ab28e847ba1d",
+      "name": "Obtener Etiquetas",
+      "webhookId": "9e08b59e-792d-4566-83f1-9263c9ad86ae"
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $fromAI(\"ID\",\"el ID del mensaje\") }}",
+        "labelIds": "={{ $fromAI(\"labelID\") }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        608
+      ],
+      "id": "3c4034ec-07e6-495e-a9de-3827d83a9a7d",
+      "name": "Etiquetar Correos",
+      "webhookId": "0e951529-2e6d-40bf-ac40-fc0947e242e2"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "victorperezsanz2004@gmail.com",
+          "mode": "list",
+          "cachedResultName": "victorperezsanz2004@gmail.com"
+        },
+        "start": "={{ $fromAI(\"eventStart\") }}",
+        "end": "={{ $fromAI(\"eventEnd\") }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ $fromAI(\"eventAttendeeEmail\") }}"
+          ],
+          "summary": "={{ $fromAI(\"eventTitle\") }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        416
+      ],
+      "id": "d9b59723-d6f5-4d61-939d-8e4cc6e3628a",
+      "name": "Crear Evento con Asistente"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "victorperezsanz2004@gmail.com",
+          "mode": "list",
+          "cachedResultName": "victorperezsanz2004@gmail.com"
+        },
+        "start": "={{ $fromAI(\"eventStart\") }}",
+        "end": "={{ $fromAI(\"eventEnd\") }}",
+        "additionalFields": {
+          "attendees": [],
+          "summary": "={{ $fromAI(\"eventTitle\") }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        416
+      ],
+      "id": "b84a1f84-32dd-4ed6-939b-feee4b3697fa",
+      "name": "Crear Evento"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "=",
+          "mode": "id"
+        },
+        "timeMin": "={{ $fromAI(\"dayBefore\",\"el día anterior a la fecha solicitada por el usuario\") }}",
+        "timeMax": "={{ $fromAI(\"dayAfter\",\"el día posterior a la fecha solicitada por el usuario\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        528,
+        416
+      ],
+      "id": "2f2deac8-1ee8-4e0f-8721-066d21a0e2f1",
+      "name": "Obtener Eventos"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "=",
+          "mode": "id"
+        },
+        "eventId": "={{ $fromAI(\"eventID\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        656,
+        416
+      ],
+      "id": "c4e4f0af-b696-44ee-a98b-7931f1061f6c",
+      "name": "Eliminar Evento"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "calendar": {
+          "__rl": true,
+          "value": "=",
+          "mode": "id"
+        },
+        "eventId": "={{ $fromAI(\"eventID\") }}",
+        "updateFields": {
+          "end": "={{ $fromAI(\"endTime\") }}",
+          "start": "={{ $fromAI(\"startTime\") }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        784,
+        416
+      ],
+      "id": "8fcd4d68-1a53-4e08-a4c1-6007bc23e2d5",
+      "name": "Actualizar Evento"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appK0rbtvf9e7vt6w",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appK0rbtvf9e7vt6w"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl08JGCfUK1RhXsG",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appK0rbtvf9e7vt6w/tbl08JGCfUK1RhXsG"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        1040,
+        656
+      ],
+      "id": "fb5aff54-df0c-4543-be09-ec149123f035",
+      "name": "Obtener Contactos"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Usa esta herramienta para buscar en internet",
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"api_key\": \"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\",\n    \"query\": \"{searchTerm}\",\n    \"search_depth\": \"basic\",\n    \"include_answer\": true,\n    \"topic\": \"news\",\n    \"include_raw_content\": true,\n    \"max_results\": 3\n} ",
+        "placeholderDefinitions": {
+          "values": [
+            {
+              "name": "searchTerm",
+              "description": "Sobre qué ha solicitado el usuario escribir un blog",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        1504,
+        464
+      ],
+      "id": "d288da64-3ef5-4d3f-8689-a0ecc4d4b26a",
+      "name": "Tavily1"
+    },
+    {
+      "parameters": {
+        "model": "anthropic/claude-3.7-sonnet",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        464
+      ],
+      "id": "c40ae740-79c6-4253-8e39-624f46c4c1ea",
+      "name": "Claude 3.7"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "=# Resumen\nEres el asistente personal definitivo. Tu trabajo es enviar la consulta del usuario a la herramienta correcta. Nunca debes escribir correos electrónicos, ni crear resúmenes, solo necesitas llamar a la herramienta correcta.\n\n## Herramientas\n- Pensar: Úsala para pensar profundamente o si te quedas atascado\n- agenteCorreo: Usa esta herramienta para realizar acciones en el correo electrónico\n- agenteCalendario: Usa esta herramienta para realizar acciones en el calendario\n- agenteContacto: Usa esta herramienta para obtener, actualizar o añadir contactos\n- creadorContenido: Usa esta herramienta para crear publicaciones de blog\n- Tavily: Usa esta herramienta para buscar en la web\n\n## Reglas\n- Algunas acciones requieren que primero busques información de contacto. Para las siguientes acciones, debes obtener la dirección de correo electrónico y enviarla al agente que la necesite:\n  - enviar correos electrónicos\n  - redactar borradores de correos electrónicos\n  - crear un evento de calendario con un asistente\n\n## Instrucciones\n1) Llama a las herramientas necesarias según la solicitud del usuario\n2) Usa la herramienta \"Pensar\" para verificar que has seguido los pasos correctos. Esta herramienta debe ser llamada cada vez.\n\n\n## Ejemplos\n1) \n- Entrada: envía un correo a nate herkelman preguntándole a qué hora quiere salir\n  - Acción: Usa agenteContacto para obtener el correo de nate herkelman\n  - Acción: Usa agenteCorreo para enviar el correo. Le pasarás a la herramienta una consulta como \"envía a nate herkelman un correo para preguntarle a qué hora quiere salir. aquí está su correo: [dirección de correo]\"\n- Salida: El correo ha sido enviado a Nate Herkelman. ¿Puedo ayudarte en algo más?\n\n\n## Recordatorios Finales\nAquí está la fecha/hora actual: {{ $now }}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        560,
+        -64
+      ],
+      "id": "96ce7c8a-8176-4e26-ae4d-b09bc085757e",
+      "name": "Asistente Definitivo"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        240
+      ],
+      "id": "34d75e95-b148-41fb-8bfd-e652cf58b814",
+      "name": "Calculadora"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        240
+      ],
+      "id": "e4071d06-864c-4366-a97f-03e46ba07ed1",
+      "name": "Pensar"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -752,
+        240
+      ],
+      "id": "0f535147-bdcb-4961-8342-810facd5ab37",
+      "name": "GPT 4.1"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "b0d23670-159f-4c13-84d9-56065d3cb93f",
+      "name": "Disparador de Telegram",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -880,
+        -64
+      ],
+      "webhookId": "99eab1a0-569d-4f0f-a49e-578a02abfe63"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe7ecc99-e1e8-4a5e-bdd6-6fce9757b234",
+              "name": "text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "eabfd2e0-21f7-48bc-82db-b586288f7fdc",
+      "name": "Establecer 'Texto'",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -208,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "id": "11afb203-f3df-4cce-aa2a-0dca7e627437",
+      "name": "Descargar Archivo de Voz",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -432,
+        -160
+      ],
+      "webhookId": "c0b376b1-7b63-41b6-8063-0b3096b8333d"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "id": "fb3fbf5c-e4a2-4d12-abde-782d459bcfe1",
+      "name": "Transcribir Audio",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        -208,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice.file_id }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "ab07bb2b-5412-49f4-9b8f-b2f6f88bbd6a"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Voz"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8c844924-b2ed-48b0-935c-c66a8fd0c778",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Texto"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c3c4b11f-be0a-4702-893d-1d7855017151",
+      "name": "Conmutador",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -656,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Disparador de Telegram').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "27d7b0a0-637d-470a-a5e4-2efc0c628ea5",
+      "name": "Respuesta",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1328,
+        -64
+      ],
+      "webhookId": "682ca5ab-d30c-4ea5-bb25-c2f26206e761"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "=."
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -624,
+        240
+      ],
+      "id": "b0926349-c4d6-478c-a8ce-d85898b27837",
+      "name": "Memoria Simple"
+    },
+    {
+      "parameters": {
+        "text": "=# Resumen\nEres un asistente de calendario. Tus responsabilidades incluyen crear, obtener y eliminar eventos en el calendario del usuario.\n\n**Herramientas de Gestión de Calendario**\n   - Usa \"Crear Evento con Asistente\" cuando un evento incluye un participante.\n   - Usa \"Crear Evento\" para eventos individuales.\n   - Usa \"Obtener Eventos\" para buscar horarios en el calendario cuando se solicite.\n   - Usa \"Eliminar Evento\" para eliminar un evento. Debes usar \"Obtener Eventos\" primero para obtener el ID del evento a eliminar.\n   - Usa \"Actualizar Evento\" para actualizar un evento. Debes usar \"Obtener Eventos\" primero para obtener el ID del evento a actualizar.\n\n## Notas Finales\nAquí está la fecha/hora actual: {{ $now }}\nSi no se especifica una duración para un evento, asume que será de una hora.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        208
+      ],
+      "id": "f34de390-2e23-4ac7-87d9-2227fd7841c9",
+      "name": "Agente de Calendario"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Cuando te pida algo usa la herramienta que quieras pero no hagas nada solo devuelve el correo de victorperezia22@gmail.com como contacto",
+        "text": "Cuando te pida algo usa la herramienta que quieras pero no hagas nada solo devuelve el correo de victorperezia22@gmail.com como contacto",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        976,
+        448
+      ],
+      "id": "fb673378-7ec5-4475-9267-854ad672f47c",
+      "name": "Agente de Contactos"
+    },
+    {
+      "parameters": {
+        "text": "# Resumen\nEres un hábil redactor de blogs de IA especializado en contenido atractivo, bien estructurado e informativo. Tu estilo de escritura es claro, convincente y adaptado al público objetivo. Optimizas la legibilidad, el SEO y el valor, asegurando que los blogs estén bien investigados, sean originales y no tengan relleno.\n\n## Herramientas\nTavily - Úsala para buscar en la web sobre el tema solicitado para la publicación del blog.\n\n## Requisitos del Blog\nFormatea todo el contenido del blog en HTML, usando encabezados adecuados (<h1>, <h2>), párrafos (<p>), viñetas (<ul><li>) y enlaces (<a href=\"URL\">) para las citas. Todas las citas de la herramienta Tavily deben conservarse, con hipervínculos clicables para que los lectores puedan acceder a las fuentes originales.\n\nMantén un tono natural y humano, usa estructuras de oración variadas e incluye ejemplos o datos relevantes cuando sea necesario. Estructura el contenido para una fácil lectura con párrafos concisos y un flujo lógico. Asegúrate siempre de la precisión de los hechos y alinea el tono con la marca o el propósito previsto.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        1280,
+        256
+      ],
+      "id": "d6cac125-5c9c-469d-83f2-0570a8bdeb32",
+      "name": "Agente de Contenido"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -608,
+        608
+      ],
+      "id": "9624c3c1-2eca-431e-a9cb-91f6cbdb664c",
+      "name": "GPT4o"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        176,
+        432
+      ],
+      "id": "32dcdd36-5701-4a8d-8e31-cfb785e83c48",
+      "name": "GPT4o1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        912,
+        656
+      ],
+      "id": "0178b2a9-8867-4bf8-933d-3cc91a68614f",
+      "name": "GPT4o2"
+    },
+    {
+      "parameters": {
+        "text": "=# Resumen\nEres un asistente de gestión de correo electrónico. Todos los correos deben estar formateados profesionalmente en HTML y firmados como \"Nate\".\n\n**Herramientas de Gestión de Correo**\n   - Usa \"Enviar Correo\" para enviar correos.\n   - Usa \"Crear Borrador\" si el usuario pide un borrador.\n   - Usa \"Obtener Correos\" para recuperar correos cuando se solicite.\n   - Usa \"Obtener Etiquetas\" para recuperar etiquetas.\n   - Usa \"Marcar como no leído\" para marcar un correo como no leído. Debes usar \"Obtener Correos\" primero para tener el ID del mensaje a marcar.\n   - Usa \"Etiquetar Correo\" para marcar un correo. Debes usar \"Obtener Correos\" primero para tener el ID del mensaje a marcar. Luego debes usar \"Obtener Etiquetas\" para tener el ID de la etiqueta.\n   - Usa \"Responder Correo\" para responder a un correo. Debes usar \"Obtener Correos\" primero para tener el ID del mensaje al que responder.\n\n## Notas Finales\n- Aquí está la fecha/hora actual: {{ $now }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        -240,
+        400
+      ],
+      "id": "93671528-38c3-4c95-9f16-693c0fe74e92",
+      "name": "Agente de Correo"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "appK0rbtvf9e7vt6w",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appK0rbtvf9e7vt6w"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl08JGCfUK1RhXsG",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appK0rbtvf9e7vt6w/tbl08JGCfUK1RhXsG"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $fromAI(\"name\") }}",
+            "email": "={{ $fromAI(\"emailAddress\") }}",
+            "phoneNumber": "={{ $fromAI(\"phoneNumber\") }}"
+          },
+          "matchingColumns": [
+            "name"
+          ],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "phoneNumber",
+              "displayName": "númeroDeTeléfono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        1200,
+        656
+      ],
+      "id": "74eaab5a-6235-4fd6-8caa-85df00964d53",
+      "name": "Anadir o Actualizar Contacto"
+    },
+    {
+      "parameters": {
+        "operation": "markAsUnread",
+        "messageId": "={{ $fromAI(\"messageID\") }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        288,
+        608
+      ],
+      "id": "6d6eadb9-07d9-4356-b5c4-38f2da1e1d79",
+      "name": "Marcar como no leido",
+      "webhookId": "a35af9d8-f67d-4ff9-803f-59ec6356e795"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-10T23:13:54.414Z",
+      "createdAt": "2025-11-10T23:13:54.414Z",
+      "role": "workflow:owner",
+      "workflowId": "RztpvWS6cTGR0JCy",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-10T23:13:54.406Z",
+  "versionId": "98d536c7-37e5-4306-9ed8-bf505d75f095"
+}
