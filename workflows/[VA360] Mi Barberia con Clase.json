@@ -1,0 +1,697 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Business Cloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disponibilidad": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reserva": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Modifica": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consulta": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cancela": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Info",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Info": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-08T08:21:54.061Z",
+  "id": "B5IoGXMr1pvwxC0H",
+  "isArchived": false,
+  "meta": null,
+  "name": "[VA360] Mi Barberia con Clase",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        64
+      ],
+      "id": "b5283db4-91cd-4f4d-8ab7-d5d27118d098",
+      "name": "WhatsApp Trigger",
+      "webhookId": "e0cc79cd-a6db-423b-8db2-fd189f02931a"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.messages[0].text.body }}",
+        "options": {
+          "systemMessage": "=## Fecha y hora actual: {{ $now }}\n## Horario de la barbería: de 10:00h a 21:00h con una hora de descanso a las 14:00h\n# Barbería con Clase by Valen está ubicada en Calle Sevilla, Arcos de la Frontera.\n\nEres un asistente muy servicial que se encarga de gestionar citas en una barbería muy especial.\n\nNo eres un asistente cualquiera, eres el asistente de una BARBERÍA con CLASE y muy especial.\n\nTienes disponibles algunas herramientas para hacerle la vida más fácil al usuario.\n\nLa primera es: Disponibilidad\nTe devolverá si el usuario tiene o no disponibilidad en la hora solicitada. Si tiene disponibilidad ofrece 3 o 4 slots de 30 minutos para que el usuario elija y adicionalmente añade esta url para que el usuario reserve cuando quiera: https://mibarberiaconclase.com/reservas\n\nNo des SLOTS en horas que ya han pasado.\n\nTambién tienes la tool: Reserva\nEn la reserva es obligatorio que el usuario decida el slot y tener en cuenta que la duración es de 30 minutos. Además, en summary debes enviar el nombre y el teléfono móvil del usuario así que debes preguntarlo siempre si no lo sabes.\n\nNo reserves SLOTS en horas que ya han pasado.\n\nTambién tienes la tool: Consulta\nBusca slots en una hora concreta. Lo necesitamos si el usuario necesita modificar una cita para pasarle el id de la cita a la tool Modifica. Debes tener en cuenta la hora que el usuario te indica y no modificar citas que no son de ese usuario para que los clientes no puedan modificar citas de otro usuario.\n\nOtra tool que tienes es: Modifica\nPermite cambiar una cita de fecha y hora teniendo en cuenta la disponibilidad. En una hora solo puede haber una cita y solo se pueden modificar las citas del usuario así que ten en cuenta siempre su teléfono para saber que citas tienes que modificar. Tienes que pasarle el ID de la cita que tiene que modificar no la hora ni nada más.\n\nOtra tool que tienes es: Cancela\nPermite eliminar una cita. Solo se pueden eliminar las citas del usuario así que ten en cuenta siempre su teléfono para saber que citas tienes que modificar. Tienes que pasarle el ID de la cita que tiene que eliminar no la hora ni nada más.\n\nTienes una tool que se llama \"Info\" que es una base de datos vectorial con toda la información sobre mi barbería con clase. Contiene entre otras cosas la dirección y ubicación así como las redes sociales. Si el usuario te pide información o la ubicación deberás enviar el enlace a google maps.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        160,
+        48
+      ],
+      "id": "9f6fa5e4-35d7-41b6-942a-1ea84ddba9f0",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -80,
+        320
+      ],
+      "id": "b657e31c-c889-4bb8-af32-a8b768e4696e",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        32,
+        352
+      ],
+      "id": "9be35e25-703f-4a02-954d-db81d0dc6760",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "8a2ec8ac7fbf7a5a178b26edfce748909b14db34ef288dc3999873e962684409@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "MiBarberia"
+        },
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start_Time', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End_Time', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        768,
+        368
+      ],
+      "id": "c7488233-f41c-4cf5-ac94-e7f9fe4c7748",
+      "name": "Disponibilidad"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "=520651321139037",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        576,
+        48
+      ],
+      "id": "f6336452-1fa7-407c-bbf6-3dee6c939b29",
+      "name": "WhatsApp Business Cloud",
+      "webhookId": "9cb6291d-a7b2-4d24-8a4a-a9713fed78e5",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "40FvwmbjkbQ3AYME",
+          "name": "WhatsApp Send"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "8a2ec8ac7fbf7a5a178b26edfce748909b14db34ef288dc3999873e962684409@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "MiBarberia"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "attendees": [],
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        688,
+        368
+      ],
+      "id": "6e1a4357-c85a-4631-b853-f1098c1be44a",
+      "name": "Reserva"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "calendar": {
+          "__rl": true,
+          "value": "8a2ec8ac7fbf7a5a178b26edfce748909b14db34ef288dc3999873e962684409@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "MiBarberia"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "updateFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        608,
+        368
+      ],
+      "id": "e6ddd708-5697-469b-bc07-e3bef63a03c1",
+      "name": "Modifica"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "8a2ec8ac7fbf7a5a178b26edfce748909b14db34ef288dc3999873e962684409@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "MiBarberia"
+        },
+        "limit": 5,
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        528,
+        368
+      ],
+      "id": "6338d350-706f-4e82-b98e-9ae1468c40c4",
+      "name": "Consulta"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "8a2ec8ac7fbf7a5a178b26edfce748909b14db34ef288dc3999873e962684409@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "MiBarberia"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        448,
+        368
+      ],
+      "id": "74bd91d3-303b-4dda-be06-c02feb537126",
+      "name": "Cancela"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1P8F2xRy7VeawgxxDPsT7DjtirodSVsiR",
+          "mode": "list",
+          "cachedResultName": "DATASET MI BARBERIA",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1P8F2xRy7VeawgxxDPsT7DjtirodSVsiR"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        784
+      ],
+      "id": "cd493292-f94c-42ea-9c8f-7d147c6987ff",
+      "name": "Google Drive Trigger"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "mibarberia",
+          "mode": "list",
+          "cachedResultName": "mibarberia"
+        },
+        "options": {
+          "pineconeNamespace": "mibarberia"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        80,
+        784
+      ],
+      "id": "8cf85b52-cc9c-47ef-a12c-aa9ebed09bc9",
+      "name": "Pinecone Vector Store"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -64,
+        976
+      ],
+      "id": "7464e8d5-4375-4e58-9938-7848a1817a99",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "filename",
+                "value": "={{ $('Google Drive Trigger').item.json.name }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        64,
+        1104
+      ],
+      "id": "d7436082-9db9-47ee-b72d-cdaaa9bd0a46",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "content": "## Alimento el RAG\n",
+        "height": 700,
+        "width": 860,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        688
+      ],
+      "id": "ee4a2cf9-14bb-4408-a479-5353d4ec228d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        128,
+        512
+      ],
+      "id": "fdb17840-3833-4fdb-a3b9-0a91caed1286",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "informacion",
+        "toolDescription": "Contiene la información de mi barbería con clase",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "mibarberia",
+          "mode": "list",
+          "cachedResultName": "mibarberia"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        144,
+        368
+      ],
+      "id": "f419019a-753b-46f2-b28b-177eebe69f38",
+      "name": "Info"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -208,
+        784
+      ],
+      "id": "987d3350-8c32-49c8-bbc3-6300f528d7ce",
+      "name": "Google Drive"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        784
+      ],
+      "id": "1e3eacdd-09a4-4bc7-ac17-20bd50ee91b4",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "chunkSize": 500,
+        "chunkOverlap": 50,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        112,
+        1248
+      ],
+      "id": "0e823e40-7ca3-4f0d-8fd0-be18f48ab9ea",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "content": "## Mi Barbería\n\n",
+        "height": 680,
+        "width": 1260,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -16
+      ],
+      "id": "47f35296-ad3d-4bd3-91b9-3cd76ae355e4",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6d5856dd-4e52-4e8d-a51b-c1e10c59b33c",
+              "leftValue": "={{ $json.messages[0].text.body }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -112,
+        64
+      ],
+      "id": "b7326373-db1b-46c3-a9de-0af8c1375d4e",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -304,
+        320
+      ],
+      "id": "875937ff-a0ea-453b-aa7a-24c9f61e941c",
+      "name": "No Operation, do nothing"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-08T08:21:54.064Z",
+      "createdAt": "2025-11-08T08:21:54.064Z",
+      "role": "workflow:owner",
+      "workflowId": "B5IoGXMr1pvwxC0H",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-08T08:21:54.061Z",
+  "versionId": "587e0d91-7043-4ea9-a552-8f7c4806d322"
+}
