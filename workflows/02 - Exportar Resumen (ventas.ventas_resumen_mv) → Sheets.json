@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Manual Trigger": {
       "main": [
@@ -413,8 +415,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-19T17:18:42.764Z",
       "updatedAt": "2025-10-19T17:18:42.764Z",
+      "createdAt": "2025-10-19T17:18:42.764Z",
       "role": "workflow:owner",
       "workflowId": "6SNioomtZl9l1lmK",
       "projectId": "zIvgruNDMJwjqAqX"
@@ -423,26 +425,26 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2025-10-19T17:18:24.205Z",
       "updatedAt": "2025-10-19T17:18:24.205Z",
+      "createdAt": "2025-10-19T17:18:24.205Z",
       "id": "JiYYNhlykdJkpuE7",
       "name": "detalle+resumen"
     },
     {
-      "createdAt": "2025-10-19T17:18:24.212Z",
       "updatedAt": "2025-10-19T17:18:24.212Z",
+      "createdAt": "2025-10-19T17:18:24.212Z",
       "id": "RC0MQRVzip5ZHFXG",
       "name": "sheets"
     },
     {
-      "createdAt": "2025-10-19T17:18:24.207Z",
       "updatedAt": "2025-10-19T17:18:24.207Z",
+      "createdAt": "2025-10-19T17:18:24.207Z",
       "id": "qOR0CNzkzeCinjmv",
       "name": "pdf"
     },
     {
-      "createdAt": "2025-10-19T17:18:24.210Z",
       "updatedAt": "2025-10-19T17:18:24.210Z",
+      "createdAt": "2025-10-19T17:18:24.210Z",
       "id": "rUQqO7w7abcnJTKk",
       "name": "ventas"
     }
