@@ -1,0 +1,232 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Cancelar Cita": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "ID de Cita": {
+      "main": [
+        [
+          {
+            "node": "Cancelar Cita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variables": {
+      "main": [
+        [
+          {
+            "node": "ID de Cita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-18T09:56:53.088Z",
+  "id": "7RV5fidDS9TPKfpy",
+  "isArchived": false,
+  "meta": null,
+  "name": "cancel_booking",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.cal.com/v2/bookings/{{ $json.uid }}/cancel ",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-08-13"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "cancellationReason",
+              "value": "={{ $('Trigger').item.json.cancellationReason }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -496,
+        176
+      ],
+      "id": "51d14da8-7957-41e8-a306-14bdc39cd8da",
+      "name": "Cancelar Cita",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Dania Cal"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f4de0725-a5be-40d9-b2b1-44bc0293a029",
+              "name": "uid",
+              "value": "={{ $json.uid }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -752,
+        176
+      ],
+      "id": "1f4e140b-5f75-4c89-986d-7bf73ba3b783",
+      "name": "ID de Cita"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "email"
+            },
+            {
+              "name": "cancellationReason"
+            },
+            {
+              "name": "uid"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1280,
+        176
+      ],
+      "id": "70096737-921c-46d5-9537-65500222d463",
+      "name": "Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ade7f458-03e6-4b9f-a07a-03c37469e32f",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "2b79c4f4-0db5-4b25-a382-ebd556f5db49",
+              "name": "cancellationReason",
+              "value": "={{ $json.cancellationReason }}",
+              "type": "string"
+            },
+            {
+              "id": "4abe43a7-0c0f-40fe-8cb8-8f1958e754b4",
+              "name": "uid",
+              "value": "={{ $json.uid }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -992,
+        176
+      ],
+      "id": "b7f483ce-9fe8-4f9d-a1f1-2908198e9716",
+      "name": "Set Variables"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6b5ce880-a21d-441f-9738-f4735f4c956c",
+              "name": "message",
+              "value": "Tu cita ha sido cancelada con exito",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -256,
+        80
+      ],
+      "id": "aeb186a4-26aa-4d51-b5ce-4153719901e4",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-18T09:56:53.094Z",
+      "createdAt": "2025-12-18T09:56:53.094Z",
+      "role": "workflow:owner",
+      "workflowId": "7RV5fidDS9TPKfpy",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-12-09T22:03:31.610Z",
+      "createdAt": "2025-12-09T22:03:31.610Z",
+      "id": "tpOesxfbWU7SmGGd",
+      "name": "Dania_Final"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2026-01-15T03:25:19.000Z",
+  "versionId": "e3fa7702-83f2-42ed-88ae-36689ce21bbb"
+}
