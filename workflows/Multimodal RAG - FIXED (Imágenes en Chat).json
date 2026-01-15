@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When chat message received": {
       "main": [
@@ -1121,8 +1123,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-31T19:29:04.637Z",
       "updatedAt": "2025-10-31T19:29:04.637Z",
+      "createdAt": "2025-10-31T19:29:04.637Z",
       "role": "workflow:owner",
       "workflowId": "5A15JmE7zbQ1Kyyi",
       "projectId": "zIvgruNDMJwjqAqX"
