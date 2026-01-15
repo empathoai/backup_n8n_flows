@@ -1,0 +1,108 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "MongoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-06T11:20:02.728Z",
+  "id": "9BOz4uUXKFmMu6gG",
+  "isArchived": true,
+  "meta": null,
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        -64,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "3adf3007-049b-450b-8eae-db7f5bbeadd3"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "my_key",
+              "value": "my_value"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        144,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "5bd17fe4-fbf8-41a9-8a47-60da33fb03f0"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "n8n-collection",
+        "fields": "my_key",
+        "options": {}
+      },
+      "name": "MongoDB",
+      "type": "n8n-nodes-base.mongoDb",
+      "position": [
+        336,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "c96db63d-5e3d-4ab9-8c83-0866c8f057d8",
+      "credentials": {
+        "mongoDb": {
+          "id": null,
+          "name": "mongodb_credentials"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-06T11:20:02.735Z",
+      "createdAt": "2025-11-06T11:20:02.735Z",
+      "role": "workflow:owner",
+      "workflowId": "9BOz4uUXKFmMu6gG",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-02T18:42:24.000Z",
+  "versionId": "a6516a3a-5453-469f-8ab4-809b40cd521d"
+}
