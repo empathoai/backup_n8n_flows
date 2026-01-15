@@ -1,0 +1,275 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Set Cal Variables": {
+      "main": [
+        [
+          {
+            "node": "Set Start/End",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Start/End": {
+      "main": [
+        [
+          {
+            "node": "Check Slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Slots": {
+      "main": [
+        [
+          {
+            "node": "Are Slots Available?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Are Slots Available?": {
+      "main": [
+        [
+          {
+            "node": "Sugerir Horarios Cercanos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Set Cal Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-11T02:14:26.121Z",
+  "id": "SQ7RcFjw79OhxEhd",
+  "isArchived": false,
+  "meta": null,
+  "name": "Check_availability",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "try {\n  // --- Utils ---\n  function formatTime(date) {\n    const hour = date.getHours();\n    const minute = date.getMinutes();\n    const period = hour < 12 ? 'AM' : 'PM';\n    const hour12 = (hour % 12) || 12;\n    const minuteStr = minute === 0 ? '' : ':' + String(minute).padStart(2, '0');\n    return `${hour12}${minuteStr} ${period}`;\n  }\n\n  function formatDay(date) {\n    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];\n    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];\n    return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`;\n  }\n\n  // --- Extrae todos los slots disponibles\n  let allSlots = [];\n  if ($json.data) {\n    Object.values($json.data).forEach(arr => {\n      arr.forEach(slot => {\n        if (slot.start) allSlots.push(new Date(slot.start));\n      });\n    });\n  }\n\n  // Si no hay slots, responde seguro y claro\n  if (allSlots.length === 0) {\n    return [{\n      message: \"No slots available for the selected date.\",\n      slotsCount: 0,\n      suggestions: []\n    }];\n  }\n\n  // El slot solicitado: el primero del array (puedes adaptar si tienes otro criterio)\n  const requestedDate = allSlots[0];\n\n  // Valida y ordena los slots\n  const slotDates = allSlots.filter(dt => !isNaN(dt.getTime())).sort((a, b) => a - b);\n\n  // Busca si el slot exacto solicitado está disponible\n  let found = false;\n  let message = \"\";\n  let suggestions = [];\n\n  for (let dt of slotDates) {\n    if (dt.getTime() === requestedDate.getTime()) {\n      found = true;\n      message = `Yes, that time is available (${formatDay(dt)} at ${formatTime(dt)}). Would you like me to book it for you?`;\n      break;\n    }\n  }\n\n  // Si no está exacto, sugiere los 3 más cercanos\n  if (!found) {\n    const byProximity = slotDates\n      .map(d => ({\n        dt: d,\n        diff: Math.abs(d.getTime() - requestedDate.getTime())\n      }))\n      .sort((a, b) => a.diff - b.diff)\n      .slice(0, 3);\n\n    if (byProximity.length > 0) {\n      suggestions = byProximity.map(s =>\n        `${formatDay(s.dt)} at ${formatTime(s.dt)}`\n      );\n      message = `Requested slot not available. Here are the 3 closest open slots:\\n` +\n        suggestions.map((s, i) => `${i+1}. ${s}`).join('\\n') +\n        `\\nWhich one do you prefer?`;\n    } else {\n      message = \"Sorry, there are no available slots. Please try another date.\";\n    }\n  }\n\n  // --- Output seguro y amigable ---\n  return [{\n    message,\n    slotsCount: slotDates.length,\n    suggestions\n  }];\n\n} catch (error) {\n  // Falla controlada y detalle para debugging\n  return [{\n    message: \"Error processing slots: \" + (error && error.message ? error.message : String(error)),\n    slotsCount: 0,\n    suggestions: []\n  }];\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        32
+      ],
+      "id": "a7c025f9-7949-4964-90fa-b8489b6772de",
+      "name": "Sugerir Horarios Cercanos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "23cae85f-0868-4a99-9fd4-a8f379728d1b",
+              "name": "username",
+              "value": "empathoai",
+              "type": "string"
+            },
+            {
+              "id": "9d111618-82d3-4cbe-a2ea-07d87060b551",
+              "name": "eventTypeSlug",
+              "value": "30min",
+              "type": "string"
+            },
+            {
+              "id": "fe5ab0aa-03c2-4ff6-a3aa-7a996e5f203c",
+              "name": "datetime",
+              "value": "={{ $json.datetime }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -896,
+        48
+      ],
+      "id": "d49d018b-103c-465e-bdbe-2a069c2944aa",
+      "name": "Set Cal Variables"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "22767100-ef1c-4356-aa4a-3b58d4f81075",
+              "name": "start",
+              "value": "={{ DateTime.fromISO($json.datetime).startOf('day').toUTC().toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "0f4d3db6-9958-4cff-a310-3536c544e19d",
+              "name": "end",
+              "value": "={{ DateTime.fromISO($json.datetime).endOf('day').toUTC().toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "6ec0fe20-1796-4b6e-8a9d-0af1b4978d16",
+              "name": "timeZone",
+              "value": "America/Bogota",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -736,
+        48
+      ],
+      "id": "3225b65a-cec0-4d66-a7b7-2501a638889a",
+      "name": "Set Start/End"
+    },
+    {
+      "parameters": {
+        "url": "https://api.cal.com/v2/slots",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "username",
+              "value": "={{ $('Set Cal Variables').item.json.username }}"
+            },
+            {
+              "name": "eventTypeSlug",
+              "value": "={{ $('Set Cal Variables').item.json.eventTypeSlug }}"
+            },
+            {
+              "name": "start",
+              "value": "={{ $json.start }}"
+            },
+            {
+              "name": "end",
+              "value": "={{ $json.end }}"
+            },
+            {
+              "name": "timeZone",
+              "value": "={{ $json.timeZone }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-09-04"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -576,
+        48
+      ],
+      "id": "1d6cc2f6-b135-416d-ad51-7b97e25eb5bf",
+      "name": "Check Slots",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Cal API Derma"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "46aadd77-eb8f-4351-8b88-26c7fcb82e03",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -416,
+        48
+      ],
+      "id": "645298ec-b0fc-4971-a9c5-bf5a8677bade",
+      "name": "Are Slots Available?"
+    },
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"datetime\": \"2025-11-12T12:00:00-05:00\",\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1056,
+        48
+      ],
+      "id": "8a15ecef-f748-4f52-94ca-0888a3ff4353",
+      "name": "When Executed by Another Workflow",
+      "executeOnce": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-11T02:14:26.123Z",
+      "createdAt": "2025-11-11T02:14:26.123Z",
+      "role": "workflow:owner",
+      "workflowId": "SQ7RcFjw79OhxEhd",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-11T02:14:26.121Z",
+  "versionId": "ebb1bad2-5578-4b08-a6a1-1ca438e36085"
+}
