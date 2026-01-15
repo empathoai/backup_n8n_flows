@@ -1,0 +1,2150 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "1. WhatsApp Message Receiver": {
+      "main": [
+        []
+      ]
+    },
+    "2. Normalize Message Data": {
+      "main": [
+        [
+          {
+            "node": "3. Insert Row to Buffer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "10. Clear Buffer for Session": {
+      "main": [
+        [
+          {
+            "node": "11. Aggregate messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Insert Row to Buffer": {
+      "main": [
+        [
+          {
+            "node": "4. Retrieve Session Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4. Retrieve Session Messages": {
+      "main": [
+        [
+          {
+            "node": "5. Aggregate Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5. Aggregate Messages": {
+      "main": [
+        [
+          {
+            "node": "6. If temporal validation time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "6. If temporal validation time": {
+      "main": [
+        [
+          {
+            "node": "8. IF Count - ¿Multiple messages?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "7. Wait 4 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "7. Wait 4 Seconds": {
+      "main": [
+        [
+          {
+            "node": "4. Retrieve Session Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Milvus Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Milvus Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Milvus Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "🤖 Main Orchestrator",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "8. IF Count - ¿Multiple messages?": {
+      "main": [
+        [
+          {
+            "node": "10. Clear Buffer for Session",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11. Aggregate messages": {
+      "main": [
+        [
+          {
+            "node": "🤖 Main Orchestrator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message 1": {
+      "main": [
+        [
+          {
+            "node": "Wait 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message 2": {
+      "main": [
+        []
+      ]
+    },
+    "Wait 1": {
+      "main": [
+        [
+          {
+            "node": "Send message 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "🤖 Main Orchestrator",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "🤖 Main Orchestrator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Notification Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Labels": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Notification Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1-mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "🤖 Notification Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1-mini1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "🤖 Booking Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily1": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Qualification Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "2. Normalize Message Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ultimate Assistant1": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "🤖 Qualification Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1-mini2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "🤖 Knowledge Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Milvus Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Knowledge Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Milvus Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Booking Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Main Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Main Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notification Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Main Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🤖 Main Orchestrator": {
+      "main": [
+        [
+          {
+            "node": "Send message 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send template in WhatsApp Business Cloud": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Notification Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lead database": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Qualification Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lead Registration": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Main Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Availability": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Booking Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Cal Variables": {
+      "main": [
+        [
+          {
+            "node": "Set Start/End",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Start/End": {
+      "main": [
+        [
+          {
+            "node": "Check Slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Slots": {
+      "main": [
+        [
+          {
+            "node": "Are Slots Available?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Are Slots Available?": {
+      "main": [
+        [
+          {
+            "node": "Sugerir Horarios Cercanos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Set Cal Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🤖 Booking Agent": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-11-09T20:18:29.515Z",
+  "id": "IDrW2fI5wKeC52bs",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Multi Agent System Benefits",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -816,
+        -768
+      ],
+      "id": "23809476-564c-4a38-9840-621392308b15",
+      "name": "1. WhatsApp Message Receiver",
+      "webhookId": "whatsapp-webhook",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "TNi1zmkv3atiIibJ",
+          "name": "WhatsApp Receiver"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "extract_message",
+              "name": "messages",
+              "value": "={{ $json.messages[0].text.body || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "extract_session",
+              "name": "sessionId",
+              "value": "={{ parseInt($json.contacts[0].wa_id) }}",
+              "type": "number"
+            },
+            {
+              "id": "0204d587-06b5-4352-99be-d445e9244413",
+              "name": "datetime",
+              "value": "={{ $now .plus({ seconds: 4 }).toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "2d694b83-bd5c-40c2-9d47-454e5f9b44b5",
+              "name": "sessionId",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "string"
+            },
+            {
+              "id": "8fa4c00f-57fe-463c-b07c-e5e3b6cc0d15",
+              "name": "messages",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2784,
+        2512
+      ],
+      "id": "498bf30b-136c-46d6-8677-2fd121a5c8d4",
+      "name": "2. Normalize Message Data"
+    },
+    {
+      "parameters": {
+        "operation": "deleteRows",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pxnG5d50cxlkcbxj",
+          "mode": "list",
+          "cachedResultName": "buffer",
+          "cachedResultUrl": "/projects/zIvgruNDMJwjqAqX/datatables/pxnG5d50cxlkcbxj"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "sessionId",
+              "keyValue": "={{ $('2. Normalize Message Data').item.json.sessionId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1424,
+        2432
+      ],
+      "id": "d4adbd5d-672b-479c-9c53-883c7d359679",
+      "name": "10. Clear Buffer for Session"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "pxnG5d50cxlkcbxj",
+          "mode": "list",
+          "cachedResultName": "buffer",
+          "cachedResultUrl": "/projects/zIvgruNDMJwjqAqX/datatables/pxnG5d50cxlkcbxj"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "datetime": "={{ $json.datetime }}",
+            "sessionId": "={{ $json.sessionId }}",
+            "messages": "={{ $json.messages }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "datetime",
+              "displayName": "datetime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "messages",
+              "displayName": "messages",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -2576,
+        2512
+      ],
+      "id": "77137e80-9a35-46cd-8747-46308272a4b1",
+      "name": "3. Insert Row to Buffer"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pxnG5d50cxlkcbxj",
+          "mode": "list",
+          "cachedResultName": "buffer",
+          "cachedResultUrl": "/projects/zIvgruNDMJwjqAqX/datatables/pxnG5d50cxlkcbxj"
+        },
+        "matchType": "allConditions",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -2352,
+        2512
+      ],
+      "id": "e0b227f8-dfbc-44bd-8649-e4d439495154",
+      "name": "4. Retrieve Session Messages"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "messages"
+            },
+            {
+              "fieldToAggregate": "createdAt"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -2144,
+        2512
+      ],
+      "id": "c3a09419-0852-4aee-bf67-0b3807f05852",
+      "name": "5. Aggregate Messages"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "timeout_check",
+              "leftValue": "={{ $json.createdAt.last().toDateTime().plus({ seconds: 4 }).toISO() }}",
+              "rightValue": "={{ $now }}",
+              "operator": {
+                "type": "string",
+                "operation": "isBefore"
+              }
+            },
+            {
+              "id": "47fa191b-c077-4387-83e6-e825f381617d",
+              "leftValue": "={{ $json.createdAt.last().toDateTime().plus({ seconds: 10 }).toISO() }} ",
+              "rightValue": "={{$now }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "before"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1936,
+        2512
+      ],
+      "id": "efe0f701-c7f3-418b-847a-74b676eacacf",
+      "name": "6. If temporal validation time"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1712,
+        2640
+      ],
+      "id": "97a1fc44-f387-4f61-8b56-90ab53456abb",
+      "name": "7. Wait 4 Seconds",
+      "webhookId": "3fcd49fa-8308-49c9-bf2d-3486cefc7771"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -1424,
+        2608
+      ],
+      "id": "c4d2a819-29d3-483c-b2b6-84c110347583",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "891019627426034",
+        "recipientPhoneNumber": "=+{{ $('2. Normalize Message Data').item.json.session_id }}",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        -512,
+        -768
+      ],
+      "id": "b4506f87-8c45-4748-8c61-95ecacba8865",
+      "name": "Send message",
+      "webhookId": "32da2474-12da-4cf2-8086-205332c11add",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "40FvwmbjkbQ3AYME",
+          "name": "WhatsApp Send"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -3248,
+        2720
+      ],
+      "id": "87e9b2ba-944f-43b0-a68d-fae2a47768bf",
+      "name": "Telegram Trigger",
+      "webhookId": "61d2021b-f0b5-4e00-a4bd-45fc323996ae",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZnnqJZvoQL8Ki07s",
+          "name": "Telegram empathoai_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b40e165d-2add-42a6-84b9-de44936a0f02",
+              "leftValue": "={{ $json.message.from.id }}",
+              "rightValue": 8162715695,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4688,
+        2560
+      ],
+      "id": "fc1c219d-19b3-4db9-bfb9-91d83b44c18e",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -2800,
+        2864
+      ],
+      "id": "9fc39c30-c769-4001-b978-b4855d4c24fc",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1t3gnkvt6eKBHyUKbt4u3JEc1VJc07vn5",
+          "mode": "list",
+          "cachedResultName": "Base de Conocimiento RAG – DANIA..txt",
+          "cachedResultUrl": "https://drive.google.com/file/d/1t3gnkvt6eKBHyUKbt4u3JEc1VJc07vn5/view?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2224,
+        1680
+      ],
+      "id": "ff9d44b5-7b17-4327-bcb3-55b932ca5f51",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "zjMXBIzA00snn3ly",
+          "name": "Drive RAG"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -2016,
+        1680
+      ],
+      "id": "51c519f9-925f-40f5-82de-58bf0f82af99",
+      "name": "Extract from File",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "milvusCollection": {
+          "__rl": true,
+          "value": "knowledge_base",
+          "mode": "list",
+          "cachedResultName": "knowledge_base"
+        },
+        "options": {
+          "clearCollection": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+      "typeVersion": 1.3,
+      "position": [
+        -1808,
+        1680
+      ],
+      "id": "604d34da-1ec6-4a14-a26c-a573413d2c7a",
+      "name": "Milvus Vector Store",
+      "credentials": {
+        "milvusApi": {
+          "id": "YbwPcrTxudipd6F0",
+          "name": "MilvusRag"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "dimensions": {},
+          "batchSize": 512,
+          "stripNewLines": true,
+          "timeout": -1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1888,
+        1904
+      ],
+      "id": "5f3f6c19-1948-40d9-bc87-5b423a62e62a",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -1664,
+        1904
+      ],
+      "id": "2339a632-2ecc-43ba-8c91-50bc1bc63e09",
+      "name": "Default Data Loader",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.data[0].sessionId }}",
+        "databaseName": "agent_ai",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        -3584,
+        2496
+      ],
+      "id": "5a20939f-1ddb-46d1-8071-fa69da797bf1",
+      "name": "Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "count_check",
+              "leftValue": "={{ $json.messages.length }}",
+              "rightValue": "={{ 1 }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1712,
+        2448
+      ],
+      "id": "901ae8f9-e934-47d3-9bda-9fa05f79510d",
+      "name": "8. IF Count - ¿Multiple messages?"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        2432
+      ],
+      "id": "37075639-9e71-484e-86f9-36baf1b6f449",
+      "name": "11. Aggregate messages"
+    },
+    {
+      "parameters": {
+        "content": "## Data Loader RAG",
+        "height": 480,
+        "width": 2320,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3104,
+        1616
+      ],
+      "id": "2fd54a96-bb2d-480d-afac-ed444931512b",
+      "name": "Sticky Note5",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('2. Normalize Message Data').item.json.sessionId }}",
+        "text": "={{ $json.output.message_1 }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -432,
+        2512
+      ],
+      "id": "aaded9e1-aadd-4683-bf0e-2156853904d4",
+      "name": "Send message 1",
+      "webhookId": "715f78ad-85ad-4a4f-b32e-b6cadf8a24fd",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZnnqJZvoQL8Ki07s",
+          "name": "Telegram empathoai_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('2. Normalize Message Data').item.json.sessionId }}",
+        "text": "={{ $('🤖 Main Orchestrator').item.json.output.message_2 }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        144,
+        2512
+      ],
+      "id": "1fa9fbc1-c1b4-4e53-a305-376b0775ac15",
+      "name": "Send message 2",
+      "webhookId": "715f78ad-85ad-4a4f-b32e-b6cadf8a24fd",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZnnqJZvoQL8Ki07s",
+          "name": "Telegram empathoai_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -128,
+        2512
+      ],
+      "id": "852c5f90-7e2b-4d54-b8cf-1959b702a0d4",
+      "name": "Wait 1",
+      "webhookId": "220305f3-010e-43d4-81f8-a61924e70f2c"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2416,
+        1680
+      ],
+      "id": "663b33dd-1005-43b6-b4f4-5cb2e5922757",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n    \"message_1\": \"Excelente\",\n    \"message_2\": \"Gracias por aceptar.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -176,
+        2784
+      ],
+      "id": "8a92434e-b185-4acb-911d-20ffeb8b8f9c",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -3584,
+        2720
+      ],
+      "id": "ea82298c-ca87-4cf2-8c47-cb7d87e32bab",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI(\"emailAddress\") }}",
+        "subject": "={{ $fromAI(\"subject\") }}",
+        "message": "={{ $fromAI(\"emailBody\") }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -592,
+        3840
+      ],
+      "id": "330fb3e6-4e0b-4d93-af40-04650c29abdc",
+      "name": "Send Email",
+      "webhookId": "86c8c4b1-13bb-4ebe-acb9-30e1d7082d55",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "label",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -720,
+        3840
+      ],
+      "id": "e4041c1e-8e67-422c-846e-ffab1e0fd03f",
+      "name": "Get Labels",
+      "webhookId": "9e08b59e-792d-4566-83f1-9263c9ad86ae",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -784,
+        3680
+      ],
+      "id": "a223395a-3e05-472c-a6b8-01f95b77e060",
+      "name": "4.1-mini",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1728,
+        3552
+      ],
+      "id": "0080af31-5133-4162-9cf2-540e1a9ae44c",
+      "name": "4.1-mini1",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Use this tool to search the internet",
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"api_key\": \"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\",\n    \"query\": \"{searchTerm}\",\n    \"search_depth\": \"basic\",\n    \"include_answer\": true,\n    \"topic\": \"news\",\n    \"include_raw_content\": true,\n    \"max_results\": 3\n} ",
+        "placeholderDefinitions": {
+          "values": [
+            {
+              "name": "searchTerm",
+              "description": "What the user has requested to write a blog about",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -2880,
+        3728
+      ],
+      "id": "121471d1-d66c-4489-9ee7-415de5fa0ee0",
+      "name": "Tavily1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8c844924-b2ed-48b0-935c-c66a8fd0c778",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "Text",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notExists",
+                      "singleValue": true
+                    },
+                    "id": "368b2ee8-2ebd-4982-b5b9-5e19ef2314e7"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Other Format"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a41b2875-9f6e-4291-a8bc-804950da900b",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -3024,
+        2720
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# 5️⃣ Main Agent (Orchestrator / WhatsApp Router)\n",
+        "height": 884,
+        "width": 3708,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3328,
+        2304
+      ],
+      "typeVersion": 1,
+      "id": "cb694d07-3e9f-47fe-a7b6-6d3debabcb72",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "## 4️⃣ Notification Agent",
+        "height": 780,
+        "width": 540
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        3248
+      ],
+      "id": "aba4944b-08c8-4c6f-8151-00f5a32a7a9a",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "## Booking Agent (Cal.com Agent)",
+        "height": 460,
+        "width": 1116,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2000,
+        3232
+      ],
+      "id": "21a05e66-2075-4d24-9b7d-fe63f70f8664",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "content": "## 1️⃣ Qualification Agent (DANIA)",
+        "height": 780,
+        "width": 620,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3328,
+        3232
+      ],
+      "id": "2b992ff5-e4fe-499a-bfaa-19146b8acf49",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "content": "## Brain/Tools",
+        "height": 884,
+        "width": 332,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3696,
+        2304
+      ],
+      "id": "2c563745-9b6e-4e72-b767-a4030c56d4cc",
+      "name": "Sticky Note18"
+    },
+    {
+      "parameters": {
+        "content": "# Parent Agent\n\n",
+        "height": 420,
+        "width": 1660,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1744,
+        4864
+      ],
+      "typeVersion": 1,
+      "id": "c7bf9365-41b9-4887-8116-f153345b2b0f",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Benefits of Multi Agent System\n\n- More reusable components\n\n- Model flexibility (different models per agent)\n\n- Easier debugging and maintenance\n\n- Clearer prompt logic and better testability\n\n- Foundation for multi-turn agents or agent memory",
+        "height": 460,
+        "width": 540,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4624,
+        3712
+      ],
+      "id": "9fd248d7-19f5-4438-ac74-1defd878b3b0",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# 📚 Setup Guide  \n*Author:* [Nate Herk](https://www.youtube.com/@nateherk)\n\n## Instructions\n1. Take the **Email Agent** and place it into a new workflow.  \n2. Link the **Email Agent tool** to that new workflow you created.  \n3. In that new workflow, start it with the **\"Execute Workflow\" trigger** (`When workflow is executed by another`).  \n4. Repeat steps 1–3 for the **Calendar Agent**, **Contact Agent**, and **Content Creator Agent**.  \n5. Ensure all agents are powered by a **Chat Model** (e.g., OpenRouter, Google, or OpenAI).  \n6. Connect all necessary credentials:\n   - ✅ Chat model credentials  \n   - ✅ Tavily API key  \n   - ✅ Google account  \n   - ✅ Airtable  \n   - ✅ Telegram  \n---\n\nStay organized, test each agent individually, and you’ll be up and running in no time!\n",
+        "height": 460,
+        "width": 800
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4768,
+        3216
+      ],
+      "id": "6f9b1381-ddeb-42ab-abc3-bc7b31c22c3c",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are the ultimate personal assistant. Your job is to send the user's query to the correct tool. You should never be writing emails, or creating even summaries, you just need to call the correct tool.\n\n## Tools\n- Think: Use this to think deeply or if you get stuck\n- emailAgent: Use this tool to take action in email\n- calendarAgent: Use this tool to take action in calendar\n- contactAgent: Use this tool to get, update, or add contacts\n- contentCreator: Use this tool to create blog posts\n- Tavily: Use this tool to search the web\n\n## Rules\n- Some actions require you to look up contact information first. For the following actions, you must get email address and send that to the agent who needs it:\n  - sending emails\n  - drafting emails\n  - creating calendar event with attendee\n\n## Instructions\n1) Call the neccessary tools based on the user request\n2) Use the \"Think\" tool to verify you took the right steps. This tool should be called every time.\n\n\n## Examples\n1) \n- Input: send an email to nate herkelman asking him what time he wants to leave\n  - Action: Use contactAgent to get nate herkelman's email\n  - Action: Use emailAgent to send the email. You will pass the tool a query like \"send nate herkelman an email to ask what time he wants to leave. here is his email: [email address]\n- Output: The email has been sent to Nate Herkelman. Anything else I can help you with?\n\n\n## Final Reminders\nHere is the current date/time: {{ $now }}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        2672,
+        5056
+      ],
+      "id": "9efb52e7-355e-41f7-a316-1cb25c3a1294",
+      "name": "Ultimate Assistant1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -3248,
+        3728
+      ],
+      "id": "f98659d2-301c-4697-8f50-76c548daf5cc",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2576,
+        3648
+      ],
+      "id": "2dbd0ad7-8069-44ce-baca-ae40e4fdeb2e",
+      "name": "4.1-mini2",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 2️⃣ Knowledge Agent (RAG Agent)",
+        "height": 780,
+        "width": 604
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2672,
+        3232
+      ],
+      "id": "91a3bde4-bea9-47bc-8b8d-ea8bc12d30c8",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "=You are the Knowledge Agent for an AI agency specializing in property management. \nYour task is to answer user questions related to the agency, its services, workflows, or integrations. \nUse a Retrieval-Augmented Generation (RAG) process connected to a vector database to provide accurate and context-based responses. \nRespond clearly, factually, and only with information available in the knowledge base.\n"
+        }
+      },
+      "id": "7a92a240-5339-4d7f-8b4d-e9ab112e35e0",
+      "name": "🤖 Knowledge Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        -2512,
+        3424
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query}}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are **DANIA**, a professional and empathetic AI qualification assistant for an AI agency specialized in property management.\n\nYour main responsibility is to qualify potential clients through a structured 11-question flow.  \nYou must guide the user step by step, collect each answer, validate it, and reformulate if the response is unclear or incomplete.\n\nAfter all questions are answered, you will show a full summary of the user’s information and ask for confirmation:\n“Please confirm if everything is correct (Yes/No).”\n\nIf the user says “Yes”, you must trigger the **Lead Registration** tool to store the data in the database.  \nIf the user says “No”, politely allow them to correct the incorrect fields before saving.\n\n---\n\n## Qualification Flow\nAsk these questions in order, waiting for a response each time:\n\n0. What is your full name? → `name`\n1. What is your email address? → `email`\n2. Which country are you contacting us from? → `country`\n3. Do you currently own a business or work within a company? → `work_type`\n4. If you own a business, what’s its name and main activity? → `business_name`\n5. What is your role within the company or project? → `role`\n6. Does your company offer physical products, services, or is it a digital business? → `business_model`\n7. How many people are currently part of your team or business? → `team_size`\n8. How familiar are you with using artificial intelligence in your industry? → `ai_knowledge`\n9. What is the main challenge you’re trying to solve right now in your company? → `main_challenge`\n10. Have you tried any digital tools or strategies to solve it? If yes, which ones? → `past_attempt`\n\n---\n\n## Confirmation Step\nAfter the user has answered all questions, show the following summary message before saving:\n\nPerfect, here’s what I have so far:\n\n👤 Name: {{name}}\n📧 Email: {{email}}\n🌍 Country: {{country}}\n🏢 Work type: {{work_type}}\n💼 Business: {{business_name}}\n👔 Role: {{role}}\n💡 Business model: {{business_model}}\n👥 Team size: {{team_size}}\n🤖 AI knowledge level: {{ai_knowledge}}\n⚙️ Current challenge: {{main_challenge}}\n🧠 Previous attempts: {{past_attempt}}\n\nPlease confirm if everything is correct (Yes / No).\n\n\nIf the user responds **“Yes”**, execute the **Lead Registration** tool with the payload below.  \nIf the user responds **“No”**, ask politely which field needs correction, update the summary, and repeat the confirmation.\n\n---\n\n## Tools\n**Lead Registration**  \nUse this tool **only after the user confirms their information** to save the data in MongoDB.  \nPass the following fields in the payload:\n{\n\"name\": \"\",\n\"email\": \"\",\n\"country\": \"\",\n\"work_type\": \"\",\n\"business_name\": \"\",\n\"role\": \"\",\n\"business_model\": \"\",\n\"team_size\": \"\",\n\"ai_knowledge\": \"\",\n\"main_challenge\": \"\",\n\"past_attempt\": \"\",\n\"confirmed\": true,\n\"createdAt\": \"{{ $now }}\"\n}\n\nyaml\nCopy code\n\n---\n\n## Tone & Style\n- Be professional, warm, and efficient.  \n- Always guide the user back to the main question if they deviate.  \n- Confirm understanding and maintain a human-like conversational tone.  \n- Do **not** skip questions or change their order.  \n- Always show the final summary before saving.\n\n---\n\n## Final Notes\nHere is the current date/time: {{ $now }}  \nIf the user asks unrelated questions (like about services or pricing), pass control to the **Knowledge Agent"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -3120,
+        3408
+      ],
+      "id": "c388e0d2-6b0e-4c97-bae1-5e29b66cdc65",
+      "name": "🤖 Qualification Agent",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "name": "knoledgeAgent",
+        "description": "Call this tool to answer user questions about the agency, its services, or processes. \nIt retrieves relevant information from the internal RAG database and returns a concise, factual response.\n",
+        "workflowId": {
+          "__rl": true,
+          "value": "9npZ8s6deBGbGtc9",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/9npZ8s6deBGbGtc9",
+          "cachedResultName": "🤖 Knowledge Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -880,
+        2928
+      ],
+      "id": "1a29305c-2d6f-4926-88b7-edc01e0c1fe0",
+      "name": "Knowledge Agent"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Handles user onboarding and qualification through a sequence of 11 predefined questions.\nValidates and reformulates user answers when needed.\nGenerates a summary and requests confirmation before saving to MongoDB.",
+        "milvusCollection": {
+          "__rl": true,
+          "value": "knowledge_base",
+          "mode": "list",
+          "cachedResultName": "knowledge_base"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+      "typeVersion": 1.3,
+      "position": [
+        -2384,
+        3648
+      ],
+      "id": "52c3db68-bc09-4b01-8fa7-2536a5d5c5b8",
+      "name": "Milvus Vector Store1",
+      "credentials": {
+        "milvusApi": {
+          "id": "YbwPcrTxudipd6F0",
+          "name": "MilvusRag"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2304,
+        3840
+      ],
+      "id": "635f6a69-1e7e-4540-b3a0-51a6e25f401c",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=You are the Booking Agent responsible for managing meeting scheduling using Cal.com integration. \nAfter a lead has been qualified and confirmed, check the agency’s availability and suggest up to three possible time slots based on the user’s requested date or timezone. \nOnce the user selects a time, generate and return the Cal.com meeting link for confirmation. \nYour responses must be concise, structured, and limited to booking coordination only. \nDo not handle lead data or general inquiries — focus exclusively on scheduling tasks.\n"
+        }
+      },
+      "id": "97cd7c56-6de8-43cf-a33f-69e549a28c77",
+      "name": "🤖 Booking Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        -1584,
+        3344
+      ],
+      "disabled": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "name": "bookingAgent",
+        "description": "Call this tool to schedule or suggest available meeting times using Cal.com integration. \nIt checks the agency’s calendar for availability and returns three possible options for the user to confirm.\n",
+        "workflowId": {
+          "__rl": true,
+          "value": "zOARss1gOFVjVadQ",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/zOARss1gOFVjVadQ",
+          "cachedResultName": "🤖 Booking Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -688,
+        2928
+      ],
+      "id": "487a178e-acab-48db-8f1f-5b0f8710a033",
+      "name": "Booking Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "=You are the Notification Agent for the agency’s automation system. \nYour responsibility is to send internal notifications once a lead is successfully registered or a meeting is booked. \nNotifications must include key information in JSON format, such as:\n\n{\n  \"lead_name\": \"{{lead_name}}\",\n  \"business\": \"{{business}}\",\n  \"country\": \"{{country}}\",\n  \"challenge\": \"{{challenge}}\",\n  \"phone\": \"{{phone}}\"\n}\n\nSend these notifications via Slack, email, or internal webhook depending on the channel configuration. \nKeep messages concise, professional, and structured. \nDo not ask for confirmation or start conversations — your only task is to deliver the data to the appropriate communication channel.\n"
+        }
+      },
+      "id": "4b7d1f15-4713-4041-ae73-c65e42e61099",
+      "name": "🤖 Notification Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        -704,
+        3472
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "name": "notificationAgent",
+        "description": "Call this tool to send notifications to the agency team after a lead is registered or a meeting is booked. \nIt can deliver updates through email, WhatsApp templates, or internal webhooks.\n",
+        "workflowId": {
+          "__rl": true,
+          "value": "PPkZ7EBsP8SxPPFz",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/PPkZ7EBsP8SxPPFz",
+          "cachedResultName": "🤖 Notification Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -464,
+        2928
+      ],
+      "id": "e83ac858-4fa7-437d-99ba-a20bc06b5fe1",
+      "name": "Notification Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=El usuario envia el siguinete \nmessage: {{ $('5. Aggregate Messages').item.json.messages }}\nphone: {{ $json.data[0].sessionId }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# System Prompt: Agente DANIA.AI (Final Optimizado)\n\n## Rol\n\nAsistente Virtual de DANIA.AI. Califica leads inmobiliarios capturando datos, informando sobre DANIA y agendando citas.\n\n---\n\n## Primera Interacción\n\n> 👋 ¡Hola! Soy el asistente virtual de DANIA.AI.\n> \n> 🤖 Soy experto en automatización inmobiliaria. Ayudamos a empresas a reducir carga operativa, automatizar tareas y mejorar rentabilidad.\n>\n> ¿Te gustaría que te cuente cómo funciona DANIA.AI o prefieres que preparemos un diagnóstico?\n\n**Espera respuesta antes de continuar.**\n\n---\n\n## Si Usuario Pide Información\n\n1. Consulta Knowledge Base (sin inventar)\n2. Responde en lenguaje humano, sin tecnicismos (API→herramientas, Multicanal→WhatsApp/web, CRM→todo en un lugar)\n3. Cierra: \"¿Preparamos tu diagnóstico?\"\n\n---\n\n## Si Usuario Acepta Diagnóstico: 11 Preguntas\n\n**Una por mensaje. Sin reconocimientos intermedios.**\n\n1. ¿Cuál es tu nombre completo? | `name` ✅\n2. ¿A qué email te envío la información? | `email` ✅\n3. ¿De qué país o ciudad gestionas propiedades? | `country` ✅\n4. ¿Propio o empresa? | `work_type`\n5. ¿Nombre de la empresa? | `business_name` + **[TAVILY en background: evalúa si existe business_name + country + NO es personal → ejecuta async, continúa sin pausa]**\n6. ¿Tu cargo? | `role`\n7. ¿Ventas, rentas o administración? | `business_model`\n8. ¿Cuántas personas en equipo? | `team_size`\n9. ¿Experiencia con IA/automatización? | `ai_knowledge`\n10. ¿Principal desafío? | `main_challenge`\n11. ¿Herramientas que intentaste? | `past_attempt`\n\n**AL FINAL: confirmación con todo el resumen**\n\n---\n\n## Confirmación de Datos\n\n**Después de P11, muestra:**\n\n> ✅ Perfecto, esto es lo que tengo:\n>\n> 👤 Nombre: {{name}}\n> 📧 Email: {{email}}\n> 🌍 País: {{country}}\n> 🏢 Tipo de trabajo: {{work_type}}\n> 💼 Negocio: {{business_name}}\n> 👔 Rol: {{role}}\n> 💡 Modelo: {{business_model}}\n> 👥 Equipo: {{team_size}}\n> 🤖 Conocimiento de IA: {{ai_knowledge}}\n> ⚙️ Desafío actual: {{main_challenge}}\n> 🧠 Intentos previos: {{past_attempt}}\n>\n> ¿Confirmas que todo es correcto? (Sí / No)\n\n**Si \"No\" → Pregunta qué corregir, actualiza, vuelve a confirmar**\n\n**Si \"Sí\" → Lead Registration + Siguiente paso**\n\n---\n\n## Lead Registration (Confirmado \"Sí\")\n\nGuarda JSON en MongoDB:\n\n```json\n{\n  \"name\": \"{{name}}\", \"email\": \"{{email}}\", \"country\": \"{{country}}\", \"work_type\": \"{{work_type}}\", \n  \"business_name\": \"{{business_name}}\", \"role\": \"{{role}}\", \"business_model\": \"{{business_model}}\", \n  \"team_size\": \"{{team_size}}\", \"ai_knowledge\": \"{{ai_knowledge}}\", \"main_challenge\": \"{{main_challenge}}\", \n  \"past_attempt\": \"{{past_attempt}}\"\n}\n```\n\nResponde:\n\n> ✅ Perfecto, he registrado tu información correctamente.\n\n---\n\n## Agendamiento de Cita - Check Availability\n\nPregunta:\n\n> ¿Te gustaría agendar una llamada con nuestro equipo para mostrarte cómo podemos ayudarte?\n\n---\n\n### Si Usuario Acepta\n\n**Pregunta fecha y hora:**\n> ¿Qué día y hora te vendría bien?\n\n**Usuario responde → ENVÍA A HERRAMIENTA: Check_Availability**\n\n```json\n{\n  \"datetime\": \"{{user_date_time}}\"\n}\n```\n\n**Espera validación de Check_Availability:**\n\n- **Si disponible (true)** → Check_Availability retorna cal_link → Responde:\n  > Perfecto ✅ Aquí está tu enlace para confirmar:\n  > {{cal_link}}\n\n- **Si NO disponible (false)** → Responde:\n  > Lo siento, ese horario no está disponible.\n  >\n  > ¿Prefieres otro día y hora?\n\n---\n\n### Si Usuario Rechaza\n\n> Sin problema, contactaremos con el equipo para preparar tu diagnóstico.\n\n---\n\n## Notificación Interna (Automático después de Registro)\n\nEnvía webhook/Slack:\n\n```json\n{\n  \"lead_name\": \"{{name}}\",\n  \"business\": \"{{business_name}}\",\n  \"country\": \"{{country}}\",\n  \"challenge\": \"{{main_challenge}}\",\n  \"email\": \"{{email}}\"\n}\n```\n\n---\n\n## Herramientas\n\n**Knowledge Base**: Usuario pregunta sobre DANIA → información verificada, sin tecnicismos, sin precios\n\n**Lead Registration**: Confirma \"Sí\" → envía JSON a MongoDB\n\n**cal.com**: Usuario elige horario → genera link de cita\n\n---\n\n## Modo\n\n- Una pregunta por mensaje\n- Tono: profesional, humano, natural\n- Sin tecnicismos, presionar o prometer\n- Habla como amigo: claro, visual, beneficios (dinero/tiempo/leads)\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -880,
+        2512
+      ],
+      "id": "2257f188-41e6-4e18-aea0-9d6d50797c93",
+      "name": "🤖 Main Orchestrator",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.whatsAppTool",
+      "typeVersion": 1.1,
+      "position": [
+        -464,
+        3840
+      ],
+      "id": "247ba08a-bc01-4ec1-a71d-c55a99e94afa",
+      "name": "Send template in WhatsApp Business Cloud",
+      "webhookId": "dc90a2df-d9cc-4470-8aa2-86670e586ac2",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "40FvwmbjkbQ3AYME",
+          "name": "WhatsApp Send"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "lead_data",
+        "fields": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Fields', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        -3056,
+        3728
+      ],
+      "id": "c70fc2cc-b940-4fdc-9b8b-eec4b2c573ff",
+      "name": "Lead database",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "leadRegistration",
+        "description": "Call this tool to register the lead information confirmed by the Qualification Agent. \nIt stores the validated data in MongoDB under the 'qualified_leads' collection.\n",
+        "workflowId": {
+          "__rl": true,
+          "value": "wcoSnw5w93etMG23",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/wcoSnw5w93etMG23",
+          "cachedResultName": "🤖 Qualification Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -1056,
+        2928
+      ],
+      "id": "255a39f9-0a74-457e-a49b-1d6515c09f21",
+      "name": "Lead Registration"
+    },
+    {
+      "parameters": {
+        "description": "Use this tool to check availavility in the calendar",
+        "workflowId": {
+          "__rl": true,
+          "value": "SQ7RcFjw79OhxEhd",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/SQ7RcFjw79OhxEhd",
+          "cachedResultName": "Check_availability"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -1568,
+        3552
+      ],
+      "id": "94195817-3b96-4018-8d69-46d3b581b86c",
+      "name": "Check Availability"
+    },
+    {
+      "parameters": {
+        "content": "## Check Availability",
+        "height": 300,
+        "width": 1116,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2000,
+        3712
+      ],
+      "id": "ad8ba61a-c1a5-438e-8f93-0be4c375a0e3",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "jsCode": "try {\n  // --- Utils ---\n  function formatTime(date) {\n    const hour = date.getHours();\n    const minute = date.getMinutes();\n    const period = hour < 12 ? 'AM' : 'PM';\n    const hour12 = (hour % 12) || 12;\n    const minuteStr = minute === 0 ? '' : ':' + String(minute).padStart(2, '0');\n    return `${hour12}${minuteStr} ${period}`;\n  }\n\n  function formatDay(date) {\n    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];\n    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];\n    return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`;\n  }\n\n  // --- Extrae todos los slots disponibles\n  let allSlots = [];\n  if ($json.data) {\n    Object.values($json.data).forEach(arr => {\n      arr.forEach(slot => {\n        if (slot.start) allSlots.push(new Date(slot.start));\n      });\n    });\n  }\n\n  // Si no hay slots, responde seguro y claro\n  if (allSlots.length === 0) {\n    return [{\n      message: \"No slots available for the selected date.\",\n      slotsCount: 0,\n      suggestions: []\n    }];\n  }\n\n  // El slot solicitado: el primero del array (puedes adaptar si tienes otro criterio)\n  const requestedDate = allSlots[0];\n\n  // Valida y ordena los slots\n  const slotDates = allSlots.filter(dt => !isNaN(dt.getTime())).sort((a, b) => a - b);\n\n  // Busca si el slot exacto solicitado está disponible\n  let found = false;\n  let message = \"\";\n  let suggestions = [];\n\n  for (let dt of slotDates) {\n    if (dt.getTime() === requestedDate.getTime()) {\n      found = true;\n      message = `Yes, that time is available (${formatDay(dt)} at ${formatTime(dt)}). Would you like me to book it for you?`;\n      break;\n    }\n  }\n\n  // Si no está exacto, sugiere los 3 más cercanos\n  if (!found) {\n    const byProximity = slotDates\n      .map(d => ({\n        dt: d,\n        diff: Math.abs(d.getTime() - requestedDate.getTime())\n      }))\n      .sort((a, b) => a.diff - b.diff)\n      .slice(0, 3);\n\n    if (byProximity.length > 0) {\n      suggestions = byProximity.map(s =>\n        `${formatDay(s.dt)} at ${formatTime(s.dt)}`\n      );\n      message = `Requested slot not available. Here are the 3 closest open slots:\\n` +\n        suggestions.map((s, i) => `${i+1}. ${s}`).join('\\n') +\n        `\\nWhich one do you prefer?`;\n    } else {\n      message = \"Sorry, there are no available slots. Please try another date.\";\n    }\n  }\n\n  // --- Output seguro y amigable ---\n  return [{\n    message,\n    slotsCount: slotDates.length,\n    suggestions\n  }];\n\n} catch (error) {\n  // Falla controlada y detalle para debugging\n  return [{\n    message: \"Error processing slots: \" + (error && error.message ? error.message : String(error)),\n    slotsCount: 0,\n    suggestions: []\n  }];\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1024,
+        3792
+      ],
+      "id": "60519ffa-6dd7-4669-9657-6da4c84a67c3",
+      "name": "Sugerir Horarios Cercanos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "23cae85f-0868-4a99-9fd4-a8f379728d1b",
+              "name": "username",
+              "value": "empathoai",
+              "type": "string"
+            },
+            {
+              "id": "9d111618-82d3-4cbe-a2ea-07d87060b551",
+              "name": "eventTypeSlug",
+              "value": "30min",
+              "type": "string"
+            },
+            {
+              "id": "fe5ab0aa-03c2-4ff6-a3aa-7a996e5f203c",
+              "name": "datetime",
+              "value": "={{ $json.datetime }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1744,
+        3808
+      ],
+      "id": "dddac220-bd78-4436-a7f8-c9857da47a3f",
+      "name": "Set Cal Variables"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "22767100-ef1c-4356-aa4a-3b58d4f81075",
+              "name": "start",
+              "value": "={{ DateTime.fromISO($json.datetime).startOf('day').toUTC().toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "0f4d3db6-9958-4cff-a310-3536c544e19d",
+              "name": "end",
+              "value": "={{ DateTime.fromISO($json.datetime).endOf('day').toUTC().toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "6ec0fe20-1796-4b6e-8a9d-0af1b4978d16",
+              "name": "timeZone",
+              "value": "America/Bogota",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1568,
+        3808
+      ],
+      "id": "7ecce12e-e0fe-43d5-9d86-5332dce820b5",
+      "name": "Set Start/End"
+    },
+    {
+      "parameters": {
+        "url": "https://api.cal.com/v2/slots",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "username",
+              "value": "={{ $('Set Cal Variables').item.json.username }}"
+            },
+            {
+              "name": "eventTypeSlug",
+              "value": "={{ $('Set Cal Variables').item.json.eventTypeSlug }}"
+            },
+            {
+              "name": "start",
+              "value": "={{ $json.start }}"
+            },
+            {
+              "name": "end",
+              "value": "={{ $json.end }}"
+            },
+            {
+              "name": "timeZone",
+              "value": "={{ $json.timeZone }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-09-04"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1408,
+        3808
+      ],
+      "id": "b9574579-9d2a-4717-bff1-60bdb3dc78d5",
+      "name": "Check Slots",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Cal API Derma"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "46aadd77-eb8f-4351-8b88-26c7fcb82e03",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1232,
+        3808
+      ],
+      "id": "222ae811-29d7-4454-be62-16dc7f2f9061",
+      "name": "Are Slots Available?"
+    },
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"datetime\": \"2025-11-12T12:00:00-05:00\",\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1920,
+        3808
+      ],
+      "id": "80550787-13e6-4054-a2d4-f1d1356c8a71",
+      "name": "When Executed by Another Workflow",
+      "executeOnce": true,
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Bogota",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-09T20:18:29.520Z",
+      "createdAt": "2025-11-09T20:18:29.520Z",
+      "role": "workflow:owner",
+      "workflowId": "IDrW2fI5wKeC52bs",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-11-08T01:34:56.907Z",
+      "createdAt": "2025-11-08T01:34:56.907Z",
+      "id": "4gP47lGFtTL5SfOo",
+      "name": "Dania_Inti Menoni"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-11T02:59:56.000Z",
+  "versionId": "da2f2b1a-9710-4b82-8954-f8d4d9806e92"
+}
