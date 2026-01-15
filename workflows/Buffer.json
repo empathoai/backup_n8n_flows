@@ -1,0 +1,1130 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "10. Clear Buffer for Session": {
+      "main": [
+        [
+          {
+            "node": "11. Aggregate messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Insert Row to Buffer": {
+      "main": [
+        [
+          {
+            "node": "4. Retrieve Session Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4. Retrieve Session Messages": {
+      "main": [
+        [
+          {
+            "node": "5. Aggregate Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5. Aggregate Messages": {
+      "main": [
+        [
+          {
+            "node": "6. If temporal validation time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "6. If temporal validation time": {
+      "main": [
+        [
+          {
+            "node": "8. IF Count - ¿Multiple messages?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "7. Wait 4 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "7. Wait 4 Seconds": {
+      "main": [
+        [
+          {
+            "node": "4. Retrieve Session Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "8. IF Count - ¿Multiple messages?": {
+      "main": [
+        [
+          {
+            "node": "10. Clear Buffer for Session",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11. Aggregate messages": {
+      "main": [
+        [
+          {
+            "node": "12. Prepare Session for Memory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Ultimate Assistant",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Ultimate Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Normalize Data Telegram": {
+      "main": [
+        [
+          {
+            "node": "3. Insert Row to Buffer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "12. Prepare Session for Memory": {
+      "main": [
+        [
+          {
+            "node": "Ultimate Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Ultimate Assistant",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ultimate Assistant": {
+      "main": [
+        [
+          {
+            "node": "Send message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Send message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Send message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If message 2": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If message 3": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "2. Normalize Data Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB": {
+      "ai_tool": [
+        [
+          {
+            "node": "Ultimate Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message2": {
+      "main": [
+        [
+          {
+            "node": "If message 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message3": {
+      "main": [
+        [
+          {
+            "node": "If message 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-25T14:25:26.439Z",
+  "id": "Vhha5ZV96WCFEoab",
+  "isArchived": false,
+  "meta": null,
+  "name": "Buffer",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "deleteRows",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pxnG5d50cxlkcbxj",
+          "mode": "list",
+          "cachedResultName": "buffer",
+          "cachedResultUrl": "/projects/zIvgruNDMJwjqAqX/datatables/pxnG5d50cxlkcbxj"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "sessionId",
+              "keyValue": "={{ $('2. Normalize Data Telegram').item.json.sessionId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        2048,
+        128
+      ],
+      "id": "e22c46ec-e2ed-403f-9d6e-a3783f6f525d",
+      "name": "10. Clear Buffer for Session"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "pxnG5d50cxlkcbxj",
+          "mode": "list",
+          "cachedResultName": "buffer",
+          "cachedResultUrl": "/projects/zIvgruNDMJwjqAqX/datatables/pxnG5d50cxlkcbxj"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "datetime": "={{ $json.datetime }}",
+            "sessionId": "={{ $json.sessionId }}",
+            "messages": "={{ $json.messages }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "datetime",
+              "displayName": "datetime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "messages",
+              "displayName": "messages",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        944,
+        144
+      ],
+      "id": "1a003775-fc27-47db-b918-4bb5cee8cfd2",
+      "name": "3. Insert Row to Buffer"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pxnG5d50cxlkcbxj",
+          "mode": "list",
+          "cachedResultName": "buffer",
+          "cachedResultUrl": "/projects/zIvgruNDMJwjqAqX/datatables/pxnG5d50cxlkcbxj"
+        },
+        "matchType": "allConditions",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        144
+      ],
+      "id": "f3c5d1a1-f668-4a10-9f9b-a38731909ae5",
+      "name": "4. Retrieve Session Messages"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "messages"
+            },
+            {
+              "fieldToAggregate": "createdAt"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        144
+      ],
+      "id": "ef9ed5a4-e179-4c6e-b25a-d22f988748ba",
+      "name": "5. Aggregate Messages"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "timeout_check",
+              "leftValue": "={{ $json.createdAt.last().toDateTime().plus({ seconds: 4 }).toISO() }}",
+              "rightValue": "={{ $now }}",
+              "operator": {
+                "type": "string",
+                "operation": "isBefore"
+              }
+            },
+            {
+              "id": "47fa191b-c077-4387-83e6-e825f381617d",
+              "leftValue": "={{ $json.createdAt.last().toDateTime().plus({ seconds: 5 }).toISO() }} ",
+              "rightValue": "={{$now }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "before"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1600,
+        144
+      ],
+      "id": "1dacc346-4ffe-4d04-aaf0-bde34b084001",
+      "name": "6. If temporal validation time"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1744,
+        320
+      ],
+      "id": "aa4f83ec-8e29-43b5-a4a5-aec3e0cefcd7",
+      "name": "7. Wait 4 Seconds",
+      "webhookId": "3fcd49fa-8308-49c9-bf2d-3486cefc7771",
+      "notes": "⚠️ FIX V-7: Este nodo debe reemplazarse con contadores de intentos y máximo 3 reintentos. Agregar: If (attempts < 3) → retry. FUENTE: Auditoría paso 8."
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2032,
+        320
+      ],
+      "id": "64b8699a-d03d-48c4-a728-3fa2902038c6",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "count_check",
+              "leftValue": "={{ $json.messages.length }}",
+              "rightValue": "={{ 1 }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1824,
+        128
+      ],
+      "id": "3e6eae47-a3f5-4c58-b6d1-f15339445cf9",
+      "name": "8. IF Count - ¿Multiple messages?"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        128
+      ],
+      "id": "2b8c32f0-9303-4140-9ca0-71db6455db89",
+      "name": "11. Aggregate messages"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "databaseName": "agent_ai",
+        "contextWindowLength": 100
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        -704,
+        160
+      ],
+      "id": "e290c3a4-f51f-4aac-aad2-5448fde2d899",
+      "name": "Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      },
+      "notes": "✅ FIX V-2: Ahora recibe sessionId desde nodo 12. sessionKey debe ser: {{ $json.sessionId }}. FUENTE: Auditoría paso 1."
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {
+          "frequencyPenalty": 0,
+          "maxTokens": -1,
+          "responseFormat": "text",
+          "presencePenalty": 0,
+          "temperature": 0,
+          "timeout": 60000,
+          "maxRetries": 2,
+          "topP": 1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        320
+      ],
+      "id": "ef2ba286-8c19-4a9b-861a-5215e02dd9c0",
+      "name": "OpenAI Chat Model4",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "\n![alt text](https://hello.dania.ai/assets/dania_logo_1754664182694-DtgVFTaW.png)\n\n\n## 🧠 Brain/Memory",
+        "height": 656,
+        "width": 272,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        -16
+      ],
+      "id": "023808cb-153e-4d57-b7a6-77225f215d0d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 672,
+        "width": 4416,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -32
+      ],
+      "id": "53325230-4830-47c6-9030-7a25debc23bf",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Main Orchestrator",
+        "height": 544,
+        "width": 608,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2672,
+        32
+      ],
+      "id": "a4ec3b34-0f4a-4524-9fd9-20e7f59f3522",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## Buffer",
+        "height": 544,
+        "width": 2672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        32
+      ],
+      "id": "89574798-bc24-49b4-90c3-73780a668a69",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "## Message parser",
+        "height": 544,
+        "width": 896
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3328,
+        32
+      ],
+      "id": "19be77e0-2530-45e9-a444-35acf18ca2cb",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "msg_tg",
+              "name": "messages",
+              "value": "={{ $json.messages[0].text || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "sid_tg",
+              "name": "sessionId",
+              "value": "={{ $json.contacts[0].wa_id }}",
+              "type": "string"
+            },
+            {
+              "id": "dt_tg",
+              "name": "datetime",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        160
+      ],
+      "id": "4509343c-1cef-4746-9aef-2fdc588b00ab",
+      "name": "2. Normalize Data Telegram",
+      "notes": "✅ FIX V-1: sessionId como STRING para consistencia. Asignaciones específicas para Telegram. FUENTE: Auditoría paso 2."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ac3622c2-4ff8-4534-b077-9000826453e5",
+              "name": "sessionId",
+              "value": "={{ $json.data[0].sessionId }}",
+              "type": "number"
+            },
+            {
+              "id": "a89bc31e-0ff1-4138-acb0-ce3e1fa66816",
+              "name": "message",
+              "value": "={{ $json.data[0].messages }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2448,
+        128
+      ],
+      "id": "6545078b-ed57-48d3-9979-212f1d568eb4",
+      "name": "12. Prepare Session for Memory",
+      "notes": "✅ FIX V-2 CRÍTICO: Pasa sessionId correctamente a Chat Memory node. Sin este nodo, la memoria no funciona. Conecta salida de 11 (Aggregate) con entrada de Chat Memory. FUENTE: Auditoría paso 1, n8n docs [1]."
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"message_1\": \"Puedo ayudarte con información sobre nuestros servicios.\",\n  \"message_2\": \"¿En qué te gustaría que te apoye?\",\n  \"message_3\": \"Estoy aquí para asistirte\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        3040,
+        400
+      ],
+      "id": "da02df9a-b2ce-4a50-9c29-cf52eab0f8f0",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -368,
+        336
+      ],
+      "id": "0a86007b-7933-4559-8cbe-44c367b8dbaf",
+      "name": "Telegram Trigger",
+      "webhookId": "61d2021b-f0b5-4e00-a4bd-45fc323996ae",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZnnqJZvoQL8Ki07s",
+          "name": "Telegram empathoai_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=message: {{ $json.message}}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# Overview\nYou are the ultimate personal assistant. Your job is to send the user's query to the correct tool. You should never be writing emails or creating summaries — your sole responsibility is to call the correct tool.\n\n## Tools\n- **Think**: Use this to think deeply or if you get stuck\n- **qualifierAgent**: Use this tool to qualified users\n- **bookingAgent**: Use this tool to shedule a meeting\n- **knowledgeAgent**: Use this tool to get provide details only the user need more details\n\n\n## Rules\n- Some actions require you to look up contact information first. For the following actions, you must get contact information and send that to the agent who needs it:\n  - sending emails\n  - drafting emails\n  - creating calendar event with attendee\n\n## Instructions\n1) Call the necessary tools based on the user's request\n2) Use the **Think** tool to verify you took the right steps. This tool should be called every time.\n\n## Examples\n1) \n- Input: quiero mas informacion \n  - Action: Use **knowledgeAgent** te get datail about DANIA\n  - Action: Use **qualifierAgent** to complete questions and insert date in mongoDatabase  \n- Output: Tus datos fueron registrador . then call **bookingAgent**?\n\n1) \n- Input: quiero egndar \n  - Action: Use **bookingAgent** to request deatils for the schedulling\n - Output: The meeting has been scheduled . Anything else I can help you with?\n\n## Final Reminders\nHere is the current date/time: {{ $now }}\n\nAllways reponde in this format\n\n{\n  \"message_1\":\"\",\n  \"message_2\":\"\",\n  \"message_3\":\"\",\n}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        2864,
+        192
+      ],
+      "id": "ca7a6665-4a6c-4a6d-a514-a76d94045d53",
+      "name": "Ultimate Assistant",
+      "alwaysOutputData": false,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        3632,
+        112
+      ],
+      "id": "7fce772a-9718-480f-8856-0046c6681e86",
+      "name": "Wait",
+      "webhookId": "c3d269c0-bc06-4f74-a99e-d8118853c744"
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4016,
+        112
+      ],
+      "id": "6cf1753f-006a-494f-8efe-9a2df9a70e5a",
+      "name": "Wait1",
+      "webhookId": "02649be1-37c1-40f7-920e-47ffcf53e409"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d4439bde-bdce-4e14-854c-54e69f91d558",
+              "leftValue": "={{ $('Ultimate Assistant').item.json.output.message_2 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3472,
+        112
+      ],
+      "id": "ced8dc41-0d0a-4a10-b925-df34c76ed979",
+      "name": "If message 2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d4439bde-bdce-4e14-854c-54e69f91d558",
+              "leftValue": "={{ $('Ultimate Assistant').item.json.output.message_3 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3856,
+        112
+      ],
+      "id": "576ae13b-e92d-4708-a7b5-7d32b8682eaa",
+      "name": "If message 3"
+    },
+    {
+      "parameters": {
+        "content": "\n    \n## Trigger",
+        "height": 656,
+        "width": 294,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        -16
+      ],
+      "id": "5471671f-cf78-4b9d-8302-c3c8d1be2021",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        128
+      ],
+      "id": "612bebf8-9a31-41fc-9357-006cb7a6e3e0",
+      "name": "WhatsApp Trigger",
+      "webhookId": "d375c87b-6de8-47ad-9a53-28b8bdbe1444",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "cZyb6dr4x4ekScrv",
+          "name": "WhatsApp IntiMenoni"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2be85218-5d90-484a-8381-594aba3baf64",
+              "leftValue": "={{ $json.field }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        48,
+        256
+      ],
+      "id": "da6e2d60-d58c-4529-97d1-de51a0ea6569",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Insert documents in MongoDB \n\nname,email,country,phone,work_type,business_name,role,business_model,team_size,ai_knowledge,main_challenge,past_attempt,createdAt",
+        "operation": "insert",
+        "collection": "lead_data",
+        "fields": "=name,email,country,phone,work_type,business_name,role,business_model,team_size,ai_knowledge,main_challenge,past_attempt",
+        "options": {
+          "dateFields": "createdAt"
+        }
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        448
+      ],
+      "id": "cbde3553-f940-44b7-8d52-0d3c041fdc27",
+      "name": "MongoDB",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "845366772000034",
+        "recipientPhoneNumber": "=+{{ $('WhatsApp Trigger').item.json.statuses[0].recipient_id }}",
+        "textBody": "Disculpa en este momento solo podemos atenderte por texto, por favor cuentame en que puedo ayudarte hoy?",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        384
+      ],
+      "id": "1efaac60-13ab-422c-b8c4-22cecb19a8cc",
+      "name": "Send message1",
+      "webhookId": "1b37a9d9-a412-4d7d-9bda-b50c2020ff3a",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "fWFw1a9y9jkhDL2J",
+          "name": "WhatsApp Send inti Menoni"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "845366772000034",
+        "recipientPhoneNumber": "=+{{ $('12. Prepare Session for Memory').item.json.sessionId }}",
+        "textBody": "={{ $json.output.message_1 }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        3344,
+        240
+      ],
+      "id": "cd2e4b9c-c273-4b6d-a15e-71d228ddce0d",
+      "name": "Send message2",
+      "webhookId": "1b37a9d9-a412-4d7d-9bda-b50c2020ff3a",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "fWFw1a9y9jkhDL2J",
+          "name": "WhatsApp Send inti Menoni"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "845366772000034",
+        "recipientPhoneNumber": "=+{{ $('12. Prepare Session for Memory').item.json.sessionId }}",
+        "textBody": "={{ $json.output.message_2 }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        3744,
+        240
+      ],
+      "id": "07638faf-9d01-4294-849a-3ab5b7ccf346",
+      "name": "Send message3",
+      "webhookId": "1b37a9d9-a412-4d7d-9bda-b50c2020ff3a",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "fWFw1a9y9jkhDL2J",
+          "name": "WhatsApp Send inti Menoni"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "845366772000034",
+        "recipientPhoneNumber": "=+{{ $('12. Prepare Session for Memory').item.json.sessionId }}",
+        "textBody": "={{ $json.output.message_3 }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        4128,
+        240
+      ],
+      "id": "80254798-2430-4035-a113-9cd68d485e13",
+      "name": "Send message4",
+      "webhookId": "1b37a9d9-a412-4d7d-9bda-b50c2020ff3a",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "fWFw1a9y9jkhDL2J",
+          "name": "WhatsApp Send inti Menoni"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 631271713,
+          "message": {
+            "message_id": 4065,
+            "from": {
+              "id": 8162715695,
+              "is_bot": false,
+              "first_name": "Empathoai",
+              "language_code": "en"
+            },
+            "chat": {
+              "id": 8162715695,
+              "first_name": "Empathoai",
+              "type": "private"
+            },
+            "date": 1763490312,
+            "text": "si por avor"
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-25T14:25:26.443Z",
+      "createdAt": "2025-11-25T14:25:26.443Z",
+      "role": "workflow:owner",
+      "workflowId": "Vhha5ZV96WCFEoab",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-25T14:26:34.000Z",
+  "versionId": "a12d59a9-fa66-4300-a061-5384f8228a61"
+}
