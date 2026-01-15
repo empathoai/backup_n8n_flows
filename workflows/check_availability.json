@@ -1,0 +1,255 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Data": {
+      "main": [
+        [
+          {
+            "node": "check_availability",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_availability": {
+      "main": [
+        [
+          {
+            "node": "Are Slots Available",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AgruparPorFranjaHoraria": {
+      "main": [
+        []
+      ]
+    },
+    "Are Slots Available": {
+      "main": [
+        [
+          {
+            "node": "AgruparPorFranjaHoraria",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-12-10T06:35:05.511Z",
+  "id": "3FwKWORpZ6ExG34t",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "check_availability",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "date"
+            },
+            {
+              "name": "timezone"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        -16
+      ],
+      "id": "525b667e-debd-4afa-99d9-6c405af2946e",
+      "name": "Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "51695eb8-506d-4821-b3b3-8f2c210ac65e",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            },
+            {
+              "id": "bb967246-c839-4fc9-9d6d-6fc5ca5bd02b",
+              "name": "timezone",
+              "value": "={{ $json.timezone }}",
+              "type": "string"
+            },
+            {
+              "id": "d0a86dbe-928b-4bf1-8b7d-02251794bcc2",
+              "name": "date",
+              "value": "={{ $json.date }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        384,
+        -16
+      ],
+      "id": "169ca172-ce0c-41bb-8283-a33a03aff3dc",
+      "name": "Set Data"
+    },
+    {
+      "parameters": {
+        "url": "https://api.cal.com/v2/slots",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "username",
+              "value": "empathoai"
+            },
+            {
+              "name": "eventTypeSlug",
+              "value": "60min"
+            },
+            {
+              "name": "start",
+              "value": "={{ $json.date }}"
+            },
+            {
+              "name": "end",
+              "value": "={{ $json.date }}"
+            },
+            {
+              "name": "timeZone",
+              "value": "={{ $json.timezone }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-09-04"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        608,
+        -16
+      ],
+      "id": "135dd7cf-9110-4585-b71b-b2c5af4b438a",
+      "name": "check_availability",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Dania Cal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = items[0].json;\nconst availability = input.data;\nconst preferredDate = $items(\"Set Data\", 0)[0].json.date;\nconst preferredHour = $items(\"Set Data\", 0)[0].json.preferredHour ?? null;\n\n// boundaries\nconst MIN_HOUR = 8;\nconst MAX_HOUR = 18;\n\nconst slots = availability[preferredDate];\n\nif (!slots || slots.length === 0) {\n  return [{\n    json: {\n      date: preferredDate,\n      suggestedTimes: []\n    }\n  }];\n}\n\n// Parse local hour manually → position 11,13\nfunction extractLocalHour(startStr) {\n  return parseInt(startStr.substring(11,13), 10);\n}\n\n// filter logical window\nconst filtered = slots.filter(s => {\n  const hour = extractLocalHour(s.start);\n  return hour >= MIN_HOUR && hour < MAX_HOUR;\n});\n\nif (filtered.length === 0) {\n  return [{\n    json: {\n      date: preferredDate,\n      suggestedTimes: []\n    }\n  }];\n}\n\n// if no preference: return first 3 in window\nif (preferredHour === null) {\n  return [{\n    json: {\n      date: preferredDate,\n      suggestedTimes: filtered.slice(0,3).map(f => f.start)\n    }\n  }];\n}\n\n// calculate distance to preference\nconst ranked = filtered\n  .map(s => {\n    const hour = extractLocalHour(s.start);\n    return {\n      start: s.start,\n      distance: Math.abs(hour - preferredHour)\n    };\n  })\n  .sort((a,b)=>a.distance-b.distance)\n  .slice(0,3)\n  .map(x=>x.start);\n\nreturn [{\n  json: {\n    date: preferredDate,\n    suggestedTimes: ranked\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1104,
+        -32
+      ],
+      "id": "736a1cbe-2c43-40c6-9015-3bceeab0e5af",
+      "name": "AgruparPorFranjaHoraria",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "46aadd77-eb8f-4351-8b88-26c7fcb82e03",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        848,
+        -16
+      ],
+      "id": "c6bb1d29-65a8-4368-a83e-fde69303efeb",
+      "name": "Are Slots Available"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-10T06:35:05.517Z",
+      "createdAt": "2025-12-10T06:35:05.517Z",
+      "role": "workflow:owner",
+      "workflowId": "3FwKWORpZ6ExG34t",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-12-09T22:03:31.610Z",
+      "createdAt": "2025-12-09T22:03:31.610Z",
+      "id": "tpOesxfbWU7SmGGd",
+      "name": "Dania_Final"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-18T07:09:12.000Z",
+  "versionId": "db4791bb-1977-49d2-abf4-215cb7992e2b"
+}
