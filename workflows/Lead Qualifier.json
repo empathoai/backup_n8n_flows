@@ -1,0 +1,182 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Capturar Entrada": {
+      "main": [
+        [
+          {
+            "node": "Get Questions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Capturar Entrada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Questions": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-21T09:02:38.822Z",
+  "id": "7AGEuYUqceLxElx2",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lead Qualifier",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 📋 Workflow de Calificación de Leads\n\n### Cómo funciona:\n1. **Loop de Preguntas**: Itera cada pregunta no respondida (flag=false)\n2. **Actualización**: Guarda respuesta + sessionId en datatable\n3. **Resumen**: Cuando termina, agrupa todas las respuestas\n4. **Confirmación**: Pide confirmación al usuario\n5. **Correcciones**: Si dice \"no\", permite corregir campos específicos\n6. **MongoDB**: Si dice \"sí\", guarda en colección 'leads'\n\n### Variables importantes:\n- `sessionId`: ID de WhatsApp del usuario\n- `query`: Respuesta del usuario\n- `flag`: true/false (respondida o no)",
+        "height": 400,
+        "width": 500,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3216,
+        1584
+      ],
+      "id": "4069c550-f353-4891-834e-0c3c813e1ab6",
+      "name": "📋 Instrucciones del Workflow"
+    },
+    {
+      "parameters": {
+        "content": "## ⚙️ Configuración Requerida\n\n### MongoDB:\n- Colección: `leads`\n- Credencial: MongoDB n8n (ya configurada)\n\n### Datatable:\n- ID: pxnG5d50cxlkcbxj (ya configurado)\n- Campos necesarios: id, sessionId, answer, field, description, flag\n\n### Nota:\n- Ajusta los nombres de colecciones si son diferentes\n- Verifica que la datatable tenga todos los campos listados",
+        "height": 300,
+        "width": 500,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2960,
+        2576
+      ],
+      "id": "df2fbee3-1303-4657-8759-698c30a1f5d6",
+      "name": "⚙️ Configuración Necesaria"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "assign-001",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-002",
+              "name": "query",
+              "value": "={{ $json.query }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3184,
+        2240
+      ],
+      "id": "7616d2e0-99f0-4ad8-89d2-8041771ec1aa",
+      "name": "Capturar Entrada"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -3408,
+        2240
+      ],
+      "id": "351e8d78-b680-4e04-a7ad-065bce364c94",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ===================================================\n// AGENTE DE CUALIFICACIÓN LEADS - DANIA\n// Con validación de datos y sessionId como identificador\n// ===================================================\n\n// Datos del mensaje entrante\nconst lead = $json;\nconst data = $node[\"Find One\"].json || {}; // Sesión existente desde MongoDB\nconst text = lead.text?.trim() || \"\";\n\n// 🧠 Cargar preguntas dinámicamente desde Data Table\n// ⚠️ Cambia \"Data Table\" por el nombre exacto de tu nodo que lee la tabla de preguntas\nconst questions = $node[\"Data Table\"].json.map(q => ({\n  key: q.key,\n  q: q.question,\n  required: q.required === true || q.required === \"true\"\n}));\n\n// Identificador único de sesión\nconst sessionId = lead.sessionId || lead.phone || data.sessionId;\ndata.sessionId = sessionId;\n\n// Paso actual\nlet step = data.step || 0;\n\n// 1️⃣ Validadores de tipo de campo\nfunction validateField(key, value) {\n  switch (key) {\n    case 'email':\n      return /^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(value);\n    case 'country':\n      return /^[a-zA-ZÀ-ÿ\\s]{3,}$/.test(value);\n    case 'name':\n      return /^[a-zA-ZÀ-ÿ\\s]{3,}$/.test(value);\n    case 'team_size':\n      return /^\\d+$/.test(value);\n    case 'ai_knowledge':\n    case 'main_challenge':\n    case 'past_attempt':\n    case 'work_type':\n    case 'business_name':\n    case 'role':\n    case 'business_model':\n      return value.length > 2;\n    default:\n      return true;\n  }\n}\n\n// 2️⃣ Guardar respuesta anterior con validación\nif (step > 0 && step <= questions.length && !data.awaiting_confirmation && !data.awaiting_field_choice) {\n  const prevKey = questions[step - 1].key;\n  const prevValue = text;\n\n  if (!validateField(prevKey, prevValue)) {\n    let hint = \"\";\n    if (prevKey === 'email') hint = \"Por favor, asegúrate de escribir un correo válido (por ejemplo: nombre@dominio.com).\";\n    else if (prevKey === 'country') hint = \"Por favor, indícame el país correctamente (por ejemplo: México, Argentina, España).\";\n    else if (prevKey === 'team_size') hint = \"Por favor, escribe solo el número de personas (por ejemplo: 5).\";\n    else hint = \"Podrías reformular tu respuesta, por favor.\";\n\n    return [{\n      sessionId,\n      reply: `Disculpa 😊, parece que hubo un error con tu respuesta.\\n${hint}\\n\\n${questions[step - 1].q}`,\n      data\n    }];\n  }\n\n  data[prevKey] = prevValue;\n}\n\n// 3️⃣ Confirmación final\nif (data.awaiting_confirmation) {\n  const answer = text.toLowerCase();\n  if (answer === 'sí' || answer === 'si') {\n    data.confirmed = true;\n    return [{\n      sessionId,\n      save: true,\n      reply: \"Perfecto ✅ Guardando tus datos, muchas gracias por tu tiempo.\",\n      data\n    }];\n  } else if (answer === 'no') {\n    data.awaiting_confirmation = false;\n    data.awaiting_field_choice = true;\n\n    const fields = Object.keys(data)\n      .filter(k => questions.some(q => q.key === k))\n      .map(f => `- ${f}`)\n      .join(\"\\n\");\n\n    return [{\n      sessionId,\n      reply: `Entendido 😊 ¿Qué campo te gustaría corregir?\\n${fields}\\n(Escribe el nombre del campo, por ejemplo: \"email\")`,\n      data\n    }];\n  } else {\n    return [{\n      sessionId,\n      reply: \"Solo necesito saber si confirmas la información (Sí / No).\",\n      data\n    }];\n  }\n}\n\n// 4️⃣ Elegir campo para corregir\nif (data.awaiting_field_choice && !data.field_to_fix) {\n  const availableFields = questions.map(q => q.key);\n  const field = text.toLowerCase().trim();\n\n  if (availableFields.includes(field)) {\n    data.field_to_fix = field;\n    return [{\n      sessionId,\n      reply: `Perfecto 👍 Por favor, indícame el nuevo valor para \"${field}\":`,\n      data\n    }];\n  } else {\n    return [{\n      sessionId,\n      reply: `No entendí ese campo 😅. Por favor, escribe uno de estos: ${availableFields.join(', ')}`,\n      data\n    }];\n  }\n}\n\n// 5️⃣ Guardar corrección\nif (data.field_to_fix) {\n  const field = data.field_to_fix;\n  const value = text;\n\n  if (!validateField(field, value)) {\n    return [{\n      sessionId,\n      reply: `Disculpa 😊, parece que el valor ingresado no es válido para \"${field}\". ¿Podrías intentarlo nuevamente?`,\n      data\n    }];\n  }\n\n  data[field] = value;\n  delete data.field_to_fix;\n  data.awaiting_field_choice = false;\n  data.awaiting_confirmation = true;\n\n  const summary = `Gracias. Aquí está la información actualizada:\\n` +\n    `👤 Nombre: ${data.name || '-'}\\n` +\n    `📧 Email: ${data.email || '-'}\\n` +\n    `🌍 País: ${data.country || '-'}\\n` +\n    `🏢 Tipo de trabajo: ${data.work_type || '-'}\\n` +\n    `💼 Negocio: ${data.business_name || '-'}\\n` +\n    `👔 Rol: ${data.role || '-'}\\n` +\n    `💡 Modelo: ${data.business_model || '-'}\\n` +\n    `👥 Equipo: ${data.team_size || '-'}\\n` +\n    `🤖 Conocimiento de IA: ${data.ai_knowledge || '-'}\\n` +\n    `⚙️ Desafío actual: ${data.main_challenge || '-'}\\n` +\n    `🧠 Intentos previos: ${data.past_attempt || '-'}\\n¿Confirmas que todo está correcto? (Sí / No)`;\n\n  return [{\n    sessionId,\n    reply: summary,\n    data\n  }];\n}\n\n// 6️⃣ Si completó todas las preguntas\nif (step >= questions.length && !data.awaiting_confirmation) {\n  const summary = `Perfecto, esto es lo que tengo:\\n` +\n    `👤 Nombre: ${data.name || '-'}\\n` +\n    `📧 Email: ${data.email || '-'}\\n` +\n    `🌍 País: ${data.country || '-'}\\n` +\n    `🏢 Tipo de trabajo: ${data.work_type || '-'}\\n` +\n    `💼 Negocio: ${data.business_name || '-'}\\n` +\n    `👔 Rol: ${data.role || '-'}\\n` +\n    `💡 Modelo: ${data.business_model || '-'}\\n` +\n    `👥 Equipo: ${data.team_size || '-'}\\n` +\n    `🤖 Conocimiento de IA: ${data.ai_knowledge || '-'}\\n` +\n    `⚙️ Desafío actual: ${data.main_challenge || '-'}\\n` +\n    `🧠 Intentos previos: ${data.past_attempt || '-'}\\n¿Confirmas que todo es correcto? (Sí / No)`;\n\n  data.awaiting_confirmation = true;\n  return [{\n    sessionId,\n    reply: summary,\n    data\n  }];\n}\n\n// 7️⃣ Siguiente pregunta\nconst question = questions[step];\ndata.step = step + 1;\nreturn [{\n  sessionId,\n  reply: question.q,\n  data\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2752,
+        2240
+      ],
+      "id": "bdcffed7-2fd5-40d5-9edd-49318e194228",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "pxnG5d50cxlkcbxj",
+          "mode": "list",
+          "cachedResultName": "answers"
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -2960,
+        2240
+      ],
+      "id": "bc9cca34-7787-42d7-b1a5-9723c50df2df",
+      "name": "Get Questions"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-21T09:02:38.829Z",
+      "createdAt": "2025-11-21T09:02:38.829Z",
+      "role": "workflow:owner",
+      "workflowId": "7AGEuYUqceLxElx2",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-24T13:24:50.000Z",
+  "versionId": "f7f7d198-448f-4cfc-9ceb-ae0bf78a9b09"
+}
