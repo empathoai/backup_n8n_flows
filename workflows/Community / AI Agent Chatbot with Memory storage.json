@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Save Message": {
       "ai_tool": [
@@ -213,8 +215,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-25T12:22:44.133Z",
       "updatedAt": "2025-10-25T12:22:44.133Z",
+      "createdAt": "2025-10-25T12:22:44.133Z",
       "role": "workflow:owner",
       "workflowId": "3J7twR59MTzo12tW",
       "projectId": "zIvgruNDMJwjqAqX"
@@ -223,8 +225,8 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2025-10-25T12:21:59.038Z",
       "updatedAt": "2025-10-25T12:21:59.038Z",
+      "createdAt": "2025-10-25T12:21:59.038Z",
       "id": "8DVyf0Hp9utHpCg5",
       "name": "whatsapp"
     }
