@@ -1,0 +1,165 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Send Email": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Notification Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Labels": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Notification Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1-mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "🤖 Notification Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send template in WhatsApp Business Cloud": {
+      "ai_tool": [
+        [
+          {
+            "node": "🤖 Notification Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-11T02:08:37.092Z",
+  "id": "PPkZ7EBsP8SxPPFz",
+  "isArchived": true,
+  "meta": null,
+  "name": "🤖 Notification Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI(\"emailAddress\") }}",
+        "subject": "={{ $fromAI(\"subject\") }}",
+        "message": "={{ $fromAI(\"emailBody\") }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -1104,
+        208
+      ],
+      "id": "57ab3cb3-bed7-47a4-8674-0bd9b77d685a",
+      "name": "Send Email",
+      "webhookId": "86c8c4b1-13bb-4ebe-acb9-30e1d7082d55"
+    },
+    {
+      "parameters": {
+        "resource": "label",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -1264,
+        176
+      ],
+      "id": "25195996-5213-4387-b06b-d2b97d765cd6",
+      "name": "Get Labels",
+      "webhookId": "9e08b59e-792d-4566-83f1-9263c9ad86ae"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1376,
+        64
+      ],
+      "id": "16380c43-ffcc-4366-aa67-00f7de71c498",
+      "name": "4.1-mini"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "=You are the Notification Agent for the agency’s automation system. \nYour responsibility is to send internal notifications once a lead is successfully registered or a meeting is booked. \nNotifications must include key information in JSON format, such as:\n\n{\n  \"lead_name\": \"{{lead_name}}\",\n  \"business\": \"{{business}}\",\n  \"country\": \"{{country}}\",\n  \"challenge\": \"{{challenge}}\",\n  \"phone\": \"{{phone}}\"\n}\n\nSend these notifications via Slack, email, or internal webhook depending on the channel configuration. \nKeep messages concise, professional, and structured. \nDo not ask for confirmation or start conversations — your only task is to deliver the data to the appropriate communication channel.\n"
+        }
+      },
+      "id": "0aa4efa5-bd37-44b3-bc35-f80442b4efef",
+      "name": "🤖 Notification Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        -1184,
+        -160
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.whatsAppTool",
+      "typeVersion": 1.1,
+      "position": [
+        -928,
+        176
+      ],
+      "id": "3b5aa53c-b16d-4072-9780-d5a1bf6a48f0",
+      "name": "Send template in WhatsApp Business Cloud",
+      "webhookId": "dc90a2df-d9cc-4470-8aa2-86670e586ac2",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "40FvwmbjkbQ3AYME",
+          "name": "WhatsApp Send"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-11T02:08:37.094Z",
+      "createdAt": "2025-11-11T02:08:37.094Z",
+      "role": "workflow:owner",
+      "workflowId": "PPkZ7EBsP8SxPPFz",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-11T04:19:37.000Z",
+  "versionId": "97358f86-eda7-4bd6-90b2-8b4d7278fc35"
+}
