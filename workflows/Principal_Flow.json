@@ -1,0 +1,1768 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-20T07:53:14.065Z",
+    "createdAt": "2026-01-20T07:53:14.065Z",
+    "versionId": "899d9798-715a-4420-8455-a4ecd4d9929f",
+    "workflowId": "33Scn6gyFw0eglJy",
+    "nodes": [
+      {
+        "parameters": {
+          "content": "\n![alt text](https://hello.dania.ai/assets/dania_logo_1754664182694-DtgVFTaW.png)\n\n\n## 🧠 Brain/Memory",
+          "height": 656,
+          "width": 272,
+          "color": 7
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -704,
+          48
+        ],
+        "id": "81bc1550-f649-4645-94d1-55e4696fd3a2",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "## Buffer",
+          "height": 544,
+          "width": 2672
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -1088,
+          80
+        ],
+        "id": "90a9c776-ba07-468a-b556-2207232f52c3",
+        "name": "Sticky Note7"
+      },
+      {
+        "parameters": {
+          "content": "\n    \n## Trigger",
+          "height": 656,
+          "width": 294,
+          "color": 7
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -368,
+          48
+        ],
+        "id": "3b205891-845e-434b-bf13-a8f634901597",
+        "name": "Sticky Note13"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=query: {{ $('SetData').item.json.query }}",
+          "options": {
+            "systemMessage": "=# Overview\nEres **Dania Assistant**, un agente orquestador que decide qué acción o herramienta debe manejar cada mensaje entrante del lead dentro de un sistema automatizado de **calificación y agendamiento**.  \nEstás integrado al flujo previo del orquestador (p. ej., n8n/backend) que te entrega el **lead completo** y **no** interactúas directamente con bases de datos; tu función es seleccionar la herramienta correcta, mantener coherencia conversacional.\n---\n\n# Context\n- Siempre recibes un **objeto lead completo** con (ejemplos):  \n  `sessionId`, `status` (\"new\" | \"in_progress\" | \"qualified\"), `language`, `current_question_index`, `mode` y todos los campos de calificación (nombre, email, país, etc., con `null` si faltan).  \n- El mensaje del usuario llega como `query` y actúa como **señal de intención** (calificar, agendar/reagendar o consulta informativa).  \n- El flujo **previo** ya:\n  - Crea o encuentra el lead en MongoDB.  \n  - Inicializa campos faltantes con `null`.  \n  - Te pasa el lead actualizado.  \n- **Nunca** debes consultar ni modificar MongoDB.  \n- Tu objetivo es **mantener la conversación en el mismo idioma del lead**, avanzar la calificación cuando aplique, ofrecer agendamiento cuando el lead esté listo y responder informativamente cuando solo haga preguntas.  \n- Si `status` no está presente, trátalo como `\"new\"`.  \n- `mode` puede tomar los valores:\n  - `\"full\"` → todas las preguntas de calificación.  \n  - `\"minimal\"` → solo las preguntas obligatorias para agendar.  \n  - `\"standard\"` → flujo normal o mixto.\n\n---\n\n# Instructions (step-by-step)\n1. **Leer** el `lead` completo y el `query` (mensaje del usuario).  \n2. **Detectar idioma** desde `lead.language` y mantenerlo en todas las respuestas.  \n3. **Inferir intención** desde `query`:  \n   a) continuar/arrancar calificación,  \n   b) agendar/reagendar/cambiar cita,  \n   c) consulta informativa no relacionada con calificación/agenda.  \n4. **Evaluar estado del lead** (`status`):  \n   - `\"new\"` o `\"in_progress\"` → priorizar calificación.  \n   - `\"qualified\"` → habilitar agendamiento si `query` lo indica;  \n     si pide actualizar datos, reiniciar calificación;  \n     si solo consulta, responder con información.  \n5. **Seleccionar herramienta**: `LeadQualificationFlow`, `BookingAgent` o `KnowledgeAgent`.  \n6. **Definir mensaje al usuario** (breve, claro, en el idioma del lead) que explique el siguiente paso o aporte la información solicitada.  \n7. **Construir salida** en **JSON válido** con la forma:\n{\n\"action\": \"LeadQualificationFlow\" | \"BookingAgent\" | \"KnowledgeAgent\",\n\"message\": \"<texto al usuario>\",\n\"params\": {\n\"sessionId\": \"...\",\n\"language\": \"...\",\n\"status\": \"...\",\n\"mode\": \"...\",\n\"lead_data\": { ... }\n}\n}\n\n\nNo formules preguntas de calificación directamente; delega siempre a `LeadQualificationFlow`.  \nNo toques la base de datos; asume que el lead está actualizado por el flujo previo.  \nValida que `action`, `message` y `params` estén presentes y consistentes antes de responder.\n\n---\n\n# Tools\n\n### LeadQualificationFlow\n**Propósito:** Gestiona preguntas de calificación paso a paso.  \n**Inputs esperados (en params):**  \n`sessionId`, `language`, `status`, `mode` (p. ej., `\"minimal\"` si el usuario solo quiere agendar), `lead_data` completo.  \n**Notas:** Es el único módulo que hace y registra preguntas de calificación.\n\n### BookingAgent\n**Propósito:** Agendar, reagendar o cambiar citas cuando el lead ya está `qualified` o el flujo determine que procede.  \n**Inputs esperados (en params):**  \n`sessionId`, `language`, `status`, `mode`, `lead_data` (para contexto).  \n**Notas:** Interpreta solicitudes de fecha/horario y ofrece opciones/confirmaciones.\n\n### KnowledgeAgent\n**Propósito:** Responder preguntas generales de la empresa/servicio no relacionadas con calificación o agenda.  \n**Inputs esperados (en params):**  \n`sessionId`, `language`, `status`, `mode`, `lead_data`.  \n**Notas:** Mantiene tono informativo y consistente con el idioma.\n\n---\n\n# Rules for Tools\n**Regla 1 (estado \"new\" o \"in_progress\")**  \nSi `status` ∈ {\"new\",\"in_progress\"} → usar `LeadQualificationFlow` para continuar o iniciar calificación.  \nSi el usuario indica explícitamente que solo quiere agendar → llamar `LeadQualificationFlow` con `mode = \"minimal\"` para capturar lo imprescindible antes de pasar al agendamiento.\n\n**Regla 2 (estado \"qualified\")**  \nSi `query` implica agendar/reagendar/cambiar → usar `BookingAgent`.  \nSi `query` pide actualizar información → resetear la calificación (establece `status` en `\"in_progress\"` dentro de `params`) y usar `LeadQualificationFlow`.  \nSi `query` es informativa → usar `KnowledgeAgent`.\n\n**Regla 3 (consultas no relacionadas)**  \nSi el mensaje no está relacionado con calificación ni agenda → usar `KnowledgeAgent`.\n\n**Regla 4 (idioma)**  \nMantén el idioma en todas las salidas igual a `lead.language`.\n\n**Regla 5 (salida estándar)**  \nTodas las respuestas deben ser JSON válidos con `action`, `message`, `params` (incluyendo `lead_data`).\n\n**Regla 6 (no DB)**  \nNunca leer/escribir MongoDB; asume que el orquestador mantiene `lead_data` al día.\n\n---\n\n# Examples (Input → Actions → Output)\n\n**Ejemplo 1 — Lead nuevo que pide agendar**\nInput:\nquery: \"Hola, quiero agendar una cita\"\nstatus: \"new\"\n\nOutput:\n{\n\"action\": \"LeadQualificationFlow\",\n\"message\": \"Perfecto, primero necesito hacerte unas preguntas rápidas para agendar correctamente.\",\n\"params\": {\n\"sessionId\": \"abc123\",\n\"language\": \"es\",\n\"status\": \"in_progress\",\n\"mode\": \"minimal\",\n\"lead_data\": { \"name\": null, \"email\": null, \"country\": null }\n}\n}\n\n\n**Ejemplo 2 — Lead calificado que quiere cambiar horario**\nInput:\nquery: \"¿Puedo cambiar mi horario de reunión?\"\nstatus: \"qualified\"\n\nOutput:\n{\n\"action\": \"BookingAgent\",\n\"message\": \"Claro, puedo ayudarte a reagendar tu cita.\",\n\"params\": {\n\"sessionId\": \"def456\",\n\"language\": \"es\",\n\"status\": \"qualified\",\n\"mode\": \"standard\",\n\"lead_data\": { \"name\": \"Ana\", \"email\": \"ana@example.com\" }\n}\n}\n\n**Ejemplo 3 — Calificación en progreso**\nInput:\nquery: \"Sí, mi empresa se llama DataNova\"\nstatus: \"in_progress\"\n\nOutput:\n{\n\"action\": \"LeadQualificationFlow\",\n\"message\": \"Gracias, continuemos con la siguiente pregunta.\",\n\"params\": {\n\"sessionId\": \"ghi789\",\n\"language\": \"es\",\n\"status\": \"in_progress\",\n\"mode\": \"standard\",\n\"lead_data\": { \"company\": \"DataNova\" }\n}\n}\n\n\n\n# SOP (Standard Operating Procedure)\n1. Recepción: leer lead y query. Confirmar `language`.  \n2️. Intención: clasificar `query` en calificación, agendamiento (incl. cambios) o consulta informativa.  \n3️. Estado: revisar `status` para decidir si continuar calificación o habilitar agendamiento.  \n4️. Selección de herramienta: aplicar las Reglas (LeadQualificationFlow / BookingAgent / KnowledgeAgent).  \n5️. Mensaje: redactar texto breve y claro, consistente con el idioma.  \n6️. Construcción de respuesta: armar JSON con `action`, `message`, `params` (incluye `sessionId`, `language`, `status`, `mode`, `lead_data`).  \n7️. Validación: comprobar JSON válido y coherente. No incluir texto fuera del JSON en la salida.  \n8️. Entrega: devolver el JSON. El orquestador ejecutará la herramienta seleccionada.\n\n---\n\n# Final Notes (Edge Cases, Error Handling, Validation)\n- No inventes datos: si un campo falta en `lead_data`, déjalo como `null` o ausente.  \n- No preguntes calificación directamente: esa lógica pertenece a `LeadQualificationFlow`.  \n- Si el usuario corrige datos y `status` es `\"qualified\"`, volver a `\"in_progress\"` y delegar a `LeadQualificationFlow`.  \n- Si la intención no es clara y el lead no está calificado, prioriza continuar calificación con mensaje orientativo.  \n- Todas las respuestas deben respetar `lead.language`. Si `language` está ausente, usa el idioma detectado en `query`.  \n- Si alguna herramienta falla, devuelve un mensaje claro en `message` y usa `KnowledgeAgent` como fallback.  \n- Siempre retornar JSON válido con las claves requeridas (`action`, `message`, `params`).\n\n---\n\n# Time & Variables in Prompt\nVariables dinámicas disponibles:  \n- `current_datetime_iso`: hora actual (ISO-8601) {$now()}  \n- `current_date`: fecha actual.  \n- `current_year`: año actual.  \n- `timezone`: zona horaria del lead (si se conoce).\n\nUso:  \n- Emplea estas variables solo para contextualizar respuestas o asistir a `BookingAgent`.  \n- Si `timezone` no está definido, no lo asumas; mantén mensajes neutros (“el horario que prefieras”) y deja la resolución exacta a `BookingAgent`.\n"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 1.7,
+        "position": [
+          3664,
+          240
+        ],
+        "id": "9371c838-17eb-4ce6-bcb0-ea629903f4d9",
+        "name": "Dania Assistant"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gpt-4.1-mini"
+          },
+          "responsesApiEnabled": false,
+          "options": {
+            "topP": 0.7
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          3504,
+          592
+        ],
+        "id": "0be1a59d-4714-4212-9330-91da67f505b9",
+        "name": "LLM Dania Assistant",
+        "credentials": {
+          "openAiApi": {
+            "id": "si6kdb1qPc1J6iuX",
+            "name": "OpenAi Supabase Hybrid"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $('SetData').item.json.sessionId }}",
+          "databaseName": "agent_ai",
+          "contextWindowLength": 30
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+        "typeVersion": 1,
+        "position": [
+          3728,
+          592
+        ],
+        "id": "14554405-87a6-4731-b6b0-56dc509f6bcd",
+        "name": "Chat Memory",
+        "credentials": {
+          "mongoDb": {
+            "id": "KNCVFnX6uXTL664z",
+            "name": "MongoDB n8n"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2400,
+          160
+        ],
+        "id": "6eb8b1c4-8444-4a16-a2ab-0707c13b00f9",
+        "name": "end"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "cc534b2f-e384-4088-a8a8-88051e8550ff",
+                "leftValue": "={{ $json.hasOwnProperty('statuses') }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          2160,
+          256
+        ],
+        "id": "001b5875-4ab1-4039-a4b3-42524d936ccb",
+        "name": "billing_message"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "dc3caa78-7970-45ba-9df9-a1d0390cd2e5",
+                "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].type }}",
+                "rightValue": "text",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          2400,
+          352
+        ],
+        "id": "3fd5068f-759e-49fd-b8fa-ead72318ed64",
+        "name": "is_text"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "2e86551a-c102-44da-b0df-ad0b53bf515b",
+                "name": "sessionId",
+                "value": "={{ $json.messages[0].from }}",
+                "type": "string"
+              },
+              {
+                "id": "78cac822-c04a-4e45-90e0-e6dfd5f269ba",
+                "name": "query",
+                "value": "={{ $json.messages[0].text.body }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2624,
+          256
+        ],
+        "id": "c00a9078-a6f9-46e3-9266-6b3800e6bdac",
+        "name": "SetData"
+      },
+      {
+        "parameters": {
+          "operation": "send",
+          "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id }}",
+          "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+          "textBody": "=Este tipo de mensajes no está permitido, agradecemos su comprensión.",
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.whatsApp",
+        "typeVersion": 1.1,
+        "position": [
+          2640,
+          448
+        ],
+        "id": "23b14c31-0088-4d88-aacb-99a2dae16a41",
+        "name": "message_type_not_allowed",
+        "webhookId": "d72a06c4-2527-4f4e-8262-a4eb9b5f2ab4",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "40FvwmbjkbQ3AYME",
+            "name": "WhatsApp Send Inti Menoni"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "send",
+          "phoneNumberId": "845366772000034",
+          "recipientPhoneNumber": "={{ $('SetData').item.json.sessionId }}",
+          "textBody": "={{ $json.message }}",
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.whatsApp",
+        "typeVersion": 1.1,
+        "position": [
+          4416,
+          240
+        ],
+        "id": "50e1caa0-8f20-41f5-8848-769a50417a4e",
+        "name": "Send message",
+        "webhookId": "f47ecd33-d1b7-4c32-bf6a-1bc98c091824",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "fWFw1a9y9jkhDL2J",
+            "name": "WhatsApp Send inti Menoni"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// --- FUNCIÓN PARA GENERAR LA BANDERA ---\n// Convierte código ISO de 2 letras (ej: \"CO\") en emoji (ej: \"🇨🇴\")\nfunction getFlagEmoji(isoCode) {\n  if (!isoCode || isoCode.length !== 2 || isoCode === 'Unknown' || isoCode === 'CB') {\n    return '🌐'; // Globo para desconocidos o genéricos\n  }\n  return String.fromCodePoint(...isoCode.toUpperCase().split('').map(char => 0x1F1E6 + char.charCodeAt(0) - 65));\n}\n\n// --- DICCIONARIO DE PAÍSES (Clave = Prefijo telefónico) ---\n// Agregamos aquí todos los países hispanohablantes y vecinos importantes\nconst countryMap = {\n  '57': { code: 'CO', name: 'Colombia' },\n  '52': { code: 'MX', name: 'México' },\n  '54': { code: 'AR', name: 'Argentina' },\n  '34': { code: 'ES', name: 'España' },\n  '56': { code: 'CL', name: 'Chile' },\n  '51': { code: 'PE', name: 'Perú' },\n  '53': { code: 'CU', name: 'Cuba' },\n  '55': { code: 'BR', name: 'Brasil' },\n  '58': { code: 'VE', name: 'Venezuela' },\n  '502': { code: 'GT', name: 'Guatemala' },\n  '503': { code: 'SV', name: 'El Salvador' },\n  '504': { code: 'HN', name: 'Honduras' },\n  '505': { code: 'NI', name: 'Nicaragua' },\n  '506': { code: 'CR', name: 'Costa Rica' },\n  '507': { code: 'PA', name: 'Panamá' },\n  '591': { code: 'BO', name: 'Bolivia' },\n  '593': { code: 'EC', name: 'Ecuador' },\n  '595': { code: 'PY', name: 'Paraguay' },\n  '598': { code: 'UY', name: 'Uruguay' },\n  '240': { code: 'GQ', name: 'Guinea Ecuatorial' },\n  '376': { code: 'AD', name: 'Andorra' },\n  '501': { code: 'BZ', name: 'Belice' },\n  '351': { code: 'PT', name: 'Portugal' },\n  '33':  { code: 'FR', name: 'Francia' },\n  '39':  { code: 'IT', name: 'Italia' }\n};\n\n// --- LÓGICA PRINCIPAL ---\nfor (const item of $input.all()) {\n  \n  // 1. OBTENCIÓN Y LIMPIEZA\n  // Priorizamos wa_id (que viene del webhook) o phoneId\n  let rawPhone = item.json.contacts?.[0]?.wa_id || item.json.phoneId || \"\";\n  let cleanPhone = rawPhone.toString().replace(/\\D/g, '');\n\n  // 2. CORRECCIÓN DE NÚMEROS (Reglas WhatsApp API Legacy)\n  // México (+52): Si tiene 12 dígitos (52 + 10), falta el '1' intermedio.\n  if (cleanPhone.startsWith('52') && cleanPhone.length === 12) { \n    cleanPhone = '521' + cleanPhone.substring(2); \n  }\n  // Argentina (+54): Si tiene 12 dígitos (54 + 10), falta el '9' intermedio.\n  if (cleanPhone.startsWith('54') && cleanPhone.length === 12) { \n    cleanPhone = '549' + cleanPhone.substring(2); \n  }\n  // Brasil (+55): Ajuste del noveno dígito (si aplica a tu caso específico)\n  if (cleanPhone.startsWith('55') && cleanPhone.length === 12) {\n    const areaCode = cleanPhone.substring(2, 4);\n    cleanPhone = '55' + areaCode + '9' + cleanPhone.substring(4);\n  }\n  \n  // Guardamos el ID corregido para usarlo en el envío de mensajes\n  item.json.wa_id_fixed = cleanPhone;\n\n  // 3. DETECCIÓN DE PAÍS\n  let countryCode = \"Unknown\";\n  let countryName = \"Desconocido\";\n\n  // CASO ESPECIAL: Norteamérica (+1) - Requiere revisar Area Codes\n  if (cleanPhone.startsWith('1') && cleanPhone.length >= 4) {\n    const areaCode = parseInt(cleanPhone.substring(1, 4));\n    const canadaCodes = [204, 226, 236, 249, 250, 289, 306, 343, 365, 403, 416, 418, 431, 437, 438, 450, 506, 514, 519, 548, 579, 581, 587, 604, 613, 639, 647, 705, 709, 778, 780, 782, 807, 819, 825, 867, 873, 902, 905];\n    const domRepCodes = [809, 829, 849]; // República Dominicana 🇩🇴\n    const puertoRicoCodes = [787, 939];  // Puerto Rico 🇵🇷\n    \n    if (canadaCodes.includes(areaCode)) { countryCode = \"CA\"; countryName = \"Canadá\"; }\n    else if (domRepCodes.includes(areaCode)) { countryCode = \"DO\"; countryName = \"República Dominicana\"; }\n    else if (puertoRicoCodes.includes(areaCode)) { countryCode = \"PR\"; countryName = \"Puerto Rico\"; }\n    else { countryCode = \"US\"; countryName = \"Estados Unidos\"; } // Asumimos resto es USA o Caribe genérico\n  } \n  else {\n    // RESTO DEL MUNDO (Búsqueda en el Mapa)\n    // Ordenamos las claves por longitud descendente para evitar falsos positivos\n    // (Ej: Que no detecte '59' antes que '593')\n    const sortedPrefixes = Object.keys(countryMap).sort((a, b) => b.length - a.length);\n\n    for (const prefix of sortedPrefixes) {\n      if (cleanPhone.startsWith(prefix)) {\n        countryCode = countryMap[prefix].code;\n        countryName = countryMap[prefix].name;\n        break; // ¡Encontrado! Salimos del bucle\n      }\n    }\n  }\n\n  // 4. ASIGNACIÓN FINAL\n  item.json.country_iso = countryCode;\n  item.json.country_name = countryName;\n  item.json.country_flag = getFlagEmoji(countryCode);\n}\n\nreturn $input.all();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1904,
+          256
+        ],
+        "id": "0c2d21de-b545-4d6d-8c0d-0ab8fb7b462c",
+        "name": "NormalizaePhones"
+      },
+      {
+        "parameters": {
+          "updates": [
+            "messages"
+          ],
+          "options": {}
+        },
+        "type": "n8n-nodes-base.whatsAppTrigger",
+        "typeVersion": 1,
+        "position": [
+          1648,
+          256
+        ],
+        "id": "34055efe-e5b2-4ed4-b0b0-bb19d6987753",
+        "name": "WhatsApp Trigger",
+        "webhookId": "10459b7c-c180-45da-a4a2-6477efa218c0",
+        "credentials": {
+          "whatsAppTriggerApi": {
+            "id": "cZyb6dr4x4ekScrv",
+            "name": "WhatsApp IntiMenoni"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "description": "usa esta herrramienta para cuando el usuario quiere realizar modificaciones sobre los datos registrados ",
+          "workflowId": {
+            "__rl": true,
+            "value": "3tPqNquDs6jC5YS8",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/3tPqNquDs6jC5YS8",
+            "cachedResultName": "Lead Qualification Flow v3.1"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sessionId": "={{ $('Find Lead').item.json.sessionId }}",
+              "total_questions": "={{ $('Find Lead').item.json.total_questions || 0 }}",
+              "name": "={{ $('Find Lead').item.json.name }}",
+              "email": "={{ $('Find Lead').item.json.email }}",
+              "country": "={{ $('Find Lead').item.json.country }}",
+              "city": "={{ $('Find Lead').item.json.city }}",
+              "work_type": "={{ $('Find Lead').item.json.work_type }}",
+              "business_name": "={{ $('Find Lead').item.json.business_name }}",
+              "role": "={{ $('Find Lead').item.json.role }}",
+              "business_model": "={{ $('Find Lead').item.json.business_model }}",
+              "team_size": "={{ $('Find Lead').item.json.team_size }}",
+              "ai_knowledge": "={{ $('Find Lead').item.json.ai_knowledge }}",
+              "main_challenge": "={{ $('Find Lead').item.json.main_challenge }}",
+              "past_attempt": "={{ $('Find Lead').item.json.past_attempt }}",
+              "timezone": "={{ $('Find Lead').item.json.timezone }}",
+              "language": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('language', `language: registra el idioma de acuerdo a las preferencias del usuario\nes: Espanol,\nen: ingles`, 'string') }}",
+              "current_question_index": "={{ $('Find Lead').item.json.current_question_index }}",
+              "status": "={{ $('Find Lead').item.json.status }}",
+              "mode": "={{ $('Find Lead').item.json.mode || 'full' }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "sessionId",
+                "displayName": "sessionId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "name",
+                "displayName": "name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "country",
+                "displayName": "country",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "city",
+                "displayName": "city",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "work_type",
+                "displayName": "work_type",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "business_name",
+                "displayName": "business_name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "role",
+                "displayName": "role",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "business_model",
+                "displayName": "business_model",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "team_size",
+                "displayName": "team_size",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "ai_knowledge",
+                "displayName": "ai_knowledge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "main_challenge",
+                "displayName": "main_challenge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "past_attempt",
+                "displayName": "past_attempt",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "timezone",
+                "displayName": "timezone",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "language",
+                "displayName": "language",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "current_question_index",
+                "displayName": "current_question_index",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "total_questions",
+                "displayName": "total_questions",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "number",
+                "removed": false
+              },
+              {
+                "id": "mode",
+                "displayName": "mode",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2.2,
+        "position": [
+          3936,
+          592
+        ],
+        "id": "3b27da34-4f67-4094-86b6-22e56f2fb90a",
+        "name": "LeadQualificationFlow"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "34f6ecf4-a855-4cc7-8dde-11e4ac892c96",
+                "leftValue": "={{ $json.status }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          3024,
+          256
+        ],
+        "id": "809d0555-8ad5-48e9-bf4a-78111a81507a",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "operation": "insert",
+          "collection": "leads",
+          "fields": "=sessionId, name, email, country, city, work_tye, business_model,team_size,ai_knowledge,main_challenge,past_attempt,timezone,language,status,current_question_index,total_questions,mode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          3392,
+          368
+        ],
+        "id": "2c2300d1-984a-4824-827b-4cbecac12cd3",
+        "name": "Insert documents",
+        "credentials": {
+          "mongoDb": {
+            "id": "KNCVFnX6uXTL664z",
+            "name": "MongoDB n8n"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "raw",
+          "jsonOutput": "={\n  \"sessionId\": \"{{ $('SetData').item.json.sessionId }}\",\n  \"name\": null,\n  \"email\": null,\n  \"country\": null,\n  \"city\": null,\n  \"work_type\": null,\n  \"business_name\": null,\n  \"role\": null,\n  \"business_model\": null,\n  \"team_size\": null,\n  \"ai_knowledge\": null,\n  \"main_challenge\": null,\n  \"past_attempt\": null,\n  \"timezone\": null,\n  \"language\": null,\n  \"status\": \"in_progress\",\n  \"current_question_index\": 0,\n  \"total_questions\": 13,\n  \"mode\": null\n}\n\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3184,
+          368
+        ],
+        "id": "687ccb22-ab4b-4d65-9a51-13be41a1c873",
+        "name": "Set Default Lead"
+      },
+      {
+        "parameters": {
+          "collection": "leads",
+          "options": {
+            "limit": 1
+          },
+          "query": "={ \"sessionId\": \"{{ $json.sessionId }}\" }\n"
+        },
+        "id": "eef7843a-65dd-4d89-9b8c-417c2c40912d",
+        "name": "Find Lead",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          2832,
+          256
+        ],
+        "alwaysOutputData": true,
+        "credentials": {
+          "mongoDb": {
+            "id": "KNCVFnX6uXTL664z",
+            "name": "MongoDB n8n"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e595b669-2836-463f-a390-b261d5091815",
+                "name": "message",
+                "value": "={{ $json.message }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          4208,
+          240
+        ],
+        "id": "dba0efb8-a69a-41dd-a42f-0ba3af79bbf2",
+        "name": "Set Response"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Parse Dania's output if it's returned as a string\nlet raw = $json.output;\n\n// Sometimes output might already be parsed\nif (typeof raw === \"object\") {\n  return [{ json: raw }];\n}\n\n// Clean and parse string safely\ntry {\n  const parsed = JSON.parse(raw);\n  return [{ json: parsed }];\n} catch (e) {\n  return [{ json: { action: \"error\", message: \"Invalid JSON output\", raw_output: raw } }];\n}\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4000,
+          240
+        ],
+        "id": "3b2cd9b9-a4a8-4789-b8ba-c1d4819b8747",
+        "name": "parser"
+      }
+    ],
+    "connections": {
+      "Dania Assistant": {
+        "main": [
+          [
+            {
+              "node": "parser",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "LLM Dania Assistant": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Dania Assistant",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "Dania Assistant",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "billing_message": {
+        "main": [
+          [
+            {
+              "node": "end",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "is_text",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "is_text": {
+        "main": [
+          [
+            {
+              "node": "SetData",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "message_type_not_allowed",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "SetData": {
+        "main": [
+          [
+            {
+              "node": "Find Lead",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "WhatsApp Trigger": {
+        "main": [
+          [
+            {
+              "node": "NormalizaePhones",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "NormalizaePhones": {
+        "main": [
+          [
+            {
+              "node": "billing_message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "LeadQualificationFlow": {
+        "ai_tool": [
+          [
+            {
+              "node": "Dania Assistant",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Dania Assistant",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Set Default Lead",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Default Lead": {
+        "main": [
+          [
+            {
+              "node": "Insert documents",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert documents": {
+        "main": [
+          [
+            {
+              "node": "Dania Assistant",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Find Lead": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "parser": {
+        "main": [
+          [
+            {
+              "node": "Set Response",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Response": {
+        "main": [
+          [
+            {
+              "node": "Send message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Alex Guajardo",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "899d9798-715a-4420-8455-a4ecd4d9929f",
+  "connections": {
+    "Dania Assistant": {
+      "main": [
+        [
+          {
+            "node": "parser",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM Dania Assistant": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "billing_message": {
+      "main": [
+        [
+          {
+            "node": "end",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "is_text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "is_text": {
+      "main": [
+        [
+          {
+            "node": "SetData",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "message_type_not_allowed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SetData": {
+      "main": [
+        [
+          {
+            "node": "Find Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "NormalizaePhones",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NormalizaePhones": {
+      "main": [
+        [
+          {
+            "node": "billing_message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LeadQualificationFlow": {
+      "ai_tool": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set Default Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Default Lead": {
+      "main": [
+        [
+          {
+            "node": "Insert documents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert documents": {
+      "main": [
+        [
+          {
+            "node": "Dania Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Lead": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "parser": {
+      "main": [
+        [
+          {
+            "node": "Set Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Response": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-19T13:13:11.074Z",
+  "id": "33Scn6gyFw0eglJy",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Principal_Flow",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "\n![alt text](https://hello.dania.ai/assets/dania_logo_1754664182694-DtgVFTaW.png)\n\n\n## 🧠 Brain/Memory",
+        "height": 656,
+        "width": 272,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -704,
+        48
+      ],
+      "id": "81bc1550-f649-4645-94d1-55e4696fd3a2",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Buffer",
+        "height": 544,
+        "width": 2672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1088,
+        80
+      ],
+      "id": "90a9c776-ba07-468a-b556-2207232f52c3",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "\n    \n## Trigger",
+        "height": 656,
+        "width": 294,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        48
+      ],
+      "id": "3b205891-845e-434b-bf13-a8f634901597",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=query: {{ $('SetData').item.json.query }}",
+        "options": {
+          "systemMessage": "=# Overview\nEres **Dania Assistant**, un agente orquestador que decide qué acción o herramienta debe manejar cada mensaje entrante del lead dentro de un sistema automatizado de **calificación y agendamiento**.  \nEstás integrado al flujo previo del orquestador (p. ej., n8n/backend) que te entrega el **lead completo** y **no** interactúas directamente con bases de datos; tu función es seleccionar la herramienta correcta, mantener coherencia conversacional.\n---\n\n# Context\n- Siempre recibes un **objeto lead completo** con (ejemplos):  \n  `sessionId`, `status` (\"new\" | \"in_progress\" | \"qualified\"), `language`, `current_question_index`, `mode` y todos los campos de calificación (nombre, email, país, etc., con `null` si faltan).  \n- El mensaje del usuario llega como `query` y actúa como **señal de intención** (calificar, agendar/reagendar o consulta informativa).  \n- El flujo **previo** ya:\n  - Crea o encuentra el lead en MongoDB.  \n  - Inicializa campos faltantes con `null`.  \n  - Te pasa el lead actualizado.  \n- **Nunca** debes consultar ni modificar MongoDB.  \n- Tu objetivo es **mantener la conversación en el mismo idioma del lead**, avanzar la calificación cuando aplique, ofrecer agendamiento cuando el lead esté listo y responder informativamente cuando solo haga preguntas.  \n- Si `status` no está presente, trátalo como `\"new\"`.  \n- `mode` puede tomar los valores:\n  - `\"full\"` → todas las preguntas de calificación.  \n  - `\"minimal\"` → solo las preguntas obligatorias para agendar.  \n  - `\"standard\"` → flujo normal o mixto.\n\n---\n\n# Instructions (step-by-step)\n1. **Leer** el `lead` completo y el `query` (mensaje del usuario).  \n2. **Detectar idioma** desde `lead.language` y mantenerlo en todas las respuestas.  \n3. **Inferir intención** desde `query`:  \n   a) continuar/arrancar calificación,  \n   b) agendar/reagendar/cambiar cita,  \n   c) consulta informativa no relacionada con calificación/agenda.  \n4. **Evaluar estado del lead** (`status`):  \n   - `\"new\"` o `\"in_progress\"` → priorizar calificación.  \n   - `\"qualified\"` → habilitar agendamiento si `query` lo indica;  \n     si pide actualizar datos, reiniciar calificación;  \n     si solo consulta, responder con información.  \n5. **Seleccionar herramienta**: `LeadQualificationFlow`, `BookingAgent` o `KnowledgeAgent`.  \n6. **Definir mensaje al usuario** (breve, claro, en el idioma del lead) que explique el siguiente paso o aporte la información solicitada.  \n7. **Construir salida** en **JSON válido** con la forma:\n{\n\"action\": \"LeadQualificationFlow\" | \"BookingAgent\" | \"KnowledgeAgent\",\n\"message\": \"<texto al usuario>\",\n\"params\": {\n\"sessionId\": \"...\",\n\"language\": \"...\",\n\"status\": \"...\",\n\"mode\": \"...\",\n\"lead_data\": { ... }\n}\n}\n\n\nNo formules preguntas de calificación directamente; delega siempre a `LeadQualificationFlow`.  \nNo toques la base de datos; asume que el lead está actualizado por el flujo previo.  \nValida que `action`, `message` y `params` estén presentes y consistentes antes de responder.\n\n---\n\n# Tools\n\n### LeadQualificationFlow\n**Propósito:** Gestiona preguntas de calificación paso a paso.  \n**Inputs esperados (en params):**  \n`sessionId`, `language`, `status`, `mode` (p. ej., `\"minimal\"` si el usuario solo quiere agendar), `lead_data` completo.  \n**Notas:** Es el único módulo que hace y registra preguntas de calificación.\n\n### BookingAgent\n**Propósito:** Agendar, reagendar o cambiar citas cuando el lead ya está `qualified` o el flujo determine que procede.  \n**Inputs esperados (en params):**  \n`sessionId`, `language`, `status`, `mode`, `lead_data` (para contexto).  \n**Notas:** Interpreta solicitudes de fecha/horario y ofrece opciones/confirmaciones.\n\n### KnowledgeAgent\n**Propósito:** Responder preguntas generales de la empresa/servicio no relacionadas con calificación o agenda.  \n**Inputs esperados (en params):**  \n`sessionId`, `language`, `status`, `mode`, `lead_data`.  \n**Notas:** Mantiene tono informativo y consistente con el idioma.\n\n---\n\n# Rules for Tools\n**Regla 1 (estado \"new\" o \"in_progress\")**  \nSi `status` ∈ {\"new\",\"in_progress\"} → usar `LeadQualificationFlow` para continuar o iniciar calificación.  \nSi el usuario indica explícitamente que solo quiere agendar → llamar `LeadQualificationFlow` con `mode = \"minimal\"` para capturar lo imprescindible antes de pasar al agendamiento.\n\n**Regla 2 (estado \"qualified\")**  \nSi `query` implica agendar/reagendar/cambiar → usar `BookingAgent`.  \nSi `query` pide actualizar información → resetear la calificación (establece `status` en `\"in_progress\"` dentro de `params`) y usar `LeadQualificationFlow`.  \nSi `query` es informativa → usar `KnowledgeAgent`.\n\n**Regla 3 (consultas no relacionadas)**  \nSi el mensaje no está relacionado con calificación ni agenda → usar `KnowledgeAgent`.\n\n**Regla 4 (idioma)**  \nMantén el idioma en todas las salidas igual a `lead.language`.\n\n**Regla 5 (salida estándar)**  \nTodas las respuestas deben ser JSON válidos con `action`, `message`, `params` (incluyendo `lead_data`).\n\n**Regla 6 (no DB)**  \nNunca leer/escribir MongoDB; asume que el orquestador mantiene `lead_data` al día.\n\n---\n\n# Examples (Input → Actions → Output)\n\n**Ejemplo 1 — Lead nuevo que pide agendar**\nInput:\nquery: \"Hola, quiero agendar una cita\"\nstatus: \"new\"\n\nOutput:\n{\n\"action\": \"LeadQualificationFlow\",\n\"message\": \"Perfecto, primero necesito hacerte unas preguntas rápidas para agendar correctamente.\",\n\"params\": {\n\"sessionId\": \"abc123\",\n\"language\": \"es\",\n\"status\": \"in_progress\",\n\"mode\": \"minimal\",\n\"lead_data\": { \"name\": null, \"email\": null, \"country\": null }\n}\n}\n\n\n**Ejemplo 2 — Lead calificado que quiere cambiar horario**\nInput:\nquery: \"¿Puedo cambiar mi horario de reunión?\"\nstatus: \"qualified\"\n\nOutput:\n{\n\"action\": \"BookingAgent\",\n\"message\": \"Claro, puedo ayudarte a reagendar tu cita.\",\n\"params\": {\n\"sessionId\": \"def456\",\n\"language\": \"es\",\n\"status\": \"qualified\",\n\"mode\": \"standard\",\n\"lead_data\": { \"name\": \"Ana\", \"email\": \"ana@example.com\" }\n}\n}\n\n**Ejemplo 3 — Calificación en progreso**\nInput:\nquery: \"Sí, mi empresa se llama DataNova\"\nstatus: \"in_progress\"\n\nOutput:\n{\n\"action\": \"LeadQualificationFlow\",\n\"message\": \"Gracias, continuemos con la siguiente pregunta.\",\n\"params\": {\n\"sessionId\": \"ghi789\",\n\"language\": \"es\",\n\"status\": \"in_progress\",\n\"mode\": \"standard\",\n\"lead_data\": { \"company\": \"DataNova\" }\n}\n}\n\n\n\n# SOP (Standard Operating Procedure)\n1. Recepción: leer lead y query. Confirmar `language`.  \n2️. Intención: clasificar `query` en calificación, agendamiento (incl. cambios) o consulta informativa.  \n3️. Estado: revisar `status` para decidir si continuar calificación o habilitar agendamiento.  \n4️. Selección de herramienta: aplicar las Reglas (LeadQualificationFlow / BookingAgent / KnowledgeAgent).  \n5️. Mensaje: redactar texto breve y claro, consistente con el idioma.  \n6️. Construcción de respuesta: armar JSON con `action`, `message`, `params` (incluye `sessionId`, `language`, `status`, `mode`, `lead_data`).  \n7️. Validación: comprobar JSON válido y coherente. No incluir texto fuera del JSON en la salida.  \n8️. Entrega: devolver el JSON. El orquestador ejecutará la herramienta seleccionada.\n\n---\n\n# Final Notes (Edge Cases, Error Handling, Validation)\n- No inventes datos: si un campo falta en `lead_data`, déjalo como `null` o ausente.  \n- No preguntes calificación directamente: esa lógica pertenece a `LeadQualificationFlow`.  \n- Si el usuario corrige datos y `status` es `\"qualified\"`, volver a `\"in_progress\"` y delegar a `LeadQualificationFlow`.  \n- Si la intención no es clara y el lead no está calificado, prioriza continuar calificación con mensaje orientativo.  \n- Todas las respuestas deben respetar `lead.language`. Si `language` está ausente, usa el idioma detectado en `query`.  \n- Si alguna herramienta falla, devuelve un mensaje claro en `message` y usa `KnowledgeAgent` como fallback.  \n- Siempre retornar JSON válido con las claves requeridas (`action`, `message`, `params`).\n\n---\n\n# Time & Variables in Prompt\nVariables dinámicas disponibles:  \n- `current_datetime_iso`: hora actual (ISO-8601) {$now()}  \n- `current_date`: fecha actual.  \n- `current_year`: año actual.  \n- `timezone`: zona horaria del lead (si se conoce).\n\nUso:  \n- Emplea estas variables solo para contextualizar respuestas o asistir a `BookingAgent`.  \n- Si `timezone` no está definido, no lo asumas; mantén mensajes neutros (“el horario que prefieras”) y deja la resolución exacta a `BookingAgent`.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        3664,
+        240
+      ],
+      "id": "9371c838-17eb-4ce6-bcb0-ea629903f4d9",
+      "name": "Dania Assistant"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "responsesApiEnabled": false,
+        "options": {
+          "topP": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        3504,
+        592
+      ],
+      "id": "0be1a59d-4714-4212-9330-91da67f505b9",
+      "name": "LLM Dania Assistant",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('SetData').item.json.sessionId }}",
+        "databaseName": "agent_ai",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        3728,
+        592
+      ],
+      "id": "14554405-87a6-4731-b6b0-56dc509f6bcd",
+      "name": "Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2400,
+        160
+      ],
+      "id": "6eb8b1c4-8444-4a16-a2ab-0707c13b00f9",
+      "name": "end"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cc534b2f-e384-4088-a8a8-88051e8550ff",
+              "leftValue": "={{ $json.hasOwnProperty('statuses') }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2160,
+        256
+      ],
+      "id": "001b5875-4ab1-4039-a4b3-42524d936ccb",
+      "name": "billing_message"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dc3caa78-7970-45ba-9df9-a1d0390cd2e5",
+              "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].type }}",
+              "rightValue": "text",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2400,
+        352
+      ],
+      "id": "3fd5068f-759e-49fd-b8fa-ead72318ed64",
+      "name": "is_text"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2e86551a-c102-44da-b0df-ad0b53bf515b",
+              "name": "sessionId",
+              "value": "={{ $json.messages[0].from }}",
+              "type": "string"
+            },
+            {
+              "id": "78cac822-c04a-4e45-90e0-e6dfd5f269ba",
+              "name": "query",
+              "value": "={{ $json.messages[0].text.body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2624,
+        256
+      ],
+      "id": "c00a9078-a6f9-46e3-9266-6b3800e6bdac",
+      "name": "SetData"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id }}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "textBody": "=Este tipo de mensajes no está permitido, agradecemos su comprensión.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        2640,
+        448
+      ],
+      "id": "23b14c31-0088-4d88-aacb-99a2dae16a41",
+      "name": "message_type_not_allowed",
+      "webhookId": "d72a06c4-2527-4f4e-8262-a4eb9b5f2ab4",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "40FvwmbjkbQ3AYME",
+          "name": "WhatsApp Send Inti Menoni"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "845366772000034",
+        "recipientPhoneNumber": "={{ $('SetData').item.json.sessionId }}",
+        "textBody": "={{ $json.message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        4416,
+        240
+      ],
+      "id": "50e1caa0-8f20-41f5-8848-769a50417a4e",
+      "name": "Send message",
+      "webhookId": "f47ecd33-d1b7-4c32-bf6a-1bc98c091824",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "fWFw1a9y9jkhDL2J",
+          "name": "WhatsApp Send inti Menoni"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// --- FUNCIÓN PARA GENERAR LA BANDERA ---\n// Convierte código ISO de 2 letras (ej: \"CO\") en emoji (ej: \"🇨🇴\")\nfunction getFlagEmoji(isoCode) {\n  if (!isoCode || isoCode.length !== 2 || isoCode === 'Unknown' || isoCode === 'CB') {\n    return '🌐'; // Globo para desconocidos o genéricos\n  }\n  return String.fromCodePoint(...isoCode.toUpperCase().split('').map(char => 0x1F1E6 + char.charCodeAt(0) - 65));\n}\n\n// --- DICCIONARIO DE PAÍSES (Clave = Prefijo telefónico) ---\n// Agregamos aquí todos los países hispanohablantes y vecinos importantes\nconst countryMap = {\n  '57': { code: 'CO', name: 'Colombia' },\n  '52': { code: 'MX', name: 'México' },\n  '54': { code: 'AR', name: 'Argentina' },\n  '34': { code: 'ES', name: 'España' },\n  '56': { code: 'CL', name: 'Chile' },\n  '51': { code: 'PE', name: 'Perú' },\n  '53': { code: 'CU', name: 'Cuba' },\n  '55': { code: 'BR', name: 'Brasil' },\n  '58': { code: 'VE', name: 'Venezuela' },\n  '502': { code: 'GT', name: 'Guatemala' },\n  '503': { code: 'SV', name: 'El Salvador' },\n  '504': { code: 'HN', name: 'Honduras' },\n  '505': { code: 'NI', name: 'Nicaragua' },\n  '506': { code: 'CR', name: 'Costa Rica' },\n  '507': { code: 'PA', name: 'Panamá' },\n  '591': { code: 'BO', name: 'Bolivia' },\n  '593': { code: 'EC', name: 'Ecuador' },\n  '595': { code: 'PY', name: 'Paraguay' },\n  '598': { code: 'UY', name: 'Uruguay' },\n  '240': { code: 'GQ', name: 'Guinea Ecuatorial' },\n  '376': { code: 'AD', name: 'Andorra' },\n  '501': { code: 'BZ', name: 'Belice' },\n  '351': { code: 'PT', name: 'Portugal' },\n  '33':  { code: 'FR', name: 'Francia' },\n  '39':  { code: 'IT', name: 'Italia' }\n};\n\n// --- LÓGICA PRINCIPAL ---\nfor (const item of $input.all()) {\n  \n  // 1. OBTENCIÓN Y LIMPIEZA\n  // Priorizamos wa_id (que viene del webhook) o phoneId\n  let rawPhone = item.json.contacts?.[0]?.wa_id || item.json.phoneId || \"\";\n  let cleanPhone = rawPhone.toString().replace(/\\D/g, '');\n\n  // 2. CORRECCIÓN DE NÚMEROS (Reglas WhatsApp API Legacy)\n  // México (+52): Si tiene 12 dígitos (52 + 10), falta el '1' intermedio.\n  if (cleanPhone.startsWith('52') && cleanPhone.length === 12) { \n    cleanPhone = '521' + cleanPhone.substring(2); \n  }\n  // Argentina (+54): Si tiene 12 dígitos (54 + 10), falta el '9' intermedio.\n  if (cleanPhone.startsWith('54') && cleanPhone.length === 12) { \n    cleanPhone = '549' + cleanPhone.substring(2); \n  }\n  // Brasil (+55): Ajuste del noveno dígito (si aplica a tu caso específico)\n  if (cleanPhone.startsWith('55') && cleanPhone.length === 12) {\n    const areaCode = cleanPhone.substring(2, 4);\n    cleanPhone = '55' + areaCode + '9' + cleanPhone.substring(4);\n  }\n  \n  // Guardamos el ID corregido para usarlo en el envío de mensajes\n  item.json.wa_id_fixed = cleanPhone;\n\n  // 3. DETECCIÓN DE PAÍS\n  let countryCode = \"Unknown\";\n  let countryName = \"Desconocido\";\n\n  // CASO ESPECIAL: Norteamérica (+1) - Requiere revisar Area Codes\n  if (cleanPhone.startsWith('1') && cleanPhone.length >= 4) {\n    const areaCode = parseInt(cleanPhone.substring(1, 4));\n    const canadaCodes = [204, 226, 236, 249, 250, 289, 306, 343, 365, 403, 416, 418, 431, 437, 438, 450, 506, 514, 519, 548, 579, 581, 587, 604, 613, 639, 647, 705, 709, 778, 780, 782, 807, 819, 825, 867, 873, 902, 905];\n    const domRepCodes = [809, 829, 849]; // República Dominicana 🇩🇴\n    const puertoRicoCodes = [787, 939];  // Puerto Rico 🇵🇷\n    \n    if (canadaCodes.includes(areaCode)) { countryCode = \"CA\"; countryName = \"Canadá\"; }\n    else if (domRepCodes.includes(areaCode)) { countryCode = \"DO\"; countryName = \"República Dominicana\"; }\n    else if (puertoRicoCodes.includes(areaCode)) { countryCode = \"PR\"; countryName = \"Puerto Rico\"; }\n    else { countryCode = \"US\"; countryName = \"Estados Unidos\"; } // Asumimos resto es USA o Caribe genérico\n  } \n  else {\n    // RESTO DEL MUNDO (Búsqueda en el Mapa)\n    // Ordenamos las claves por longitud descendente para evitar falsos positivos\n    // (Ej: Que no detecte '59' antes que '593')\n    const sortedPrefixes = Object.keys(countryMap).sort((a, b) => b.length - a.length);\n\n    for (const prefix of sortedPrefixes) {\n      if (cleanPhone.startsWith(prefix)) {\n        countryCode = countryMap[prefix].code;\n        countryName = countryMap[prefix].name;\n        break; // ¡Encontrado! Salimos del bucle\n      }\n    }\n  }\n\n  // 4. ASIGNACIÓN FINAL\n  item.json.country_iso = countryCode;\n  item.json.country_name = countryName;\n  item.json.country_flag = getFlagEmoji(countryCode);\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1904,
+        256
+      ],
+      "id": "0c2d21de-b545-4d6d-8c0d-0ab8fb7b462c",
+      "name": "NormalizaePhones"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        1648,
+        256
+      ],
+      "id": "34055efe-e5b2-4ed4-b0b0-bb19d6987753",
+      "name": "WhatsApp Trigger",
+      "webhookId": "10459b7c-c180-45da-a4a2-6477efa218c0",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "cZyb6dr4x4ekScrv",
+          "name": "WhatsApp IntiMenoni"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "usa esta herrramienta para cuando el usuario quiere realizar modificaciones sobre los datos registrados ",
+        "workflowId": {
+          "__rl": true,
+          "value": "3tPqNquDs6jC5YS8",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/3tPqNquDs6jC5YS8",
+          "cachedResultName": "Lead Qualification Flow v3.1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "sessionId": "={{ $('Find Lead').item.json.sessionId }}",
+            "total_questions": "={{ $('Find Lead').item.json.total_questions || 0 }}",
+            "name": "={{ $('Find Lead').item.json.name }}",
+            "email": "={{ $('Find Lead').item.json.email }}",
+            "country": "={{ $('Find Lead').item.json.country }}",
+            "city": "={{ $('Find Lead').item.json.city }}",
+            "work_type": "={{ $('Find Lead').item.json.work_type }}",
+            "business_name": "={{ $('Find Lead').item.json.business_name }}",
+            "role": "={{ $('Find Lead').item.json.role }}",
+            "business_model": "={{ $('Find Lead').item.json.business_model }}",
+            "team_size": "={{ $('Find Lead').item.json.team_size }}",
+            "ai_knowledge": "={{ $('Find Lead').item.json.ai_knowledge }}",
+            "main_challenge": "={{ $('Find Lead').item.json.main_challenge }}",
+            "past_attempt": "={{ $('Find Lead').item.json.past_attempt }}",
+            "timezone": "={{ $('Find Lead').item.json.timezone }}",
+            "language": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('language', `language: registra el idioma de acuerdo a las preferencias del usuario\nes: Espanol,\nen: ingles`, 'string') }}",
+            "current_question_index": "={{ $('Find Lead').item.json.current_question_index }}",
+            "status": "={{ $('Find Lead').item.json.status }}",
+            "mode": "={{ $('Find Lead').item.json.mode || 'full' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "country",
+              "displayName": "country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "work_type",
+              "displayName": "work_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "business_name",
+              "displayName": "business_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "business_model",
+              "displayName": "business_model",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "team_size",
+              "displayName": "team_size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "ai_knowledge",
+              "displayName": "ai_knowledge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "main_challenge",
+              "displayName": "main_challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "past_attempt",
+              "displayName": "past_attempt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "timezone",
+              "displayName": "timezone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "language",
+              "displayName": "language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "current_question_index",
+              "displayName": "current_question_index",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "total_questions",
+              "displayName": "total_questions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "mode",
+              "displayName": "mode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        3936,
+        592
+      ],
+      "id": "3b27da34-4f67-4094-86b6-22e56f2fb90a",
+      "name": "LeadQualificationFlow"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "34f6ecf4-a855-4cc7-8dde-11e4ac892c96",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3024,
+        256
+      ],
+      "id": "809d0555-8ad5-48e9-bf4a-78111a81507a",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "leads",
+        "fields": "=sessionId, name, email, country, city, work_tye, business_model,team_size,ai_knowledge,main_challenge,past_attempt,timezone,language,status,current_question_index,total_questions,mode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        3392,
+        368
+      ],
+      "id": "2c2300d1-984a-4824-827b-4cbecac12cd3",
+      "name": "Insert documents",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"sessionId\": \"{{ $('SetData').item.json.sessionId }}\",\n  \"name\": null,\n  \"email\": null,\n  \"country\": null,\n  \"city\": null,\n  \"work_type\": null,\n  \"business_name\": null,\n  \"role\": null,\n  \"business_model\": null,\n  \"team_size\": null,\n  \"ai_knowledge\": null,\n  \"main_challenge\": null,\n  \"past_attempt\": null,\n  \"timezone\": null,\n  \"language\": null,\n  \"status\": \"in_progress\",\n  \"current_question_index\": 0,\n  \"total_questions\": 13,\n  \"mode\": null\n}\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3184,
+        368
+      ],
+      "id": "687ccb22-ab4b-4d65-9a51-13be41a1c873",
+      "name": "Set Default Lead"
+    },
+    {
+      "parameters": {
+        "collection": "leads",
+        "options": {
+          "limit": 1
+        },
+        "query": "={ \"sessionId\": \"{{ $json.sessionId }}\" }\n"
+      },
+      "id": "eef7843a-65dd-4d89-9b8c-417c2c40912d",
+      "name": "Find Lead",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        2832,
+        256
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e595b669-2836-463f-a390-b261d5091815",
+              "name": "message",
+              "value": "={{ $json.message }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4208,
+        240
+      ],
+      "id": "dba0efb8-a69a-41dd-a42f-0ba3af79bbf2",
+      "name": "Set Response"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Dania's output if it's returned as a string\nlet raw = $json.output;\n\n// Sometimes output might already be parsed\nif (typeof raw === \"object\") {\n  return [{ json: raw }];\n}\n\n// Clean and parse string safely\ntry {\n  const parsed = JSON.parse(raw);\n  return [{ json: parsed }];\n} catch (e) {\n  return [{ json: { action: \"error\", message: \"Invalid JSON output\", raw_output: raw } }];\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4000,
+        240
+      ],
+      "id": "3b2cd9b9-a4a8-4789-b8ba-c1d4819b8747",
+      "name": "parser"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T13:13:11.086Z",
+      "createdAt": "2026-01-19T13:13:11.086Z",
+      "role": "workflow:owner",
+      "workflowId": "33Scn6gyFw0eglJy",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-20T07:53:15.000Z",
+  "versionId": "899d9798-715a-4420-8455-a4ecd4d9929f"
+}
