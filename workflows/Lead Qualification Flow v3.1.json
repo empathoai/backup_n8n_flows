@@ -1,0 +1,760 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Questions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Questions": {
+      "main": [
+        [
+          {
+            "node": "Filter Questions By Mode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Questions By Mode": {
+      "main": [
+        [
+          {
+            "node": "Get Current Question",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Current Question": {
+      "main": [
+        [
+          {
+            "node": "IF Is City Question",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Is City Question": {
+      "main": [
+        [
+          {
+            "node": "Infer Timezone",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Validate & Normalize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Infer Timezone": {
+      "main": [
+        [
+          {
+            "node": "IF Needs AI Timezone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Needs AI Timezone": {
+      "main": [
+        [
+          {
+            "node": "timeZone retriver",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge Timezone Results",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Parse AI Timezone": {
+      "main": [
+        [
+          {
+            "node": "Merge Timezone Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Timezone Results": {
+      "main": [
+        [
+          {
+            "node": "Update MongoDB (Timezone)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update MongoDB (Timezone)": {
+      "main": [
+        [
+          {
+            "node": "Return After Timezone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate & Normalize": {
+      "main": [
+        [
+          {
+            "node": "IF Is Valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Is Valid": {
+      "main": [
+        [
+          {
+            "node": "Update MongoDB (Field)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update MongoDB (Field)": {
+      "main": [
+        [
+          {
+            "node": "Check If Finished",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check If Finished": {
+      "main": [
+        [
+          {
+            "node": "IF Questionnaire Finished",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Questionnaire Finished": {
+      "main": [
+        [
+          {
+            "node": "Generate Summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Ask Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "timeZone retriver",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "timeZone retriver": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Timezone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-19T13:20:17.309Z",
+  "id": "3tPqNquDs6jC5YS8",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lead Qualification Flow v3.1",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "sessionId"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "email"
+            },
+            {
+              "name": "country"
+            },
+            {
+              "name": "city"
+            },
+            {
+              "name": "work_type"
+            },
+            {
+              "name": "business_name"
+            },
+            {
+              "name": "role"
+            },
+            {
+              "name": "business_model"
+            },
+            {
+              "name": "team_size"
+            },
+            {
+              "name": "ai_knowledge"
+            },
+            {
+              "name": "main_challenge"
+            },
+            {
+              "name": "past_attempt"
+            },
+            {
+              "name": "timezone"
+            },
+            {
+              "name": "language"
+            },
+            {
+              "name": "current_question_index"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "total_questions",
+              "type": "number"
+            },
+            {
+              "name": "mode"
+            },
+            {
+              "name": "message"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1680,
+        352
+      ],
+      "id": "91aeb704-d04e-4d12-82ff-a0a7f164fb0d",
+      "name": "Trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Define todas las preguntas en ambos idiomas\nconst QUESTIONS = {\n  \"es\": [\n    {\n      id: 0,\n      key: \"name\",\n      text: \"¿Podrías decirme tu nombre completo?\",\n      required: true,\n      blocking: true\n    },\n    {\n      id: 1,\n      key: \"email\",\n      text: \"¿Cuál es tu correo electrónico?\",\n      required: true,\n      blocking: true\n    },\n    {\n      id: 2,\n      key: \"country\",\n      text: \"¿De qué país nos contactas?\",\n      required: true,\n      blocking: true\n    },\n    {\n      id: 3,\n      key: \"city\",\n      text: \"¿En qué ciudad te encuentras actualmente?\",\n      required: true,\n      blocking: true\n    },\n    {\n      id: 4,\n      key: \"work_type\",\n      text: \"¿Tienes actualmente un negocio o trabajas dentro de una empresa?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 5,\n      key: \"business_name\",\n      text: \"Si tienes un negocio, ¿cómo se llama y a qué se dedica principalmente?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 6,\n      key: \"role\",\n      text: \"¿Cuál es tu rol dentro de la empresa o proyecto?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 7,\n      key: \"business_model\",\n      text: \"¿Tu empresa ofrece productos físicos, servicios, o es un negocio digital?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 8,\n      key: \"team_size\",\n      text: \"¿Cuántas personas forman parte actualmente de tu equipo o negocio?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 9,\n      key: \"ai_knowledge\",\n      text: \"¿Qué tan familiarizado estás con el uso de la inteligencia artificial en tu negocio o sector?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 10,\n      key: \"main_challenge\",\n      text: \"¿Cuál es el principal desafío que estás buscando resolver ahora mismo en tu empresa?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 11,\n      key: \"past_attempt\",\n      text: \"¿Has intentado implementar alguna herramienta o estrategia digital para resolverlo? Si es así, ¿cuál?\",\n      required: false,\n      blocking: false\n    }\n  ],\n  \"en\": [\n    {\n      id: 0,\n      key: \"name\",\n      text: \"Could you tell me your full name?\",\n      required: true,\n      blocking: true\n    },\n    {\n      id: 1,\n      key: \"email\",\n      text: \"What's your email address?\",\n      required: true,\n      blocking: true\n    },\n    {\n      id: 2,\n      key: \"country\",\n      text: \"Which country are you contacting us from?\",\n      required: true,\n      blocking: true\n    },\n    {\n      id: 3,\n      key: \"city\",\n      text: \"Which city are you currently in?\",\n      required: true,\n      blocking: true\n    },\n    {\n      id: 4,\n      key: \"work_type\",\n      text: \"Do you currently have a business or work within a company?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 5,\n      key: \"business_name\",\n      text: \"If you have a business, what is its name and what does it primarily do?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 6,\n      key: \"role\",\n      text: \"What's your role within the company or project?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 7,\n      key: \"business_model\",\n      text: \"Does your company offer physical products, services, or is it a digital business?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 8,\n      key: \"team_size\",\n      text: \"How many people are currently part of your team or business?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 9,\n      key: \"ai_knowledge\",\n      text: \"How familiar are you with using artificial intelligence in your business or sector?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 10,\n      key: \"main_challenge\",\n      text: \"What is the main challenge you are looking to solve right now in your company?\",\n      required: false,\n      blocking: false\n    },\n    {\n      id: 11,\n      key: \"past_attempt\",\n      text: \"Have you tried implementing any digital tools or strategies to solve it? If so, which ones?\",\n      required: false,\n      blocking: false\n    }\n  ]\n};\n\nreturn [{ json: { questions: QUESTIONS } }];"
+      },
+      "id": "f292acc7-df88-47fb-a79b-97787ac8bc68",
+      "name": "Get Questions",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1440,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filtra preguntas según idioma y modo\nconst lang = $('Trigger').item.json.language || 'es';\nconst mode = $('Trigger').item.json.mode || 'full';\nconst allQuestions = $('Get Questions').item.json.questions;\n\nconst localized = allQuestions[lang];\n\nconst filtered = mode === 'minimal'\n  ? localized.filter(q => q.required)\n  : localized;\n\nreturn [{\n  json: {\n    questions: filtered,\n    total_questions: filtered.length,\n    mode: mode,\n    language: lang\n  }\n}];"
+      },
+      "id": "0cfe8ec3-fe94-4bbd-b336-423f06b4735f",
+      "name": "Filter Questions By Mode",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtiene la pregunta actual según el índice\nconst questions = $('Filter Questions By Mode').item.json.questions;\nconst index = $('Trigger').item.json.current_question_index || 0;\n\nif (index >= questions.length) {\n  throw new Error('No more questions available');\n}\n\nconst currentQuestion = questions[index];\n\nreturn [{\n  json: {\n    ...currentQuestion,\n    current_index: index,\n    sessionId: $('Trigger').item.json.sessionId\n  }\n}];"
+      },
+      "id": "7c426b10-54b9-490b-8147-761d58a4be21",
+      "name": "Get Current Question",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -992,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": ""
+          },
+          "conditions": [
+            {
+              "id": "city-check",
+              "leftValue": "={{ $json.key }}",
+              "rightValue": "city",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "10dddb7a-d6a8-4941-bcf6-427ce980cf1e",
+      "name": "IF Is City Question",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -768,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Inferencia de timezone con cache nativo\nconst cache = this.getWorkflowStaticData('global');\n\n// Función de normalización\nconst normalize = s => s.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g,\"\").trim().toUpperCase();\n\n// Obtener datos\nconst leadData = $('Trigger').item.json;\nconst country = normalize(leadData.country || \"\");\nconst city = normalize($('Trigger').item.json.user_message);\nconst cacheKey = `${country}_${city}`;\n\nconsole.log('[Timezone] Checking:', { country, city, cacheKey });\n\n// Check cache primero\nif (cache[cacheKey]) {\n  console.log('[Timezone] Cache HIT:', cache[cacheKey]);\n  return [{\n    json: {\n      timezone: cache[cacheKey],\n      from_cache: true,\n      needs_ai: false,\n      country: country,\n      city: city,\n      sessionId: $('Get Current Question').item.json.sessionId\n    }\n  }];\n}\n\n// Mapa local de zonas horarias (LATAM + España + NZ)\nconst TIMEZONE_MAP = {\n  \"MEXICO\": {\n    \"GUADALAJARA\": \"America/Mexico_City\",\n    \"MONTERREY\": \"America/Monterrey\",\n    \"TIJUANA\": \"America/Tijuana\",\n    \"CANCUN\": \"America/Cancun\",\n    \"CIUDAD DE MEXICO\": \"America/Mexico_City\",\n    \"CDMX\": \"America/Mexico_City\",\n    \"MERIDA\": \"America/Merida\",\n    \"PUEBLA\": \"America/Mexico_City\",\n    \"QUERETARO\": \"America/Mexico_City\"\n  },\n  \"COLOMBIA\": {\n    \"BOGOTA\": \"America/Bogota\",\n    \"MEDELLIN\": \"America/Bogota\",\n    \"CALI\": \"America/Bogota\",\n    \"BARRANQUILLA\": \"America/Bogota\",\n    \"CARTAGENA\": \"America/Bogota\"\n  },\n  \"ESPAÑA\": {\n    \"MADRID\": \"Europe/Madrid\",\n    \"BARCELONA\": \"Europe/Madrid\",\n    \"VALENCIA\": \"Europe/Madrid\",\n    \"SEVILLA\": \"Europe/Madrid\",\n    \"BILBAO\": \"Europe/Madrid\"\n  },\n  \"SPAIN\": {\n    \"MADRID\": \"Europe/Madrid\",\n    \"BARCELONA\": \"Europe/Madrid\"\n  },\n  \"ARGENTINA\": {\n    \"BUENOS AIRES\": \"America/Argentina/Buenos_Aires\",\n    \"CORDOBA\": \"America/Argentina/Cordoba\",\n    \"ROSARIO\": \"America/Argentina/Cordoba\",\n    \"MENDOZA\": \"America/Argentina/Mendoza\"\n  },\n  \"BRASIL\": {\n    \"SAO PAULO\": \"America/Sao_Paulo\",\n    \"RIO DE JANEIRO\": \"America/Sao_Paulo\",\n    \"BRASILIA\": \"America/Sao_Paulo\",\n    \"SALVADOR\": \"America/Bahia\",\n    \"FORTALEZA\": \"America/Fortaleza\"\n  },\n  \"BRAZIL\": {\n    \"SAO PAULO\": \"America/Sao_Paulo\",\n    \"RIO DE JANEIRO\": \"America/Sao_Paulo\"\n  },\n  \"CHILE\": {\n    \"SANTIAGO\": \"America/Santiago\",\n    \"VALPARAISO\": \"America/Santiago\"\n  },\n  \"PERU\": {\n    \"LIMA\": \"America/Lima\",\n    \"AREQUIPA\": \"America/Lima\"\n  },\n  \"ECUADOR\": {\n    \"QUITO\": \"America/Guayaquil\",\n    \"GUAYAQUIL\": \"America/Guayaquil\"\n  },\n  \"NEW ZEALAND\": {\n    \"AUCKLAND\": \"Pacific/Auckland\",\n    \"WELLINGTON\": \"Pacific/Auckland\"\n  }\n};\n\n// Buscar en mapa local\nconst timezone = TIMEZONE_MAP[country]?.[city] || null;\n\nif (timezone) {\n  // Guardar en cache\n  cache[cacheKey] = timezone;\n  console.log('[Timezone] Local DB HIT:', timezone);\n  \n  return [{\n    json: {\n      timezone: timezone,\n      from_cache: false,\n      needs_ai: false,\n      country: country,\n      city: city,\n      sessionId: $('Get Current Question').item.json.sessionId\n    }\n  }];\n}\n\n// No encontrado - necesita AI\nconsole.log('[Timezone] Local DB MISS - needs AI');\nreturn [{\n  json: {\n    timezone: null,\n    from_cache: false,\n    needs_ai: true,\n    country: country,\n    city: city,\n    sessionId: $('Get Current Question').item.json.sessionId\n  }\n}];"
+      },
+      "id": "2a5ea325-2967-4606-ab48-593a18d72cb6",
+      "name": "Infer Timezone",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -560,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "needs-ai-check",
+              "leftValue": "={{ $json.needs_ai }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e137abe7-31dc-4f54-9c5b-d4fef5f163e2",
+      "name": "IF Needs AI Timezone",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -352,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse AI response con error handling robusto\nconst cache = this.getWorkflowStaticData('global');\nconst country = $('Infer Timezone').item.json.country;\nconst city = $('Infer Timezone').item.json.city;\nconst cacheKey = `${country}_${city}`;\n\nlet timezone = \"UNDEFINED\";\n\ntry {\n  // El output de OpenAI puede venir en diferentes formatos\n  const aiOutput = $input.item.json.output || $input.item.json.text || $input.item.json.response || \"\";\n  \n  console.log('[AI Timezone] Raw output:', aiOutput);\n  \n  // Limpiar markdown si existe\n  const cleanOutput = aiOutput.replace(/```json|```/g, \"\").trim();\n  \n  // Intentar parsear JSON\n  const parsed = JSON.parse(cleanOutput);\n  timezone = parsed.timezone || \"UNDEFINED\";\n  \n  console.log('[AI Timezone] Parsed timezone:', timezone);\n  \n} catch (error) {\n  console.error('[AI Timezone] Parse error:', error.message);\n  timezone = \"UNDEFINED\";\n}\n\n// Guardar en cache solo si es válido\nif (timezone && timezone !== \"UNDEFINED\") {\n  cache[cacheKey] = timezone;\n  console.log('[AI Timezone] Cached:', { cacheKey, timezone });\n}\n\nreturn [{\n  json: {\n    timezone: timezone,\n    from_cache: false,\n    from_ai: true,\n    country: country,\n    city: city,\n    sessionId: $('Infer Timezone').item.json.sessionId\n  }\n}];"
+      },
+      "id": "7e83773a-1610-49ca-8422-f7f915d0b0e3",
+      "name": "Parse AI Timezone",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "options": {}
+      },
+      "id": "c37e6ff6-5c76-4b97-b3f0-c39a1817f20a",
+      "name": "Merge Timezone Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        352,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "leads",
+        "updateKey": "sessionId",
+        "options": {}
+      },
+      "id": "0d6d660c-b98b-4e06-b0e5-82033234ef07",
+      "name": "Update MongoDB (Timezone)",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        240
+      ],
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Preparar respuesta para el orquestador (skip_wait para city)\nconst questions = $('Filter Questions By Mode').item.json.questions;\nconst currentIndex = $('Get Current Question').item.json.current_index;\nconst totalQuestions = questions.length;\nconst newIndex = currentIndex + 1;\n\n// Verificar si terminó\nif (newIndex >= totalQuestions) {\n  return [{\n    json: {\n      action: \"summary\",\n      finished: true,\n      sessionId: $json.sessionId\n    }\n  }];\n}\n\n// Obtener siguiente pregunta\nconst nextQuestion = questions[newIndex];\n\nreturn [{\n  json: {\n    action: \"ask\",\n    next_question: nextQuestion.text,\n    finished: false,\n    sessionId: $json.sessionId,\n    current_question_index: newIndex\n  }\n}];"
+      },
+      "id": "b913a3da-a965-4a70-b62b-266716ec5e12",
+      "name": "Return After Timezone",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        832,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validar y normalizar respuesta del usuario\nconst key = $('Get Current Question').item.json.key;\nconst userMessage = $('Trigger').item.json.user_message || \"\";\nconst msg = userMessage.trim();\nlet normalized = msg;\n\nconsole.log('[Validate] Field:', key, 'Message:', msg);\n\n// ===== VALIDACIÓN DE NOMBRE =====\nif (key === \"name\") {\n  normalized = msg.toUpperCase().replace(/\\s+/g, \" \").trim();\n  \n  const words = normalized.split(\" \");\n  if (words.length < 2) {\n    console.log('[Validate] Name error: menos de 2 palabras');\n    return [{\n      json: {\n        action: \"error\",\n        error_msg: \"Por favor ingresa tu nombre completo (nombre y apellido).\",\n        sessionId: $('Get Current Question').item.json.sessionId\n      }\n    }];\n  }\n}\n\n// ===== VALIDACIÓN DE EMAIL =====\nif (key === \"email\") {\n  normalized = msg.toLowerCase().trim();\n  \n  // 1. Validar que tenga @ (CRÍTICO)\n  if (!normalized.includes('@')) {\n    console.log('[Validate] Email error: sin @');\n    return [{\n      json: {\n        action: \"error\",\n        error_msg: \"El email debe contener el símbolo @\",\n        sessionId: $('Get Current Question').item.json.sessionId\n      }\n    }];\n  }\n  \n  // 2. Split seguro\n  const [user, domain] = normalized.split('@');\n  \n  // 3. Validar que ambas partes existan (FIX v3.1)\n  if (!user || !domain) {\n    console.log('[Validate] Email error: user o domain vacío');\n    return [{\n      json: {\n        action: \"error\",\n        error_msg: \"Formato de email inválido\",\n        sessionId: $('Get Current Question').item.json.sessionId\n      }\n    }];\n  }\n  \n  // 4. Detección de typos\n  const typos = {\n    'gmai.com': 'gmail.com',\n    'gmial.com': 'gmail.com',\n    'gmil.com': 'gmail.com',\n    'hotmai.com': 'hotmail.com',\n    'hotmial.com': 'hotmail.com',\n    'outlok.com': 'outlook.com',\n    'outlool.com': 'outlook.com',\n    'yaho.com': 'yahoo.com',\n    'yahooo.com': 'yahoo.com',\n    'iclou.com': 'icloud.com',\n    'icoud.com': 'icloud.com'\n  };\n  \n  if (typos[domain]) {\n    console.log('[Validate] Email typo detected:', domain, '->', typos[domain]);\n    return [{\n      json: {\n        action: \"error\",\n        error_msg: `¿Quisiste decir ${user}@${typos[domain]}?`,\n        sessionId: $('Get Current Question').item.json.sessionId\n      }\n    }];\n  }\n  \n  // 5. Validación RFC 5322\n  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;\n  \n  if (!emailRegex.test(normalized)) {\n    console.log('[Validate] Email error: formato inválido');\n    return [{\n      json: {\n        action: \"error\",\n        error_msg: \"El formato del correo electrónico no es válido\",\n        sessionId: $('Get Current Question').item.json.sessionId\n      }\n    }];\n  }\n}\n\n// ===== NORMALIZACIÓN DE COUNTRY/CITY =====\nif (key === \"country\" || key === \"city\") {\n  normalized = msg.toUpperCase().trim();\n}\n\n// ===== NORMALIZACIÓN DE OTROS CAMPOS =====\nif (![\"name\", \"email\", \"country\", \"city\"].includes(key)) {\n  // Title Case para campos de texto libre\n  normalized = msg.toLowerCase().split(' ')\n    .map(w => w.charAt(0).toUpperCase() + w.slice(1))\n    .join(' ');\n}\n\nconsole.log('[Validate] Success:', { key, normalized });\n\nreturn [{\n  json: {\n    action: \"valid\",\n    key: key,\n    value: normalized,\n    sessionId: $('Get Current Question').item.json.sessionId\n  }\n}];"
+      },
+      "id": "2240fc4e-28ea-42b4-b359-167ec83d929c",
+      "name": "Validate & Normalize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -560,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": ""
+          },
+          "conditions": [
+            {
+              "id": "valid-check",
+              "leftValue": "={{ $json.action }}",
+              "rightValue": "valid",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f892f3ec-7e4b-4bb6-843b-96b2e5a41293",
+      "name": "IF Is Valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -336,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "leads",
+        "updateKey": "sessionId",
+        "options": {}
+      },
+      "id": "bd0ae7c2-1678-4754-a104-92f3d0d80692",
+      "name": "Update MongoDB (Field)",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.1,
+      "position": [
+        -112,
+        368
+      ],
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Incrementar índice y verificar si terminó el cuestionario\nconst questions = $('Filter Questions By Mode').item.json.questions;\nconst currentIndex = $('Get Current Question').item.json.current_index;\nconst totalQuestions = questions.length;\nconst newIndex = currentIndex + 1;\n\nconsole.log('[Check Finished]', { currentIndex, newIndex, totalQuestions });\n\n// Verificar si terminó\nif (newIndex >= totalQuestions) {\n  console.log('[Check Finished] Cuestionario completado');\n  return [{\n    json: {\n      action: \"summary\",\n      finished: true,\n      sessionId: $json.sessionId\n    }\n  }];\n}\n\n// Obtener siguiente pregunta\nconst nextQuestion = questions[newIndex];\n\nconsole.log('[Check Finished] Siguiente pregunta:', nextQuestion.text);\n\nreturn [{\n  json: {\n    action: \"ask\",\n    next_question: nextQuestion.text,\n    finished: false,\n    sessionId: $json.sessionId,\n    current_question_index: newIndex\n  }\n}];"
+      },
+      "id": "36281da0-2325-417b-96ad-863ba0f21057",
+      "name": "Check If Finished",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        368
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": ""
+          },
+          "conditions": [
+            {
+              "id": "finished-check",
+              "leftValue": "={{ $json.action }}",
+              "rightValue": "summary",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f345c4e8-8d1e-447c-9fe6-09db3aca57e1",
+      "name": "IF Questionnaire Finished",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        336,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generar resumen según modo (full o minimal)\nconst leadData = $('Trigger').item.json;\nconst mode = $('Filter Questions By Mode').item.json.mode;\nconst lang = $('Filter Questions By Mode').item.json.language;\n\nconst templates = {\n  es: {\n    header: \"Perfecto, esto es lo que tengo:\\n\\n\",\n    footer: \"\\n\\n¿Confirmas que todo es correcto? (Responde Sí o No)\",\n    fields: {\n      name: \"👤 Nombre: \",\n      email: \"📧 Email: \",\n      country: \"🌍 País: \",\n      city: \"🏙️ Ciudad: \",\n      timezone: \"🕓 Zona Horaria: \",\n      work_type: \"🏢 Tipo de trabajo: \",\n      business_name: \"💼 Negocio: \",\n      role: \"👔 Rol: \",\n      business_model: \"💡 Modelo: \",\n      team_size: \"👥 Equipo: \",\n      ai_knowledge: \"🤖 Conocimiento de IA: \",\n      main_challenge: \"⚙️ Desafío: \",\n      past_attempt: \"🧠 Intentos previos: \"\n    }\n  },\n  en: {\n    header: \"Perfect, here's what I have:\\n\\n\",\n    footer: \"\\n\\nDo you confirm everything is correct? (Reply Yes or No)\",\n    fields: {\n      name: \"👤 Name: \",\n      email: \"📧 Email: \",\n      country: \"🌍 Country: \",\n      city: \"🏙️ City: \",\n      timezone: \"🕓 Timezone: \",\n      work_type: \"🏢 Work type: \",\n      business_name: \"💼 Business: \",\n      role: \"👔 Role: \",\n      business_model: \"💡 Model: \",\n      team_size: \"👥 Team: \",\n      ai_knowledge: \"🤖 AI knowledge: \",\n      main_challenge: \"⚙️ Challenge: \",\n      past_attempt: \"🧠 Past attempts: \"\n    }\n  }\n};\n\nconst t = templates[lang] || templates['es'];\nlet summary = t.header;\n\n// Campos obligatorios (siempre en ambos modos)\nconst requiredFields = ['name', 'email', 'country', 'city', 'timezone'];\nfor (const field of requiredFields) {\n  if (leadData[field]) {\n    summary += t.fields[field] + leadData[field] + \"\\n\";\n  }\n}\n\n// Campos opcionales (solo en modo full)\nif (mode === 'full') {\n  const optionalFields = [\n    'work_type', 'business_name', 'role', 'business_model',\n    'team_size', 'ai_knowledge', 'main_challenge', 'past_attempt'\n  ];\n  \n  for (const field of optionalFields) {\n    if (leadData[field]) {\n      summary += t.fields[field] + leadData[field] + \"\\n\";\n    }\n  }\n}\n\nsummary += t.footer;\n\nconsole.log('[Summary] Generated:', { mode, lang });\n\nreturn [{\n  json: {\n    action: \"summary\",\n    summary: summary,\n    finished: true,\n    mode: mode,\n    sessionId: leadData.sessionId\n  }\n}];"
+      },
+      "id": "23d13ca6-ddf1-4858-9b40-a92ab8795f86",
+      "name": "Generate Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "return-error",
+              "name": "action",
+              "value": "={{ $json.action }}",
+              "type": "string"
+            },
+            {
+              "id": "return-error-msg",
+              "name": "error_msg",
+              "value": "={{ $json.error_msg }}",
+              "type": "string"
+            },
+            {
+              "id": "return-finished",
+              "name": "finished",
+              "value": "=false",
+              "type": "boolean"
+            },
+            {
+              "id": "return-session",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8eeed633-80fb-482a-99e6-46a89f300b58",
+      "name": "Return Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -112,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "return-action",
+              "name": "action",
+              "value": "={{ $json.action }}",
+              "type": "string"
+            },
+            {
+              "id": "return-question",
+              "name": "next_question",
+              "value": "={{ $json.next_question }}",
+              "type": "string"
+            },
+            {
+              "id": "return-finished-ask",
+              "name": "finished",
+              "value": "=false",
+              "type": "boolean"
+            },
+            {
+              "id": "return-index",
+              "name": "current_question_index",
+              "value": "={{ $json.current_question_index }}",
+              "type": "number"
+            },
+            {
+              "id": "return-session-ask",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "66327b40-0f2d-439a-8edc-0e966d32abae",
+      "name": "Return Ask Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "gpt-3.5-turbo"
+        },
+        "builtInTools": {
+          "webSearch": {
+            "searchContextSize": "low"
+          }
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -144,
+        176
+      ],
+      "id": "988c5b02-fd06-4f4f-85ac-dec84faa0b54",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Given the following location details, return the most accurate IANA timezone name.\n\nCountry: {{ $json.country }}\nCity: {{ $json.city }}\n\nRemember:\n- Use your internal knowledge and web search if needed.\n- Respond **only** with valid JSON like this:\n{\"timezone\": \"America/Mexico_City\"}\n- If you cannot find a valid match, return:\n{\"timezone\": \"UNDEFINED\"}\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -96,
+        16
+      ],
+      "id": "ac2c6690-ced4-4bf9-a70f-48556fc47407",
+      "name": "timeZone retriver"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T13:20:17.314Z",
+      "createdAt": "2026-01-19T13:20:17.314Z",
+      "role": "workflow:owner",
+      "workflowId": "3tPqNquDs6jC5YS8",
+      "projectId": "zIvgruNDMJwjqAqX"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-01-20T08:16:13.000Z",
+  "versionId": "d6f008f0-ac8d-4198-8cc3-2e83ab3b9d43"
+}
