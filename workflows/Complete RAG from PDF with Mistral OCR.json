@@ -1,7 +1,930 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-30T14:20:42.474Z",
+    "createdAt": "2026-01-30T14:20:42.474Z",
+    "versionId": "bba104ef-9000-4824-8014-be6a806dd392",
+    "workflowId": "SVqpSDXbyJDwskmM",
+    "nodes": [
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.mistral.ai/v1/files",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "mistralCloudApi",
+          "sendBody": true,
+          "contentType": "multipart-form-data",
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "purpose",
+                "value": "ocr"
+              },
+              {
+                "parameterType": "formBinaryData",
+                "name": "file",
+                "inputDataFieldName": "data"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "cc78b429-ac8f-437e-ab4a-3cc5e3beeb18",
+        "name": "Mistral Upload",
+        "type": "n8n-nodes-base.httpRequest",
+        "position": [
+          16,
+          -688
+        ],
+        "typeVersion": 4.2
+      },
+      {
+        "parameters": {
+          "url": "=https://api.mistral.ai/v1/files/{{ $json.id }}/url",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "mistralCloudApi",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "expiry",
+                "value": "24"
+              }
+            ]
+          },
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "25cc3efb-ce08-424a-8d22-5886048df8d8",
+        "name": "Mistral Signed URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "position": [
+          336,
+          -688
+        ],
+        "typeVersion": 4.2
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.mistral.ai/v1/ocr",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "mistralCloudApi",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"model\": \"mistral-ocr-latest\",\n  \"document\": {\n    \"type\": \"document_url\",\n    \"document_url\": \"{{ $json.url }}\"\n  },\n  \"include_image_base64\": true\n}",
+          "options": {}
+        },
+        "id": "75cc2ea6-ac1b-45fd-b87f-9ee7f2d8d663",
+        "name": "Mistral DOC OCR",
+        "type": "n8n-nodes-base.httpRequest",
+        "position": [
+          656,
+          -688
+        ],
+        "typeVersion": 4.2
+      },
+      {
+        "parameters": {},
+        "id": "9b27ac04-b6ff-45dd-8460-3b3f022446bd",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "position": [
+          -640,
+          -1504
+        ],
+        "typeVersion": 1,
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "334f0022-1f27-4807-918d-f1183e03447d",
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "position": [
+          1376,
+          -688
+        ],
+        "typeVersion": 3
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://QDRANTURL/collections/COLLECTION/points/delete",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "{\n  \"filter\": {}\n}",
+          "options": {}
+        },
+        "id": "25eacf9a-af37-4210-a6b7-7adfd8e0c62e",
+        "name": "Refresh collection",
+        "type": "n8n-nodes-base.httpRequest",
+        "position": [
+          -304,
+          -1504
+        ],
+        "typeVersion": 4.2
+      },
+      {
+        "parameters": {
+          "options": {
+            "stripNewLines": false
+          }
+        },
+        "id": "3a8f9877-678d-49d3-95be-c38440e60623",
+        "name": "Embeddings OpenAI",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "position": [
+          2160,
+          -400
+        ],
+        "typeVersion": 1.1
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "5b379c96-db80-443a-90cd-2d2926d3633a",
+        "name": "Default Data Loader",
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "position": [
+          2304,
+          -448
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "chunkSize": 400,
+          "chunkOverlap": 40
+        },
+        "id": "cb11b130-9c56-4d49-b663-62cb42491da0",
+        "name": "Token Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterTokenSplitter",
+        "position": [
+          2400,
+          -256
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "9dada13c-bce4-491a-9bba-0063f38aef34",
+        "name": "When chat message received",
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "position": [
+          -640,
+          -240
+        ],
+        "webhookId": "97d60090-1717-4195-bf27-2e3c3105b7f8",
+        "typeVersion": 1.1,
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "818fb21d-f895-436d-bfbf-3cd493f28f08",
+        "name": "Question and Answer Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+        "position": [
+          -320,
+          -240
+        ],
+        "typeVersion": 1.5
+      },
+      {
+        "parameters": {
+          "modelName": "models/gemini-1.5-flash",
+          "options": {}
+        },
+        "id": "637bf7a8-d231-402b-8280-4fb81b943a83",
+        "name": "Google Gemini Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "position": [
+          -384,
+          -48
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {},
+        "id": "abe9a10d-c914-47cb-993d-109575c1356d",
+        "name": "Vector Store Retriever",
+        "type": "@n8n/n8n-nodes-langchain.retrieverVectorStore",
+        "position": [
+          -160,
+          -16
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "qdrantCollection": {
+            "__rl": true,
+            "mode": "list",
+            "value": "ocr_mistral_test",
+            "cachedResultName": "ocr_mistral_test"
+          },
+          "options": {}
+        },
+        "id": "a877ab1a-c3b4-4bba-b711-7ec4b108de91",
+        "name": "Qdrant Vector Store1",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "position": [
+          -144,
+          176
+        ],
+        "typeVersion": 1.1
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "e8246fb4-dc3c-46af-a60d-f578f7af1cd9",
+        "name": "Embeddings OpenAI1",
+        "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+        "position": [
+          -256,
+          320
+        ],
+        "typeVersion": 1.2
+      },
+      {
+        "parameters": {
+          "jsCode": "const data = $json.pages;\n\nreturn data.map(entry => ({\n  json: {\n    markdown: entry.markdown\n  }\n}));"
+        },
+        "id": "1edcc923-ed2b-4a5e-a629-86f73cd425b5",
+        "name": "Code",
+        "type": "n8n-nodes-base.code",
+        "position": [
+          976,
+          -688
+        ],
+        "typeVersion": 2
+      },
+      {
+        "parameters": {},
+        "id": "63dda5db-0dd3-4d36-89e5-192274f6e1e9",
+        "name": "Wait",
+        "type": "n8n-nodes-base.wait",
+        "position": [
+          2704,
+          -656
+        ],
+        "webhookId": "1000b40d-5dc5-4795-9dd2-8a23653c2b49",
+        "typeVersion": 1.1
+      },
+      {
+        "parameters": {
+          "mode": "insert",
+          "qdrantCollection": {
+            "__rl": true,
+            "mode": "list",
+            "value": "ocr_mistral_test",
+            "cachedResultName": "ocr_mistral_test"
+          },
+          "options": {
+            "collectionConfig": ""
+          }
+        },
+        "id": "90b13bd5-ba5e-451d-9960-e765264b4184",
+        "name": "Qdrant Vector Store",
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+        "position": [
+          2224,
+          -656
+        ],
+        "typeVersion": 1.1
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "011ff823-4ebc-44ed-8a56-a8a5f5dde353",
+        "name": "Loop Over Items1",
+        "type": "n8n-nodes-base.splitInBatches",
+        "position": [
+          384,
+          -1504
+        ],
+        "typeVersion": 3
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "AdVUaHTE9Jk1KO72",
+            "cachedResultName": "Mistral OCR_subworkflow"
+          },
+          "workflowInputs": {
+            "value": {},
+            "schema": [],
+            "mappingMode": "defineBelow",
+            "matchingColumns": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "mode": "each",
+          "options": {
+            "waitForSubWorkflow": true
+          }
+        },
+        "id": "4371088c-1941-44ae-9d62-6454ed09ee43",
+        "name": "Execute Workflow",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "position": [
+          1008,
+          -1488
+        ],
+        "typeVersion": 1.2
+      },
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "id": "7ed55c08-8c91-4473-baa5-8e648c363155",
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "position": [
+          -624,
+          -688
+        ],
+        "typeVersion": 1.1
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "ca7c30f2-444d-4551-988d-0f513e5ee4b1",
+                "name": "file_id",
+                "type": "string",
+                "value": "={{ $json.id }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "2307a0bf-d73a-4a54-977e-8d605dd8d035",
+        "name": "Edit Fields1",
+        "type": "n8n-nodes-base.set",
+        "position": [
+          704,
+          -1488
+        ],
+        "typeVersion": 3.4
+      },
+      {
+        "parameters": {
+          "method": "PUT",
+          "url": "http://QDRANTURL/collections/COLLECTION",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "{\n  \"vectors\": {\n    \"size\": 1536,\n    \"distance\": \"Cosine\"  \n  },\n  \"shard_number\": 1,  \n  \"replication_factor\": 1,  \n  \"write_consistency_factor\": 1 \n}",
+          "options": {}
+        },
+        "id": "e1e3a0c9-b7ab-4a9e-8789-842e5903f833",
+        "name": "Create collection",
+        "type": "n8n-nodes-base.httpRequest",
+        "position": [
+          -640,
+          -1968
+        ],
+        "typeVersion": 4.2
+      },
+      {
+        "parameters": {
+          "content": "# STEP 1\n\n## Create Qdrant Collection\nChange:\n- QDRANTURL\n- COLLECTION",
+          "height": 220,
+          "width": 880,
+          "color": 6
+        },
+        "id": "47de8411-3ae2-4df2-966a-fdf6427c6a4a",
+        "name": "Sticky Note3",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -432,
+          -2016
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "content": "# STEP 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n## Documents vectorization with Qdrant and Google Drive\nChange:\n- QDRANTURL\n- COLLECTION",
+          "height": 520,
+          "width": 620,
+          "color": 4
+        },
+        "id": "9627f875-57f6-4dcb-9d4c-5af55197018b",
+        "name": "Sticky Note4",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -704,
+          -1600
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "options": {
+            "summarizationMethodAndPrompts": {
+              "values": {
+                "combineMapPrompt": "Write a concise summary of the following (in italiano):\n\n\n\"{text}\"\n\n\nCONCISE SUMMARY:",
+                "prompt": "Write a concise summary of the following (in italiano):\n\n\n\"{text}\"\n\n\nCONCISE SUMMARY:"
+              }
+            }
+          }
+        },
+        "id": "3d89933d-447e-42b3-82b1-9d3d8805f8f7",
+        "name": "Summarization Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+        "position": [
+          1664,
+          -1056
+        ],
+        "typeVersion": 2
+      },
+      {
+        "parameters": {
+          "modelName": "models/gemini-2.0-flash-exp",
+          "options": {}
+        },
+        "id": "0e690b67-525a-46a3-b4f9-93b5aebf5114",
+        "name": "Google Gemini Chat Model1",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "position": [
+          1680,
+          -880
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "189f4944-a692-423c-bc6d-76747e1d04df",
+                "name": "text",
+                "type": "string",
+                "value": "={{ $json.markdown }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "a336ed54-9a50-4c5a-a68e-98ba7e390f93",
+        "name": "Set page",
+        "type": "n8n-nodes-base.set",
+        "position": [
+          1840,
+          -656
+        ],
+        "typeVersion": 3.4
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "189f4944-a692-423c-bc6d-76747e1d04df",
+                "name": "text",
+                "type": "string",
+                "value": "={{ $json.response.text }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "a814bda2-5f91-45ef-adc1-75b41d2c1886",
+        "name": "Set summary",
+        "type": "n8n-nodes-base.set",
+        "position": [
+          2016,
+          -1056
+        ],
+        "typeVersion": 3.4
+      },
+      {
+        "parameters": {
+          "content": "## STEP 3\nIf you want a \"light\" and faster rag with the main contents replace the \"Set page\" node with \"Summarization Chain\"",
+          "height": 680,
+          "width": 600
+        },
+        "id": "2bb85d7c-1f92-4f9d-9afc-effd84d7198a",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          1600,
+          -1184
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "content": "## STEP 4\nTest the RAG",
+          "height": 120,
+          "width": 500,
+          "color": 2
+        },
+        "id": "1c8a3f0d-af2c-459f-80d4-89652e37c2d4",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          160,
+          -240
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "resource": "fileFolder",
+          "filter": {
+            "folderId": {
+              "__rl": true,
+              "mode": "list",
+              "value": "1LWVo3yn_1bWQJsLskBIbWTGwlfObvtUK",
+              "cachedResultUrl": "https://drive.google.com/drive/folders/1LWVo3yn_1bWQJsLskBIbWTGwlfObvtUK",
+              "cachedResultName": "PDFs"
+            }
+          },
+          "options": {}
+        },
+        "id": "762fb7dd-1c52-493f-874a-0e3dbb8906fe",
+        "name": "Search PDFs",
+        "type": "n8n-nodes-base.googleDrive",
+        "position": [
+          48,
+          -1504
+        ],
+        "typeVersion": 3
+      },
+      {
+        "parameters": {
+          "operation": "download",
+          "fileId": {
+            "__rl": true,
+            "mode": "id",
+            "value": "={{ $json.file_id }}"
+          },
+          "options": {}
+        },
+        "id": "28407ceb-dc30-414b-9287-5af90453bd6b",
+        "name": "Get PDF",
+        "type": "n8n-nodes-base.googleDrive",
+        "position": [
+          -304,
+          -688
+        ],
+        "typeVersion": 3
+      },
+      {
+        "parameters": {
+          "content": "## Complete RAG system from PDF Documents with Mistral OCR, Qdrant and Gemini AI\n\nThis workflow is designed to process PDF documents using Mistral's OCR capabilities, store the extracted text in a Qdrant vector database, and enable Retrieval-Augmented Generation (RAG) for answering questions. ",
+          "height": 140,
+          "width": 1140
+        },
+        "id": "ce29dfc1-ffc2-4ddf-8b97-56e7ef41eb5d",
+        "name": "Sticky Note2",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -704,
+          -2288
+        ],
+        "typeVersion": 1
+      }
+    ],
+    "connections": {
+      "Code": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get PDF": {
+        "main": [
+          [
+            {
+              "node": "Mistral Upload",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set page": {
+        "main": [
+          [
+            {
+              "node": "Qdrant Vector Store",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Search PDFs": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields1": {
+        "main": [
+          [
+            {
+              "node": "Execute Workflow",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mistral Upload": {
+        "main": [
+          [
+            {
+              "node": "Mistral Signed URL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Token Splitter": {
+        "ai_textSplitter": [
+          [
+            {
+              "node": "Default Data Loader",
+              "type": "ai_textSplitter",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Set page",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mistral DOC OCR": {
+        "main": [
+          [
+            {
+              "node": "Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Execute Workflow": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items1": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Edit Fields1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Embeddings OpenAI": {
+        "ai_embedding": [
+          [
+            {
+              "node": "Qdrant Vector Store",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Embeddings OpenAI1": {
+        "ai_embedding": [
+          [
+            {
+              "node": "Qdrant Vector Store1",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mistral Signed URL": {
+        "main": [
+          [
+            {
+              "node": "Mistral DOC OCR",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Refresh collection": {
+        "main": [
+          [
+            {
+              "node": "Search PDFs",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Default Data Loader": {
+        "ai_document": [
+          [
+            {
+              "node": "Qdrant Vector Store",
+              "type": "ai_document",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Qdrant Vector Store": {
+        "main": [
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Summarization Chain": {
+        "main": [
+          [
+            {
+              "node": "Set summary",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Qdrant Vector Store1": {
+        "ai_vectorStore": [
+          [
+            {
+              "node": "Vector Store Retriever",
+              "type": "ai_vectorStore",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Vector Store Retriever": {
+        "ai_retriever": [
+          [
+            {
+              "node": "Question and Answer Chain",
+              "type": "ai_retriever",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Google Gemini Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Question and Answer Chain",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Google Gemini Chat Model1": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Summarization Chain",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When chat message received": {
+        "main": [
+          [
+            {
+              "node": "Question and Answer Chain",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Get PDF",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Test workflow’": {
+        "main": [
+          [
+            {
+              "node": "Refresh collection",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "bba104ef-9000-4824-8014-be6a806dd392",
   "connections": {
     "Code": {
       "main": [
@@ -393,7 +1316,8 @@
         -640,
         -1504
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -491,7 +1415,8 @@
         -240
       ],
       "webhookId": "97d60090-1717-4195-bf27-2e3c3105b7f8",
-      "typeVersion": 1.1
+      "typeVersion": 1.1,
+      "disabled": true
     },
     {
       "parameters": {
@@ -943,5 +1868,5 @@
   ],
   "triggerCount": 0,
   "updatedAt": "2025-10-30T19:42:28.082Z",
-  "versionId": "c3e49a7d-e17c-437b-b2b2-63a9d98f13e4"
+  "versionId": "bba104ef-9000-4824-8014-be6a806dd392"
 }
