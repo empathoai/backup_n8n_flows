@@ -1,7 +1,167 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-12-03T09:47:01.401Z",
+    "createdAt": "2025-12-03T09:47:01.401Z",
+    "versionId": "5f6d10c9-cb8f-4246-afca-7dd97070314d",
+    "workflowId": "NYcZtAXFB0YtwGHk",
+    "nodes": [
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gpt-4.1-mini"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.2,
+        "position": [
+          -128,
+          416
+        ],
+        "id": "167be41b-eb43-4375-b6ff-768b9aae4e7b",
+        "name": "OpenAI Chat Model2",
+        "credentials": {
+          "openAiApi": {
+            "id": "si6kdb1qPc1J6iuX",
+            "name": "OpenAi Supabase Hybrid"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Insert documents in MongoDB\n{{ $fromAI('name', 'Full name', 'string') }}\n{{ $fromAI('email', 'Contact email', 'string') }}\n{{ $fromAI('business_name', 'Company name', 'string') }}\n{{ $fromAI('country', 'Main property location', 'string') }}",
+          "operation": "insert",
+          "collection": "lead_data",
+          "fields": "name, email, country",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.mongoDbTool",
+        "typeVersion": 1.2,
+        "position": [
+          176,
+          496
+        ],
+        "id": "dd35e9b7-a4d0-40f2-88e2-494f3976723c",
+        "name": "MongoDB",
+        "credentials": {
+          "mongoDb": {
+            "id": "KNCVFnX6uXTL664z",
+            "name": "MongoDB n8n"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fa153136-d559-4eee-a5b1-c503d6ff6711",
+                "name": "messages",
+                "value": "={{ $json.query}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -240,
+          224
+        ],
+        "id": "1ab79c32-2bfd-4fe5-951e-08850362db77",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.messages }}",
+          "options": {
+            "systemMessage": "=# DANIA Lead Qualification Agent\n\n## Current Date & Time\n\n{{ $now }}\n\n## Language\n\nAdapt to user's language immediately.\n\n## ONLY TASK: Ask 3 questions, then show summary\n\nYou will ask exactly 3 questions.\n\n## questions\n\n\"What is your full name?\" 'name'\n\"What is your email address?\" 'email'\n\"What is your country?\" 'country'\n\n\n## AFTER Question 3 is answered\n\nIMMEDIATELY show this summary (do NOT ask another question):\n```\nPerfect, let me confirm your information:\n\nName: {{ $fromAI('name', 'Full name', 'string') }}\nEmail: {{ $fromAI('email', 'Email address', 'string') }}\nCountry: {{ $fromAI('country', 'Country', 'string') }}\n\n\nIs this correct? (Yes / No)\n```\n\n## If User Says \"yes\"\n\nInsert field in MongoDB \n\n\nAlways respond in this format json:\n{\n  \"message_1\": \"\",\n  \"message_2\": \"\",\n  \"message_3\": \"\"\n}"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 1.7,
+        "position": [
+          48,
+          224
+        ],
+        "id": "df7f8cc8-06a1-48d9-a2d4-9f3d01f1e2b5",
+        "name": "qualifierAssistant",
+        "alwaysOutputData": false,
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -448,
+          224
+        ],
+        "id": "07f0b4b0-a0dd-4e17-8db4-fe4caa358f00",
+        "name": "When Executed by Another Workflow"
+      }
+    ],
+    "connections": {
+      "OpenAI Chat Model2": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "qualifierAssistant",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "MongoDB": {
+        "ai_tool": [
+          [
+            {
+              "node": "qualifierAssistant",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "qualifierAssistant",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "5f6d10c9-cb8f-4246-afca-7dd97070314d",
   "connections": {
     "OpenAI Chat Model2": {
       "ai_languageModel": [
