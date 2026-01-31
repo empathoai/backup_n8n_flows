@@ -1,7 +1,402 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-12-03T09:47:01.401Z",
+    "createdAt": "2025-12-03T09:47:01.401Z",
+    "versionId": "c83b0bb4-b538-455c-b8bf-3bda68fe7e89",
+    "workflowId": "CClKODXbcPjNN86L",
+    "nodes": [
+      {
+        "parameters": {},
+        "id": "6dac907f-8b67-42f6-a9cc-d772ceb575fb",
+        "name": "Execute Sub-workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          -48,
+          176
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "operation",
+                "name": "operation",
+                "type": "string",
+                "value": "={{ $json.operation }}"
+              },
+              {
+                "id": "session-id",
+                "name": "sessionId",
+                "type": "string",
+                "value": "={{ $json.sessionId }}"
+              },
+              {
+                "id": "field",
+                "name": "field",
+                "type": "string",
+                "value": "={{ $json.field }}"
+              },
+              {
+                "id": "value",
+                "name": "value",
+                "type": "string",
+                "value": "={{ $json.value }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "3f39b128-9101-42c8-8631-ad55217982db",
+        "name": "Map Fields - Input Validation",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          224,
+          176
+        ]
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "save-answer-op",
+                      "leftValue": "={{ $json.operation }}",
+                      "rightValue": "saveAnswer",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "finish-op",
+                      "leftValue": "={{ $json.operation }}",
+                      "rightValue": "finishQualification",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "491ad807-67e3-4a3f-a839-16637a31ea26",
+        "name": "Switch - Route Operation",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          464,
+          176
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "findOneAndUpdate",
+          "collection": "qualifications_temp",
+          "options": {}
+        },
+        "id": "375b9b4c-8dc3-45ba-a134-9ba4ba49909d",
+        "name": "MongoDB - Update Temp Answer",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          752,
+          64
+        ],
+        "credentials": {
+          "mongoDb": {
+            "id": "KNCVFnX6uXTL664z",
+            "name": "MongoDB n8n"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "collection": "qualifications_temp",
+          "options": {}
+        },
+        "id": "e99a1e83-8213-4cd5-b866-ae60b8180529",
+        "name": "MongoDB - Get Temp Record (For Finish)",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          752,
+          304
+        ],
+        "credentials": {
+          "mongoDb": {
+            "id": "KNCVFnX6uXTL664z",
+            "name": "MongoDB n8n"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "insert",
+          "collection": "leads",
+          "options": {}
+        },
+        "id": "8c4635ed-a8fe-47a8-a84f-5214f4601c0c",
+        "name": "MongoDB - Insert Lead to leads",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          1024,
+          304
+        ],
+        "credentials": {
+          "mongoDb": {
+            "id": "KNCVFnX6uXTL664z",
+            "name": "MongoDB n8n"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "delete",
+          "collection": "qualifications_temp"
+        },
+        "id": "cf9c9486-7cb9-4cd6-8193-720279b13246",
+        "name": "MongoDB - Delete Temp Record",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          1216,
+          304
+        ],
+        "credentials": {
+          "mongoDb": {
+            "id": "KNCVFnX6uXTL664z",
+            "name": "MongoDB n8n"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "output",
+                "name": "output",
+                "type": "string",
+                "value": "={{ JSON.stringify({ status: 'answered', sessionId: $json.sessionId, message: 'Respuesta guardada. Continuamos con la siguiente pregunta.' }) }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "ecca760e-d26d-4172-b997-87d9f593daaf",
+        "name": "Set - Format Save Answer Response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1024,
+          64
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "output",
+                "name": "output",
+                "type": "string",
+                "value": "={{ JSON.stringify({ status: 'qualified', leadId: $('MongoDB - Insert Lead to leads').item.json.insertedId, sessionId: $json.sessionId, message: '¡Lead creado y calificado exitosamente!' }) }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "9ee93d70-5692-48ab-95b4-a795be2400fb",
+        "name": "Set - Format Finish Response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1472,
+          304
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "db1e1b5d-f304-4487-ac24-5a447cbb2d92",
+        "name": "Merge - Combine Responses",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3,
+        "position": [
+          1760,
+          144
+        ]
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "6a51ad48-0988-4500-a64a-a2f4a86bd92f",
+        "name": "Return - questionsflow Output",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.1,
+        "position": [
+          2016,
+          144
+        ]
+      }
+    ],
+    "connections": {
+      "Execute Sub-workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "Map Fields - Input Validation",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Map Fields - Input Validation": {
+        "main": [
+          [
+            {
+              "node": "Switch - Route Operation",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch - Route Operation": {
+        "main": [
+          [
+            {
+              "node": "MongoDB - Update Temp Answer",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "MongoDB - Get Temp Record (For Finish)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "MongoDB - Update Temp Answer": {
+        "main": [
+          [
+            {
+              "node": "Set - Format Save Answer Response",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set - Format Save Answer Response": {
+        "main": [
+          [
+            {
+              "node": "Merge - Combine Responses",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "MongoDB - Get Temp Record (For Finish)": {
+        "main": [
+          [
+            {
+              "node": "MongoDB - Insert Lead to leads",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "MongoDB - Insert Lead to leads": {
+        "main": [
+          [
+            {
+              "node": "MongoDB - Delete Temp Record",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "MongoDB - Delete Temp Record": {
+        "main": [
+          [
+            {
+              "node": "Set - Format Finish Response",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set - Format Finish Response": {
+        "main": [
+          [
+            {
+              "node": "Merge - Combine Responses",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge - Combine Responses": {
+        "main": [
+          [
+            {
+              "node": "Return - questionsflow Output",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "c83b0bb4-b538-455c-b8bf-3bda68fe7e89",
   "connections": {
     "Execute Sub-workflow Trigger": {
       "main": [
