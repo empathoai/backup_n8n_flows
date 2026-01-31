@@ -1,7 +1,639 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-12-17T10:18:03.354Z",
+    "createdAt": "2025-12-17T10:18:03.354Z",
+    "versionId": "f5444e8a-7fc0-42a9-b7ba-6abe6047dc77",
+    "workflowId": "FlsnpWXzyOHnt92c",
+    "nodes": [
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "lead_country"
+              },
+              {
+                "name": "lead_city"
+              },
+              {
+                "name": "sessionId"
+              },
+              {
+                "name": "bot_country"
+              },
+              {
+                "name": "bot_timezone"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          560,
+          608
+        ],
+        "id": "94607b85-caeb-470a-81b6-5c9224cd2350",
+        "name": "Trigger"
+      },
+      {
+        "parameters": {
+          "jsCode": "/**\n * Normalización de números de teléfono para WhatsApp\n * Maneja casos problemáticos: México, Argentina, Brasil, Rusia\n */\n\nconst rawPhone = $json.phone || '';\nconst lead_city = $json.lead_city || '';\nconst bot_country = $json.bot_country || '';\nconst bot_timezone = $json.bot_timezone || '';\nconst bot_country_code = $json.bot_country_code || '';\n\n// Paso 1: Limpiar el teléfono (remover +, espacios, guiones, @c.us, etc.)\nlet phone = rawPhone\n  .replace(/@c\\.us$/i, '')  // Quitar sufijo de WhatsApp\n  .replace(/@s\\.whatsapp\\.net$/i, '')  // Otro formato de WhatsApp\n  .replace(/[^0-9]/g, '');  // Solo números\n\n// Paso 2: Normalizar casos problemáticos\nlet country_code = '';\nlet normalized_phone = phone;\nlet normalization_applied = 'none';\n\n// MÉXICO (+52)\n// WhatsApp: 521XXXXXXXXXX (con 1 después del 52 para móviles)\n// Normalizado: quitamos el 1 para obtener solo el código 52\nif (phone.startsWith('521') && phone.length === 13) {\n  // Formato WhatsApp móvil: 521 + 10 dígitos\n  country_code = '52';\n  normalized_phone = '52' + phone.substring(3); // Quitar el 1\n  normalization_applied = 'mexico_removed_1';\n} else if (phone.startsWith('52') && phone.length === 12) {\n  // Formato estándar: 52 + 10 dígitos\n  country_code = '52';\n  normalization_applied = 'mexico_standard';\n}\n\n// ARGENTINA (+54)\n// WhatsApp: 549XXXXXXXXXX (con 9 después del 54 para móviles)\n// Local puede tener 15 que hay que quitar\nelse if (phone.startsWith('549') && phone.length >= 13) {\n  // Formato WhatsApp móvil: 549 + número\n  country_code = '54';\n  // Quitar el 9 y cualquier 15 que siga\n  let argNumber = phone.substring(3);\n  if (argNumber.startsWith('15')) {\n    argNumber = argNumber.substring(2);\n  }\n  normalized_phone = '54' + argNumber;\n  normalization_applied = 'argentina_removed_9';\n} else if (phone.startsWith('54') && phone.length >= 12) {\n  country_code = '54';\n  // Verificar si tiene 15 después del código de área\n  let argNumber = phone.substring(2);\n  if (argNumber.length > 2 && argNumber.substring(2, 4) === '15') {\n    // Quitar el 15 del medio\n    argNumber = argNumber.substring(0, 2) + argNumber.substring(4);\n    normalized_phone = '54' + argNumber;\n    normalization_applied = 'argentina_removed_15';\n  } else {\n    normalization_applied = 'argentina_standard';\n  }\n}\n\n// BRASIL (+55)\n// Algunos números tienen 9 extra al inicio del número local (noveno dígito)\n// Móviles nuevos: 55 + DDD(2) + 9 + número(8) = 13 dígitos\n// Móviles viejos: 55 + DDD(2) + número(8) = 12 dígitos\nelse if (phone.startsWith('55') && phone.length === 13) {\n  country_code = '55';\n  // Verificar si el quinto dígito es 9 (noveno dígito de móviles)\n  const ddd = phone.substring(2, 4);\n  const ninthDigit = phone.substring(4, 5);\n  if (ninthDigit === '9') {\n    // Mantener como está, es formato nuevo\n    normalization_applied = 'brazil_with_9';\n  }\n} else if (phone.startsWith('55') && phone.length === 12) {\n  country_code = '55';\n  normalization_applied = 'brazil_standard';\n}\n\n// RUSIA (+7)\n// Reemplazar 8 inicial por 7 si aplica\n// Debe quedar: 7 + 10 dígitos = 11 dígitos total\nelse if (phone.startsWith('8') && phone.length === 11) {\n  // Número ruso con 8 nacional\n  country_code = '7';\n  normalized_phone = '7' + phone.substring(1);\n  normalization_applied = 'russia_replaced_8';\n} else if (phone.startsWith('7') && phone.length === 11) {\n  country_code = '7';\n  normalization_applied = 'russia_standard';\n}\n\n// Si no es ningún caso especial, extraer código normalmente\nif (!country_code) {\n  // Lista de códigos de país ordenados por longitud (más largos primero)\n  const countryCodes = [\n    // 4 dígitos (Caribe)\n    '1787', '1809', '1829', '1849', '1868', '1876',\n    // 3 dígitos\n    '593', '591', '595', '598', '599',\n    '351', '352', '353', '354', '355', '356', '357', '358', '359',\n    '370', '371', '372', '373', '374', '375', '376', '377', '378', '379',\n    '380', '381', '382', '383', '385', '386', '387', '389',\n    '420', '421', '423',\n    '502', '503', '504', '505', '506', '507', '508', '509',\n    '852', '853', '855', '856',\n    '880', '886',\n    '960', '961', '962', '963', '964', '965', '966', '967', '968', '969',\n    '970', '971', '972', '973', '974', '975', '976', '977',\n    '992', '993', '994', '995', '996', '997', '998',\n    // 2 dígitos\n    '20', '27',\n    '30', '31', '32', '33', '34', '36', '39',\n    '40', '41', '43', '44', '45', '46', '47', '48', '49',\n    '51', '52', '53', '54', '55', '56', '57', '58',\n    '60', '61', '62', '63', '64', '65', '66',\n    '81', '82', '84', '86',\n    '90', '91', '92', '93', '94', '95',\n    // 1 dígito\n    '1', '7'\n  ];\n\n  for (const code of countryCodes) {\n    if (phone.startsWith(code)) {\n      country_code = code;\n      normalization_applied = 'standard_extraction';\n      break;\n    }\n  }\n}\n\nreturn [{\n  json: {\n    original_phone: rawPhone,\n    phone: normalized_phone,\n    country_code: country_code,\n    lead_city: lead_city.toUpperCase().trim().normalize('NFD').replace(/[\\u0300-\\u036f]/g, ''),\n    bot_country: bot_country,\n    bot_timezone: bot_timezone,\n    bot_country_code: bot_country_code,\n    normalization_applied: normalization_applied\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1008,
+          608
+        ],
+        "id": "815efd27-8b45-4ff6-8305-ee629e85469c",
+        "name": "Normalize Phone & Extract Code"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "condition-same-country",
+                "leftValue": "={{ $json.country_code }}",
+                "rightValue": "={{ $json.bot_country_code }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          1232,
+          608
+        ],
+        "id": "37e61964-984a-48d5-b861-c6da12e26629",
+        "name": "IF Same Country"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "assign-timezone",
+                "name": "timezone",
+                "value": "={{ $('Trigger').item.json.bot_timezone }}",
+                "type": "string"
+              },
+              {
+                "id": "assign-country",
+                "name": "country",
+                "value": "={{ $('Trigger').item.json.bot_country }}",
+                "type": "string"
+              },
+              {
+                "id": "assign-source",
+                "name": "source",
+                "value": "bot_default",
+                "type": "string"
+              },
+              {
+                "id": "assign-fallback",
+                "name": "needs_fallback",
+                "value": false,
+                "type": "boolean"
+              },
+              {
+                "id": "assign-needs-selection",
+                "name": "needs_selection",
+                "value": false,
+                "type": "boolean"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1472,
+          464
+        ],
+        "id": "39387412-603c-4ceb-bb07-c0c3aa93b54f",
+        "name": "Return Bot Default"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "nIWKvOBOiZluWfTD",
+            "mode": "list",
+            "cachedResultName": "timeZones",
+            "cachedResultUrl": "/projects/zIvgruNDMJwjqAqX/datatables/nIWKvOBOiZluWfTD"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "county_code",
+                "keyValue": "={{ $('Normalize Phone & Extract Code').item.json.country_code }}"
+              }
+            ]
+          },
+          "returnAll": true
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1,
+        "position": [
+          1472,
+          704
+        ],
+        "id": "a282972a-cf34-4272-a58c-286876b19d60",
+        "name": "get timeZones"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "condition-has-records",
+                "leftValue": "={{ $json }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "object",
+                  "operation": "notEmpty"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          1696,
+          704
+        ],
+        "id": "30f55b9c-0ca6-439a-a7f7-306835f72998",
+        "name": "IF Found Records"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "assign-timezone-null",
+                "name": "timezone",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "assign-fallback-true",
+                "name": "needs_fallback",
+                "value": true,
+                "type": "boolean"
+              },
+              {
+                "id": "assign-reason",
+                "name": "reason",
+                "value": "country_code_not_found",
+                "type": "string"
+              },
+              {
+                "id": "assign-needs-selection",
+                "name": "needs_selection",
+                "value": false,
+                "type": "boolean"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1920,
+          816
+        ],
+        "id": "a5044329-6603-4d94-9c17-8ef0e8add895",
+        "name": "Return Country Not Found"
+      },
+      {
+        "parameters": {
+          "jsCode": "/**\n * Procesa los registros de timezone encontrados\n * y determina si necesita selección del usuario\n */\n\nconst items = $input.all();\nconst leadCity = $('Normalize Phone & Extract Code').item.json.lead_city || '';\n\n// Obtener datos del país (del primer registro)\nconst country = items[0]?.json.country || '';\nconst flag = items[0]?.json.flag || '';\nconst country_code = items[0]?.json.country_code || '';\n\n// Buscar coincidencia exacta con la ciudad\nconst exactMatch = items.find(item => {\n  const city = (item.json.city || '').toUpperCase().trim();\n  const leadCityClean = leadCity.replace(/ /g, '');\n  const cityClean = city.replace(/ /g, '');\n  \n  return city === leadCity || \n         cityClean === leadCityClean ||\n         city.replace(/_/g, ' ') === leadCity;\n});\n\nif (exactMatch) {\n  return [{\n    json: {\n      timezone: exactMatch.json.timezone,\n      country: country,\n      country_code: country_code,\n      city: exactMatch.json.city,\n      flag: flag,\n      source: 'exact_match',\n      needs_fallback: false,\n      needs_selection: false,\n      options: []\n    }\n  }];\n}\n\n// Si no hay coincidencia exacta, verificar si el país tiene una sola zona\nif (items.length === 1) {\n  return [{\n    json: {\n      timezone: items[0].json.timezone,\n      country: country,\n      country_code: country_code,\n      city: items[0].json.city,\n      flag: flag,\n      source: 'country_default',\n      needs_fallback: false,\n      needs_selection: false,\n      options: []\n    }\n  }];\n}\n\n// Múltiples zonas - necesita selección del usuario\nconst options = items.map((item, index) => ({\n  index: index + 1,\n  city: item.json.city,\n  timezone: item.json.timezone\n}));\n\nreturn [{\n  json: {\n    timezone: null,\n    country: country,\n    country_code: country_code,\n    city: null,\n    flag: flag,\n    source: 'multiple_zones',\n    needs_fallback: false,\n    needs_selection: true,\n    options: options\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1920,
+          608
+        ],
+        "id": "2e7398f3-6a5f-4a7f-a4a2-280761eb6e2b",
+        "name": "Process Timezone Logic"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "final-timezone",
+                "name": "timezone",
+                "value": "={{ $json.timezone }}",
+                "type": "string"
+              },
+              {
+                "id": "final-country",
+                "name": "country",
+                "value": "={{ $json.country }}",
+                "type": "string"
+              },
+              {
+                "id": "final-country-code",
+                "name": "country_code",
+                "value": "={{ $json.country_code }}",
+                "type": "string"
+              },
+              {
+                "id": "final-city",
+                "name": "city",
+                "value": "={{ $json.city || '' }}",
+                "type": "string"
+              },
+              {
+                "id": "final-flag",
+                "name": "flag",
+                "value": "={{ $json.flag }}",
+                "type": "string"
+              },
+              {
+                "id": "final-source",
+                "name": "source",
+                "value": "={{ $json.source }}",
+                "type": "string"
+              },
+              {
+                "id": "final-fallback",
+                "name": "needs_fallback",
+                "value": "={{ $json.needs_fallback }}",
+                "type": "boolean"
+              },
+              {
+                "id": "final-selection",
+                "name": "needs_selection",
+                "value": "={{ $json.needs_selection }}",
+                "type": "boolean"
+              },
+              {
+                "id": "final-options",
+                "name": "options",
+                "value": "={{ $json.options || [] }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2144,
+          608
+        ],
+        "id": "7a636370-9520-478f-b7e0-a8726199a87c",
+        "name": "Format Output"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "bot-final-timezone",
+                "name": "timezone",
+                "value": "={{ $json.timezone }}",
+                "type": "string"
+              },
+              {
+                "id": "bot-final-country",
+                "name": "country",
+                "value": "={{ $('Trigger').item.json.bot_country }}",
+                "type": "string"
+              },
+              {
+                "id": "bot-final-country-code",
+                "name": "country_code",
+                "value": "={{ $('Trigger').item.json.bot_country_code }}",
+                "type": "string"
+              },
+              {
+                "id": "bot-final-city",
+                "name": "city",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "bot-final-flag",
+                "name": "flag",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "bot-final-source",
+                "name": "source",
+                "value": "={{ $json.source }}",
+                "type": "string"
+              },
+              {
+                "id": "bot-final-fallback",
+                "name": "needs_fallback",
+                "value": "={{ $json.needs_fallback }}",
+                "type": "boolean"
+              },
+              {
+                "id": "bot-final-selection",
+                "name": "needs_selection",
+                "value": "={{ $json.needs_selection }}",
+                "type": "boolean"
+              },
+              {
+                "id": "bot-final-options",
+                "name": "options",
+                "value": "={{ [] }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1696,
+          464
+        ],
+        "id": "3abca040-1290-4317-8d64-a26b073fd3d9",
+        "name": "Format Bot Default Output"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "notfound-final-timezone",
+                "name": "timezone",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "notfound-final-country",
+                "name": "country",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "notfound-final-country-code",
+                "name": "country_code",
+                "value": "={{ $('Normalize Phone & Extract Code').item.json.country_code }}",
+                "type": "string"
+              },
+              {
+                "id": "notfound-final-city",
+                "name": "city",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "notfound-final-flag",
+                "name": "flag",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "notfound-final-source",
+                "name": "source",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "notfound-final-fallback",
+                "name": "needs_fallback",
+                "value": true,
+                "type": "boolean"
+              },
+              {
+                "id": "notfound-final-selection",
+                "name": "needs_selection",
+                "value": false,
+                "type": "boolean"
+              },
+              {
+                "id": "notfound-final-reason",
+                "name": "reason",
+                "value": "country_code_not_found",
+                "type": "string"
+              },
+              {
+                "id": "notfound-final-options",
+                "name": "options",
+                "value": "={{ [] }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2160,
+          816
+        ],
+        "id": "c57637d9-12e5-45af-94e3-4d1ac96a5fa3",
+        "name": "Format Not Found Output"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "6b2a800c-3047-406c-ba79-54a0441c78ed",
+                "name": "lead_country",
+                "value": "={{ $json.lead_country }}",
+                "type": "string"
+              },
+              {
+                "id": "9057d7f6-a0f1-48a9-a1d4-8bdbd8f6b0e7",
+                "name": "lead_city",
+                "value": "={{ $json.lead_city }}",
+                "type": "string"
+              },
+              {
+                "id": "5df58dc7-ab6e-49db-80bc-d085e5059423",
+                "name": "phone",
+                "value": "={{ $json.sessionId }}",
+                "type": "string"
+              },
+              {
+                "id": "03acfca5-c070-4d24-bd2c-db05b5fc5ad7",
+                "name": "bot_country",
+                "value": "={{ $json.bot_country }}",
+                "type": "string"
+              },
+              {
+                "id": "157271a7-d085-4e82-8765-aa11dc656fba",
+                "name": "bot_timezone",
+                "value": "={{ $json.bot_timezone }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          816,
+          608
+        ],
+        "id": "20509569-71f7-4d10-8bab-df6b913baae4",
+        "name": "Edit Fields"
+      }
+    ],
+    "connections": {
+      "Trigger": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Normalize Phone & Extract Code": {
+        "main": [
+          [
+            {
+              "node": "IF Same Country",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF Same Country": {
+        "main": [
+          [
+            {
+              "node": "Return Bot Default",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "get timeZones",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Return Bot Default": {
+        "main": [
+          [
+            {
+              "node": "Format Bot Default Output",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "get timeZones": {
+        "main": [
+          [
+            {
+              "node": "IF Found Records",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF Found Records": {
+        "main": [
+          [
+            {
+              "node": "Process Timezone Logic",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Return Country Not Found",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Return Country Not Found": {
+        "main": [
+          [
+            {
+              "node": "Format Not Found Output",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Process Timezone Logic": {
+        "main": [
+          [
+            {
+              "node": "Format Output",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Normalize Phone & Extract Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Alex Guajardo",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "f5444e8a-7fc0-42a9-b7ba-6abe6047dc77",
   "connections": {
     "Trigger": {
       "main": [
