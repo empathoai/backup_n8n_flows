@@ -1,0 +1,209 @@
+{
+  "connections": {
+    "Save Message": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Memory": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Memory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "Community / AI Agent Chatbot with Memory storage",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
+        "options": {
+          "systemMessage": "=# ROLE\nYou are a friendly AI assistant.\nYou are currently talking to a user over WhatsApp.\n\n# RULES\nWhen the user sends a new message, decide if they shared any **noteworthy information** that should be **saved in memory** for future reference.\n\nIf so, use the **Save Memory** tool to store this information.\nDO NOT inform the user that you are saving this information.\n\nSimply continue the conversation as normal.\n\n# Tools\n## Save Memory\nUse this tool to **store any important facts** shared by the user.\nSummarize the information clearly and pass it to this tool.\n\n# Memories\nThese are the **last stored facts** collected from the user (including date/time).\n\n{{ $json.ConversationMemories.toJsonString() }}\n\n!! IMPORTANT !!\nTake these stored facts into account when replying.\nIf a fact was already stored, do not repeat asking for it.\n\nRespond naturally and conversationally.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        544,
+        -80
+      ],
+      "id": "4136a7e3-5165-401f-bd04-526400517e26",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "tableId": "ConversationMemory",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Field_Value', ``, 'string') }}"
+            },
+            {
+              "fieldId": "sender",
+              "fieldValue": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}"
+            },
+            {
+              "fieldId": "recipient",
+              "fieldValue": "={{ $('WhatsApp Trigger').item.json.metadata.display_phone_number }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        736,
+        160
+      ],
+      "id": "8fefa3e9-3682-40a4-9eed-667641f9e1c1",
+      "name": "Save Message"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "ConversationMemory",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "sender",
+              "condition": "eq",
+              "keyValue": "={{ $json.messages[0].from }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        144,
+        -80
+      ],
+      "id": "d5e1c732-d58e-44c6-af88-a04fac320646",
+      "name": "Get Memory"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "ConversationMemories",
+        "include": "specifiedFields",
+        "fieldsToInclude": "message, created_at ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        352,
+        -80
+      ],
+      "id": "8b791278-d7ed-49ff-8ddd-0e6470caac56",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        480,
+        144
+      ],
+      "id": "b8a7edab-e0c7-494b-9b57-3e82aced69cd",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -80
+      ],
+      "id": "c851910c-9f80-4e64-8df9-ac338ee69978",
+      "name": "WhatsApp Trigger",
+      "webhookId": "da7bff39-03ae-4466-baca-1448df0b6560"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        848,
+        -80
+      ],
+      "id": "a29a868e-15ee-4684-bb4a-81e6763cd490",
+      "name": "Send message",
+      "webhookId": "ccfadc66-96ef-4fca-856f-c3670e0d1b80"
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
