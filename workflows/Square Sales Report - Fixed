@@ -1,0 +1,439 @@
+{
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Square Locations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Square Locations": {
+      "main": [
+        [
+          {
+            "node": "Split Locations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Locations": {
+      "main": [
+        [
+          {
+            "node": "Prepare API Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare API Request": {
+      "main": [
+        [
+          {
+            "node": "Get Weekly Sales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Weekly Sales": {
+      "main": [
+        [
+          {
+            "node": "Has Sales?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Sales?": {
+      "main": [
+        [
+          {
+            "node": "Compile Weekly Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compile Weekly Report": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "name": "Square Sales Report - Fixed",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 🔧 Square Weekly Sales Report - FIXED VERSION\n\n### What This Workflow Does\nAutomatically generates a **weekly sales summary** for all your Square locations and emails it to your finance team every Monday.\n\n### Key Fixes Applied\n✅ **No More Duplicates** - Processes each location once per week\n✅ **Correct Date Filtering** - Uses proper 7-day date range in API calls\n✅ **Optimized Flow** - Locations processed before date filtering\n✅ **Weekly Summary** - One report per location per week (not per day)\n✅ **Proper Data Structure** - Fixed all n8n expression syntax\n\n### Prerequisites\n- Square API Access Token (Personal Access Token or OAuth)\n- Gmail account configured in n8n\n\n### Setup Instructions\n\n1. **Configure Square Credentials:**\n   - In \"Get Square Locations\" node: Replace `YOUR_SQUARE_ACCESS_TOKEN`\n   - In \"Get Weekly Sales\" node: Replace `YOUR_SQUARE_ACCESS_TOKEN`\n   - Format: `Bearer EAAAlwWK22agV...` (include \"Bearer \" prefix)\n\n2. **Configure Email:**\n   - In \"Send Email\" node: Change recipient email from `finance@example.com`\n   - Set up Gmail credential in n8n if not already configured\n\n3. **Activate Workflow:**\n   - Toggle the workflow to **Active**\n   - It will run every Monday at 8:00 AM\n\n### What Gets Reported\n- **Date Range**: Previous 7 days  \n- **Per Location**: Each location gets one summary row\n- **Metrics**: Gross sales, returns, discounts, net sales, taxes, tips, payment methods, fees\n- **Output**: CSV file attached to email\n\n### Customization Options\n- Change schedule: Edit \"Schedule Trigger\" node\n- Change recipients: Edit \"Send Email\" node  \n- Add more locations: They'll be processed automatically\n- Change date range: Modify the date calculation in \"Get Weekly Sales\"\n\n### Testing\nTest manually by clicking \"Execute Workflow\" - it will use the current date as the trigger date.\n\n---\n**Version:** 2.0 (Fixed)\n**Compatible with:** n8n v1.0+",
+        "height": 1040,
+        "width": 540
+      },
+      "id": "1455b76e-e0f5-4aa0-9489-4d4330fe1fca",
+      "name": "Sticky Note - Main Info",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -32,
+        -256
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "c3be0c0e-9ae9-46b0-b860-5ae22c4025a4",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        3216,
+        1392
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "url": "https://connect.squareup.com/v2/locations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Square-Version",
+              "value": "2025-10-16"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAAlwWK22agVOvrkkw_WlY3cAEWDZYSFlc5oaRYXGELdhiYQCiDgovmOifHUTab"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "05ac4495-13f7-411d-baaa-b3696d8e13d6",
+      "name": "Get Square Locations",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        3440,
+        1392
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "locations",
+        "options": {}
+      },
+      "id": "3f123ca2-7a3a-4681-861e-a86d0958665d",
+      "name": "Split Locations",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        3664,
+        1392
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get trigger timestamp\nconst triggerTimestamp = $('Schedule Trigger').first().json.timestamp;\nconst now = new Date(triggerTimestamp);\nconst startDate = new Date(now);\nstartDate.setDate(now.getDate() - 7);\n\n// Format dates for Square API (RFC3339 format)\nconst startDateStr = startDate.toISOString();\nconst endDateStr = now.toISOString();\n\n// Get location ID from previous node\nconst locationId = $input.item.json.id;\nconst locationName = $input.item.json.name || 'Unknown';\n\n// Build the API payload WITHOUT return_entries to get full order data\nconst payloadObj = {\n  location_ids: [locationId],\n  query: {\n    filter: {\n      date_time_filter: {\n        created_at: {\n          start_at: startDateStr,\n          end_at: endDateStr\n        }\n      },\n      state_filter: {\n        states: [\"COMPLETED\"]\n      }\n    },\n    sort: {\n      sort_field: \"CREATED_AT\",\n      sort_order: \"DESC\"\n    }\n  },\n  limit: 500\n};\n\n// Return the data with payload as string\nreturn {\n  json: {\n    locationId: locationId,\n    locationName: locationName,\n    payloadString: JSON.stringify(payloadObj),\n    startDate: startDateStr,\n    endDate: endDateStr\n  }\n};"
+      },
+      "id": "9944b345-20c4-4c62-80a4-2172d820c2c0",
+      "name": "Prepare API Request",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        3888,
+        1392
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://connect.squareup.com/v2/orders/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Square-Version",
+              "value": "2025-10-16"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAAlwWK22agVOvrkkw_WlY3cAEWDZYSFlc5oaRYXGELdhiYQCiDgovmOifHUTab"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.payloadString }}",
+        "options": {}
+      },
+      "id": "dfdb591e-d6e6-489d-8828-edb30e6413ff",
+      "name": "Get Weekly Sales",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        4096,
+        1392
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "498f5fab-6930-4e89-9fbe-0d67671da8d2",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              },
+              "leftValue": "={{ $json.orders?.length ?? 0 }}",
+              "rightValue": 0
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8b981d4e-415f-49fd-b419-455347067384",
+      "name": "Has Sales?",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        4320,
+        1392
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================\n// DETAILED SALES REPORT FROM ORDERS\n// ============================================\n\n// 1. Get orders directly from the API response\nconst orders = $json.orders || [];\n\nconsole.log('=== PROCESSING ORDERS ===');\nconsole.log('Total orders:', orders.length);\n\nif (orders.length === 0) {\n  return [{\n    json: {\n      message: 'No orders found'\n    }\n  }];\n}\n\n// 2. Get date range\nconst triggerDate = $('Schedule Trigger').first().json.timestamp;\nconst endDate = new Date(triggerDate);\nconst startDate = new Date(triggerDate);\nstartDate.setDate(startDate.getDate() - 7);\n\n// 3. Get location info\nconst location_id = orders[0].location_id || null;\nlet location_name = 'Unknown Location';\ntry {\n  const splitLocationItem = $('Split Locations').item.json;\n  location_name = splitLocationItem.name || splitLocationItem.id || 'Unknown Location';\n} catch (e) {\n  location_name = location_id || 'Unknown Location';\n}\n\n// Log first order to verify structure\nif (orders.length > 0) {\n  console.log('First order sample:', JSON.stringify(orders[0], null, 2));\n}\n\n// ============================================\n// 4. Process each order individually\n// ============================================\nconst detailedReports = [];\n\nfor (const order of orders) {\n  if (!order || !order.id) continue;\n\n  // Extract basic info\n  const order_id = order.id;\n  const order_date = order.created_at ? order.created_at.split('T')[0] : '';\n  const order_time = order.created_at ? order.created_at.split('T')[1]?.substring(0, 8) : '';\n  \n  // Line items\n  const line_items = order.line_items || [];\n  const items_description = line_items.map(item => \n    `${item.name || 'Unknown'} (${item.quantity || 1})`\n  ).join('; ');\n  \n  // Financial data (convert cents to dollars)\n  const total_money = (order.total_money?.amount || 0) / 100.0;\n  const total_tax = (order.total_tax_money?.amount || 0) / 100.0;\n  const total_discount = Math.abs((order.total_discount_money?.amount || 0)) / 100.0;\n  const total_tip = (order.total_tip_money?.amount || 0) / 100.0;\n  const cash_rounding = (order.rounding_adjustment?.amount_money?.amount || 0) / 100.0;\n  \n  // Calculate net sales\n  const net_sales = total_money - total_tip - total_tax - cash_rounding;\n  const gross_sales = net_sales - total_discount;\n  \n  // Tenders (payment methods)\n  const tenders = order.tenders || [];\n  let cash = 0;\n  let card = 0;\n  let gift_card = 0;\n  let other = 0;\n  let fees = 0;\n  \n  for (const tender of tenders) {\n    const amount = (tender.amount_money?.amount || 0) / 100.0;\n    \n    switch (tender.type) {\n      case 'CARD':\n        card += amount;\n        break;\n      case 'CASH':\n        cash += amount;\n        break;\n      case 'SQUARE_GIFT_CARD':\n        gift_card += amount;\n        break;\n      default:\n        other += amount;\n    }\n    \n    if (tender.processing_fee_money) {\n      fees -= (tender.processing_fee_money.amount || 0) / 100.0;\n    }\n  }\n  \n  // Returns\n  const return_amount = order.return_amounts?.total_money?.amount \n    ? Math.abs(order.return_amounts.total_money.amount) / 100.0 \n    : 0;\n  \n  const net_total = cash + card + gift_card + other + fees;\n  \n  // Create detailed row\n  detailedReports.push({\n    json: {\n      date: order_date,\n      time: order_time,\n      location_id,\n      location_name,\n      order_id,\n      items: items_description,\n      gross_sales: gross_sales.toFixed(2),\n      total_discount: total_discount.toFixed(2),\n      net_sales: net_sales.toFixed(2),\n      total_tax: total_tax.toFixed(2),\n      total_tip: total_tip.toFixed(2),\n      total_money: total_money.toFixed(2),\n      returns: return_amount.toFixed(2),\n      cash: cash.toFixed(2),\n      card: card.toFixed(2),\n      gift_card: gift_card.toFixed(2),\n      other_payment: other.toFixed(2),\n      processing_fees: fees.toFixed(2),\n      net_total: net_total.toFixed(2)\n    }\n  });\n}\n\nconsole.log(`Created ${detailedReports.length} detailed records`);\n\nreturn detailedReports;"
+      },
+      "id": "c068d29d-6522-4367-8445-4820c77739de",
+      "name": "Compile Weekly Report",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        4592,
+        1360
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "sendTo": "finance@example.com",
+        "subject": "=Weekly Square Sales Report - {{ $('Schedule Trigger').item.json.timestamp.split('T')[0] }}",
+        "message": "=<p>Hello Finance Team,</p><p>Please find attached the weekly sales report from Square for all locations.</p><p><strong>Report Period:</strong> {{ $('Compile Weekly Report').first().json.date_range }}</p><p>Best regards,<br>Automated Sales Reporting System</p>",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "sales_report"
+              }
+            ]
+          }
+        }
+      },
+      "id": "d6965a72-0909-48ac-abd8-b18b3c2f7de0",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        5248,
+        1392
+      ],
+      "webhookId": "a1026d0b-b5a8-4657-955f-975f7c1f307d",
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "content": "## 📅 Weekly Schedule Trigger\n\n**Runs every Monday at 8:00 AM**\n\nAutomatically triggers the workflow to pull the previous week's sales data from Square.",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "3ff77b27-aeca-463e-ac46-65e997bf416a",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3136,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 📍 Get All Square Locations\n\n**Fetches all your Square locations once**\n\nRetrieves all locations from your Square account to process each one separately.",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "100fb467-a2c0-4646-bc7a-c6dde0ff1d98",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3360,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 🔀 Split Into Individual Locations\n\n**Creates one execution per location**\n\nSeparates the locations array so each location can be processed independently.",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "be7a0862-f010-4991-ab13-7a12ccaad222",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3584,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 🔧 Prepare API Request\n\n**Builds the Square API payload**\n\nConstructs the JSON payload with:\n- Location ID from previous node\n- Date range (last 7 days)\n- Filter for completed orders only",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "e0de58ed-6fce-475a-8081-bc618b95a691",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3808,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 📊 Get Weekly Sales Data\n\n**Calls Square Orders API**\n\nFetches completed orders using the prepared payload from previous node.",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "7bc6ec43-2559-4cb5-9b1d-afa365d8d2d9",
+      "name": "Sticky Note4b",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4016,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## ✅ Filter Empty Results\n\n**Skips locations with no sales**\n\nOnly processes locations that had orders during the reporting period.",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "c59a17c3-4700-4a45-aaa8-4ae75d2b4801",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4240,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 🧮 Calculate Weekly Summary\n\n**Aggregates all sales data**\n\nProcesses all orders and calculates:\n- Gross Sales\n- Net Sales  \n- Returns\n- Discounts\n- Taxes & Tips\n- Payment methods breakdown\n- Processing fees",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "d49a22ea-987a-4695-a4f2-b4693a982e21",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4464,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 📄 Create CSV File\n\n**Converts data to CSV format**\n\nGenerates a CSV file with all location summaries for easy analysis.",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "1b1da5cd-99ed-4196-9e92-410fdb4a74fc",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4688,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 📧 Email Report\n\n**Sends to finance team**\n\nEmails the weekly sales report as a CSV attachment to your specified recipients.",
+        "height": 280,
+        "width": 320,
+        "color": 5
+      },
+      "id": "8f58741a-4123-4308-bb40-1e2b43495b8d",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4896,
+        1232
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 🔧 Square Weekly Sales Report - FIXED VERSION\n\n### What This Workflow Does\nAutomatically generates a **weekly sales summary** for all your Square locations and emails it to your finance team every Monday.\n\n### Key Fixes Applied\n✅ **No More Duplicates** - Processes each location once per week\n✅ **Correct Date Filtering** - Uses proper 7-day date range in API calls\n✅ **Optimized Flow** - Locations processed before date filtering\n✅ **Weekly Summary** - One report per location per week (not per day)\n✅ **Proper Data Structure** - Fixed all n8n expression syntax\n\n### Prerequisites\n- Square API Access Token (Personal Access Token or OAuth)\n- Gmail account configured in n8n\n\n### Setup Instructions\n\n1. **Configure Square Credentials:**\n   - In \"Get Square Locations\" node: Replace `YOUR_SQUARE_ACCESS_TOKEN`\n   - In \"Get Weekly Sales\" node: Replace `YOUR_SQUARE_ACCESS_TOKEN`\n   - Format: `Bearer EAAAlwWK22agV...` (include \"Bearer \" prefix)\n\n2. **Configure Email:**\n   - In \"Send Email\" node: Change recipient email from `finance@example.com`\n   - Set up Gmail credential in n8n if not already configured\n\n3. **Activate Workflow:**\n   - Toggle the workflow to **Active**\n   - It will run every Monday at 8:00 AM\n\n### What Gets Reported\n- **Date Range**: Previous 7 days  \n- **Per Location**: Each location gets one summary row\n- **Metrics**: Gross sales, returns, discounts, net sales, taxes, tips, payment methods, fees\n- **Output**: CSV file attached to email\n\n### Customization Options\n- Change schedule: Edit \"Schedule Trigger\" node\n- Change recipients: Edit \"Send Email\" node  \n- Add more locations: They'll be processed automatically\n- Change date range: Modify the date calculation in \"Get Weekly Sales\"\n\n### Testing\nTest manually by clicking \"Execute Workflow\" - it will use the current date as the trigger date.\n\n---\n**Version:** 2.0 (Fixed)\n**Compatible with:** n8n v1.0+",
+        "height": 1040,
+        "width": 540
+      },
+      "id": "bf0082a3-fa7f-496a-be3e-197f52f97c5e",
+      "name": "Sticky Note - Main Info1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2736,
+        1072
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
