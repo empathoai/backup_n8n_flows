@@ -1,0 +1,3237 @@
+{
+  "connections": {
+    "Upload File": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Upload Image to Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Image to Supabase": {
+      "main": [
+        [
+          {
+            "node": "Get response file name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Images": {
+      "main": [
+        [
+          {
+            "node": "Set file name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages": {
+      "main": [
+        [
+          {
+            "node": "Split Out Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get response file name": {
+      "main": [
+        [
+          {
+            "node": "Merge results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge results": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set file name": {
+      "main": [
+        [
+          {
+            "node": "Prep base64 string",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge results",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Prep base64 string": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase_account_details": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Supabase_account_details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move file": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Upload File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent6",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hybrid Search1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Full Text Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent5",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sparse Embedding Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent5",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dense Embedding From Query": {
+      "main": [
+        [
+          {
+            "node": "Trigger Hybrid Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Vars": {
+      "main": [
+        [
+          {
+            "node": "Generate Sparse Embedding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Sparse Embedding": {
+      "main": [
+        [
+          {
+            "node": "Query Pinecone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store3": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent7",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI3": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store3",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hybrid Search2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent6",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dense Embedding1": {
+      "main": [
+        [
+          {
+            "node": "Trigger Dynamic Hybrid Search1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent7",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Cohere": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Milvus Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader1": {
+      "ai_document": [
+        [
+          {
+            "node": "Milvus Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Upload Image to Supabase1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Image to Supabase1": {
+      "main": [
+        [
+          {
+            "node": "Get response file name1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Images1": {
+      "main": [
+        [
+          {
+            "node": "Set file name1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages2": {
+      "main": [
+        [
+          {
+            "node": "Split Out Images1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get response file name1": {
+      "main": [
+        [
+          {
+            "node": "Merge results1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge results1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set file name1": {
+      "main": [
+        [
+          {
+            "node": "Prep base64 string1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge results1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Prep base64 string1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages3": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase_account_details1": {
+      "main": [
+        [
+          {
+            "node": "Download file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Supabase_account_details1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move file1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file1": {
+      "main": [
+        [
+          {
+            "node": "Upload File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Cohere1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Milvus Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader3": {
+      "ai_document": [
+        [
+          {
+            "node": "Milvus Vector Store1",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "Contextual RAG",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "purpose",
+              "value": "ocr"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -6048,
+        -976
+      ],
+      "id": "69bf6bbc-e343-4ddb-a1ba-659441dc70b0",
+      "name": "Upload File",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "=https://api.mistral.ai/v1/files/{{ $json.id }}/url",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "expiry",
+              "value": "24"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5856,
+        -976
+      ],
+      "id": "4e71d61c-4407-4da5-8614-4918d7017fd5",
+      "name": "HTTP Request",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/ocr",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"model\": \"mistral-ocr-latest\",\n    \"document\": {\n        \"type\": \"document_url\",\n        \"document_url\": \"{{ $json.url }}\"\n    },\n    \"include_image_base64\": true,\n    \"bbox_annotation_format\": {\n        \"type\": \"text\",\n        \"json_schema\": {\n            \"name\": \"visual_descriptions_only\",\n            \"description\": \"Extract concise natural-language descriptions for each distinct visual element (image, chart, table, diagram, etc.) on the page. Focus on summarizing what each visual element contains or conveys.\",\n            \"schema\": {\n                \"type\": \"array\",\n                \"items\": {\n                    \"type\": \"string\",\n                    \"description\": \"A concise description of a single visual element.\"\n                }\n            },\n            \"strict\": false\n        }\n    }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5648,
+        -976
+      ],
+      "id": "ad560132-4811-4ab3-8668-a3e91ef03fa3",
+      "name": "HTTP Request1",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        -2368,
+        -1008
+      ],
+      "id": "e4c50c0c-5c5f-458b-94fd-25edcd50af61",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "z3EU9aX7OrP0jWfJ",
+          "name": "Supabase account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.markdown }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -2240,
+        -816
+      ],
+      "id": "72aa23b8-4c03-43a9-82db-85ed600ca733",
+      "name": "Default Data Loader",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 200,
+        "options": {
+          "splitCode": "markdown"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -2224,
+        -656
+      ],
+      "id": "db20f85a-2dd0-45e9-b942-de83de5282b4",
+      "name": "Recursive Character Text Splitter",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2448,
+        -816
+      ],
+      "id": "10ea940d-962b-42e1-91d5-b70a12be68b8",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "public": true,
+        "options": {
+          "customCss": ":root {\n  /* Colors */\n  --chat--color-primary: #e74266;\n  --chat--color-primary-shade-50: #db4061;\n  --chat--color-primary-shade-100: #cf3c5c;\n  --chat--color-secondary: #20b69e;\n  --chat--color-secondary-shade-50: #1ca08a;\n  --chat--color-white: #ffffff;\n  --chat--color-light: #f2f4f8;\n  --chat--color-light-shade-50: #e6e9f1;\n  --chat--color-light-shade-100: #c2c5cc;\n  --chat--color-medium: #d2d4d9;\n  --chat--color-dark: #101330;\n  --chat--color-disabled: #777980;\n  --chat--color-typing: #404040;\n\n  /* Base Layout */\n  --chat--spacing: 1rem;\n  --chat--border-radius: 0.25rem;\n  --chat--transition-duration: 0.15s;\n  --chat--font-family: (\n    -apple-system,\n    BlinkMacSystemFont,\n    'Segoe UI',\n    Roboto,\n    Oxygen-Sans,\n    Ubuntu,\n    Cantarell,\n    'Helvetica Neue',\n    sans-serif\n  );\n\n  /* Window Dimensions */\n  --chat--window--width: 400px;\n  --chat--window--height: 600px;\n  --chat--window--bottom: var(--chat--spacing);\n  --chat--window--right: var(--chat--spacing);\n  --chat--window--z-index: 9999;\n  --chat--window--border: 1px solid var(--chat--color-light-shade-50);\n  --chat--window--border-radius: var(--chat--border-radius);\n  --chat--window--margin-bottom: var(--chat--spacing);\n\n  /* Header Styles */\n  --chat--header-height: auto;\n  --chat--header--padding: var(--chat--spacing);\n  --chat--header--background: var(--chat--color-dark);\n  --chat--header--color: var(--chat--color-light);\n  --chat--header--border-top: none;\n  --chat--header--border-bottom: none;\n  --chat--header--border-left: none;\n  --chat--header--border-right: none;\n  --chat--heading--font-size: 2em;\n  --chat--subtitle--font-size: inherit;\n  --chat--subtitle--line-height: 1.8;\n\n  /* Message Styles */\n  --chat--message--font-size: 1rem;\n  --chat--message--padding: var(--chat--spacing);\n  --chat--message--border-radius: var(--chat--border-radius);\n  --chat--message-line-height: 1.5;\n  --chat--message--margin-bottom: calc(var(--chat--spacing) * 1);\n  --chat--message--bot--background: var(--chat--color-white);\n  --chat--message--bot--color: var(--chat--color-dark);\n  --chat--message--bot--border: none;\n  --chat--message--user--background: var(--chat--color-secondary);\n  --chat--message--user--color: var(--chat--color-white);\n  --chat--message--user--border: none;\n  --chat--message--pre--background: rgba(0, 0, 0, 0.05);\n  --chat--messages-list--padding: var(--chat--spacing);\n\n  /* Toggle Button */\n  --chat--toggle--size: 64px;\n  --chat--toggle--width: var(--chat--toggle--size);\n  --chat--toggle--height: var(--chat--toggle--size);\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--background: var(--chat--color-primary);\n  --chat--toggle--hover--background: var(--chat--color-primary-shade-50);\n  --chat--toggle--active--background: var(--chat--color-primary-shade-100);\n  --chat--toggle--color: var(--chat--color-white);\n\n  /* Input Area */\n  --chat--textarea--height: 50px;\n  --chat--textarea--max-height: 30rem;\n  --chat--input--font-size: inherit;\n  --chat--input--border: 0;\n  --chat--input--border-radius: 0;\n  --chat--input--padding: 0.8rem;\n  --chat--input--background: var(--chat--color-white);\n  --chat--input--text-color: initial;\n  --chat--input--line-height: 1.5;\n  --chat--input--placeholder--font-size: var(--chat--input--font-size);\n  --chat--input--border-active: 0;\n  --chat--input--left--panel--width: 2rem;\n\n  /* Button Styles */\n  --chat--button--color: var(--chat--color-light);\n  --chat--button--background: var(--chat--color-primary);\n  --chat--button--padding: calc(var(--chat--spacing) * 1 / 2) var(--chat--spacing);\n  --chat--button--border-radius: var(--chat--border-radius);\n  --chat--button--hover--color: var(--chat--color-light);\n  --chat--button--hover--background: var(--chat--color-primary-shade-50);\n  --chat--close--button--color-hover: var(--chat--color-primary);\n\n  /* Send and File Buttons */\n  --chat--input--send--button--background: var(--chat--color-white);\n  --chat--input--send--button--color: var(--chat--color-light);\n  --chat--input--send--button--background-hover: var(--chat--color-primary-shade-50);\n  --chat--input--send--button--color-hover: var(--chat--color-secondary-shade-50);\n  --chat--input--file--button--background: var(--chat--color-white);\n  --chat--input--file--button--color: var(--chat--color-secondary);\n  --chat--input--file--button--background-hover: var(--chat--input--file--button--background);\n  --chat--input--file--button--color-hover: var(--chat--color-secondary-shade-50);\n  --chat--files-spacing: 0.25rem;\n\n  /* Body and Footer */\n  --chat--body--background: var(--chat--color-light);\n  --chat--footer--background: var(--chat--color-light);\n  --chat--footer--color: var(--chat--color-dark);\n}\n\n\n/* You can override any class styles, too. Right-click inspect in Chat UI to find class to override. */\n.chat-message {\n\tmax-width: 50%;\n}\n\n.chat-message table {\n  width: 100%;\n  border-collapse: collapse;\n  background-color: var(--chat--color-light-shade-50);\n  border: 1px solid var(--chat--color-medium);\n  padding: 0.5rem;\n  border-radius: var(--chat--border-radius);\n}\n\n.chat-message th,\n.chat-message td {\n  border: 1px solid var(--chat--color-medium);\n  padding: 0.5rem;\n  text-align: left;\n}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -5520,
+        -208
+      ],
+      "id": "8ebfd8df-7a99-44db-8251-6279c2f457ce",
+      "name": "When chat message received",
+      "webhookId": "d3b3b762-cbfb-47f6-a612-1c00181d7ed7"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a washine machine expert.\n\nYou are tasked with answering a question using the information retrieved from the attached vector store.\n\nYour goal is to provide an accurate answer based on this information ONLY.\n\nIf there are images provided from the retrieved information, you should return this in markdown format.\n\nIf you cannot answer the question using the provided information or if no information is returned from the vector store, say \"Sorry I don't know\"."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -6768,
+        -240
+      ],
+      "id": "1c52aabe-6861-4441-b7d6-3f0dea72bee6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -6832,
+        16
+      ],
+      "id": "008e9486-4b63-42a0-97c1-24c80f59a29c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -6672,
+        0
+      ],
+      "id": "3b398e82-82cb-4faa-80cf-6e6bbcd57c56",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -6528,
+        128
+      ],
+      "id": "872d5f1b-8990-409d-9d8f-efa52f0847bc",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "documents",
+        "toolDescription": "Retrieve relevant details from the vector store",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "topK": 20,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        -6512,
+        -64
+      ],
+      "id": "3909decd-563f-47f4-8db5-8f1c0bb278f9",
+      "name": "Supabase Vector Store1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "z3EU9aX7OrP0jWfJ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "=image_base64",
+        "options": {
+          "fileName": "={{ $('Set file name').item.json.file_name }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -4304,
+        -1536
+      ],
+      "id": "0220b1fb-4613-4027-b992-0e42429ce27c",
+      "name": "Convert to File",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Supabase_account_details').first().json.supabase_base_url }}/storage/v1/object/{{ $('Supabase_account_details').first().json.supabase_storage_bucket_name }}/{{ $binary.data.fileName }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -4064,
+        -1536
+      ],
+      "id": "92085a44-89ae-4316-962b-1800f9d9d6e2",
+      "name": "Upload Image to Supabase",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "z3EU9aX7OrP0jWfJ",
+          "name": "Supabase account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -5072,
+        -1328
+      ],
+      "id": "fb1b5dce-36bd-4947-bc9b-8270a5f363a9",
+      "name": "Split Out Images",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -5296,
+        -1328
+      ],
+      "id": "36e7b488-0ac0-4b80-a6ae-b1794b793269",
+      "name": "Split Out Pages",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dbd236e3-a9cb-4568-b781-086497021139",
+              "name": "file_name",
+              "value": "={{ $json.Key.split('/').slice(1).join('/') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3856,
+        -1536
+      ],
+      "id": "43227862-dbf8-4034-9f03-92cdcaa8813c",
+      "name": "Get response file name",
+      "alwaysOutputData": true,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "file_name",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -3568,
+        -1360
+      ],
+      "id": "e2452c49-4571-4fea-98a3-d06c1b1a4535",
+      "name": "Merge results",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "uploaded_images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -3376,
+        -1360
+      ],
+      "id": "7bb149e7-bfcc-4fd1-8e17-7ba9d6cff6d9",
+      "name": "Aggregate1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -3088,
+        -1008
+      ],
+      "id": "af969305-17e3-4065-83b9-74b298ffedc8",
+      "name": "Merge1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "94ab2435-fc15-4668-b6c7-542619abb5e3",
+              "name": "file_name",
+              "value": "={{ Array.from({ length: 6 }, () => Math.random().toString(36).slice(2, 10)).join('') }}",
+              "type": "string"
+            },
+            {
+              "id": "1ab3ad56-4086-4c23-9e44-ca33e8dadbb5",
+              "name": "original_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "aa2e372a-bcc7-4843-967c-b0ad9a0ebbfc",
+              "name": "image_annotation",
+              "value": "={{ $json.image_annotation }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4848,
+        -1328
+      ],
+      "id": "617c1896-f072-47f3-b24b-80657038fa91",
+      "name": "Set file name",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b1c9a844-7c93-4899-992e-75a2d1d651f9",
+              "name": "image_base64",
+              "value": "={{ $('Split Out Images').item.json.image_base64.split(',')[1]; }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4528,
+        -1536
+      ],
+      "id": "d97790d2-ba00-4ddf-a970-bdf62cd645b1",
+      "name": "Prep base64 string",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -2848,
+        -1008
+      ],
+      "id": "cd5bee94-fe8f-43be-831c-4cd275468e41",
+      "name": "Split Out Pages1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Safely access uploaded_images from Merge1\nconst mergeItem = $('Merge1').item;\nconst uploadedImages = mergeItem?.json?.uploaded_images;\n\nlet markdown = $json.markdown;\nconst supabaseBaseUrl = $('Supabase_account_details').item.json.supabase_base_url;\nconst bucketName = $('Supabase_account_details').item.json.supabase_storage_bucket_name;\nconst fullBaseUrl = `${supabaseBaseUrl}/storage/v1/object/public/${bucketName}/`;\n\n// Only run replacement if uploadedImages is a non-empty array\nif (Array.isArray(uploadedImages) && uploadedImages.length > 0) {\n  for (const image of uploadedImages) {\n    const originalId = image.original_id;\n    const fileName = image.file_name;\n    const annotation = image.image_annotation || '';\n\n    const localMarkdownPattern = `![${originalId}](${originalId})`;\n    const hostedMarkdownWithAnnotation = `![${originalId}](${fullBaseUrl}${fileName})\\n\\n${annotation}`;\n\n    if (markdown.includes(localMarkdownPattern)) {\n      markdown = markdown.replaceAll(localMarkdownPattern, hostedMarkdownWithAnnotation);\n    }\n  }\n}\n\nreturn {\n  json: {\n    ...$json,\n    markdown\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2608,
+        -1008
+      ],
+      "id": "2a6f0ade-f3a7-4f4c-acd0-230d356105a1",
+      "name": "Code",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ef0afdc6-34df-4509-9112-daeaa2e8dabd",
+              "name": "supabase_base_url",
+              "value": "https://ihbsaqntpcfcddjsfahr.supabase.co",
+              "type": "string"
+            },
+            {
+              "id": "c8116945-1d31-4e9b-a898-2fcfb5a2e347",
+              "name": "supabase_storage_bucket_name",
+              "value": "images",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6528,
+        -976
+      ],
+      "id": "225a681e-f67a-4dac-8667-8b15322e25d4",
+      "name": "Supabase_account_details",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -6832,
+        -1008
+      ],
+      "id": "f7d633df-6b7c-4b01-a516-8b7df1ef54c5",
+      "name": "Loop Over Items",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1ZPaoi3VcW6FlX5yhrvhdb2zUKHm5T20E",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1600,
+        -592
+      ],
+      "id": "1a66e0d6-4596-44bc-8e0a-1642b8192196",
+      "name": "Move file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "11lXb2f7enCxgeP6HROWqDWzfIz3vX_Kv",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -7072,
+        -1008
+      ],
+      "id": "7e9cbbf2-5806-490c-a16b-6b7896877495",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -6272,
+        -976
+      ],
+      "id": "7a4491ff-378a-40c7-a594-3693e78eec4d",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1792,
+        -944
+      ],
+      "id": "8b1e9afd-9ec9-4489-baa7-f67a370bd647",
+      "name": "Aggregate",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Image Upload",
+        "height": 512,
+        "width": 2176,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -5360,
+        -1616
+      ],
+      "id": "d6c14667-bfa9-44ab-9b55-1a02380b1f6e",
+      "name": "Sticky Note",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Loading to Vector Store",
+        "height": 640,
+        "width": 1008,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2896,
+        -1120
+      ],
+      "id": "70dbc789-6002-4dd2-8395-cb96f3abe456",
+      "name": "Sticky Note1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# OCR",
+        "height": 368,
+        "width": 912,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -6336,
+        -1104
+      ],
+      "id": "5f2e91f6-9821-4249-a799-8b577dc392c6",
+      "name": "Sticky Note2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Multimodal RAG Agent",
+        "height": 632,
+        "width": 1020,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -7136,
+        -352
+      ],
+      "id": "ca28f3f5-0cf2-4cd0-9b1d-1d8959616ca3",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a refrigerators expert.\n\nYou are tasked with answering a question using the information retrieved from the attached vector store.\n\nYour goal is to provide an accurate answer based on this information ONLY.\n\nIf there are images provided from the retrieved information, you should return this in markdown format.\n\nIf you cannot answer the question using the provided information or if no information is returned from the vector store, say \"Sorry I don't know\"."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -5296,
+        -224
+      ],
+      "id": "41efe246-5470-4a25-a681-ab66fef48486",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -5360,
+        32
+      ],
+      "id": "c53dde75-3fa5-445b-8ef2-5cc4b74fcc1d",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -5200,
+        16
+      ],
+      "id": "818211e8-46a0-47e3-bc55-bc6bce6009d4",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -5056,
+        144
+      ],
+      "id": "ec2b6669-aef4-4347-83f8-550187cb4b70",
+      "name": "Embeddings OpenAI2",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "documents",
+        "toolDescription": "Retrieve relevant details from the vector store",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "topK": 20,
+        "useReranker": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        -5040,
+        -48
+      ],
+      "id": "734c2bd8-1a1a-4bf0-927d-3fb151889587",
+      "name": "Supabase Vector Store2",
+      "credentials": {
+        "supabaseApi": {
+          "id": "z3EU9aX7OrP0jWfJ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Multimodal RAG Agent Reranked",
+        "height": 632,
+        "width": 1020,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -5664,
+        -336
+      ],
+      "id": "2e958e68-edec-4a43-b575-17f047f03231",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "topN": 5
+      },
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        -4912,
+        160
+      ],
+      "id": "40124b28-1b5a-433a-ae58-6594eaec437c",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "MDpMWvH8CuNBd9uu",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        -2352,
+        6336
+      ],
+      "id": "e55fb7c0-6f22-4925-ba2e-76ebc6678c7a",
+      "name": "Anthropic Chat Model"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -3216,
+        6080
+      ],
+      "id": "f0373fdb-49a4-4ad9-9759-62f79c5b7227",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "description": "=Call this to query data from our vector store knowledgebase",
+        "workflowId": {
+          "__rl": true,
+          "value": "WA8Vhuct15StLWEF",
+          "mode": "list",
+          "cachedResultName": "TheAIAutomators.com - Dynamic Hybrid Search"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}",
+            "session_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('session_id', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "vector_weight",
+              "displayName": "vector_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "keyword_weight",
+              "displayName": "keyword_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "ilike_weight",
+              "displayName": "ilike_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -3072,
+        6320
+      ],
+      "id": "8b0b5f1a-c69b-43c8-9e2e-08ecc87c5504",
+      "name": "Hybrid Search1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -4880,
+        6064
+      ],
+      "id": "5ca5d255-6c5f-41da-a544-1c13c1c1c23d",
+      "name": "AI Agent3"
+    },
+    {
+      "parameters": {
+        "content": "## 2. Full Text Search\nTS Vector",
+        "height": 944,
+        "width": 784,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -5200,
+        5904
+      ],
+      "id": "46f383ba-8784-414f-ab19-2a1ffe945e14",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkrfwcplubvqbtqoytsd.supabase.co/functions/v1/fts-search",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n        \"query_text\": \"{{ $fromAI(\"query\") }}\",\n        \"match_count\": 10\n      }",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -4720,
+        6288
+      ],
+      "id": "390519a2-2c0f-4fa0-bb22-00bd199859f9",
+      "name": "Full Text Search",
+      "credentials": {
+        "supabaseApi": {
+          "id": "z3EU9aX7OrP0jWfJ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Set Vars').item.json.INDEX_HOST }}/query",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "pineconeApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"namespace\": \"{{ $('Set Vars').item.json.NAMESPACE }}\",\n    \"sparseVector\": {\"indices\":{{ JSON.stringify($json.data[0].sparse_indices) }},\"values\":{{ JSON.stringify($json.data[0].sparse_values) }}},\n    \"topK\": 10,\n    \"includeValues\": false,\n    \"includeMetadata\": true\n  }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3776,
+        6576
+      ],
+      "id": "0b74aad6-ce0c-4b26-b212-900a2dd8ddf5",
+      "name": "Query Pinecone",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -4048,
+        6064
+      ],
+      "id": "bde82c18-8f72-4be7-9f5d-fcff89df9696",
+      "name": "AI Agent5"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        -4048,
+        6304
+      ],
+      "id": "45c0dd17-f59a-4710-b36a-9eaf26736821",
+      "name": "Anthropic Chat Model4"
+    },
+    {
+      "parameters": {
+        "description": "=Call this to query data from our vector store knowledgebase",
+        "workflowId": {
+          "__rl": true,
+          "value": "WA8Vhuct15StLWEF",
+          "mode": "list",
+          "cachedResultName": "TheAIAutomators.com - Dynamic Hybrid Search"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}",
+            "session_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('session_id', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "dense_weight",
+              "displayName": "dense_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "sparse_weight",
+              "displayName": "sparse_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "pattern_weight",
+              "displayName": "pattern_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -3904,
+        6304
+      ],
+      "id": "5318594c-f195-4201-9ecf-802207aab2ee",
+      "name": "Sparse Embedding Search"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkrfwcplubvqbtqoytsd.supabase.co/functions/v1/hybrid-search",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n        \"query_text\": \"{{ $('When Executed by Another Workflow').item.json.query }}\",\n        \"query_embedding\": [{{ $json.data[0].embedding }}],\n        \"match_count\": 10\n      }",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3008,
+        6576
+      ],
+      "id": "69880bc6-3f89-47d6-95aa-e157f389d809",
+      "name": "Trigger Hybrid Search",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={{ $('When Executed by Another Workflow').item.json.query }}"
+            },
+            {
+              "name": "model",
+              "value": "text-embedding-3-small"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3216,
+        6576
+      ],
+      "id": "774d3020-cdb6-4cd3-bc30-096a631d25a9",
+      "name": "Generate Dense Embedding From Query"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dac7c8e1-2e8a-4f46-942c-f187dbd533c1",
+              "name": "INDEX_HOST",
+              "value": "<ENTER HOST>",
+              "type": "string"
+            },
+            {
+              "id": "ac26a320-fd99-48ac-a627-50e4211aa21e",
+              "name": "NAMESPACE",
+              "value": "n8n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4096,
+        6576
+      ],
+      "id": "da3c1a0b-cc84-4e07-96ed-56f44f3a8fad",
+      "name": "Set Vars"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pinecone.io/embed",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "pineconeApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Pinecone-API-Version",
+              "value": "2025-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"pinecone-sparse-english-v0\",\n  \"parameters\": {\n    \"input_type\": \"query\",\n    \"truncate\": \"END\"\n  },\n   \"inputs\": [\n        {\"text\": {{ JSON.stringify($('When Executed by Another Workflow').item.json.query) }}}]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3936,
+        6576
+      ],
+      "id": "e4a93706-4542-4563-8090-aaa1265894c0",
+      "name": "Generate Sparse Embedding"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -2352,
+        6080
+      ],
+      "id": "564b5b97-7297-4b5b-bfda-5f285cec01aa",
+      "name": "AI Agent6"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "vector store retrieval",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_v2",
+          "mode": "list",
+          "cachedResultName": "documents_v2"
+        },
+        "topK": 10,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        -5600,
+        6384
+      ],
+      "id": "50c358d4-37f1-4461-8bd2-0d8042963d2f",
+      "name": "Supabase Vector Store3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -5648,
+        6560
+      ],
+      "id": "1e304d51-373f-4900-b3f6-2746db2cc4ac",
+      "name": "Embeddings OpenAI3"
+    },
+    {
+      "parameters": {
+        "description": "=You can set different weights of this hybrid search depending on the type of query.\n\ndense_weight float DEFAULT 0.5,\nsparse_weight float DEFAULT 0.5,\nilike_weight float DEFAULT 0\nfuzzy_weight float DEFAULT 0\nfuzzy_threshold float DEFAULT 0.8\n\nFor semantic natural lanauge queries you can prioritise dense embeddings, \nFor technical terms and more traditional search you can priorize sparse lexical search\nFor exact matches for codes and IDs you can prioritze ilike wildcard matching\nFor typos that aren't picked up by semantic search, you can prioritize fuzzy matching\n\nIf looking for matches via ilike or fuzzy matches, the query should be extremely focused and short, as otherwise it will likely return zero results. (e.g. exact ID or code)\n\nAs pattern matching and fuzzy matching can add latency, I recommend defaulting this to zero unless you want to actually use it.\n\nTotal of the 4 weights much equal 1\n\nFuzzy Threshold adds significant latency should should be as high as possible - Default to 0.8",
+        "workflowId": {
+          "__rl": true,
+          "value": "UXWu8CrMXpKVIneU",
+          "mode": "list",
+          "cachedResultName": "My workflow 6"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}",
+            "session_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('session_id', ``, 'string') }}",
+            "sparse_weight": "={{ $fromAI('sparse_weight', ``, 'number', 0.5) }}",
+            "dense_weight": "={{ $fromAI('dense_weight', ``, 'number', 0.5) }}",
+            "fuzzy_threshold": "={{ $fromAI('fuzzy_threshold', `this is the word similarity threshold in postgres - lower means more candidates however the call may time out`, 'number', 0.8) }}",
+            "fuzzy_weight": "={{ $fromAI('fuzzy_weight', ``, 'number', 0) }}",
+            "ilike_weight": "={{ $fromAI('ilike_weight', ``, 'number', 0) }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "dense_weight",
+              "displayName": "dense_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "sparse_weight",
+              "displayName": "sparse_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "ilike_weight",
+              "displayName": "ilike_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "fuzzy_weight",
+              "displayName": "fuzzy_weight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "fuzzy_threshold",
+              "displayName": "fuzzy_threshold",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -2176,
+        6336
+      ],
+      "id": "9bfe5833-9704-4a22-92b8-25cd54e0cd22",
+      "name": "Hybrid Search2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -5808,
+        6160
+      ],
+      "id": "4a40cded-e363-4d52-935f-77ca24a621fb",
+      "name": "AI Agent7"
+    },
+    {
+      "parameters": {
+        "content": "## 1. Semantic Search\nDense Vector Embeddings\n\nEl texto se transforma en vectores de 1 536 dimensiones (usando, por ejemplo, text-embedding-3-small de OpenAI). Es excelente para captar similitudes conceptuales —entiende que “car” y “automobile” están relacionados—, pero no sabe qué hacer con códigos arbitrarios o secuencias sin significado lingüístico.",
+        "height": 944,
+        "width": 784,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -6032,
+        5904
+      ],
+      "id": "aa227ba7-03e0-4235-bd58-ac37a158e713",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "## 4. Traditional Hybrid Search (Semantic & Full Text Search)\nDense Vector Embeddings & TS Vector",
+        "height": 944,
+        "width": 784,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3536,
+        5904
+      ],
+      "id": "ff6a928f-fdb5-448f-8aaf-d2a62575ad28",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "## 5. Dynamic Hybrid Search v2 (Semantic, Full Text & Pattern Matching)\nDense Vector Embeddings & TS Vector & Trigram",
+        "height": 944,
+        "width": 784
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2704,
+        5904
+      ],
+      "id": "e0c6731a-4453-4da1-9e80-d123b11b0875",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "## 3. Sparse Embedding Search\nPinecone Sparse English\n\nEnfoque basado en tokenización (como BM25, TS vectors o modelos dispersos aprendidos tipo SPLADE).\nCrea índices de palabras clave y sus posiciones dentro del texto. Es mejor para coincidencias exactas, pero el proceso de tokenización puede fragmentar códigos o identificadores, sobre todo cuando los datos son desordenados o no estructurados.",
+        "height": 944,
+        "width": 784,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4368,
+        5904
+      ],
+      "id": "665d7b4e-9a74-402a-8017-400e7fb6ee99",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mkrfwcplubvqbtqoytsd.supabase.co/functions/v1/dynamic_hybrid_search_edge",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n        \"query_text\": \"{{ $('When Executed by Another Workflow').item.json.query }}\",\n        \"query_embedding\": [{{ $json.data[0].embedding }}],\n        \"match_count\": 10,\n\"dense_weight\": {{ $('When Executed by Another Workflow').item.json.dense_weight }},\n\"sparse_weight\": {{ $('When Executed by Another Workflow').item.json.sparse_weight }},\n\"ilike_weight\": {{ $('When Executed by Another Workflow').item.json.ilike_weight }},\n\"fuzzy_weight\": {{ $('When Executed by Another Workflow').item.json.fuzzy_weight }},\n\"fuzzy_threshold\": {{ $('When Executed by Another Workflow').item.json.fuzzy_threshold }}\n      }",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2160,
+        6576
+      ],
+      "id": "1a3340c3-47cf-4b60-8178-e80c5c9408d4",
+      "name": "Trigger Dynamic Hybrid Search1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={{ $('When Executed by Another Workflow').item.json.query }}"
+            },
+            {
+              "name": "model",
+              "value": "text-embedding-3-small"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2368,
+        6576
+      ],
+      "id": "9ec467aa-e0f2-4bc3-bd49-79967e3918f5",
+      "name": "Generate Dense Embedding1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -5872,
+        6384
+      ],
+      "id": "8203325c-0c72-4a23-a27c-6592cce5ff5c",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -5024,
+        6272
+      ],
+      "id": "59cf42c2-c846-40c9-833c-f7132f42bbb0",
+      "name": "OpenAI Chat Model4",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -3360,
+        6288
+      ],
+      "id": "68b727fd-b51f-4a37-a304-7a794006a128",
+      "name": "OpenAI Chat Model5",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Casos de uso potenciales\nEste sistema es ideal para agentes de IA que trabajan con:\n\n\nDocumentación de productos con números de modelo, códigos de pieza e identificadores.\n\n\nDocumentos legales con números de caso y citas.\n\n\nManuales técnicos con números de serie y especificaciones.\n\n\nSoporte al cliente, donde los usuarios mencionan ID de pedido, números de seguimiento o SKUs.\n\n\nRegistros médicos con identificadores de paciente, códigos de procedimiento o de medicamentos.\n\n\nCualquier base de conocimiento donde las coincidencias exactas sean tan importantes como la comprensión semántica.\n\n",
+        "height": 432,
+        "width": 880
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -6032,
+        5312
+      ],
+      "id": "433b1ec9-ed02-4bb7-b828-d02cf96add05",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 Cómo funciona\n**Embeddings densos:** La búsqueda semántica estándar. El texto se transforma en vectores de 1 536 dimensiones (por ejemplo, con *text-embedding-3-small* de OpenAI). Ideal para similitudes conceptuales —reconoce que “car” y “automobile” son afines—, pero no maneja bien códigos o secuencias arbitrarias.\n\n**Embeddings dispersos:** Enfoque basado en *tokenización* (BM25, TS vectors o modelos como SPLADE). Crea índices de palabras clave y sus posiciones. Funciona mejor para coincidencias exactas, aunque puede dividir códigos en fragmentos cuando los datos son desordenados o no estructurados.\n\n**Coincidencia ILIKE / comodines:** Aquí ocurre la magia. Con índices *trigram*, genera fragmentos superpuestos del texto (“the”, “he ”, “e w”, “wa”…). Al buscar un código, puede encontrar subcadenas exactas incluso dentro de bloques de texto. Súper rápido con el índice correcto: de 2 s a 100 ms.\n\n**Coincidencia difusa (Fuzzy Matching):** Más lenta que la búsqueda por comodines, pero útil cuando el código no es exacto.\n\nEl sistema combina los resultados de los cuatro métodos mediante **Reciprocal Rank Fusion**, ponderando cada uno según la prioridad del agente.\n",
+        "height": 416,
+        "width": 736
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4960,
+        5312
+      ],
+      "id": "86d6d3b5-6e51-4062-ba05-c581a49adb80",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "milvusCollection": {
+          "__rl": true,
+          "value": "whirlpool",
+          "mode": "list",
+          "cachedResultName": "whirlpool"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+      "typeVersion": 1.3,
+      "position": [
+        -1936,
+        -1552
+      ],
+      "id": "6f3fb173-7c54-410d-bf16-f0e6c0cb4c0c",
+      "name": "Milvus Vector Store",
+      "credentials": {
+        "milvusApi": {
+          "id": "YbwPcrTxudipd6F0",
+          "name": "MilvusRag"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelName": "embed-english-light-v3.0"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+      "typeVersion": 1,
+      "position": [
+        -2016,
+        -1344
+      ],
+      "id": "a9dd4249-cd6a-4c1f-9002-b0895090af57",
+      "name": "Embeddings Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "MDpMWvH8CuNBd9uu",
+          "name": "CohereApi account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -1808,
+        -1344
+      ],
+      "id": "8d705dc6-4550-4aaf-ae5a-238da986626b",
+      "name": "Default Data Loader1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "purpose",
+              "value": "ocr"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -6000,
+        -4384
+      ],
+      "id": "e792a736-693c-436d-8726-a6e29e365155",
+      "name": "Upload File1",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.mistral.ai/v1/files/{{ $json.id }}/url",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "expiry",
+              "value": "24"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5808,
+        -4384
+      ],
+      "id": "6f22162b-1764-4c21-bbf1-8031f59b3be2",
+      "name": "HTTP Request2",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/ocr",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"model\": \"mistral-ocr-latest\",\n    \"document\": {\n        \"type\": \"document_url\",\n        \"document_url\": \"{{ $json.url }}\"\n    },\n    \"include_image_base64\": true,\n    \"bbox_annotation_format\": {\n        \"type\": \"text\",\n        \"json_schema\": {\n            \"name\": \"visual_descriptions_only\",\n            \"description\": \"Extract concise natural-language descriptions for each distinct visual element (image, chart, table, diagram, etc.) on the page. Focus on summarizing what each visual element contains or conveys.\",\n            \"schema\": {\n                \"type\": \"array\",\n                \"items\": {\n                    \"type\": \"string\",\n                    \"description\": \"A concise description of a single visual element.\"\n                }\n            },\n            \"strict\": false\n        }\n    }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5600,
+        -4384
+      ],
+      "id": "aedf3505-3338-461d-9b84-c371052d58e7",
+      "name": "HTTP Request3",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "=image_base64",
+        "options": {
+          "fileName": "={{ $('Set file name1').item.json.file_name }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -4256,
+        -4944
+      ],
+      "id": "6cd758fb-fd9a-4232-ad09-cbdb2713544e",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Supabase_account_details1').first().json.supabase_base_url }}/storage/v1/object/{{ $('Supabase_account_details1').first().json.supabase_storage_bucket_name }}/{{ $binary.data.fileName }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -4016,
+        -4944
+      ],
+      "id": "1caf2aa2-95bc-4828-b3c4-715834631d49",
+      "name": "Upload Image to Supabase1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "z3EU9aX7OrP0jWfJ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -5024,
+        -4736
+      ],
+      "id": "871792c3-82eb-4e70-8ad9-3c229065e95c",
+      "name": "Split Out Images1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -5248,
+        -4736
+      ],
+      "id": "3433f7b7-0ca7-4631-b5a3-5961fcfe0ecf",
+      "name": "Split Out Pages2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dbd236e3-a9cb-4568-b781-086497021139",
+              "name": "file_name",
+              "value": "={{ $json.Key.split('/').slice(1).join('/') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3808,
+        -4944
+      ],
+      "id": "323dbbb3-3a4d-4947-aee5-5760b1539874",
+      "name": "Get response file name1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "file_name",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -3520,
+        -4768
+      ],
+      "id": "19661df5-ab59-46a7-a6a1-5dd66ae2ed4b",
+      "name": "Merge results1"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "uploaded_images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -3328,
+        -4768
+      ],
+      "id": "ee005d10-c76d-49f6-ad9e-6ef4059d8369",
+      "name": "Aggregate2"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -3040,
+        -4416
+      ],
+      "id": "84699dbf-dcfb-4ef1-9e4d-cf061f343d61",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "94ab2435-fc15-4668-b6c7-542619abb5e3",
+              "name": "file_name",
+              "value": "={{ Array.from({ length: 6 }, () => Math.random().toString(36).slice(2, 10)).join('') }}",
+              "type": "string"
+            },
+            {
+              "id": "1ab3ad56-4086-4c23-9e44-ca33e8dadbb5",
+              "name": "original_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "aa2e372a-bcc7-4843-967c-b0ad9a0ebbfc",
+              "name": "image_annotation",
+              "value": "={{ $json.image_annotation }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4800,
+        -4736
+      ],
+      "id": "1bf15988-0f92-4dc0-9caf-af44e6d3cfcf",
+      "name": "Set file name1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b1c9a844-7c93-4899-992e-75a2d1d651f9",
+              "name": "image_base64",
+              "value": "={{ $('Split Out Images1').item.json.image_base64.split(',')[1]; }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4480,
+        -4944
+      ],
+      "id": "ea316c90-f56c-447f-a80d-261b3bbe6aba",
+      "name": "Prep base64 string1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -2800,
+        -4416
+      ],
+      "id": "fe1184c8-a705-4d84-88c5-5bcf8e6ec5f9",
+      "name": "Split Out Pages3"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Safely access uploaded_images from Merge1\nconst mergeItem = $('Merge').item;\nconst uploadedImages = mergeItem?.json?.uploaded_images;\n\nlet markdown = $json.markdown;\nconst supabaseBaseUrl = $('Supabase_account_details1').item.json.supabase_base_url;\nconst bucketName = $('Supabase_account_details1').item.json.supabase_storage_bucket_name;\nconst fullBaseUrl = `${supabaseBaseUrl}/storage/v1/object/public/${bucketName}/`;\n\n// Only run replacement if uploadedImages is a non-empty array\nif (Array.isArray(uploadedImages) && uploadedImages.length > 0) {\n  for (const image of uploadedImages) {\n    const originalId = image.original_id;\n    const fileName = image.file_name;\n    const annotation = image.image_annotation || '';\n\n    const localMarkdownPattern = `![${originalId}](${originalId})`;\n    const hostedMarkdownWithAnnotation = `![${originalId}](${fullBaseUrl}${fileName})\\n\\n${annotation}`;\n\n    if (markdown.includes(localMarkdownPattern)) {\n      markdown = markdown.replaceAll(localMarkdownPattern, hostedMarkdownWithAnnotation);\n    }\n  }\n}\n\nreturn {\n  json: {\n    ...$json,\n    markdown\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2560,
+        -4416
+      ],
+      "id": "2356a883-b277-46c9-b27b-13ea0afa8899",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ef0afdc6-34df-4509-9112-daeaa2e8dabd",
+              "name": "supabase_base_url",
+              "value": "https://ihbsaqntpcfcddjsfahr.supabase.co",
+              "type": "string"
+            },
+            {
+              "id": "c8116945-1d31-4e9b-a898-2fcfb5a2e347",
+              "name": "supabase_storage_bucket_name",
+              "value": "images",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6480,
+        -4384
+      ],
+      "id": "19e05a5f-6f7f-4829-8add-b5e156a6fba8",
+      "name": "Supabase_account_details1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -6784,
+        -4416
+      ],
+      "id": "b059c6b3-2d37-49db-80c1-7546477213ef",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items1').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1ZPaoi3VcW6FlX5yhrvhdb2zUKHm5T20E",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1552,
+        -4000
+      ],
+      "id": "d006edd4-6080-42f2-8104-85617f00c37b",
+      "name": "Move file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "11lXb2f7enCxgeP6HROWqDWzfIz3vX_Kv",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -7024,
+        -4416
+      ],
+      "id": "491b724a-40a4-4289-bb6d-567d206c008c",
+      "name": "Google Drive Trigger1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items1').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -6224,
+        -4384
+      ],
+      "id": "87f6dc30-cd52-403e-a0da-7d4cf0015bdb",
+      "name": "Download file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1744,
+        -4352
+      ],
+      "id": "ecdb03f3-44a4-4176-8cec-896d7efa159f",
+      "name": "Aggregate3"
+    },
+    {
+      "parameters": {
+        "content": "# Image Upload",
+        "height": 512,
+        "width": 2176,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -5312,
+        -5024
+      ],
+      "id": "ca8e45de-6e25-45df-a0c2-63bcda6e287a",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "content": "# Loading to Vector Store",
+        "height": 640,
+        "width": 1008,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2848,
+        -4528
+      ],
+      "id": "92471e32-1aa1-4528-8601-bb379e07f399",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "content": "# OCR",
+        "height": 368,
+        "width": 912,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -6288,
+        -4512
+      ],
+      "id": "66e4c96c-bd16-4d88-9161-6a8ede2bb566",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "milvusCollection": {
+          "__rl": true,
+          "value": "whirlpool",
+          "mode": "list",
+          "cachedResultName": "whirlpool"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+      "typeVersion": 1.3,
+      "position": [
+        -1888,
+        -5008
+      ],
+      "id": "d9878ad5-d330-4b1b-8c90-cda0194e421e",
+      "name": "Milvus Vector Store1",
+      "credentials": {
+        "milvusApi": {
+          "id": "YbwPcrTxudipd6F0",
+          "name": "MilvusRag"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "embed-english-light-v3.0"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+      "typeVersion": 1,
+      "position": [
+        -2016,
+        -4768
+      ],
+      "id": "5bd517e8-13e5-4191-9065-6748797c5408",
+      "name": "Embeddings Cohere1",
+      "credentials": {
+        "cohereApi": {
+          "id": "MDpMWvH8CuNBd9uu",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -1760,
+        -4784
+      ],
+      "id": "49a335dc-6b04-4595-a08e-0abf793632b2",
+      "name": "Default Data Loader3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const markdown = $json.markdown;\n\n// Extrae todas las URLs de imágenes Markdown ![alt](url)\nconst imageUrls = [...markdown.matchAll(/!\\[.*?\\]\\((.*?)\\)/g)].map(match => match[1]);\n\nreturn {\n  json: {\n    ...$json,\n    image_urls: imageUrls\n  }\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2352,
+        -4416
+      ],
+      "id": "3122e620-e900-4736-9e44-722713260254",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
