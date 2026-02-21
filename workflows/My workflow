@@ -1,0 +1,627 @@
+{
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Upload File to Mistral",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Signed URL Mistral": {
+      "main": [
+        [
+          {
+            "node": "Get OCR Result Mistral",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get OCR Result Mistral": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File to Mistral": {
+      "main": [
+        [
+          {
+            "node": "Get Signed URL Mistral",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1744,
+        1312
+      ],
+      "id": "7b5f44ac-34e4-4d5b-9d57-19de9dbc067a",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        560,
+        1472
+      ],
+      "id": "d7f6ef92-790d-4325-80a5-27a89f33445c",
+      "name": "Split Out",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "let markdown = $json.markdown;\nconst images = $json.images || [];\n\nfor (const image of images) {\n  const fileName = image.id; // e.g. \"img-35.jpeg\"\n  const annotation = image.image_annotation || '';\n\n  const imageMarkdown = `![${fileName}](${fileName})`;\n  const annotatedMarkdown = `${imageMarkdown}\\n\\n${annotation}`;\n\n  markdown = markdown.replaceAll(imageMarkdown, annotatedMarkdown);\n}\n\nreturn {\n  json: {\n    ...$json,\n    markdown\n  }\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        912,
+        1472
+      ],
+      "id": "2984d3e3-00e8-40d7-b54f-4ce2209e1ad4",
+      "name": "Code",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        1408,
+        1472
+      ],
+      "id": "06ae0968-46d6-40ea-b230-0f14d1acd598",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "96p8oDSuMXWNZPNL",
+          "name": "n8nrag_alexguajoai"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $('Code').item.json.markdown }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1504,
+        1632
+      ],
+      "id": "96a34eff-f50c-4e31-91bd-04aca36e8d31",
+      "name": "Default Data Loader",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 200,
+        "options": {
+          "splitCode": "markdown"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        1792
+      ],
+      "id": "5ebad51f-2506-4473-938d-e5de4caf591c",
+      "name": "Recursive Character Text Splitter",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1264,
+        1712
+      ],
+      "id": "e40db2b3-4a48-412d-8afd-e34bb5e3a618",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hola! 👋 Mi nombre es Alex experto en refrigeradores refrigeradores whirlpool, en que puedo asistirte hoy?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -240,
+        -16
+      ],
+      "id": "47510a9c-778a-4342-acdb-2254327f6260",
+      "name": "When chat message received",
+      "webhookId": "9470c505-58f2-438e-96b9-c37240c6a9e9"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a Whirlpool REFRIGERATOR expert.\n\nYou are tasked with answering a question using the information retrieved from the attached vector store.\n\nYour goal is to provide an accurate answer based on this information ONLY.\n\nIf you cannot answer the question using the provided information or if no information is returned from the vector store, say \"Sorry I don't know\"."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        0,
+        -16
+      ],
+      "id": "746c42e8-ca9a-4ee3-b9f4-ac3d1397af02",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -64,
+        224
+      ],
+      "id": "a58d8fcb-455e-42b3-9558-4d00d4f9c2cc",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        224
+      ],
+      "id": "bba662cc-145f-45a9-8a51-bcade09f42ff",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Vector store containing embedded product manuals for semantic search and retrieval",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        240
+      ],
+      "id": "9ca59ec5-dbc9-4900-be42-dc0c790c4818",
+      "name": "Supabase Vector Store1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "96p8oDSuMXWNZPNL",
+          "name": "n8nrag_alexguajoai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        320,
+        448
+      ],
+      "id": "d0e77986-ad2f-44d1-9563-b2a8acda12ce",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1-QT3XdO0CQTY5Cybghw5vJc3Hf1FQBOi",
+          "mode": "list",
+          "cachedResultName": "owners-manual-W10439277-RevC.pdf",
+          "cachedResultUrl": "https://drive.google.com/file/d/1-QT3XdO0CQTY5Cybghw5vJc3Hf1FQBOi/view?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1408,
+        1312
+      ],
+      "id": "961deeff-8ad7-4743-828c-70041bb791f6",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "=https://api.mistral.ai/v1/files/{{ $json.id }}/url",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "expiry",
+              "value": "24"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -368,
+        1472
+      ],
+      "id": "b656f073-dd0e-4dc0-9328-370b155f4a05",
+      "name": "Get Signed URL Mistral",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/ocr",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"model\": \"mistral-ocr-latest\",\n    \"document\": {\n        \"type\": \"document_url\",\n        \"document_url\": \"{{ $json.url }}\"\n    },\n    \"include_image_base64\": true,\n    \"bbox_annotation_format\": {\n        \"type\": \"text\",\n        \"json_schema\": {\n            \"name\": \"visual_descriptions_only\",\n            \"description\": \"Extract concise natural-language descriptions for each distinct visual element (image, chart, table, diagram, etc.) on the page. Focus on summarizing what each visual element contains or conveys.\",\n            \"schema\": {\n                \"type\": \"array\",\n                \"items\": {\n                    \"type\": \"string\",\n                    \"description\": \"A concise description of a single visual element.\"\n                }\n            },\n            \"strict\": false\n        }\n    }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        192,
+        1472
+      ],
+      "id": "d141e399-a748-47f0-9e6d-43f431be52ab",
+      "name": "Get OCR Result Mistral",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "https://www.whirlpool.com/content/dam/global/documents/201304/owners-manual-W10439277-RevC.pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1408,
+        1120
+      ],
+      "id": "3058c3ed-8b19-4f45-b8de-d3b9f86d34f7",
+      "name": "Dowload File from Public Documents",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "purpose",
+              "value": "ocr"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -944,
+        1472
+      ],
+      "id": "2e190fbe-d385-4401-914f-84a64e538f48",
+      "name": "Upload File to Mistral",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## 1. Subir PDF\n**Primero debes subir tu archivo PDF a la nube de Mistral; este archivo será almacenado y solo accesible mediante una clave API.**\n\n**Ejemplo CURL:**\ncurl https://api.mistral.ai/v1/files\n-H \"Authorization: Bearer $MISTRAL_API_KEY\"\n-F purpose=\"ocr\"\n-F file=\"@2201.04234v3.pdf\"\n\nhttps://docs.mistral.ai/capabilities/document_ai/basic_ocr",
+        "height": 880,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1120,
+        816
+      ],
+      "id": "ed77bbfb-170d-45f6-a89f-0fa8b85072be",
+      "name": "Sticky Note1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "2. ## Obtener firma del documento\n\n**Para tareas de OCR, puedes obtener una URL firmada para acceder al archivo. El parámetro opcional `expiry` permite que la URL expire automáticamente después de n horas.**\n\n**Ejemplo CURL:**\ncurl -X GET \"https://api.mistral.ai/v1/files/$id/url?expiry=24\"\n-H \"Accept: application/json\"\n-H \"Authorization: Bearer $MISTRAL_API_KEY\"\n\nhttps://docs.mistral.ai/capabilities/document_ai/basic_ocr",
+        "height": 896,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        816
+      ],
+      "id": "3fb07a37-97c3-48d0-9ebc-d83bdb578808",
+      "name": "Sticky Note2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## 3. Obtener Resultados de OCR\n**Ahora puedes consultar el endpoint de OCR usando la url firmada.**\n\n**Ejemplo CURL:**\ncurl https://api.mistral.ai/v1/ocr\n-H \"Content-Type: application/json\"\n-H \"Authorization: Bearer ${MISTRAL_API_KEY}\"\n-d '{\n\"model\": \"mistral-ocr-latest\",\n\"document\": {\n\"type\": \"document_url\",\n\"document_url\": \"<signed_url>\"\n},\n\"include_image_base64\": true\n}' -o ocr_output.json\n\n\nEs importante que reemplaces <signed_url> por el id proporcionado en el nodo anterior\n\nEn el formato de respuesta asegurate de cambiar a JSON ya que el curl trae por defecto devolver un archivo binario\n\nPara las anotaciones debes seguir el formato de salida como se muestra en esta seccion: \nhttps://docs.mistral.ai/capabilities/document_ai/annotations\nPara enviar en la seccion de BODY, es imposrante que reemplace el url del documento del nodo anterior\n\nPidele a ChatGPT que te haga el JSon de acuerdo a tu requerimiento",
+        "height": 896,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        16,
+        816
+      ],
+      "id": "bc4aefe6-ba30-40d5-94de-117baf08ade6",
+      "name": "Sticky Note",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## 4. Procesar paginas por separado\n**Pideo a ChatGpt que te haga el codigo.**\n\nEnviale una imagen del nodo code y del resuladto del nodo anterior\n\nsolo reemplza la primera linea por esto\n\nconst markdown= $input.first().json.markdown;\nPega la imagen en chatgpt\n\nPrompt: Escribe el codigo para que se ejecute una vez para cada elemento, agrega la anotacion de imagen directamente en linea enel markdown, Las imagenes se refernciaran en el markdonw por su nombre de archivo  por ejemplo: \n**y opegas un extractop de la vision de tabla del nodo anterior**\n\nTHANK YOU for purchasing this high-quality product. If you should experience a problem not covered in TROUBLESHOOTING or PROBLEM SOLVER, please visit our website at www.whirlpool.com for additional information. If you still need assistance, call us at 1-800-253-1301. In Canada, visit our website at www.whirlpool.ca or call us at 1-800-807-6777.\\nYou will need your model and serial number, located on the inside wall of the ",
+        "height": 896,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        736,
+        816
+      ],
+      "id": "077baa43-806d-4ead-8fbd-dc93d99e17bf",
+      "name": "Sticky Note3",
+      "disabled": true
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
