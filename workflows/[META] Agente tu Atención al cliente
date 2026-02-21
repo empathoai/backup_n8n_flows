@@ -1,0 +1,2189 @@
+{
+  "connections": {
+    "Recibir mensaje": {
+      "main": [
+        [
+          {
+            "node": "Switch Tipo de Entrada1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Explicar imagen": {
+      "main": [
+        [
+          {
+            "node": "Clasificar_IMAGEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI AgentTubiblia1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Postgres chat_histories1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EXTRAER INFORMACION DE COMPROBANTE": {
+      "main": [
+        [
+          {
+            "node": "DATOS_Comprobante",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATOS_Comprobante": {
+      "main": [
+        [
+          {
+            "node": "Obtener datos del usuario1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Eliminar visualizacion_previo_correo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simulación_escritura": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mdelo LLM Principal": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Explicar imagen",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Clasificar_IMAGEN",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "EXTRAER INFORMACION DE COMPROBANTE",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Clasificar_PDF",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "EXTRAER INFORMACION DE COMPROBANTE1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TEXTO": {
+      "main": [
+        [
+          {
+            "node": "Obtener datos del usuario1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clasificar_IMAGEN": {
+      "main": [
+        [
+          {
+            "node": "EXTRAER INFORMACION DE COMPROBANTE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Obtener datos del usuario1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EXTRAER INFORMACION DE COMPROBANTE1": {
+      "main": [
+        [
+          {
+            "node": "DATOS_Comprobante1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATOS_Comprobante1": {
+      "main": [
+        [
+          {
+            "node": "Obtener datos del usuario1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener datos del usuario1": {
+      "main": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Actualizar_cliente": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar_cliente": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar_Cliente": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pais": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Consultar_FAQ",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar_FAQ": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Consultar_FAQ",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar_factura": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WooCommerce": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eliminar visualizacion_previo_correo": {
+      "main": [
+        [
+          {
+            "node": "Separador_Humanizador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asesor": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clasificar_PDF": {
+      "main": [
+        [
+          {
+            "node": "EXTRAER INFORMACION DE COMPROBANTE1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Obtener datos del usuario1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Separador_Humanizador": {
+      "main": [
+        [
+          {
+            "node": "Simulación_escritura",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar_mensaje",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message": {
+      "main": [
+        [
+          {
+            "node": "Gmail1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail1": {
+      "main": [
+        [
+          {
+            "node": "Mensaje Administracion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mensaje Administracion": {
+      "main": [
+        [
+          {
+            "node": "Enviar_mensaje",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Tipo de Entrada1": {
+      "main": [
+        [
+          {
+            "node": "Descarga de Audio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Obtener imagen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "TEXTO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Download media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descarga de Audio": {
+      "main": [
+        [
+          {
+            "node": "Obtener Archivo de Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Archivo de Audio": {
+      "main": [
+        [
+          {
+            "node": "Transcribir audio a texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribir audio a texto": {
+      "main": [
+        [
+          {
+            "node": "Recepción de texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Se transcribio el audio?": {
+      "main": [
+        [
+          {
+            "node": "Obtener datos del usuario1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Audio no entendible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recepción de texto": {
+      "main": [
+        [
+          {
+            "node": "Se transcribio el audio?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener imagen": {
+      "main": [
+        [
+          {
+            "node": "Descargar imagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargar imagen": {
+      "main": [
+        [
+          {
+            "node": "Explicar imagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "Download media": {
+      "main": [
+        [
+          {
+            "node": "Descargar pdf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargar pdf": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Clasificar_PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI AgentTubiblia1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "[META] Agente tu Atención al cliente",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        -1056
+      ],
+      "id": "e7e80f56-f374-469c-839a-fd6301a16056",
+      "name": "Recibir mensaje",
+      "webhookId": "40becde5-9509-41e7-9bd7-8e620cd80818"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Aquí tienes una imagen enviada por el usuario. Describe la imagen y transcribe cualquier texto visible en la imagen. Incluye tantos detalles como sea posible.",
+        "messages": {
+          "messageValues": [
+            {
+              "type": "HumanMessagePromptTemplate",
+              "messageType": "imageBinary"
+            }
+          ]
+        }
+      },
+      "id": "e0a3e934-282c-45d9-be64-b6fbcfcc8b9d",
+      "name": "Explicar imagen",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        592,
+        -1984
+      ],
+      "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "content": "## Receptor de Imagenes\nDescarga y explica una imagen enviada del usuario\n",
+        "height": 340,
+        "width": 1684,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        96,
+        -2112
+      ],
+      "typeVersion": 1,
+      "id": "fefa8bd5-7992-429b-a70e-cc623beb572d",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "## Enrutador\nValida el tipo de mensaje del usuario\n",
+        "height": 440,
+        "width": 300,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        -1680
+      ],
+      "typeVersion": 1,
+      "id": "a034244a-6613-4e4b-b93b-2041b5eba422",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "## Receptor de mensaje de texto\nResume el mensaje de texto del usuario\n",
+        "height": 240,
+        "width": 560,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        528,
+        -1184
+      ],
+      "typeVersion": 1,
+      "id": "80a3c704-90e8-46bb-8f42-37d04084ac4b",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "## SALIDA a WHATSAPP.\nHumanización de respuesta a usuario.\n\n",
+        "height": 480,
+        "width": 1680,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3840,
+        -1632
+      ],
+      "typeVersion": 1,
+      "id": "f5b8d5ae-840d-408d-b6e0-0f9cfe4d2812",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "content": "## Agente de IA \n\n",
+        "height": 680,
+        "width": 1304,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2352,
+        -2304
+      ],
+      "typeVersion": 1,
+      "id": "672f122a-b291-477c-baff-7fa4b0cdc2fd",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.Message_text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# 👤 ROL\n\nEres un Agente de IA que gestiona clientes en WhatsApp para \"\". Ayudas a encontrar y comprar biblias y libros cristianos.\n\n# 🚀 INSTRUCCIONES INICIALES\n\n**SALUDO INICIAL (PRIMER MENSAJE):**\n```\n¡Hola! Bendiciones🎉 \n¡Bienvenido a tu https://tubiblia.com.co/ 📚✨\n\"Estamos felices de que estés aquí. Vas a encontrar el mundo bíblico a tu alcance. Si necesitas recomendaciones u orientación, ¡no dudes en preguntar! Estamos para ayudarte a encontrar el libro o la biblia perfecta. 🚀📖 ¡Empecemos!\n\"\n```\n\n### 2️⃣ Primera acción\nDespués del saludo inicial, **llama a la herramienta `Pais` con: {{ $json.telefono }}\n\n### 3️⃣ Flujo según resultado de `Pais`\n\n#### Caso A: `Pais = extranjero`\n1. Enviar:  \n   `\"Somos importadores directos de las biblias y estamos ubicados en Colombia. Para qué ciudad sería la entrega?\"`  \n2. Esperar respuesta del cliente → ciudad.\n3. Confirmar:  \n   `\"Gracias. Para confirmar, ¿la ciudad de [Ciudad] para la entrega se encuentra en Colombia?\"`\n4. Evaluar:\n   - **Si responde SÍ** → Pedir nombre y continuar con flujo normal (como si fuera de Colombia).  \n   - **Si responde NO** → Agradecer e invitar a seguir en Instagram:  \n     `\"Entendemos. Actualmente solo realizamos envíos dentro de Colombia. ¡Te agradecemos mucho tu interés! Para más novedades y contenido interesante, síguenos en Instagram: https://www.instagram.com/tubiblia.com.co/?hl=es\"`\n\n#### Caso B: `Pais = colombia`\n- No mencionar país.  \n- Preguntar nombre y cómo puedes ayudar.  \n  Ejemplo: `\"Para poder dirigirme a ti mejor, ¿me podrías decir tu nombre, por favor? Y cuéntame, ¿en qué puedo ayudarte hoy?\"`\n\n---\n\n## 📋 Tareas\n\n### 📌 1. Consulta de productos\n**Tool:** `WooCommerce`\n\n**Acciones:**\n- Consultar producto en WooCommerce.  \n- Si disponible → enviar **nombre + breve descripción + URL**.  \n- Si agotado → ofrecer alternativos o indicar que verificarás disponibilidad.  \n- Recordar siempre: puede comprar en WhatsApp o web con el link.  \n- Si no hay claridad, pedir más información (edad, gustos, tema, etc.).  \n- Buscar también sinónimos (ej: oración → orar, rezar).  \n- **Regla extranjero:** si no confirmó ciudad en Colombia, añadir:  \n  `\"Solo como recordatorio, nuestros envíos se realizan únicamente dentro de Colombia.\"`  \n- Si pregunta sobre cristianismo/iglesia católica → siempre ofrecer libros relacionados usando `WooCommerce`.\n\n---\n\n### 📌 2. Preguntas frecuentes\n**Tool:** `Consultar_FAQ`\n\n**Cuándo usar:** Preguntas generales sobre ubicación, mayoristas, contraentrega, tiempos de entrega, medios de pago, donaciones, garantías, digital/PDF, seguridad, envíos internacionales, etc.\n\n**Acciones:**\n- Pasar la consulta exacta del cliente a `Consultar_FAQ`.  \n- Responder de forma natural (no mencionar FAQs ni base de datos).  \n- Si tema requiere asesor (ej: mayoristas, donaciones complejas, dudas sin respuesta) →  \n  1. Enviar frase de espera: `\"Entendido. Deme un momento por favor ya estoy con usted.\"`  \n  2. Llamar a `Asesor` con:  \n     - `telefono`: `{{ $json.telefono }}`  \n     - `nombre`: si se conoce  \n     - `motivo`: consulta original del cliente  \n  3. **No enviar más mensajes al cliente sobre este tema.**\n\n---\n\n### 📌 3. Flujo de compra\nDos opciones: **Web** o **WhatsApp**.\n\n#### ▶️ Opción 1: Web\n- Enviar link: https://tubiblia.com.co/ o URL del producto (desde WooCommerce).  \n- Luego → llamar a `Asesor` para seguimiento.\n\n#### ▶️ Opción 2: WhatsApp\n**Paso 1: Método de pago**  \n- Ofrecer: Bancolombia, Davivienda o Nequi.  \n- Según respuesta → enviar datos bancarios.  \n- Si cliente elige web → enviar link + llamar a `Asesor` y cerrar flujo.\n\n**Paso 2: Verificación/Registro**  \n- Tool: `Buscar_cliente` con `{{ $json.telefono }}`.  \n- Si existe → mostrar datos y confirmar.  \n  - Si correctos y TyC aceptados → seguir.  \n  - Si correctos y TyC no aceptados → mostrar link TyC + preguntar.  \n    - Si acepta → `Actualizar_cliente` con `TyC = Sí`.  \n    - Si no acepta → llamar a `Asesor`.  \n  - Si datos incorrectos → pedir corrección y actualizar con `Actualizar_cliente`.  \n- Si no existe → iniciar registro:  \n  - Mostrar TyC + Política.  \n  - Si acepta → pedir datos (ID, nombre, dirección, ciudad, correo).  \n  - Confirmar todos los datos.  \n  - Registrar con `Registrar_cliente`.\n\n---\n\n## 🛠️ Tools utilizadas\n- `Pais` → Identificar si cliente está en Colombia o extranjero.  \n- `WooCommerce` → Consultar disponibilidad de productos.  \n- `Consultar_FAQ` → Responder preguntas frecuentes.  \n- `Asesor` → Escalar consultas que requieren intervención humana.  \n- `Buscar_cliente` → Verificar datos de cliente.  \n- `Registrar_cliente` → Nuevo registro.  \n- `Actualizar_cliente` → Actualizar datos existentes.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        2928,
+        -2144
+      ],
+      "id": "792850e4-4e53-4974-ae06-5ecb9e351089",
+      "name": "AI AgentTubiblia1"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.telefono +\"tubibliaTEST\"}}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        2576,
+        -1936
+      ],
+      "id": "bce8bb8f-420a-4fb4-ab26-2fed09f53ec5",
+      "name": "Postgres chat_histories1"
+    },
+    {
+      "parameters": {
+        "content": "## Receptor archivo PDF\n",
+        "height": 260,
+        "width": 1540,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        256,
+        -1456
+      ],
+      "id": "5cef5fc8-09e9-451b-b393-6118e571f7f2",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.text }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "importe",
+              "description": "El monto o valor numérico exacto de la transferencia mencionado en el texto.",
+              "required": true
+            },
+            {
+              "name": "ordenante",
+              "description": "Nombre del ordenante que ha hecho la transferencia",
+              "required": true
+            },
+            {
+              "name": "fecha_pago",
+              "description": "Fecha en la que ha hecho el pago"
+            },
+            {
+              "name": "concepto",
+              "description": "Concepto o descripción que ha usado al hacer la transferencia"
+            },
+            {
+              "name": "referencia",
+              "description": "Número de referencia o numero de transferencia o de registro de la transferencia"
+            },
+            {
+              "name": "Nombre_beneficiario",
+              "description": "Nombre del beneficiario de la transferencia"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        -1984
+      ],
+      "id": "da199d98-13cc-4e2b-9e54-efdbf574ebe7",
+      "name": "EXTRAER INFORMACION DE COMPROBANTE"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "71a6ecc5-dcc5-4417-be55-6bc51288a5e5",
+              "name": "text",
+              "value": "=[MENSAJE_SISTEMA: Comprobante de pago detectado. \nDatos extraídos:\n- Importe:{{ $json.output.importe }}\n- Concepto: {{ $json.output.concepto }}\n- Ordenante:{{ $json.output.ordenante }}\n- Fecha: {{ $json.output.fecha_pago }}\n- Referencia: {{ $json.output.referencia }}\nPor favor, acusa recibo al usuario e informa sobre la verificación manual.]",
+              "type": "string"
+            },
+            {
+              "id": "fa35e9f9-6e8d-4128-b996-74c3ebda9037",
+              "name": "numero_telefono",
+              "value": "57311234672",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1648,
+        -1984
+      ],
+      "id": "ee2da9ba-f0cc-4547-9fe6-cdf2b322565e",
+      "name": "DATOS_Comprobante"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        3872,
+        -1792
+      ],
+      "id": "29b56b48-1909-4400-a42b-5991f97ee73c",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        3984,
+        -1104
+      ],
+      "id": "531b5468-172e-42e4-956b-56f5a01248b1",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4576,
+        -1376
+      ],
+      "id": "b0271ab6-fef9-42b3-9b9a-16b1efbfce66",
+      "name": "Simulación_escritura",
+      "webhookId": "656cbd71-2c95-447d-8e46-d9176929ee24"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {
+          "frequencyPenalty": 0.3,
+          "maxTokens": 2000,
+          "responseFormat": "text",
+          "presencePenalty": 0,
+          "temperature": 0.5,
+          "maxRetries": 2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1152,
+        -1632
+      ],
+      "id": "9b28869c-2125-4283-9b08-e1500ff952e0",
+      "name": "Mdelo LLM Principal"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d3f13840-d3a0-43c2-90d5-fa9a6ebe04d8",
+              "name": "text",
+              "value": "={{ $json.messages[0].text.body  }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        -1696
+      ],
+      "id": "55f34447-5827-4f59-8aa1-680db36e7caf",
+      "name": "TEXTO"
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "COMPROBANTE_DETECTADO",
+              "description": "\"El texto describe una imagen o contiene texto que parece ser un comprobante de pago, recibo de transferencia bancaria, mencionando bancos, montos, fechas, o el IBAN/nombre de la tienda.\""
+            },
+            {
+              "category": "IMAGEN_GENERAL",
+              "description": "\"El texto describe una imagen que no parece ser un comprobante de pago, o es texto general no relacionado con una transacción.\""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        944,
+        -1984
+      ],
+      "id": "45a8dd53-7715-4689-b9a7-d02e1ba83031",
+      "name": "Clasificar_IMAGEN"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.text }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "importe",
+              "description": "El monto o valor numérico exacto de la transferencia mencionado en el texto.",
+              "required": true
+            },
+            {
+              "name": "ordenante",
+              "description": "Nombre del ordenante que ha hecho la transferencia",
+              "required": true
+            },
+            {
+              "name": "fecha_pago",
+              "description": "Fecha en la que ha hecho el pago"
+            },
+            {
+              "name": "concepto",
+              "description": "Concepto o descripción que ha usado al hacer la transferencia"
+            },
+            {
+              "name": "referencia",
+              "description": "Número de referencia o de registro de la transferencia"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        -1376
+      ],
+      "id": "b04aab57-e18e-47bc-ac42-878f589030c6",
+      "name": "EXTRAER INFORMACION DE COMPROBANTE1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "71a6ecc5-dcc5-4417-be55-6bc51288a5e5",
+              "name": "text",
+              "value": "=[MENSAJE_SISTEMA: Comprobante de pago detectado. \nDatos extraídos:\n- Importe:{{ $json.output.importe }}\n- Concepto: {{ $json.output.concepto }}\n- Ordenante:{{ $json.output.ordenante }}\n- Fecha: {{ $json.output.fecha_pago }}\n- Referencia: {{ $json.output.referencia }}\nPor favor, acusa recibo al usuario e informa sobre la verificación manual.]",
+              "type": "string"
+            },
+            {
+              "id": "fa35e9f9-6e8d-4128-b996-74c3ebda9037",
+              "name": "numero_telefono",
+              "value": "57311234672",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1648,
+        -1376
+      ],
+      "id": "555d0717-4cc6-4254-86fb-3f1a7f8549af",
+      "name": "DATOS_Comprobante1"
+    },
+    {
+      "parameters": {
+        "content": "# 3 -> RECOPILACIÓN \n",
+        "height": 1484,
+        "width": 360,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1856,
+        -2416
+      ],
+      "id": "0fdd7971-32c0-48ef-8e4b-123fe989fd9a",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# 2 -> CLASIFICACION Y PREPARACIÓN DATOS\n",
+        "height": 2236,
+        "width": 1860,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -3152
+      ],
+      "id": "a9df4a80-9be4-4f31-93eb-3a54809f3afb",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "# 4-> PROCESAMIENTO y GESTIÓN\n",
+        "height": 1468,
+        "width": 1508,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2272,
+        -2416
+      ],
+      "id": "23a380e7-47cc-497f-8234-24e7b219df07",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "# ENVÍO INFORMACIÓN\n",
+        "height": 1460,
+        "width": 1776,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3920,
+        -2416
+      ],
+      "id": "c22698ed-d63d-4832-82e1-becc622176d3",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "# 1 -> RECEPCIÓN y FILTRADO\n",
+        "height": 1420,
+        "width": 760,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        -2320
+      ],
+      "id": "83aa166a-3efb-42f0-a27b-05ad63a11745",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "310c0cce-bd8e-43b1-b40e-850a9d8a1daa",
+              "name": "Destinatario",
+              "value": "={{ $('Recibir mensaje').item.json.contacts[0].wa_id }}",
+              "type": "string"
+            },
+            {
+              "id": "080faabe-abf9-45ee-9711-1f475c3742c3",
+              "name": "Instancia",
+              "value": "=\"Instancia?\"",
+              "type": "string"
+            },
+            {
+              "id": "04f7b0d5-9a52-4594-b71c-04a1b4c95e47",
+              "name": "ID del mensaje",
+              "value": "={{ $('Recibir mensaje').item.json.messages[0].id }}",
+              "type": "string"
+            },
+            {
+              "id": "e90cf818-d301-4ee8-9045-28475b788d43",
+              "name": "Nombre de la persona",
+              "value": "={{ $('Recibir mensaje').item.json.contacts[0].profile.name }}",
+              "type": "string"
+            },
+            {
+              "id": "57a94aeb-d961-44f3-bbfa-651468943d10",
+              "name": "data_time",
+              "value": "={{ $('Recibir mensaje').item.json.messages[0].timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "6c54c588-ec1a-425a-bf25-3f4b4705898a",
+              "name": "Message_text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "045c368e-1b0b-4610-9737-566fec5b0b9b",
+              "name": "telefono",
+              "value": "={{ $('Recibir mensaje').item.json.contacts[0].wa_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2016,
+        -1712
+      ],
+      "id": "6211675d-45f2-4cdf-b495-578aafb5225c",
+      "name": "Obtener datos del usuario1"
+    },
+    {
+      "parameters": {
+        "name": "Actualizar_cliente",
+        "description": "=Utiliza esta herramienta para actualizar y corregir los datos del cliente.\nPasa los campos que se quieren corregir con los valores nuevos a corregir. Por ejemplo\n\"direccion\":\"nuevadirección\" o \"Ciudad\":\"Nueva ciudad\"\n\nPasa siempre el campo \"identificacion\" para poder hacer la búsqueda.\n",
+        "workflowId": {
+          "__rl": true,
+          "value": "nZSepbQwDbURKKJw",
+          "mode": "list",
+          "cachedResultName": "Actualizar_cliente"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.1,
+      "position": [
+        2768,
+        -1808
+      ],
+      "id": "6cdae7e0-a855-4d11-889d-4cb31b327c86",
+      "name": "Actualizar_cliente"
+    },
+    {
+      "parameters": {
+        "name": "Buscar_cliente",
+        "description": "Utiliza esta herramienta para buscar un cliente en la base de datos.",
+        "workflowId": {
+          "__rl": true,
+          "value": "eo3SnPmxQiW7pkOO",
+          "mode": "list",
+          "cachedResultName": "BuscarCliente Biblias"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.1,
+      "position": [
+        2912,
+        -1808
+      ],
+      "id": "eb9cffb5-2f37-40de-9ba3-05a6c265c721",
+      "name": "Buscar_cliente"
+    },
+    {
+      "parameters": {
+        "name": "Registrar_Cliente",
+        "description": "=Utiliza esta herramienta para registrar un cliente nuevo.\n\nPasa los datos recopilados: en un objeto JSON.\n                ",
+        "workflowId": {
+          "__rl": true,
+          "value": "xLMyQsFyjk8ZqLIK",
+          "mode": "list",
+          "cachedResultName": "Registrar_Cliente Biblias"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.1,
+      "position": [
+        3040,
+        -1808
+      ],
+      "id": "bee5e879-3156-4011-8e18-354ba5b55285",
+      "name": "Registrar_Cliente"
+    },
+    {
+      "parameters": {
+        "name": "Pais",
+        "description": "Esta herramienta sirve para averiguar desde que país conecta el cliente. Pasa la variable {{ $json.numero_telefono }}",
+        "workflowId": {
+          "__rl": true,
+          "value": "up4vRjLOvJX7yqTy",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/up4vRjLOvJX7yqTy",
+          "cachedResultName": "pais"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telefono_pais": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('telefono_pais', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "telefono_pais"
+          ],
+          "schema": [
+            {
+              "id": "telefono_pais",
+              "displayName": "telefono_pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.1,
+      "position": [
+        3136,
+        -1904
+      ],
+      "id": "19af3efa-4a79-426b-9b1d-e9b238d9adbc",
+      "name": "Pais"
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8nrag",
+          "mode": "list",
+          "cachedResultName": "n8nrag"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        3024,
+        -1440
+      ],
+      "id": "5a59d159-701e-4a54-beb8-a456d7458e50",
+      "name": "Pinecone Vector Store"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2816,
+        -1408
+      ],
+      "id": "e6a2bd27-8352-49af-bf45-3ed3fa71dc0b",
+      "name": "Embeddings OpenAI1"
+    },
+    {
+      "parameters": {
+        "content": "Preguntas frecuentes",
+        "height": 220,
+        "width": 380,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3312,
+        -1408
+      ],
+      "id": "0c190e4c-4c3b-4f71-be62-940e78cf821a",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "name": "Consultar_FAQ",
+        "description": "Busca y recupera respuestas a preguntas frecuentes (FAQs) sobre la tienda Tubiblia.com.co. Útil para consultas sobre ubicación, ventas al por mayor, tiempos de entrega, envíos, medios de pago, garantía, originalidad de productos, y direcciones de tiendas."
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        3392,
+        -1328
+      ],
+      "id": "cf91c91d-5cfb-4a05-ad0f-94ae1c0af4a1",
+      "name": "Consultar_FAQ"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        3104,
+        -1232
+      ],
+      "id": "84193f99-6fc9-4361-bea7-5c49faeb27ad",
+      "name": "OpenAI Chat Model1"
+    },
+    {
+      "parameters": {
+        "name": "Generar_factura",
+        "description": "Llama a esta herramienta cuando se haya detectado un envío de comprobante con los datos que se tenga.",
+        "workflowId": {
+          "__rl": true,
+          "value": "KbmDH53YlEB257iw",
+          "mode": "list",
+          "cachedResultName": "Facturar"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Importe": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Importe', ``, 'string') }}",
+            "Concepto": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Concepto', ``, 'string') }}",
+            "Ordenante": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Ordenante', ``, 'string') }}",
+            "Fecha": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Fecha', ``, 'string') }}",
+            "Referencia": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Referencia', ``, 'string') }}",
+            "telefono": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('telefono', ``, 'string') }}",
+            "destinatario": "={{ $('Obtener datos del usuario1').item.json.Destinatario }}",
+            "nombre instancia": "={{ $('Obtener datos del usuario1').item.json.Instancia }}",
+            "id evolution bot": "={{ $('Obtener datos del usuario1').item.json['ID del mensaje'] }}",
+            "data": "={{ $('Obtener imagen').item.json.url }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Importe",
+              "displayName": "Importe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "Concepto",
+              "displayName": "Concepto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "Ordenante",
+              "displayName": "Ordenante",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "Referencia",
+              "displayName": "Referencia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "nombre instancia",
+              "displayName": "nombre instancia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "destinatario",
+              "displayName": "destinatario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "id evolution bot",
+              "displayName": "id evolution bot",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "data",
+              "displayName": "data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.1,
+      "position": [
+        3248,
+        -1904
+      ],
+      "id": "65f36524-e020-4f69-8a1d-6c47fd2cccc4",
+      "name": "Generar_factura"
+    },
+    {
+      "parameters": {
+        "name": "WooCommerce",
+        "description": "Llama a esta herramienta para buscar libros y productos.",
+        "workflowId": {
+          "__rl": true,
+          "value": "hdgJe8hzt8tbTXRK",
+          "mode": "list",
+          "cachedResultName": "WooCommerce"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "query"
+          ],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.1,
+      "position": [
+        3360,
+        -1904
+      ],
+      "id": "6e1c3aa8-e7d0-412e-9c69-0ee6beb97c1d",
+      "name": "WooCommerce"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the single input item object directly\n// In this mode, $input.item usually refers to the single item data structure\nconst item = $input.item;\n\n// Check if the 'json' property and the 'output' property exist within the item\n// AND ensure 'output' is actually a string before trying to modify it\nif (item.json && typeof item.json.output === 'string') {\n\n  // Read the text directly from item.json.output\n  let messageText = item.json.output;\n\n  // --- Regex Logic (remains the same) ---\n  // Expresión regular para encontrar dominios después de '@'\n  const emailDomainRegex = /@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})/g;\n\n  // Reemplaza solo los dominios de correo electrónico\n  messageText = messageText.replace(emailDomainRegex, (match, domain) => {\n    // Inserta un espacio de ancho cero entre cada caracter del dominio\n    const modifiedDomain = domain.split('').join('\\u200B');\n    return '@' + modifiedDomain;\n  });\n  // --- End of Regex Logic ---\n\n  // Write the modified text back directly to item.json.output\n  item.json.output = messageText;\n\n} else {\n  // Optional: Log a warning if the expected path wasn't found or wasn't a string\n  if (!item.json) {\n      console.log(\"Warning: Input item did not contain 'json' property.\");\n  } else if (typeof item.json.output !== 'string') {\n      console.log(\"Warning: Input item's 'json.output' property was not a string. Value:\", item.json.output);\n  }\n}\n\n// Return the potentially modified item object itself\n// This is what the next node will receive\nreturn item;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4160,
+        -1376
+      ],
+      "id": "165a6918-26c6-48c2-b3b1-2e661ec727b9",
+      "name": "Eliminar visualizacion_previo_correo"
+    },
+    {
+      "parameters": {
+        "name": "Asesor",
+        "description": "Llama a esta herramienta cuando se requiera de un asesor.",
+        "workflowId": {
+          "__rl": true,
+          "value": "fnd1yTm3iY0KvL89",
+          "mode": "list",
+          "cachedResultName": "Asesor"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telefono": "={{ $('Obtener datos del usuario1').item.json.telefono }}",
+            "nombre instancia": "={{ $('Obtener datos del usuario1').item.json.Instancia }}",
+            "id evolution bot": "={{ $('Obtener datos del usuario1').item.json['ID del mensaje'] }}",
+            "Nombre": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Nombre', ``, 'string') }}",
+            "motivo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('motivo', ``, 'string') }}",
+            "Idtelefono": "={{ $('Obtener datos del usuario1').item.json.Destinatario }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "nombre instancia",
+              "displayName": "nombre instancia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "id evolution bot",
+              "displayName": "id evolution bot",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "motivo",
+              "displayName": "motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "Idtelefono",
+              "displayName": "Idtelefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.1,
+      "position": [
+        3488,
+        -1904
+      ],
+      "id": "c7e19556-1c0b-413f-8643-b62beed92364",
+      "name": "Asesor"
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "COMPROBANTE_DETECTADO",
+              "description": "=\"El texto  contiene texto que parece ser un comprobante de pago, recibo de transferencia bancaria, mencionando bancos, montos, fechas, o el IBAN/nombre de la tienda.\""
+            },
+            {
+              "category": "IMAGEN_GENERAL",
+              "description": "=\"El texto  no parece ser un comprobante de pago, o es texto general no relacionado con una transacción.\""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        944,
+        -1376
+      ],
+      "id": "16a5adf9-f5f2-41a5-997a-811d42c54662",
+      "name": "Clasificar_PDF"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtener el item combinado del nodo Merge\nconst mergedItem = $input.item.json;\n\n// 2. Extraer la información específica directamente del item combinado\nconst fullMessage = mergedItem.output;\nconst destinatario = mergedItem.Destinatario;\nconst instancia = mergedItem.Instancia;\nconst originalMessageId = $input.first().json.messages[0].id\n\n// 3. Dividir el mensaje usando la nueva expresión regular\n//    Divide por doble salto de línea O por un salto de línea seguido de \"Número. \"\nconst regex = /\\n\\n|\\n(?=\\d+\\.\\s)/;\nconst messageParts = fullMessage.split(regex);\n\n// 4. Filtrar partes vacías (igual que antes)\nconst nonEmptyParts = messageParts.filter(part => part.trim() !== '');\n\n// 5. Crear un nuevo item para cada parte del mensaje (igual que antes)\nconst outputItems = nonEmptyParts.map(part => {\n  return {\n    json: {\n      Destinatario: destinatario,\n      Instancia: instancia,\n      originalMessageId: originalMessageId,\n      messagePart: part.trim() // trim() sigue siendo útil aquí\n    }\n  };\n});\n\n// 6. Devolver el array de nuevos items (igual que antes)\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4368,
+        -1376
+      ],
+      "id": "6213d6cd-d85e-4710-8615-d8a28fa009ce",
+      "name": "Separador_Humanizador"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cd7722b3-9173-4fc8-9431-311882ae3c43",
+              "leftValue": "={{ $('Separador_Humanizador').item.json.messagePart }}",
+              "rightValue": "no parece estar disponible ",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "2db3e1eb-4222-49b2-b764-4668244402c5",
+              "leftValue": "={{ $('Separador_Humanizador').item.json.messagePart }}",
+              "rightValue": "parece no estar disponible",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "b0f70dc3-1985-43ee-8814-676744bb4b86",
+              "leftValue": "={{ $('Separador_Humanizador').item.json.messagePart }}",
+              "rightValue": "no tenemos",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "10f3ac24-f42a-4bce-a11d-402df39703af",
+              "leftValue": "={{ $('Separador_Humanizador').item.json.messagePart }}",
+              "rightValue": "no encontré",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        4768,
+        -1376
+      ],
+      "id": "746d9cf4-ed88-407e-9d53-4a44aed61dd3",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "sendTo": "sistemas@tubiblia.com.co",
+        "subject": "Búsqueda de libro no encontrada",
+        "emailType": "text",
+        "message": "=Hola equipo de Tubiblia.com\n\nCon hora y fecha siguientes:\n{{ $now.toFormat('dd/MM/yyyy') }}  {{ $now.toFormat('HH:mm:ss') }} \n\nSe ha recibido una busqueda de un libro que no se ha encontrado en la base de datos.\nEl numero del cliente es:{{ $('Merge1').item.json.Destinatario }}\nEl mensaje enviado a cliente con el libro:\n**{{ $('Separador_Humanizador').item.json.messagePart }} \"\n\nPor favor contacten con el cliente en cuanto sea posible\n\nMuchas gracias.\nAgente IA Tubiblia.",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        5168,
+        -1584
+      ],
+      "id": "7778f36d-c169-48ba-8427-20638aac14fa",
+      "name": "Gmail1",
+      "webhookId": "d8db512f-ca78-40f0-98ff-7adc6ebbc2d8"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "831953883325563",
+        "recipientPhoneNumber": "={{ $('Merge1').item.json.Destinatario }}",
+        "textBody": "Parece que no tenemos el nombre exacto de este libro ahora mismo disponible, pero he avisado a un asesor para que lo compruebe.",
+        "additionalFields": {
+          "previewUrl": true
+        }
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        4992,
+        -1584
+      ],
+      "id": "3383749a-61a6-40a7-85b6-da67d07c361f",
+      "name": "Send message",
+      "webhookId": "06b78f4a-474e-4d6b-98c1-dd0a40cf3e0c"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "831953883325563",
+        "recipientPhoneNumber": "={{ $('Merge1').item.json.Destinatario }}",
+        "textBody": "={{ $('Separador_Humanizador').item.json.messagePart }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        5168,
+        -1296
+      ],
+      "id": "f9eef511-2525-4e5b-a3b1-8b13503c4713",
+      "name": "Enviar_mensaje",
+      "webhookId": "94018992-a3d0-48a2-bba5-72feb3b079f5"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "831953883325563",
+        "textBody": "={{ $now.toFormat('dd/MM/yyyy') }} {{ $now.toFormat('HH:mm:ss') }} Se ha recibido una búsqueda de libro que no se ha encontrado.  Número cliente: {{ $('Simulación_escritura').item.json.Destinatario }}  Mensaje enviado a cliente: \"{{ $('Separador_Humanizador').item.json.messagePart }}\"   Se ha procedido a enviar también un email con los detalles. Por favor atiendan esta petición.  Gracias.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        5376,
+        -1584
+      ],
+      "id": "1239759c-540f-4461-bce3-251ba68d4d6c",
+      "name": "Mensaje Administracion",
+      "webhookId": "4a344fa5-4536-413d-b74f-6e456f844db4"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d13eb9a7-fae6-4906-b7ff-7a7b0c4cc08d",
+                    "leftValue": "={{ $json.messages[0].audio }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Voz"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.messages[0].image }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "90fcac00-01b7-4992-b6b8-6cb00cda7f56"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Foto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6ef5fd99-c137-4ecb-8716-a8212a98c65e",
+                    "leftValue": "={{ $json.messages[0].text.body.toString() }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Texto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5b3b5546-0bb5-4594-87fc-fa4b748cb760",
+                    "leftValue": "={{ $json.messages[0].document.mime_type }}",
+                    "rightValue": "=application/pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PDF"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -464,
+        -1504
+      ],
+      "id": "8b3b4bea-ff41-465a-ad34-ab98dc5c45f8",
+      "name": "Switch Tipo de Entrada1"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "831953883325563",
+        "recipientPhoneNumber": "={{ $('Recibir mensaje').item.json.contacts[0].wa_id }}",
+        "textBody": "Lo siento puedes repetir el audio no es entendible.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        528,
+        -2400
+      ],
+      "id": "63d7155e-75cc-416e-88b5-7c51ad506e7e",
+      "name": "Audio no entendible",
+      "webhookId": "54ff05b3-0a58-4905-afcc-c5f9b7a9378b"
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.messages[0].audio.id }}"
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        512,
+        -2800
+      ],
+      "id": "56f1bd63-9494-4b17-a9fb-4354cbadf287",
+      "name": "Descarga de Audio",
+      "webhookId": "27dc4348-d6eb-45e6-8bf7-478ee0ee4aae"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1136,
+        -2800
+      ],
+      "id": "12957eff-e576-4b1a-b34e-23a05cb35395",
+      "name": "Obtener Archivo de Audio"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {
+          "language": "es"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        512,
+        -2624
+      ],
+      "id": "2273fcb5-f9cf-4c43-8892-486cf6eab633",
+      "name": "Transcribir audio a texto"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6fb0cb6b-8267-4073-a4c5-03f3b8724281",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "Subtítulos realizados por la comunidad de Amara.org",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        -2624
+      ],
+      "id": "87c6779e-b44c-49d9-bbe1-db0003b0f507",
+      "name": "Se transcribio el audio?"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c0da9ea0-b86b-49e5-abf9-53c8e3d5b152",
+              "name": "text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        -2624
+      ],
+      "id": "b3275f80-76af-444b-9344-54f5138a297a",
+      "name": "Recepción de texto"
+    },
+    {
+      "parameters": {
+        "content": "## MANEJO DE  VOZ\n* Nodo de ia se encarga de traducir todo el audio y pasarlo como texto\n* Manejo de errores en caso de no entender ningun audio.",
+        "height": 704,
+        "width": 848
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        464,
+        -2928
+      ],
+      "typeVersion": 1,
+      "id": "72d56f32-41e1-4f87-b867-dea8b5be252a",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        368,
+        -1984
+      ],
+      "id": "68dd892e-9f2b-404e-9d04-5122463a1b52",
+      "name": "Descargar imagen"
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.messages[0].image.id }}"
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        144,
+        -1984
+      ],
+      "id": "b1f5de65-12d6-4186-ad56-10abff1770d1",
+      "name": "Obtener imagen",
+      "webhookId": "46085bb4-9128-4538-9685-3a0826c250ed"
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        2352,
+        -1536
+      ],
+      "id": "27712672-0a5a-445e-9a47-3968be05122b",
+      "name": "OpenRouter Chat Model"
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.messages[0].document.id }}"
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        304,
+        -1376
+      ],
+      "id": "5581c53b-2f62-4165-85ff-811e80314274",
+      "name": "Download media",
+      "webhookId": "23e0a7a9-d602-41e8-a56a-2f5e564b5924"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        496,
+        -1376
+      ],
+      "id": "476aff5c-000c-4d56-9da0-342321fbb353",
+      "name": "Descargar pdf"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        720,
+        -1376
+      ],
+      "id": "58a6415f-d366-4aa0-88ea-92a79d5a06b0",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2640,
+        -1824
+      ],
+      "id": "f09a0fc7-5cee-48ab-917f-41c16c4e8c9c",
+      "name": "OpenAI Chat Model"
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
