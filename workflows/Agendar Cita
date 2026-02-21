@@ -1,0 +1,448 @@
+{
+  "connections": {
+    "Sugerir Horarios Cercanos": {
+      "main": [
+        [
+          {
+            "node": "Huecos libres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mirar Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Are Slots Available",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comienzo y Final": {
+      "main": [
+        [
+          {
+            "node": "Mirar Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Are Slots Available": {
+      "main": [
+        [
+          {
+            "node": "Sugerir Horarios Cercanos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No hay huecos libres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Elegir Herramienta": {
+      "main": [
+        [
+          {
+            "node": "Comienzo y Final",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Agendar Cita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Setear Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agendar Cita": {
+      "main": [
+        [
+          {
+            "node": "Cita agendada con exito",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Cita no agendada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setear Variables": {
+      "main": [
+        [
+          {
+            "node": "Elegir Herramienta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "Agendar Cita",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// --- FUNCIÓN PARA FORMATEAR HORA ---\nfunction formatoHoraEspañol(dateTime) {\n  const hora = dateTime.hour;\n  const minuto = dateTime.minute;\n  const minutoStr = minuto === 0 ? '' : `:${minuto.toString().padStart(2, '0')}`;\n  let horaDoce = hora % 12; if (horaDoce === 0) horaDoce = 12;\n  let periodo = (hora < 12) ? \" de la mañana\" : (hora < 20) ? \" de la tarde\" : \" de la noche\";\n  return (horaDoce === 1) ? `La 1${minutoStr}${periodo}` : `Las ${horaDoce}${minutoStr}${periodo}`;\n}\n\n// --- 1) INPUT + TZ ---\nconst args = $('Webhook').item.json.body.message.toolCalls[0].function.arguments;\nconst TZ = args.zonaHoraria || 'Europe/Madrid';\nconst citaSolicitadaISO = args.citaSolicitada;\nconst req = DateTime.fromISO(citaSolicitadaISO).setZone(TZ).startOf('minute');\nconst reqMillisUTC = req.toUTC().toMillis();\n\n// --- 2) SLOTS DE LA API (solo el MISMO DÍA) ---\nconst data = $('Mirar Disponibilidad').item.json.data || {};\nconst sameDayKey = req.toISODate(); // p.ej. \"2025-09-09\"\nconst rawSlots = data[sameDayKey] || [];\nconst slots = rawSlots.map(s => DateTime.fromISO(s.start).setZone(TZ).startOf('minute'));\n\n// --- 3) ¿ESTÁ DISPONIBLE EXACTO? (comparación robusta) ---\nconst isAvailable = slots.some(dt => dt.toUTC().toMillis() === reqMillisUTC);\n\n// --- 4) MENSAJE + SUGERENCIAS (2 más cercanas del MISMO DÍA) ---\nlet message = \"\";\nif (isAvailable) {\n  message = \"Sí, ese horario está disponible. ¿Quieres que te agende la cita?\";\n} else if (slots.length > 0) {\n  const sugerencias = slots\n    .map(dt => ({ dt, diff: Math.abs(dt.toMillis() - req.toMillis()) }))\n    .sort((a, b) => a.diff - b.diff)\n    .slice(0, 2)\n    .map(x => formatoHoraEspañol(x.dt));\n  message = `Vaya, la hora que solicitaste no está disponible. Pero tengo estos horarios cercanos: ${sugerencias.join(' y ')}. ¿Te gustaría reservar alguno de ellos?`;\n} else {\n  message = \"Lo siento, no he encontrado ningún hueco disponible para ese día. ¿Quieres intentar con otra fecha?\";\n}\n\n// --- 5) SALIDA ---\nreturn [{\n  json: {\n    isAvailable,\n    message\n    // opcional debug:\n    // requested: req.toISO(),\n    // slots: slots.map(s => s.toISO())\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        -80
+      ],
+      "id": "16fa2b5c-f3bc-41a8-b298-0998bab07c58",
+      "name": "Sugerir Horarios Cercanos"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"No esta disponible ese horario, intenta seleccionar otro día u hora.\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -256,
+        112
+      ],
+      "id": "c7a53287-7f8e-4907-8f00-fba3b90fad1a",
+      "name": "No hay huecos libres"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"{{ $('Sugerir Horarios Cercanos').item.json.message }}\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -32,
+        -80
+      ],
+      "id": "e058b4f6-120e-436d-a9ef-109755c9564b",
+      "name": "Huecos libres"
+    },
+    {
+      "parameters": {
+        "url": "https://api.cal.com/v2/slots",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "username",
+              "value": "={{ $('Setear Variables').item.json.username }}"
+            },
+            {
+              "name": "eventTypeSlug",
+              "value": "={{ $('Setear Variables').item.json.eventTypeSlug }}"
+            },
+            {
+              "name": "start",
+              "value": "={{ $json.start }}"
+            },
+            {
+              "name": "end",
+              "value": "={{ $json.end }}"
+            },
+            {
+              "name": "=timeZone",
+              "value": "={{$('Webhook').item.json.body.message.toolCalls[0].function.arguments.zonaHoraria || 'Europe/Madrid'}}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-09-04"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -704,
+        16
+      ],
+      "id": "106f2e27-b132-4d44-a34c-be2d6f468316",
+      "name": "Mirar Disponibilidad"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "22767100-ef1c-4356-aa4a-3b58d4f81075",
+              "name": "start",
+              "value": "={{ DateTime.fromISO($('Webhook').item.json.body.message.toolCalls[0].function.arguments.citaSolicitada).setZone($('Webhook').item.json.body.message.toolCalls[0].function.arguments.zonaHoraria).startOf('day').toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "0f4d3db6-9958-4cff-a310-3536c544e19d",
+              "name": "end",
+              "value": "={{ DateTime.fromISO($('Webhook').item.json.body.message.toolCalls[0].function.arguments.citaSolicitada).setZone($('Webhook').item.json.body.message.toolCalls[0].function.arguments.zonaHoraria).startOf('day').plus({ days: 1 }).toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -928,
+        16
+      ],
+      "id": "52265672-e6e2-4f2b-9a99-eccc925dd497",
+      "name": "Comienzo y Final"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "46aadd77-eb8f-4351-8b88-26c7fcb82e03",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -480,
+        16
+      ],
+      "id": "ed8c0eda-20a5-4eb5-9010-2ba4df828912",
+      "name": "Are Slots Available"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.body.message.toolCalls[0].function.name }}",
+                    "rightValue": "mirar_disponibilidad_clinica",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "5fa12cfb-483b-4fda-89b2-33908d2a727e"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "mirarDisponibilidad"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b2678560-ec05-4e9d-bb66-6944e049ff7f",
+                    "leftValue": "={{ $('Webhook').item.json.body.message.toolCalls[0].function.name }}",
+                    "rightValue": "agendar_cita_clinica",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agendarCita"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -1152,
+        208
+      ],
+      "id": "b6fb1c4e-d510-4a96-a2fa-0458c869f0ad",
+      "name": "Elegir Herramienta"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "545026d0-60db-4a72-860a-80bec6d1dd6d",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1600,
+        208
+      ],
+      "id": "3421ae26-bb4e-40e8-b188-e1130e28f570",
+      "name": "Webhook",
+      "webhookId": "ee663f68-fa21-45a1-ae83-2ba5ce950a65"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cal.com/v2/bookings",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-08-13"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"attendee\": {\n    \"language\": \"es\",\n    \"name\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.nombre }}\",\n    \"timeZone\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.zonaHoraria }}\",\n    \"email\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.correo }}\"\n  },\n  \"start\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.citaSolicitada }}\",\n  \"eventTypeSlug\": \"{{ $('Setear Variables').item.json.eventTypeSlug }}\",\n  \"username\": \"{{ $('Setear Variables').item.json.username }}\"\n}\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -928,
+        304
+      ],
+      "id": "4de80dee-ad43-47b2-8326-00fa246fffe5",
+      "name": "Agendar Cita",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"La cita ha sido agendada con éxito.\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -704,
+        208
+      ],
+      "id": "f6453b1b-da65-4731-9166-b76ecba88fe9",
+      "name": "Cita agendada con exito"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"La reserva no se ha realizado con éxito. Prueba con otro día u hora.\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -704,
+        400
+      ],
+      "id": "cb483111-c136-4f02-8abb-3f82ed603489",
+      "name": "Cita no agendada"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "23cae85f-0868-4a99-9fd4-a8f379728d1b",
+              "name": "username",
+              "value": "victor-perez-ozqerz",
+              "type": "string"
+            },
+            {
+              "id": "9d111618-82d3-4cbe-a2ea-07d87060b551",
+              "name": "eventTypeSlug",
+              "value": "30min",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1376,
+        208
+      ],
+      "id": "0763f5ca-0819-49f3-93dc-f24df5bbc174",
+      "name": "Setear Variables"
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
