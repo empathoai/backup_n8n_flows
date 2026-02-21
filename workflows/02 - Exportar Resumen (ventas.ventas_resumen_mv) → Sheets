@@ -1,0 +1,409 @@
+{
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "List PDFs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Postgres: Ensure Schema+Objects (ventas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List PDFs": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Download PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PDF": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Code: Parse Detalle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Parse Detalle": {
+      "main": [
+        [
+          {
+            "node": "Postgres: Upsert Detalle (ventas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Next Batch?": {
+      "main": [
+        [
+          {
+            "node": "Postgres: Refresh MV (ventas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres: Upsert Detalle (ventas)": {
+      "main": [
+        [
+          {
+            "node": "Postgres: Refresh MV (ventas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres: Ensure Schema+Objects (ventas)": {
+      "main": [
+        [
+          {
+            "node": "Postgres: Refresh MV (ventas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron (03:00)": {
+      "main": [
+        [
+          {
+            "node": "Postgres: Ensure Schema+Objects (ventas)1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Postgres: Read MV (ventas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres: Read MV (ventas)": {
+      "main": [
+        [
+          {
+            "node": "Code: Build Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Build Rows": {
+      "main": [
+        [
+          {
+            "node": "Sheets: Clear",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Sheets: Append Bulk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "02 - Exportar Resumen (ventas.ventas_resumen_mv) → Sheets",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "ec18ea3c-d438-4528-b807-7681ecff7eec",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "options": {}
+      },
+      "id": "f29a8fcc-8dfd-4915-83e4-588749768073",
+      "name": "List PDFs",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 2,
+        "options": {}
+      },
+      "id": "d98ca7ee-fd67-414b-9251-9ea3a06effa0",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": "={{$json.id}}",
+        "options": {}
+      },
+      "id": "292be4c1-5f25-4ab6-9e99-036164d7d073",
+      "name": "Download PDF",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "id": "63985f93-356d-47a4-8213-e7f63ba2a7d4",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nfunction num(s) { return Number((s || '0').toString().replace(/,/g, '').trim()); }\nfunction hash(str) { let h=0,i=0; for(;i<str.length;i++) h=((h<<5)-h+str.charCodeAt(i))|0; return 'h'+(h>>>0).toString(16); }\nconst raw = $input.first().json.text || '';\nconst archivo = $json?.name || $node['List PDFs']?.item?.json?.name || 'desconocido.pdf';\nconst mPeriod = raw.match(/Period\\s+From\\s*:\\s*(\\d{2})\\/\\d{2}\\/\\d{4}\\s*To\\s*:\\s*\\d{2}\\/\\d{2}\\/\\d{4}/i);\nconst mes  = mPeriod ? mPeriod[1] : '00';\nconst anio = mPeriod ? mPeriod[0].slice(-4) : '0000';\nconst periodo = `${anio}-${mes}`;\nconst sucursal = (raw.match(/Pollos?\\s*AP\\s*-\\s*([^\\r\\n]+)/i)?.[1] || 'Desconocido').trim();\nlet canalActual = '';\nconst canalRegex = /^\\s*\\d+\\s*-\\s*([A-Za-zÁÉÍÓÚÜÑ ]{3,})\\s*$/i;\nconst reMain1 = /^\\s*\\d{1,3}\\.\\d{2}%\\s+(\\d+)\\s+(.+?)\\s+Main\\s*1\\s+([\\d,\\.]+)\\s+(\\d+)\\s+.*?([\\d,\\.]+)\\s+.*$/i;\nconst reMain2 = /^\\s*\\d{1,3}\\.\\d{2}%\\s+(?!\\d+\\s)(.+?)\\s+Main\\s*2\\s+([\\d,\\.]+)?\\s*(\\d+)?\\s+.*?([\\d,\\.]+)\\s+.*$/i;\nconst reBasura = /^(Page\\s+\\d+|Consolidated|Subtotal|Total|Net Sales|Printed on|% of Ttl|Grand Total)/i;\nconst lines = raw.split(/\\r?\\n/);\nlet ultimoCodigo=null, indexBloque=0;\nconst out=[];\nfor (const line of lines) {\n  const t=line.trim(); if(!t) continue;\n  const mCanal = canalRegex.exec(t); if(mCanal){ canalActual=mCanal[1].trim(); continue; }\n  if (reBasura.test(t)) continue;\n  let m=reMain1.exec(line);\n  if(m){ const codigo=m[1].trim(), nombre=m[2].trim().replace(/\\s+/g,' '), precio=num(m[3]), cantidad=num(m[4]), total=num(m[5]);\n    ultimoCodigo=codigo; indexBloque+=1; const gid=`${periodo}|${sucursal}|${archivo}|${indexBloque}`;\n    const base={periodo,anio,mes,sucursal,canal:canalActual||'',linea_tipo:'M1',codigo_producto:codigo,codigo_linea:codigo,descripcion_linea:nombre,precio_unitario:precio,cantidad, total_linea:total,parent_codigo:codigo,group_id:gid,archivo_origen:archivo,fecha_procesamiento:new Date().toISOString().slice(0,10)};\n    base.hash_linea=hash(`${archivo}|${t}`); out.push({json:base}); continue; }\n  m=reMain2.exec(line);\n  if(m && ultimoCodigo){ const nombre2=m[1].trim().replace(/\\s+/g,' '), precio2=num(m[2]), cant2=num(m[3]), total2=num(m[4]);\n    const last=out[out.length-1]?.json; const gid=(last&&last.parent_codigo===ultimoCodigo)? last.group_id : `${periodo}|${sucursal}|${archivo}|${indexBloque}`;\n    const det={periodo,anio,mes,sucursal,canal:canalActual||'',linea_tipo:'M2',codigo_producto:ultimoCodigo,codigo_linea:'',descripcion_linea:nombre2,precio_unitario:isNaN(precio2)?0:precio2,cantidad:isNaN(cant2)?0:cant2,total_linea:total2,parent_codigo:ultimoCodigo,group_id:gid,archivo_origen:archivo,fecha_procesamiento:new Date().toISOString().slice(0,10)};\n    det.hash_linea=hash(`${archivo}|${t}`); out.push({json:det}); continue; }\n}\nif(!out.length) return [{json:{warning:'Sin líneas M1/M2', archivo_origen:archivo, periodo}}];\nreturn out;\n"
+      },
+      "id": "792bc1ad-e154-48ff-b0a8-d5cd271c0318",
+      "name": "Code: Parse Detalle",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        464,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "\n-- Ensure schema and objects in schema ventas\nCREATE SCHEMA IF NOT EXISTS ventas;\n\n-- Table (detalle)\nCREATE TABLE IF NOT EXISTS ventas.ventas_detalle (\n  id bigserial PRIMARY KEY,\n  periodo text,\n  anio text,\n  mes text,\n  sucursal text,\n  canal text,\n  linea_tipo text,\n  codigo_producto text,\n  codigo_linea text,\n  descripcion_linea text,\n  precio_unitario numeric,\n  cantidad numeric,\n  total_linea numeric,\n  parent_codigo text,\n  group_id text,\n  archivo_origen text,\n  fecha_procesamiento date,\n  hash_linea text UNIQUE\n);\n\n-- Materialized View (resumen)\nDO $$\nBEGIN\n  CREATE MATERIALIZED VIEW ventas.ventas_resumen_mv AS\n  SELECT\n    periodo, anio, mes,\n    COALESCE(sucursal,'') AS sucursal,\n    COALESCE(canal,'')    AS canal,\n    codigo_producto,\n    SUM(CASE WHEN linea_tipo='M1' THEN COALESCE(cantidad,0) ELSE 0 END) AS cantidad_total,\n    SUM(COALESCE(total_linea,0)) AS total_producto,\n    CASE\n      WHEN SUM(CASE WHEN linea_tipo='M1' THEN COALESCE(cantidad,0) ELSE 0 END) > 0\n      THEN ROUND(SUM(COALESCE(total_linea,0)) / NULLIF(SUM(CASE WHEN linea_tipo='M1' THEN COALESCE(cantidad,0) ELSE 0 END),0), 2)\n      ELSE 0\n    END AS precio_efectivo\n  FROM ventas.ventas_detalle\n  GROUP BY periodo, anio, mes, COALESCE(sucursal,''), COALESCE(canal,''), codigo_producto;\nEXCEPTION WHEN duplicate_table THEN\n  NULL;\nEND$$;\n\nCREATE UNIQUE INDEX IF NOT EXISTS ux_resumen_mv\nON ventas.ventas_resumen_mv (periodo, sucursal, canal, codigo_producto);\n",
+        "additionalFields": {}
+      },
+      "id": "f474c3ba-a742-4215-9355-694bdd48662d",
+      "name": "Postgres: Ensure Schema+Objects (ventas)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        240,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO ventas.ventas_detalle (periodo, anio, mes, sucursal, canal, linea_tipo, codigo_producto, codigo_linea, descripcion_linea, precio_unitario, cantidad, total_linea, parent_codigo, group_id, archivo_origen, fecha_procesamiento, hash_linea) VALUES ({$json.periodo}, {$json.anio}, {$json.mes}, {$json.sucursal}, {$json.canal}, {$json.linea_tipo}, {$json.codigo_producto}, {$json.codigo_linea}, {$json.descripcion_linea}, {$json.precio_unitario}, {$json.cantidad}, {$json.total_linea}, {$json.parent_codigo}, {$json.group_id}, {$json.archivo_origen}, {$json.fecha_procesamiento}, {$json.hash_linea}) ON CONFLICT (hash_linea) DO NOTHING;",
+        "additionalFields": {}
+      },
+      "id": "3e2f6474-6200-47e9-83db-a6e918461bf6",
+      "name": "Postgres: Upsert Detalle (ventas)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        704,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "REFRESH MATERIALIZED VIEW CONCURRENTLY ventas.ventas_resumen_mv;",
+        "additionalFields": {}
+      },
+      "id": "658c24e0-c1c8-4aec-af17-e4ddea243a04",
+      "name": "Postgres: Refresh MV (ventas)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        944,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const b=$node['Split In Batches'].context; return [{json:{loop:b.lastBatch?'done':'next'}}];"
+      },
+      "id": "5bff7ba5-500d-4c8e-8f79-916d11d5f682",
+      "name": "Code: Next Batch?",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        672,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 3
+            }
+          ]
+        }
+      },
+      "id": "19b7561f-30c2-4dda-b3aa-24b64f6dd27b",
+      "name": "Cron (03:00)",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT periodo, anio, mes, sucursal, canal, codigo_producto, cantidad_total, total_producto, precio_efectivo FROM ventas.ventas_resumen_mv ORDER BY periodo, sucursal, canal, codigo_producto;",
+        "additionalFields": {}
+      },
+      "id": "02bbf5a5-546d-414f-a80f-f6f2d32ccac5",
+      "name": "Postgres: Read MV (ventas)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        688
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const headers=['periodo','anio','mes','sucursal','canal','codigo_producto','cantidad_total','total_producto','precio_efectivo']; const rows=[headers]; for(const it of items){const r=it.json; rows.push([r.periodo,r.anio,r.mes,r.sucursal||'',r.canal||'',r.codigo_producto,r.cantidad_total,r.total_producto,r.precio_efectivo]);} return [{json:{rows}}];"
+      },
+      "id": "38e31b24-654e-4adb-b7e9-ca7f53f4c96a",
+      "name": "Code: Build Rows",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "clear",
+        "documentId": {
+          "__rl": true,
+          "value": "1jHOqnA3eNdOsP_82A748JGVKlsmnUQPXNDMO2Y_ffpM",
+          "mode": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": " Resumen_Mensual",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jHOqnA3eNdOsP_82A748JGVKlsmnUQPXNDMO2Y_ffpM/edit#gid=0"
+        }
+      },
+      "id": "a5e1905f-a8f5-4115-b8db-2509bbc83f84",
+      "name": "Sheets: Clear",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        176,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1jHOqnA3eNdOsP_82A748JGVKlsmnUQPXNDMO2Y_ffpM",
+          "mode": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": " Resumen_Mensual",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jHOqnA3eNdOsP_82A748JGVKlsmnUQPXNDMO2Y_ffpM/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "032bebb7-5611-4e47-bb91-7bb8c57abadc",
+      "name": "Sheets: Append Bulk",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        176,
+        736
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "\n-- Ensure schema and objects in schema ventas\nCREATE SCHEMA IF NOT EXISTS ventas;\n\n-- Table (detalle)\nCREATE TABLE IF NOT EXISTS ventas.ventas_detalle (\n  id bigserial PRIMARY KEY,\n  periodo text,\n  anio text,\n  mes text,\n  sucursal text,\n  canal text,\n  linea_tipo text,\n  codigo_producto text,\n  codigo_linea text,\n  descripcion_linea text,\n  precio_unitario numeric,\n  cantidad numeric,\n  total_linea numeric,\n  parent_codigo text,\n  group_id text,\n  archivo_origen text,\n  fecha_procesamiento date,\n  hash_linea text UNIQUE\n);\n\n-- Materialized View (resumen)\nDO $$\nBEGIN\n  CREATE MATERIALIZED VIEW ventas.ventas_resumen_mv AS\n  SELECT\n    periodo, anio, mes,\n    COALESCE(sucursal,'') AS sucursal,\n    COALESCE(canal,'')    AS canal,\n    codigo_producto,\n    SUM(CASE WHEN linea_tipo='M1' THEN COALESCE(cantidad,0) ELSE 0 END) AS cantidad_total,\n    SUM(COALESCE(total_linea,0)) AS total_producto,\n    CASE\n      WHEN SUM(CASE WHEN linea_tipo='M1' THEN COALESCE(cantidad,0) ELSE 0 END) > 0\n      THEN ROUND(SUM(COALESCE(total_linea,0)) / NULLIF(SUM(CASE WHEN linea_tipo='M1' THEN COALESCE(cantidad,0) ELSE 0 END),0), 2)\n      ELSE 0\n    END AS precio_efectivo\n  FROM ventas.ventas_detalle\n  GROUP BY periodo, anio, mes, COALESCE(sucursal,''), COALESCE(canal,''), codigo_producto;\nEXCEPTION WHEN duplicate_table THEN\n  NULL;\nEND$$;\n\nCREATE UNIQUE INDEX IF NOT EXISTS ux_resumen_mv\nON ventas.ventas_resumen_mv (periodo, sucursal, canal, codigo_producto);\n",
+        "additionalFields": {}
+      },
+      "id": "801d78a4-f794-470b-b233-40882d027d93",
+      "name": "Postgres: Ensure Schema+Objects (ventas)1",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        512
+      ]
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
