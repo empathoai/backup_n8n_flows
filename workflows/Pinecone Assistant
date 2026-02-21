@@ -1,0 +1,282 @@
+{
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Asistente RAG 2.0",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente RAG 2.0",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Asistente RAG 2.0",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente RAG 2.0",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente RAG 2.",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Asistente RAG 2.",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone": {
+      "ai_tool": [
+        [
+          {
+            "node": "Asistente RAG 2.",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "Pinecone Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        368,
+        176
+      ],
+      "id": "43406e29-134b-4f1a-9f66-70bf39cde2d9",
+      "name": "When chat message received",
+      "webhookId": "df8636da-933e-44db-921c-15ff18ceed38"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        400
+      ],
+      "id": "e3df92b8-8280-45eb-bc99-5e2da5dbaea0",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=# Resumen\n\nEres un agente de IA especializado en analizar datos de ventas detalladas de resultados.\n\nUsa tu herramienta **Pinecone** para buscar en los informes de resultados de **Ap Pollo** \n\nAl responder a la pregunta del usuario, cita **siempre** tus fuentes indicando:\n- **Qué documento** usaste.\n- **Qué página** corresponde.\n- **Qué sección** consultaste.\n- **Una cita textual exacta** del documento original.\n\n\nEres un agente experto en análisis de ventas de **Ap Pollo**. Usa **Pinecone** para responder preguntas basadas en los informes de resultados y la matriz de productos.\n\nResponde siempre citando:\n- Documento consultado\n- Página\n- Sección\n- Cita textual exacta\n\nNo inventes información. Usa solo lo que aparece en los documentos.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        656,
+        176
+      ],
+      "id": "2501ae2b-e0f4-428b-b407-0f15765ee64d",
+      "name": "Asistente RAG 2.0"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        368,
+        416
+      ],
+      "id": "837048d2-f164-429c-b098-7ae4b4394bef",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Utiliza esta herramienta siempre que el usuario haga preguntas",
+        "method": "POST",
+        "url": "https://prod-1-data.ke.pinecone.io/assistant/chat/appollo",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Api-Key",
+              "value": "pcsk_2WHSBK_4B2zwcTYr7uyU4hWy9ckX7asTRLCd9SVsaeics9vNaazwFTo66ERYpcquTVx6Dq"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI(\"searchQuery\")}}\"\n    }\n  ],\n  \"stream\": false,\n  \"model\": \"gpt-4.1\",\n  \"include_highlights\":true\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        864,
+        416
+      ],
+      "id": "7dd56849-d36b-4ba1-bea3-9669452442d2",
+      "name": "Pinecone1"
+    },
+    {
+      "parameters": {
+        "content": "## Aquí Víctor\n\nEspero que te sirva el flujo :)",
+        "height": 368,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -16
+      ],
+      "id": "75800c9c-236b-497e-96f9-abb75ba4ea35",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        1424,
+        1872
+      ],
+      "id": "670c4585-829e-448f-a42c-c3a65119bffc",
+      "name": "Calculator1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=# Resumen\n\nEres un agente de IA especializado en analizar datos de informes de resultados.\n\nUsa tu herramienta **Pinecone** para buscar en los informes de resultados de **Google** y **Meta**.\n\nAl responder a la pregunta del usuario, cita **siempre** tus fuentes indicando:\n- **Qué documento** usaste.\n- **Qué página** corresponde.\n- **Qué sección** consultaste.\n- **Una cita textual exacta** del documento original.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1216,
+        1600
+      ],
+      "id": "cce17f9b-135d-4b7e-97aa-f8d032940985",
+      "name": "Asistente RAG 2."
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        928,
+        1840
+      ],
+      "id": "56b91aab-fceb-4a8f-beee-0a3400791a6c",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Utiliza esta herramienta siempre que el usuario haga preguntas",
+        "method": "POST",
+        "url": "https://prod-1-data.ke.pinecone.io/assistant/chat/youtubedemo",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Api-Key",
+              "value": "AQUI_TU_API_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI(\"searchQuery\") }}\"\n    }\n  ],\n  \"stream\": false,\n  \"model\": \"gpt-4.1\",\n  \"include_highlights\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        1904
+      ],
+      "id": "8f5b341e-e76e-43e6-9485-3fdbfb35e326",
+      "name": "Pinecone"
+    },
+    {
+      "parameters": {
+        "content": "## Aquí Víctor\n\nEspero que te sirva el flujo :)",
+        "height": 368,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        320,
+        1408
+      ],
+      "id": "a4ce269d-36eb-4519-9d64-5eedaf8b4ddf",
+      "name": "Sticky Note1"
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
