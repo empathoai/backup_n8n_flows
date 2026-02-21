@@ -1,0 +1,3202 @@
+{
+  "connections": {
+    "Generate Hash": {
+      "main": [
+        [
+          {
+            "node": "Search Record Manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Record Manager": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Row in Record Manager": {
+      "main": [
+        [
+          {
+            "node": "Set up Record ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Set Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Previous Vectors": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update our Record Manager": {
+      "main": [
+        [
+          {
+            "node": "Set up Record ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Update our Record Manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Text": {
+      "main": [
+        [
+          {
+            "node": "Generate Hash",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set up Text for Embedding": {
+      "main": [
+        [
+          {
+            "node": "Smart Chunker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File": {
+      "main": [
+        [
+          {
+            "node": "Get File URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Data": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Archive File": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop over Chunks": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Setup Chunk for Embedding1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Set up Record ID",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Row in Record Manager",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Delete Previous Vectors",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Update our Record Manager1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser2": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Enrich",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Enrich",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Metadata Fields": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep": {
+      "main": [
+        [
+          {
+            "node": "Enrich",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrich": {
+      "main": [
+        [
+          {
+            "node": "Set up Text for Embedding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Download File4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Move to error folder1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download File4": {
+      "main": [
+        [
+          {
+            "node": "Upload File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move to error folder1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create OpenAI Embeddings": {
+      "main": [
+        [
+          {
+            "node": "Setup Chunk for Batch Insertion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setup Chunk for Embedding1": {
+      "main": [
+        [
+          {
+            "node": "Create OpenAI Embeddings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setup Chunk for Batch Insertion": {
+      "main": [
+        [
+          {
+            "node": "Insert into Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert into Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Loop over Chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get File URL": {
+      "main": [
+        [
+          {
+            "node": "Get OCR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get OCR": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Markdown with Page Numbers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Prep",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set up Text for Embedding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set up Record ID": {
+      "main": [
+        [
+          {
+            "node": "Continue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New Files": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop over Chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update our Record Manager1": {
+      "main": [
+        [
+          {
+            "node": "Archive File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Smart Chunker": {
+      "main": [
+        [
+          {
+            "node": "Document Hierarchy Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Document Hierarchy Extractor": {
+      "main": [
+        [
+          {
+            "node": "Merger",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merger": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Markdown with Page Numbers": {
+      "main": [
+        [
+          {
+            "node": "Set Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Continue": {
+      "main": [
+        [
+          {
+            "node": "Fetch Metadata Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store3": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI3": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store3",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Context Expansion1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Document Hierarchy": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Full Document": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Neighbor Chunks": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store4": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI4": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store4",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Context Expansion": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store5",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Upload Image to Supabase1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Image to Supabase1": {
+      "main": [
+        [
+          {
+            "node": "Get response file name1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Images1": {
+      "main": [
+        [
+          {
+            "node": "Set file name1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages2": {
+      "main": [
+        [
+          {
+            "node": "Split Out Images1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get response file name1": {
+      "main": [
+        [
+          {
+            "node": "Merge results1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge results1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set file name1": {
+      "main": [
+        [
+          {
+            "node": "Prep base64 string1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge results1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Prep base64 string1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages3": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase_account_details1": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge3": {
+      "main": [
+        [
+          {
+            "node": "Upload File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Markdown with Page Numbers1": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request6": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Markdown with Page Numbers1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI5": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store5",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file1": {
+      "main": [
+        [
+          {
+            "node": "Supabase_account_details1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "name": "TheAIAutomators.com - Context Expansion Options 1-5",
+  "nodes": [
+    {
+      "parameters": {
+        "type": "SHA256",
+        "value": "={{ $json.text }}",
+        "dataPropertyName": "hash"
+      },
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        2656,
+        1360
+      ],
+      "id": "7a412fff-3e02-4ef0-9d67-cbd84ecd2bfb",
+      "name": "Generate Hash"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "record_manager_v2",
+        "limit": 1,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "doc_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Set Data').first().json.doc_id }}"
+            },
+            {
+              "keyName": "hash",
+              "condition": "eq",
+              "keyValue": "={{ $json.hash }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2896,
+        1360
+      ],
+      "id": "cb6bf70e-9de1-41d1-9829-bc2d693ab8d3",
+      "name": "Search Record Manager",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "z3EU9aX7OrP0jWfJ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "record_manager_v2",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "doc_id",
+              "fieldValue": "={{ $('Set Data').item.json.doc_id }}"
+            },
+            {
+              "fieldId": "hash",
+              "fieldValue": "={{ $('Generate Hash').item.json.hash }}"
+            },
+            {
+              "fieldId": "data_type",
+              "fieldValue": "=file"
+            },
+            {
+              "fieldId": "document_title",
+              "fieldValue": "={{ $('Set Data').item.json.doc_name }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3712,
+        1248
+      ],
+      "id": "ffa910af-67f4-496f-a8f1-748bffc313f0",
+      "name": "Create Row in Record Manager",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        848,
+        1360
+      ],
+      "id": "4fb91a38-2350-43f1-b09f-a7e0dff7a4e9",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "documents_v2",
+        "filterType": "string",
+        "filterString": "=metadata->>doc_id=like.*{{ $('Loop Over Items').item.json.id }}*"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3440,
+        1536
+      ],
+      "id": "efa2629e-5d5e-40fa-9b40-3e96c82f4bf0",
+      "name": "Delete Previous Vectors",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "z3EU9aX7OrP0jWfJ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "record_manager_v2",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Search Record Manager').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "hash",
+              "fieldValue": "={{ $('Generate Hash').item.json.hash }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        4016,
+        1536
+      ],
+      "id": "ee5c7848-f538-4d3c-9aa2-0cfe34e21ed3",
+      "name": "Update our Record Manager",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3744,
+        1536
+      ],
+      "id": "7aa95908-09cf-49fd-a82f-85b5258efbdd",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a27d8259-8ed2-4638-8716-b60119b8f90c",
+              "name": "text",
+              "value": "={{ $json.content || $json.text || $json.markdown}}",
+              "type": "string"
+            },
+            {
+              "id": "57ffce94-6b26-426f-9891-cd436002bf6d",
+              "name": "data_type",
+              "value": "unstructured",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2336,
+        1360
+      ],
+      "id": "85ba321e-ed5f-4436-b714-e65e41d3300d",
+      "name": "Set Text"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "90016f21-d4be-4e57-a81a-5fe290f388b9",
+              "name": "content",
+              "value": "={{ $('Set Text').item.json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2320,
+        2384
+      ],
+      "id": "9013f978-70a9-4ca0-9267-134e45c451ac",
+      "name": "Set up Text for Embedding"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "purpose",
+              "value": "ocr"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1824,
+        1072
+      ],
+      "id": "9ad346d7-7b6e-4d07-afa6-1a4d57bd83d2",
+      "name": "Upload File",
+      "retryOnFail": true,
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Record Manager Router\n\n### 0. No Change to Doc\nMove to next file\n\n### 1. New Document\nAdd to Record Manager and Vector Store \n\n### 2. Changed Document \nDelete old vectors and add new ones",
+        "height": 820,
+        "width": 2156,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2608,
+        992
+      ],
+      "id": "a907e335-1d99-4c99-808b-e2e06ddf4f2f",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39bd7383-0385-459d-85d4-126bc25347ca",
+              "name": "doc_id",
+              "value": "={{ $json.id || $json.body.data[0].metadata.url }}",
+              "type": "string"
+            },
+            {
+              "id": "eabda515-4cc4-49c9-9299-88aa34071946",
+              "name": "doc_name",
+              "value": "={{ $json.name || $json.body.data[0].metadata.title }}",
+              "type": "string"
+            },
+            {
+              "id": "5f21beee-be30-413c-a426-29eda7ac18c1",
+              "name": "doc_type",
+              "value": "=file",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1072,
+        1376
+      ],
+      "id": "243dd36d-b299-4340-9f7c-244b7ef0e1e7",
+      "name": "Set Data"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Set Data').first().json.doc_id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1aL8IFqBt8Q4uZlZ-LIWAcaczOUwHUJ73",
+          "mode": "id"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        656,
+        1152
+      ],
+      "id": "f5c7df3b-43a0-4cd5-a032-9bb1107a0b2f",
+      "name": "Archive File",
+      "retryOnFail": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 50,
+        "options": {
+          "reset": "={{ $node['Loop over Chunks'].context.done }}"
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3216,
+        2096
+      ],
+      "id": "471763bb-ec17-40a0-af4d-fbd2e60b7a48",
+      "name": "Loop over Chunks"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "dcd400bc-0b91-4c30-81bd-da402e4a2730",
+                    "leftValue": "={{ $json.hash }}",
+                    "rightValue": "={{ $('Generate Hash').item.json.hash }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "empty",
+                      "singleValue": true
+                    },
+                    "id": "ad01f150-f021-454c-aa13-eea5b26c2cba"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ca0c7ef8-09f9-4424-947b-8469b1ed8cac",
+                    "leftValue": "={{ $json.hash }}",
+                    "rightValue": "={{ $('Generate Hash').item.json.hash }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        3136,
+        1408
+      ],
+      "id": "400b2a28-e1f4-4b93-a3d1-bac7feceec73",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3696,
+        2464
+      ],
+      "id": "e4a55f0b-072a-44aa-b9f1-61bba0aeec39",
+      "name": "Aggregate2"
+    },
+    {
+      "parameters": {
+        "content": "## File Extraction",
+        "height": 824,
+        "width": 2048,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        528,
+        992
+      ],
+      "id": "afad3858-1d74-4dfa-a43e-028f84d2133f",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"Generic Object with String or Number Values\",\n  \"type\": \"object\",\n  \"additionalProperties\": {\n    \"type\": [\"string\", \"number\"]\n  }\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        2032,
+        2240
+      ],
+      "id": "b9546ce9-0e8a-4bd1-b636-affd860d7aa5",
+      "name": "Structured Output Parser2"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {
+          "responseFormat": "json_object"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1872,
+        2240
+      ],
+      "id": "14b5b555-2d34-4256-80d5-4c934d680e88",
+      "name": "OpenAI Chat Model3"
+    },
+    {
+      "parameters": {
+        "content": "## Document & Metadata Enrichment",
+        "height": 820,
+        "width": 1104,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        1904
+      ],
+      "id": "b5e14002-d878-43ea-9af7-e2a09bc9e153",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "metadata_fields"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        2224
+      ],
+      "id": "1833716f-ccb8-44ed-a371-90f1bf740172",
+      "name": "Fetch Metadata Fields",
+      "retryOnFail": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get input items\nconst items = $input.all();\n\n// Initialize output string and list of fields\nlet output = '';\nlet fieldList = '';\n\n// Loop through each input item\nfor (const item of items) {\n  const data = item.json;\n\n  const key = data.metadata_name;\n  const values = data.allowed_values;\n\n  output += `## ${key}\\n`;\n  output += `The filter key ${key} can have the following possible values\\n\\n`;\n  output += `${values.trim()}\\n\\n`;\n\n  fieldList += `\"${key}\":\"<ADD>\",\\n`;\n}\n\n// Remove trailing comma and newline from fieldList\nfieldList = fieldList.trim().replace(/,\\s*$/, '');\n\n// Take the first item and modify it with aggregated data\nconst firstItem = items[0];\nfirstItem.json.filterPromptInstructions = output.trim();\nfirstItem.json.list_of_fields = fieldList;\n\n// Return only the first item (now containing aggregated data)\nreturn [firstItem];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1648,
+        2112
+      ],
+      "id": "75dea684-ac8a-4500-b373-cc7cf7c93edf",
+      "name": "Prep"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# File Name\n{{ $('Set Data').item.json.doc_name }}\n\n##################\n\n# File Contents\n{{ \n$('Set Text').first().json.text.split(/\\s+/).length > 500 \n    ? $('Set Text').first().json.text.split(/\\s+/).slice(0, 500).join(' ') + '...' \n    : $('Set Text').first().json.text \n}}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=Based on the provided file name and file contents, extract out ...\n\n# headline-style description\n\nA very short, headline-style description (7-10 words). This will be used to finish the sentence \"This chunk is from\" so start it with \"an\" or \"a\"... example output\n\nan SEC filing on ACME corp's performance in Q2 2023\n\n# document summary\n\nAlso extract out a 1 sentence description of what the document is about and classify the document according to the below fields.\n\nOnly output JSON in the following format\n\n{\n\"document_headline_description\":\"<ADD>\",\n\"document_summary\":\"<ADD>\",\n{{ $json.list_of_fields }}\n}\n\nIf you are unsure of any of these, just output N/A in the field.\n\n{{ $json.filterPromptInstructions }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        1888,
+        2032
+      ],
+      "id": "275ff947-8509-4c48-8cd8-310eddc59e5c",
+      "name": "Enrich",
+      "retryOnFail": true,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ddac5320-959a-4634-9000-c9cdc397d2e4",
+                    "leftValue": "={{ $json.mimeType }}",
+                    "rightValue": "application/pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PDF"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1280,
+        1376
+      ],
+      "id": "b4655d06-e42b-4d0e-a493-690ab4981190",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1600,
+        1360
+      ],
+      "id": "2328f9f1-ff09-4c18-a8b9-5a9316746972",
+      "name": "Download File4",
+      "retryOnFail": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Set Data').first().json.doc_id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "172iL7TQkR119SP4bWbVc7sqxYVOWCUDq",
+          "mode": "list",
+          "cachedResultName": "Error",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/172iL7TQkR119SP4bWbVc7sqxYVOWCUDq"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1520,
+        1136
+      ],
+      "id": "a39e2686-5e9d-4b93-9205-23d4ca600c24",
+      "name": "Move to error folder1",
+      "retryOnFail": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"text-embedding-3-small\",\n  \"input\": {{ JSON.stringify($json.contents) }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3856,
+        2112
+      ],
+      "id": "1017f872-f2ed-499a-9572-0bb5ca09123e",
+      "name": "Create OpenAI Embeddings",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 2500
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aggregate all chunk strings into one array and attach to the first item only\nconst items = $input.all();\n\n// Build contents from items that look like { json: { chunk: \"...\" } }\nconst contents = items\n  .map(it => it.json?.content)\n  .filter(s => typeof s === 'string' && s.trim() !== '');\n\n// Use the first item as the carrier\nconst first = items[0] ?? { json: {} };\nfirst.json.contents = contents;\n\nreturn [first];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3600,
+        2112
+      ],
+      "id": "8507a515-65ba-4433-89b0-d35d1002d2b0",
+      "name": "Setup Chunk for Embedding1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input: OpenAI response with multiple embeddings\nconst embeddings = $input.first().json.data; // Array of embedding objects\nconst originalContents = $('Setup Chunk for Embedding1').first().json.contents;\nconst loopItems = $('Loop over Chunks').all();\n\n// Prepare data for batch insert using parameterized queries\nconst insertData = embeddings.map(embeddingObj => {\n  const index = embeddingObj.index;\n  const embedding = embeddingObj.embedding;\n  const content = originalContents[index];\n  \n  return {\n    content: content,\n    metadata: JSON.stringify(loopItems[index].json.metadata),\n    embedding: embedding // Keep as array, let the DB driver handle conversion\n  };\n});\n\n// Generate parameterized query\nconst placeholders = insertData.map((_, index) => {\n  const base = index * 3;\n  return `($${base + 1}, $${base + 2}, $${base + 3}::vector)`;\n}).join(',\\n');\n\nconst insertQuery = `\n  INSERT INTO documents_v2 (content, metadata, embedding) \n  VALUES ${placeholders}\n`;\n\n// Flatten the parameters array\nconst parameters = insertData.flatMap(row => [\n  row.content,\n  row.metadata,\n  `[${row.embedding.join(',')}]` // Format vector as string for PostgreSQL\n]);\n\nreturn [{\n  insertQuery: insertQuery,\n  parameters: parameters,\n  recordCount: insertData.length,\n  batchInfo: `Processed indices: ${embeddings.map(e => e.index).join(', ')}`\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4096,
+        2112
+      ],
+      "id": "32759157-131c-4c0d-8d3e-7c1f6d505c0d",
+      "name": "Setup Chunk for Batch Insertion"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ $json.insertQuery }}",
+        "options": {
+          "queryReplacement": "={{ $json.parameters }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        4384,
+        2112
+      ],
+      "id": "4d4662d4-d9da-4d4d-99c2-06b27b542f3c",
+      "name": "Insert into Vector Store",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 2500
+    },
+    {
+      "parameters": {
+        "url": "=https://api.mistral.ai/v1/files/{{ $json.id }}/url",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "expiry",
+              "value": "24"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2064,
+        1072
+      ],
+      "id": "7327a0c4-960d-4ab9-a4d8-c78ad3236e0f",
+      "name": "Get File URL",
+      "retryOnFail": true,
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/ocr",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"mistral-ocr-latest\",\n  \"document\": {\n    \"type\": \"document_url\",\n    \"document_url\": \"{{ $json.url }}\"\n  },\n  \"include_image_base64\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2288,
+        1072
+      ],
+      "id": "18f8f059-5c6d-4877-a915-88731a0d1dc7",
+      "name": "Get OCR",
+      "retryOnFail": true,
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a4697977-31b6-4740-ae7c-0e3a35ecfdf0",
+              "leftValue": "={{ $json }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1344,
+        2224
+      ],
+      "id": "f6d27da3-c282-4fe5-9e83-d5a6cbc12016",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cb5d7fc-ea46-460e-bb1e-21756214930a",
+              "name": "record_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4272,
+        1264
+      ],
+      "id": "76e8d451-5fc9-4aa3-a90d-b0b9f4fdd8cf",
+      "name": "Set up Record ID"
+    },
+    {
+      "parameters": {
+        "content": "## Insert to Supabase Vector Store",
+        "height": 820,
+        "width": 1348,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3408,
+        1904
+      ],
+      "id": "41e28159-5600-47ef-969d-ea26dfdca639",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "11lXb2f7enCxgeP6HROWqDWzfIz3vX_Kv",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        96,
+        1568
+      ],
+      "id": "b743ede3-8cca-4ffa-ab2f-e67f47b389a1",
+      "name": "New Files",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "chunks",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2688,
+        2400
+      ],
+      "id": "0953f0a5-c0a8-46b5-99bc-19347e4c7928",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "record_manager_v2",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Create Row in Record Manager').isExecuted ? $('Create Row in Record Manager').first().json.id : $('Search Record Manager').first().json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "hierarchical_index",
+              "fieldValue": "={{ $('Document Hierarchy Extractor').item.json.document.hierarchicalIndex }}"
+            },
+            {
+              "fieldId": "document_headline",
+              "fieldValue": "={{ $('Merger').first().json.chunks[0].metadata.document_headline_description }}"
+            },
+            {
+              "fieldId": "document_summary",
+              "fieldValue": "={{ $('Document Hierarchy Extractor').item.json.document.document_summary }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        4016,
+        2464
+      ],
+      "id": "30aeb6d9-b6e7-430c-912a-8a02913cd455",
+      "name": "Update our Record Manager1",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Smart Markdown Chunker for n8n Code Node\n// Configuration - adjust these values as needed\nconst MIN_CHUNK_SIZE = 400;\nconst TARGET_CHUNK_SIZE = 600;\nconst MAX_CHUNK_SIZE = 800; // Note: Chunks can go over this size to both avoid tiny chunks as well as account for the contextual snippet and if there is more then one heading per chunk\nconst MAX_HEADING_LENGTH = 200   // For heading truncation in split chunks\n\n// Page marker configuration\nconst PAGE_MARKER_START = '<<<PAGE_START:';\nconst PAGE_MARKER_END = '>>>';\n\n// Mappings\nconst MARKDOWN_FIELD = 'content'  // Field name, not the actual content\nconst DOCUMENT_ID_FIELD = $('Set Data').first().json.doc_id\nconst DOCUMENT_NAME = $('Set Data').first().json.doc_name\nconst DOCUMENT_SUMMARY = $('Enrich').first().json.output.document_summary\nconst DOCUMENT_HEADLINE = \"This chunk is from \" + $('Enrich').first().json.output.document_headline_description + \", specifically \"\nconst DEV_MODE = false; // Enable to include debug fields for testing\n\n// Classes\nclass HierarchyNode {\n  constructor(title, level) {\n    this.title = title;\n    this.level = level;\n  }\n}\n\nclass MarkdownChunk {\n  constructor(data) {\n    this.title = data.title;\n    this.level = data.level;\n    this.cascading_path = data.cascading_path;\n    this.content = data.content;\n    this.hierarchy_stack = data.hierarchy_stack;\n    this.original_level = data.original_level;\n    this.is_merged = data.is_merged || false;\n    this.is_split = data.is_split || false;\n    this.split_part_index = data.split_part_index || null;\n    this.total_split_parts = data.total_split_parts || null;\n    this.original_chunk_title = data.original_chunk_title || null;\n    this.original_cascading_path = data.original_cascading_path || null;\n    this.merged_type = data.merged_type || null;\n    this.original_chunks = data.original_chunks || null;\n    this.merged_chunk_count = data.merged_chunk_count || 1;\n    this.enhanced_content_raw = data.enhanced_content_raw || null;\n  }\n}\n\nclass SmartMarkdownChunker {\n  constructor(minChunkSize, maxChunkSize, targetChunkSize, devMode = false) {\n    this.MIN_CHUNK_SIZE = minChunkSize;\n    this.MAX_CHUNK_SIZE = maxChunkSize;\n    this.TARGET_CHUNK_SIZE = targetChunkSize;\n    this.DEV_MODE = devMode;\n    this._document_summary = 'No summary available';\n    this._total_chunks = 0;\n    \n    // Markdown-aware separators (from LangChain approach)\n    this.MARKDOWN_SEPARATORS = [\n      \"\\n## \", \"\\n### \", \"\\n#### \", \"\\n##### \", \"\\n###### \",\n      \"```\\n\\n\", \"\\n\\n***\\n\\n\", \"\\n\\n---\\n\\n\", \"\\n\\n___\\n\\n\",\n      \"\\n\\n\", \"\\n\", \". \", \" \", \"\"\n    ];\n  }\n\n  // STEP 1: Parse markdown by major headings (H1, H2, H3, H4, H5, H6)\n  parseMarkdownSections(markdown, headingLevels = [1, 2, 3, 4, 5, 6]) {\n    const lines = markdown.split('\\n');\n    const sections = [];\n    let currentSection = null;\n    let currentContent = [];\n    const hierarchyStack = [];\n\n    for (let i = 0; i < lines.length; i++) {\n      const line = lines[i];\n      const headingMatch = line.match(/^(#+)\\s*(.*)$/);\n      \n      if (headingMatch) {\n        const level = headingMatch[1].length;\n        \n        // Only split on specified heading levels\n        if (headingLevels.includes(level)) {\n          // Save previous section if it exists\n          if (currentSection && currentContent.length > 0) {\n            currentSection.content = currentContent.join('\\n');\n            sections.push(currentSection);\n          }\n\n          const originalTitle = headingMatch[2].trim();\n          let displayTitle = originalTitle;\n\n          // Truncate extremely long headings for display\n          if (displayTitle.length > MAX_HEADING_LENGTH) {\n            displayTitle = displayTitle.substring(0, MAX_HEADING_LENGTH - 3) + '...';\n          }\n\n          // Update hierarchy stack\n          while (hierarchyStack.length >= level) {\n            hierarchyStack.pop();\n          }\n          hierarchyStack.push(new HierarchyNode(displayTitle, level));\n\n          currentSection = {\n            title: displayTitle,\n            level,\n            hierarchy_stack: JSON.parse(JSON.stringify(hierarchyStack)),\n            content: '',\n            original_title: originalTitle\n          };\n\n          currentContent = [line];\n        } else {\n          // Include sub-headings in content\n          currentContent.push(line);\n        }\n      } else {\n        currentContent.push(line);\n      }\n    }\n\n    // Don't forget the last section\n    if (currentSection && currentContent.length > 0) {\n      currentSection.content = currentContent.join('\\n');\n      sections.push(currentSection);\n    }\n\n    // If no major headings found, treat entire document as one section\n    if (sections.length === 0) {\n      sections.push({\n        title: 'Document',\n        level: 1,\n        hierarchy_stack: [new HierarchyNode('Document', 1)],\n        content: markdown,\n        original_title: 'Document'\n      });\n    }\n\n    return sections;\n  }\n\n  // STEP 2: Recursive markdown-aware splitting within sections\n  recursiveMarkdownSplit(text, separators = null) {\n    if (!separators) separators = this.MARKDOWN_SEPARATORS;\n    if (text.length <= this.MAX_CHUNK_SIZE) return [text];\n\n    for (const separator of separators) {\n      if (separator === \"\") {\n        // Character-by-character splitting as last resort\n        const chunks = [];\n        for (let i = 0; i < text.length; i += this.MAX_CHUNK_SIZE) {\n          chunks.push(text.slice(i, i + this.MAX_CHUNK_SIZE));\n        }\n        return chunks;\n      }\n\n      if (text.includes(separator)) {\n        const parts = text.split(separator);\n        const chunks = [];\n        let currentChunk = '';\n\n        for (let i = 0; i < parts.length; i++) {\n          const part = i === 0 ? parts[i] : separator + parts[i];\n          \n          if (currentChunk.length + part.length <= this.MAX_CHUNK_SIZE) {\n            currentChunk += part;\n          } else {\n            if (currentChunk) chunks.push(currentChunk);\n            \n            // If this part is still too large, recursively split it\n            if (part.length > this.MAX_CHUNK_SIZE) {\n              chunks.push(...this.recursiveMarkdownSplit(part, separators.slice(1)));\n            } else {\n              currentChunk = part;\n            }\n          }\n        }\n        \n        if (currentChunk) chunks.push(currentChunk);\n        return chunks.filter(chunk => chunk.trim().length > 0);\n      }\n    }\n\n    return [text];\n  }\n\n  splitSectionIntoChunks(section) {\n    const chunks = this.recursiveMarkdownSplit(section.content);\n    \n    return chunks.map((chunkContent, index) => {\n      let finalContent = chunkContent.trim();\n      \n      // For split chunks, add the original section heading with part number\n      if (chunks.length > 1) {\n        const headingPrefix = '#'.repeat(section.level);\n        \n        if (index === 0) {\n          // For Part 1, keep original text lossless - just add (Part 1) to existing heading\n          const originalHeading = `${headingPrefix} ${section.original_title} (Part ${index + 1})`;\n          const lines = finalContent.split('\\n');\n          const firstLineHeadingMatch = lines[0].match(/^#+\\s/);\n          if (firstLineHeadingMatch) {\n            lines[0] = originalHeading;\n            finalContent = lines.join('\\n');\n          } else {\n            finalContent = `${originalHeading}\\n\\n${finalContent}`;\n          }\n        } else {\n          // For Part 2+, add the heading at the start (trimmed for length)\n          let titleForHeading = section.original_title;\n          const partSuffix = ` (Part ${index + 1})`;\n          const maxTitleLength = MAX_HEADING_LENGTH - headingPrefix.length - partSuffix.length - 1; // -1 for space\n          \n          if (titleForHeading.length > maxTitleLength) {\n            titleForHeading = titleForHeading.substring(0, maxTitleLength - 3) + '...';\n          }\n          \n          const originalHeading = `${headingPrefix} ${titleForHeading}${partSuffix}`;\n          finalContent = `${originalHeading}\\n\\n${finalContent}`;\n        }\n      }\n      \n      return {\n        content: finalContent,\n        section_title: section.title,\n        section_level: section.level,\n        hierarchy_stack: section.hierarchy_stack,\n        original_section_title: section.original_title,\n        chunk_index_in_section: index,\n        total_chunks_in_section: chunks.length,\n        is_split: chunks.length > 1,\n        split_part_number: chunks.length > 1 ? index + 1 : null,\n        size: finalContent.length\n      };\n    });\n  }\n\n  // STEP 3: Merge small chunks intelligently\n  mergeSmallChunks(chunks) {\n    const result = [];\n    let i = 0;\n\n    while (i < chunks.length) {\n      const currentChunk = chunks[i];\n      \n      if (currentChunk.size >= this.MIN_CHUNK_SIZE) {\n        result.push(currentChunk);\n        i++;\n        continue;\n      }\n\n      // Try to merge with next chunk(s)\n      let mergedContent = currentChunk.content;\n      let mergedSize = currentChunk.size;\n      let chunksToMerge = [currentChunk];\n      let j = i + 1;\n\n      while (j < chunks.length && mergedSize < this.MIN_CHUNK_SIZE) {\n        const nextChunk = chunks[j];\n        const testSize = mergedSize + nextChunk.size + 2; // +2 for \\n\\n separator\n        \n        // Allow going over MAX_CHUNK_SIZE to avoid tiny chunks\n        if (testSize <= this.MAX_CHUNK_SIZE * 1.2 || mergedSize < this.MIN_CHUNK_SIZE) {\n          mergedContent += '\\n\\n' + nextChunk.content;\n          mergedSize = testSize;\n          chunksToMerge.push(nextChunk);\n          j++;\n        } else {\n          break;\n        }\n      }\n\n      // Find if any merged chunk is a split part\n      const splitChunk = chunksToMerge.find(chunk => chunk.is_split);\n      \n      // Create merged chunk\n      const mergedChunk = {\n        content: mergedContent,\n        section_title: currentChunk.section_title,\n        section_level: currentChunk.section_level,\n        hierarchy_stack: currentChunk.hierarchy_stack,\n        original_section_title: currentChunk.original_section_title,\n        chunk_index_in_section: currentChunk.chunk_index_in_section,\n        total_chunks_in_section: currentChunk.total_chunks_in_section,\n        is_split: splitChunk ? splitChunk.is_split : currentChunk.is_split,\n        split_part_number: splitChunk ? splitChunk.split_part_number : currentChunk.split_part_number,\n        is_merged: chunksToMerge.length > 1,\n        merged_chunk_count: chunksToMerge.length,\n        size: mergedSize,\n        original_chunks: chunksToMerge.length > 1 ? chunksToMerge : null\n      };\n\n      result.push(mergedChunk);\n      i = j;\n    }\n\n    return result;\n  }\n\n  // STEP 4: Add document headline to final chunks\n  addDocumentHeadline(chunks, headline) {\n    if (!headline) return chunks;\n\n    return chunks.map(chunk => ({\n      ...chunk,\n      content: `${headline}${chunk.content}`,\n      size: chunk.content.length + headline.length\n    }));\n  }\n\n  // Extract page information from chunk content\n  extractPageInfo(content) {\n    const pageMarkerRegex = new RegExp(`${PAGE_MARKER_START.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(\\\\d+)${PAGE_MARKER_END.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}`, 'g');\n    const pages = [];\n    let match;\n    \n    while ((match = pageMarkerRegex.exec(content)) !== null) {\n      pages.push(parseInt(match[1]));\n    }\n    \n    // Remove duplicates and sort\n    return [...new Set(pages)].sort((a, b) => a - b);\n  }\n\n  // Clean page markers from content\n  cleanPageMarkers(content) {\n    const pageMarkerRegex = new RegExp(`${PAGE_MARKER_START.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\\\d+${PAGE_MARKER_END.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\\\s*\\\\n?\\\\n?`, 'g');\n    return content.replace(pageMarkerRegex, '').trim();\n  }\n\n  // Create metadata for chunks\n  createChunkMetadata(chunks) {\n    let currentPage = 0; // Start with page 0 (which is page 1 in human terms)\n    \n    return chunks.map((chunk, index) => {\n      // Extract page information before cleaning\n      const pagesInChunk = this.extractPageInfo(chunk.content);\n      \n      // Determine all pages this chunk spans\n      let chunkPages = [];\n      \n      if (pagesInChunk.length > 0) {\n        // This chunk contains page markers - include all pages found + current page\n        const allPages = [currentPage, ...pagesInChunk];\n        chunkPages = [...new Set(allPages)].sort((a, b) => a - b);\n        // Update current page to the highest page found\n        currentPage = Math.max(...pagesInChunk);\n      } else {\n        // No page markers in this chunk - inherit current page\n        chunkPages = [currentPage];\n      }\n      \n      // Clean the content of page markers\n      const cleanContent = this.cleanPageMarkers(chunk.content);\n      chunk.content = cleanContent;\n      \n      const metadata = {\n        chunk_index: index,\n        content_length: cleanContent.length,\n        pages: chunkPages.map(p => p + 1) // Convert to human-readable page numbers (1, 2, 3...)\n      };\n\n      // Add section information for context\n      metadata.cascading_path = chunk.hierarchy_stack ? \n        chunk.hierarchy_stack.map(node => node.title).join(' > ') : \n        chunk.section_title;\n\n      // Add split part information if applicable\n      if (chunk.is_split && chunk.split_part_number) {\n        metadata.split_part_number = chunk.split_part_number;\n        metadata.total_chunks_in_section = chunk.total_chunks_in_section;\n      }\n\n      if (this.DEV_MODE) {\n        // Size analysis\n        metadata.meets_size_requirements = chunk.size >= this.MIN_CHUNK_SIZE && chunk.size <= this.MAX_CHUNK_SIZE;\n        metadata.size_category = chunk.size < this.MIN_CHUNK_SIZE ? 'small' :\n          chunk.size > this.MAX_CHUNK_SIZE ? 'large' : 'optimal';\n        \n        // Required dev fields\n        metadata.is_merged = chunk.is_merged || false;\n        metadata.is_split = chunk.is_split || false;\n        metadata.merged_chunk_count = chunk.merged_chunk_count || 1;\n        metadata.section_level = chunk.section_level;\n        metadata.section_title = chunk.section_title;\n        \n        // Split part information\n        if (chunk.is_split && chunk.split_part_number) {\n          metadata.split_part_number = chunk.split_part_number;\n        }\n        \n        // Additional dev info\n        if (chunk.is_split) {\n          metadata.chunk_index_in_section = chunk.chunk_index_in_section;\n        }\n        \n        if (chunk.original_chunks) {\n          metadata.original_chunks_info = chunk.original_chunks.map(c => ({\n            section_title: c.section_title,\n            size: c.size,\n            is_split: c.is_split\n          }));\n        }\n      }\n\n      return {\n        chunk: chunk.content,\n        chunk_metadata: metadata\n      };\n    });\n  }\n\n  // Extract heading mapping from original sections (before chunking)\n  extractHeadingMappingFromSections(sections) {\n    // Store sections for later chunk range mapping\n    this._original_sections = sections.map((section, index) => ({\n      ...section,\n      sectionIndex: index,\n      chunkStart: null, // Will be filled later\n      chunkEnd: null    // Will be filled later\n    }));\n    \n    // Return placeholder - we'll build the real hierarchy after chunk processing\n    return 'Hierarchy will be built after chunk processing...';\n  }\n\n  // Build final hierarchy with actual chunk ranges\n  buildFinalHierarchy(finalChunks) {\n    // Map chunks back to original sections\n    let currentChunkIndex = 0;\n    \n    this._original_sections.forEach((section, sectionIndex) => {\n      // Find chunks that belong to this section\n      const sectionChunks = finalChunks.filter(chunk => {\n        // Check if chunk belongs to this section by comparing section titles\n        return chunk.section_title === section.title && \n               chunk.original_section_title === section.original_title;\n      });\n      \n      if (sectionChunks.length > 0) {\n        // Find the actual chunk indices for this section\n        const chunkIndices = sectionChunks.map(chunk => \n          finalChunks.findIndex(c => c === chunk)\n        );\n        \n        section.chunkStart = Math.min(...chunkIndices);\n        section.chunkEnd = Math.max(...chunkIndices);\n      } else {\n        // No chunks found for this section (shouldn't happen)\n        section.chunkStart = currentChunkIndex;\n        section.chunkEnd = currentChunkIndex;\n      }\n      \n      currentChunkIndex++;\n    });\n    \n    // Now build the hierarchy display with correct chunk ranges\n    const lines = ['Doc Hierarchy with Chunk Indexes (From, To)', ''];\n    \n    // Simply list all sections in document order (lossless)\n    this._original_sections.forEach(section => {\n      const hierarchyStack = section.hierarchy_stack || [];\n      const depth = hierarchyStack.length - 1;\n      const indent = '  '.repeat(depth);\n      const prefix = depth > 0 ? '├─ ' : '';\n      \n      lines.push(`${indent}${prefix}${section.title} [${section.chunkStart},${section.chunkEnd}]`);\n    });\n    \n    return lines.join('\\n');\n  }\n\n  // Extract heading mapping for hierarchical index (OLD METHOD - keeping for now)\n  extractHeadingMapping(chunks) {\n    const sectionsArray = []; // Track all sections in order\n    const sectionsForChunkLookup = {}; // For parent_chunks lookup by chunk index\n    let currentSection = null;\n\n    for (let chunkIndex = 0; chunkIndex < chunks.length; chunkIndex++) {\n      const chunk = chunks[chunkIndex];\n      const hierarchyStack = chunk.hierarchy_stack || [];\n      \n      // Build full path from hierarchy stack\n      const fullPath = hierarchyStack.map(node => node.title).join(' > ');\n      \n      // Always create new sections for each heading occurrence\n      // Don't merge sections with the same name - treat each as separate\n\n      if (currentSection) {\n        sectionsArray.push(currentSection);\n      }\n\n      currentSection = {\n        path: fullPath,\n        level: chunk.section_level,\n        start: chunkIndex,\n        end: chunkIndex,\n        displayPath: fullPath // Keep original path for display\n      };\n      \n      // Add to chunk lookup\n      sectionsForChunkLookup[chunkIndex] = currentSection;\n    }\n\n    if (currentSection) {\n      sectionsArray.push(currentSection);\n    }\n\n    // Store sections mapping for use in chunk metadata (lookup by chunk index)\n    this._sections_mapping = sectionsForChunkLookup;\n\n    return this.buildTextTocFromArray(sectionsArray);\n  }\n\n  buildTextTocFromArray(sectionsArray) {\n    const lines = ['Doc Hierarchy with Chunk Indexes (From, To)', ''];\n    \n    // Build hierarchical structure with proper indentation\n    const rootSections = {};\n    \n    sectionsArray.forEach(section => {\n      const parts = section.displayPath.split(' > ');\n      const rootKey = parts[0];\n      \n      if (!rootSections[rootKey]) {\n        rootSections[rootKey] = {\n          range: [section.start, section.end],\n          children: []\n        };\n      } else {\n        rootSections[rootKey].range[0] = Math.min(rootSections[rootKey].range[0], section.start);\n        rootSections[rootKey].range[1] = Math.max(rootSections[rootKey].range[1], section.end);\n      }\n      \n      if (parts.length > 1) {\n        const childName = parts[parts.length - 1];\n        rootSections[rootKey].children.push({\n          name: childName,\n          range: [section.start, section.end]\n        });\n      }\n    });\n    \n    // Display with indentation\n    Object.keys(rootSections).forEach(rootName => {\n      const rootData = rootSections[rootName];\n      lines.push(`${rootName} [${rootData.range[0]},${rootData.range[1]}]`);\n      \n      rootData.children.forEach((child, j) => {\n        const isLastChild = j === rootData.children.length - 1;\n        const prefix = isLastChild ? '└─ ' : '├─ ';\n        lines.push(`${prefix}${child.name} [${child.range[0]},${child.range[1]}]`);\n      });\n    });\n    \n    return lines.join('\\n');\n  }\n\n  buildTextToc(sectionsDict) {\n    const lines = ['Doc Hierarchy with Chunk Indexes (From, To)', ''];\n    const rootSections = {};\n\n    for (const [path, section] of Object.entries(sectionsDict)) {\n      const parts = path.split(' > ');\n      const rootKey = parts[0];\n\n      if (!rootSections[rootKey]) {\n        rootSections[rootKey] = {\n          range: [section.start, section.end],\n          children: []\n        };\n      } else {\n        rootSections[rootKey].range[0] = Math.min(rootSections[rootKey].range[0], section.start);\n        rootSections[rootKey].range[1] = Math.max(rootSections[rootKey].range[1], section.end);\n      }\n\n      if (parts.length > 1) {\n        const childName = parts[parts.length - 1];\n        rootSections[rootKey].children.push({\n          name: childName,\n          range: [section.start, section.end]\n        });\n      }\n    }\n\n    const rootKeys = Object.keys(rootSections);\n    rootKeys.forEach((rootName, i) => {\n      const rootData = rootSections[rootName];\n      lines.push(`${rootName} [${rootData.range[0]},${rootData.range[1]}]`);\n\n      rootData.children.forEach((child, j) => {\n        const isLastChild = j === rootData.children.length - 1;\n        const prefix = isLastChild ? '└─ ' : '├─ ';\n        lines.push(`${prefix}${child.name} [${child.range[0]},${child.range[1]}]`);\n      });\n    });\n\n    return lines.join('\\n');\n  }\n\n  // Main processing method - implements the 4-step approach\n  chunkText(markdownContent) {\n    try {\n      console.log('Starting 4-step markdown chunking process...');\n\n      // STEP 1: Parse markdown by major headings (H1, H2, H3, H4, H5, H6)\n      const sections = this.parseMarkdownSections(markdownContent, [1, 2, 3, 4, 5, 6]);\n      console.log(`Step 1 - Parsed into ${sections.length} major sections`);\n\n      // STEP 2: Recursive markdown-aware splitting within sections\n      let allChunks = [];\n      for (const section of sections) {\n        const sectionChunks = this.splitSectionIntoChunks(section);\n        allChunks.push(...sectionChunks);\n      }\n      console.log(`Step 2 - Split into ${allChunks.length} chunks`);\n\n      // STEP 3: Merge small chunks intelligently\n      const mergedChunks = this.mergeSmallChunks(allChunks);\n      console.log(`Step 3 - After merging: ${mergedChunks.length} chunks`);\n\n      // STEP 4: Add document headline\n      const finalChunks = this.addDocumentHeadline(mergedChunks, DOCUMENT_HEADLINE);\n      console.log(`Step 4 - Added document headline to ${finalChunks.length} chunks`);\n\n      // Generate statistics\n      const sizeStats = finalChunks.map(chunk => chunk.size);\n      const tooSmall = sizeStats.filter(size => size < this.MIN_CHUNK_SIZE).length;\n      const tooLarge = sizeStats.filter(size => size > this.MAX_CHUNK_SIZE).length;\n      const optimal = sizeStats.filter(size => size >= this.MIN_CHUNK_SIZE && size <= this.MAX_CHUNK_SIZE).length;\n      console.log(`Size distribution - Too small: ${tooSmall}, Optimal: ${optimal}, Too large: ${tooLarge}`);\n\n      // Set total chunks\n      this._total_chunks = finalChunks.length;\n      \n      return this.createChunkMetadata(finalChunks);\n\n    } catch (error) {\n      return [{\n        error: true,\n        message: error.message,\n        stack: error.stack\n      }];\n    }\n  }\n\n  setDocumentSummary(summary) {\n    this._document_summary = summary;\n  }\n\n  getTotalChunks() {\n    return this._total_chunks;\n  }\n}\n\n// Main execution\nconst results = [];\n\nfor (const item of $input.all()) {\n  try {\n    // Get markdown content from the specified field\n    const markdownContent = item.json[MARKDOWN_FIELD];\n    \n    if (!markdownContent || typeof markdownContent !== 'string') {\n      throw new Error(`Field '${MARKDOWN_FIELD}' does not contain valid markdown text`);\n    }\n\n    // Get or generate document ID\n    const docId = DOCUMENT_ID_FIELD && item.json[DOCUMENT_ID_FIELD] \n      ? item.json[DOCUMENT_ID_FIELD] \n      : `doc_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;\n\n    // Create chunker instance\n    const chunker = new SmartMarkdownChunker(MIN_CHUNK_SIZE, MAX_CHUNK_SIZE, TARGET_CHUNK_SIZE, DEV_MODE);\n    \n    if (DOCUMENT_SUMMARY) {\n      chunker.setDocumentSummary(DOCUMENT_SUMMARY);\n    }\n\n    // Process the markdown\n    const processedChunks = chunker.chunkText(markdownContent);\n\n    // Build chunks array with metadata\n    const chunks = processedChunks.map(chunkData => ({\n      content: chunkData.chunk,\n      metadata: {\n        ...chunkData.chunk_metadata,\n        indexed_date: new Date().toISOString(),\n        doc_id: $('Set Data').first().json.doc_id,\n        doc_name: $('Set Data').first().json.doc_name,\n        ...((() => {\n          try { \n            const enrichmentData = $('Enrich').first()?.json?.output || {};\n            // Uppercase the first word of document_headline_description\n            if (enrichmentData.document_headline_description) {\n              const words = enrichmentData.document_headline_description.split(' ');\n              if (words.length > 0) {\n                words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);\n                enrichmentData.document_headline_description = words.join(' ');\n              }\n            }\n            return enrichmentData;\n          }\n          catch { return {}; }\n        })())\n      }\n    }));\n\n    // Return just the chunks array\n    results.push({\n      json: {\n        chunks: chunks\n      }\n    });\n\n  } catch (error) {\n    // Add error item\n    results.push({\n      json: {\n        error: true,\n        message: error.message,\n        original_item: item.json\n      }\n    });\n  }\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2512,
+        2096
+      ],
+      "id": "784d5ec0-ebbb-44c1-95f7-ae2d75f80327",
+      "name": "Smart Chunker"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Markdown Hierarchy Extractor for n8n Code Node\n// This tool extracts document hierarchy from markdown content independently of chunking\n\n// Input Mappings - adjust these to match your n8n workflow\nconst MARKDOWN_FIELD = 'content';  // Field name containing the original markdown text\nconst CHUNKS_FIELD = 'chunks';     // Field name containing processed chunks (optional)\n\n// Data source mappings - get actual data from n8n nodes\nconst MARKDOWN_SOURCE = () => $('Set up Text for Embedding').first().json.content;\nconst CHUNKS_SOURCE = () => $input.first().json.chunks;\n\nclass HierarchyNode {\n  constructor(title, level) {\n    this.title = title;\n    this.level = level;\n  }\n}\n\nclass MarkdownHierarchyExtractor {\n  constructor(maxHeadingLength = 200) {\n    this.MAX_HEADING_LENGTH = maxHeadingLength;\n  }\n\n  // Extract clean document hierarchy from markdown\n  extractHierarchy(markdownContent, headingLevels = [1, 2, 3, 4, 5, 6]) {\n    const lines = markdownContent.split('\\n');\n    const sections = [];\n    let currentSection = null;\n    let currentContent = [];\n    const hierarchyStack = [];\n\n    for (let i = 0; i < lines.length; i++) {\n      const line = lines[i];\n      const headingMatch = line.match(/^(#+)\\s*(.*)$/);\n      \n      if (headingMatch) {\n        const level = headingMatch[1].length;\n        \n        // Only process specified heading levels\n        if (headingLevels.includes(level)) {\n          // Save previous section if it exists\n          if (currentSection && currentContent.length > 0) {\n            currentSection.content = currentContent.join('\\n');\n            currentSection.contentLength = currentSection.content.length;\n            sections.push(currentSection);\n          }\n\n          const originalTitle = headingMatch[2].trim();\n          let displayTitle = originalTitle;\n\n          // Truncate extremely long headings for display\n          if (displayTitle.length > this.MAX_HEADING_LENGTH) {\n            displayTitle = displayTitle.substring(0, this.MAX_HEADING_LENGTH - 3) + '...';\n          }\n\n          // Update hierarchy stack\n          while (hierarchyStack.length >= level) {\n            hierarchyStack.pop();\n          }\n          hierarchyStack.push(new HierarchyNode(displayTitle, level));\n\n          currentSection = {\n            title: displayTitle,\n            originalTitle: originalTitle,\n            level,\n            hierarchyStack: JSON.parse(JSON.stringify(hierarchyStack)),\n            hierarchyPath: hierarchyStack.map(node => node.title).join(' > '),\n            content: '',\n            contentLength: 0,\n            sectionIndex: sections.length\n          };\n\n          currentContent = [line];\n        } else {\n          // Include sub-headings in content\n          currentContent.push(line);\n        }\n      } else {\n        currentContent.push(line);\n      }\n    }\n\n    // Don't forget the last section\n    if (currentSection && currentContent.length > 0) {\n      currentSection.content = currentContent.join('\\n');\n      currentSection.contentLength = currentSection.content.length;\n      sections.push(currentSection);\n    }\n\n    // If no major headings found, treat entire document as one section\n    if (sections.length === 0) {\n      sections.push({\n        title: 'Document',\n        originalTitle: 'Document',\n        level: 1,\n        hierarchyStack: [new HierarchyNode('Document', 1)],\n        hierarchyPath: 'Document',\n        content: markdownContent,\n        contentLength: markdownContent.length,\n        sectionIndex: 0\n      });\n    }\n\n    return sections;\n  }\n\n\n\n  // Helper method to get consecutive chunks from a starting point\n  getConsecutiveChunks(chunks, startIndex) {\n    if (!chunks || chunks.length === 0 || startIndex >= chunks.length) {\n      return [];\n    }\n\n    const result = [chunks[startIndex]];\n    const startChunkIndex = chunks[startIndex].metadata.chunk_index;\n    \n    // Look for consecutive chunks after the starting chunk\n    for (let i = startIndex + 1; i < chunks.length; i++) {\n      const currentChunkIndex = chunks[i].metadata.chunk_index;\n      const expectedNextIndex = result[result.length - 1].metadata.chunk_index + 1;\n      \n      if (currentChunkIndex === expectedNextIndex) {\n        result.push(chunks[i]);\n      } else {\n        // Break on first non-consecutive chunk\n        break;\n      }\n    }\n    \n    return result;\n  }\n\n  // Map sections to their corresponding chunk ranges\n  mapSectionsToChunks(sections, chunks) {\n    if (!chunks || !Array.isArray(chunks)) {\n      return sections.map(section => ({\n        ...section,\n        chunkRange: null,\n        chunkCount: 0\n      }));\n    }\n\n    // Sort chunks by index for sequential processing\n    const sortedChunks = [...chunks].sort((a, b) => a.metadata.chunk_index - b.metadata.chunk_index);\n    \n    // STEP 1: Single pass - map each section to its chunk index\n    const sectionToChunkMap = new Map(); // sectionIndex -> chunkIndex\n    let searchStartIndex = 0; // Only search forward, never backward\n    const usedChunks = new Set(); // Track which chunks have been fully processed\n    \n    console.log('=== SINGLE PASS MAPPING ===');\n    \n    sections.forEach(section => {\n      // Use the original title (not truncated) for searching in chunks\n      const searchTitle = section.originalTitle || section.title;\n      const headingPattern = `${'#'.repeat(section.level)} ${searchTitle}`;\n      \n      // Search for this section's heading starting from searchStartIndex\n      const foundChunks = [];\n      \n      for (let i = searchStartIndex; i < sortedChunks.length; i++) {\n        const chunk = sortedChunks[i];\n        const chunkContent = chunk.content || '';\n        \n        if (chunkContent.includes(headingPattern)) {\n          foundChunks.push(chunk.metadata.chunk_index);\n          \n          // If we found a match beyond the current search start, advance the search start\n          if (i > searchStartIndex) {\n            searchStartIndex = i;\n          }\n          \n          // Look for additional split parts by checking for the section heading in subsequent chunks\n          for (let j = i + 1; j < sortedChunks.length; j++) {\n            const nextChunk = sortedChunks[j];\n            const nextChunkContent = nextChunk.content || '';\n            \n            // Check if next chunk contains our section heading (indicating it's a split part)\n            if (nextChunkContent.includes(headingPattern) || \n                (nextChunk.metadata.split_part_number && \n                 nextChunk.metadata.total_chunks_in_section &&\n                 nextChunkContent.includes(section.title))) {\n              foundChunks.push(nextChunk.metadata.chunk_index);\n              \n              // If this chunk has split metadata, use it to determine how many more parts to look for\n              if (nextChunk.metadata.total_chunks_in_section) {\n                const totalParts = nextChunk.metadata.total_chunks_in_section;\n                if (foundChunks.length >= totalParts) {\n                  break;\n                }\n              }\n            } else {\n              // Stop if we don't find a related chunk\n              break;\n            }\n          }\n          \n          break;\n        }\n      }\n      \n      if (foundChunks.length > 0) {\n        // Store all chunks for this section\n        sectionToChunkMap.set(section.sectionIndex, foundChunks);\n        console.log(`Section ${section.sectionIndex}: \"${section.title}\" → Chunks [${foundChunks.join(',')}]`);\n      } else {\n        console.log(`Section ${section.sectionIndex}: \"${section.title}\" → NOT FOUND`);\n      }\n    });\n    \n    console.log('=== END SINGLE PASS MAPPING ===');\n\n    // STEP 2: Add mapped chunk index to each section (keep chunkIndices as-is for splits)\n    const sectionsWithChunks = sections.map(section => {\n      const mappedChunks = sectionToChunkMap.get(section.sectionIndex);\n      \n      if (!mappedChunks || mappedChunks.length === 0) {\n        return {\n          ...section,\n          mappedChunkIndex: null,\n          chunkRange: null,\n          chunkCount: 0,\n          chunkIndices: []\n        };\n      }\n\n      // For sections with multiple chunks (splits), use all of them\n      const allChunks = Array.isArray(mappedChunks) ? mappedChunks : [mappedChunks];\n      \n      return {\n        ...section,\n        mappedChunkIndex: allChunks[0], // First chunk index for backward compatibility\n        chunkRange: null, // Will be calculated in step 3\n        chunkCount: allChunks.length,\n        chunkIndices: allChunks.sort((a, b) => a - b)\n      };\n    });\n\n    // STEP 3: Calculate hierarchical chunk ranges based on document structure\n    const sectionsWithRanges = sectionsWithChunks.map((section, index) => {\n      if (!section.chunkIndices || section.chunkIndices.length === 0) {\n        return section;\n      }\n\n      // Find the range of chunks that belong to this section hierarchically\n      const startChunk = Math.min(...section.chunkIndices);\n      let endChunk = Math.max(...section.chunkIndices);\n\n      // Look ahead to find all chunks under this section until we hit a same-or-higher level\n      for (let i = index + 1; i < sectionsWithChunks.length; i++) {\n        const nextSection = sectionsWithChunks[i];\n        \n        // If we hit a section at the same level or higher, stop\n        if (nextSection.level <= section.level) {\n          break;\n        }\n        \n        // If the next section has chunks, extend our range to include them\n        if (nextSection.chunkIndices && nextSection.chunkIndices.length > 0) {\n          const nextSectionMaxChunk = Math.max(...nextSection.chunkIndices);\n          endChunk = Math.max(endChunk, nextSectionMaxChunk);\n        }\n      }\n\n      return {\n        ...section,\n        chunkRange: [startChunk, endChunk]\n      };\n    });\n\n    // STEP 4: Add parent ranges\n    return sectionsWithRanges.map((section, index) => {\n      let parentRange = null;\n\n      // Find the immediate parent (first section with lower level going backwards)\n      for (let i = index - 1; i >= 0; i--) {\n        const potentialParent = sectionsWithRanges[i];\n        \n        if (potentialParent.level < section.level) {\n          // Found the immediate parent\n          if (potentialParent.chunkRange) {\n            parentRange = potentialParent.chunkRange;\n          }\n          break;\n        }\n      }\n\n      return {\n        ...section,\n        parentRange: parentRange\n      };\n    });\n  }\n\n  // Build hierarchical index with section ranges\n  buildHierarchicalIndex(sectionsWithChunks) {\n    const lines = ['Document Hierarchy with Chunk Index Ranges', ''];\n    \n    sectionsWithChunks.forEach(section => {\n      const hashes = '#'.repeat(section.level);\n      let chunkInfo = '';\n      \n      if (section.chunkRange) {\n        const [start, end] = section.chunkRange;\n        chunkInfo = start === end ? ` [${start}]` : ` [${start}-${end}]`;\n      } else {\n        chunkInfo = ' [no chunks]';\n      }\n      \n      lines.push(`${hashes} ${section.title}${chunkInfo}`);\n    });\n    \n    return lines.join('\\n');\n  }\n\n}\n\n// Main execution for n8n\nconst results = [];\n\ntry {\n  // Get markdown content from specified node\n  const markdownContent = MARKDOWN_SOURCE();\n  \n  if (!markdownContent || typeof markdownContent !== 'string') {\n    throw new Error('No valid markdown content found from source node');\n  }\n\n  // Get chunks if available (optional)\n  const chunks = (() => {\n    try { return CHUNKS_SOURCE(); }\n    catch { return null; }\n  })();\n\n  // Create hierarchy extractor\n  const extractor = new MarkdownHierarchyExtractor();\n  \n  // Extract sections from original markdown\n  const sections = extractor.extractHierarchy(markdownContent);\n  \n  // Map sections to chunks (if chunks provided)\n  const sectionsWithChunks = extractor.mapSectionsToChunks(sections, chunks);\n  \n  // Build hierarchical index\n  const hierarchicalIndex = extractor.buildHierarchicalIndex(sectionsWithChunks);\n\n  // Get enrichment data if available\n  const enrichmentData = (() => {\n    try { return $('Enrich').first()?.json?.output || {}; }\n    catch { return {}; }\n  })();\n\n  // Build document metadata\n  const documentMetadata = {\n    totalSections: sections.length,\n    hierarchicalIndex: hierarchicalIndex,\n    processingTimestamp: new Date().toISOString(),\n    doc_id: (() => {\n      try { return $('Set Data').first().json.doc_id; }\n      catch { return null; }\n    })(),\n    doc_name: (() => {\n      try { return $('Set Data').first().json.doc_name; }\n      catch { return null; }\n    })(),\n    ...enrichmentData\n  };\n\n  // Return comprehensive hierarchy information\n  results.push({\n    json: {\n      sections: sectionsWithChunks.map(section => ({\n        sectionIndex: section.sectionIndex,\n        title: section.title,\n        // originalTitle: section.originalTitle,\n        level: section.level,\n        hierarchyPath: section.hierarchyPath,\n        // contentLength: section.contentLength,\n        // mappedChunkIndex: section.mappedChunkIndex,\n        chunkIndices: section.chunkIndices,\n        sectionRange: section.chunkRange,\n        parentRange: section.parentRange,\n        // chunkCount: section.chunkCount,\n        // Don't include full content to keep output manageable\n        // contentPreview: section.content ? section.content.substring(0, 200) + (section.content.length > 200 ? '...' : '') : ''\n      })),\n      document: documentMetadata\n    }\n  });\n\n} catch (error) {\n  results.push({\n    json: {\n      error: true,\n      message: error.message,\n      stack: error.stack\n    }\n  });\n}\n\nreturn results;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2720,
+        2096
+      ],
+      "id": "adda380e-1d70-462c-9bd9-69135943f521",
+      "name": "Document Hierarchy Extractor"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Chunk-Section Merger for n8n Code Node\n// This tool merges sections and chunks data, adding section ranges to chunk metadata\n\n// Input Mappings - adjust these to match your n8n workflow\nconst SECTIONS_SOURCE = () => $('Document Hierarchy Extractor').first().json.sections;\nconst CHUNKS_SOURCE = () => $('Smart Chunker').first().json.chunks;\n\nclass ChunkSectionMerger {\n  constructor() {\n    // No configuration needed\n  }\n\n  // Merge sections data into chunks metadata\n  mergeData(sections, chunks) {\n    if (!sections || !Array.isArray(sections)) {\n      throw new Error('Invalid sections data provided');\n    }\n    \n    if (!chunks || !Array.isArray(chunks)) {\n      throw new Error('Invalid chunks data provided');\n    }\n\n    // Create a map of chunk_index -> sections that reference it\n    const chunkToSectionsMap = new Map();\n\n    // Process each section to build the mapping\n    sections.forEach(section => {\n      if (section.chunkIndices && Array.isArray(section.chunkIndices)) {\n        section.chunkIndices.forEach(chunkIndex => {\n          if (!chunkToSectionsMap.has(chunkIndex)) {\n            chunkToSectionsMap.set(chunkIndex, []);\n          }\n          chunkToSectionsMap.get(chunkIndex).push(section);\n        });\n      }\n    });\n\n    // Process each chunk and add section range metadata\n    return chunks.map(chunk => {\n      const chunkIndex = chunk.metadata.chunk_index;\n      const sectionsForChunk = chunkToSectionsMap.get(chunkIndex) || [];\n\n      let sectionRange = null;\n      let parentRange = null;\n\n      if (sectionsForChunk.length > 0) {\n        // Find absolute lowest and highest section ranges\n        const allSectionRanges = sectionsForChunk\n          .filter(section => section.sectionRange && Array.isArray(section.sectionRange))\n          .map(section => section.sectionRange);\n\n        if (allSectionRanges.length > 0) {\n          const allStarts = allSectionRanges.map(range => range[0]);\n          const allEnds = allSectionRanges.map(range => range[1]);\n          sectionRange = [Math.min(...allStarts), Math.max(...allEnds)];\n        }\n\n        // Find absolute lowest and highest parent ranges\n        const allParentRanges = sectionsForChunk\n          .filter(section => section.parentRange && Array.isArray(section.parentRange))\n          .map(section => section.parentRange);\n\n        if (allParentRanges.length > 0) {\n          const allParentStarts = allParentRanges.map(range => range[0]);\n          const allParentEnds = allParentRanges.map(range => range[1]);\n          parentRange = [Math.min(...allParentStarts), Math.max(...allParentEnds)];\n        }\n      }\n\n      // Return chunk with enhanced metadata\n      return {\n        ...chunk,\n        metadata: {\n          ...chunk.metadata,\n          childRange: sectionRange,\n          parentRange: parentRange\n        }\n      };\n    });\n  }\n}\n\n// Main execution for n8n\nconst results = [];\n\ntry {\n  // Get sections and chunks data\n  const sections = SECTIONS_SOURCE();\n  const chunks = CHUNKS_SOURCE();\n\n  if (!sections) {\n    throw new Error('No sections data found from Hierarchy Extractor node');\n  }\n\n  if (!chunks) {\n    throw new Error('No chunks data found from Smart Markdown Chunker node');\n  }\n\n  // Create merger and process data\n  const merger = new ChunkSectionMerger();\n  const enhancedChunks = merger.mergeData(sections, chunks);\n\n  // Return enhanced chunks\n  results.push({\n    json: {\n      chunks: enhancedChunks,\n      totalChunks: enhancedChunks.length,\n      processingTimestamp: new Date().toISOString()\n    }\n  });\n\n} catch (error) {\n  results.push({\n    json: {\n      error: true,\n      message: error.message,\n      stack: error.stack\n    }\n  });\n}\n\nreturn results;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2912,
+        2096
+      ],
+      "id": "d3e40370-fcea-4f66-942d-aa3adddcb7b9",
+      "name": "Merger"
+    },
+    {
+      "parameters": {
+        "content": "## Smart Markdown Chunking & Hierarchy Extractor",
+        "height": 820,
+        "width": 1124,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2256,
+        1904
+      ],
+      "id": "ae0586c9-0df8-426c-9fa5-dfed2983a9b7",
+      "name": "Sticky Note23"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Page-Aware Markdown Aggregation for n8n Code Node\n// Use a unique delimiter that won't appear in documents\nconst PAGE_MARKER_START = '<<<PAGE_START:';\nconst PAGE_MARKER_END = '>>>';\n\n// Get the first item to process\nconst firstItem = $input.first();\n\n// Check if pages exist in the first item\nif (firstItem.json.pages && Array.isArray(firstItem.json.pages)) {\n  // Aggregate pages with page markers\n  const aggregatedMarkdown = firstItem.json.pages.map((page, index) => {\n    const pageNumber = page.index !== undefined ? page.index : index;\n    const pageMarker = `${PAGE_MARKER_START}${pageNumber}${PAGE_MARKER_END}`;\n    \n    // Insert page marker at the beginning of each page's content\n    return `${pageMarker}\\n\\n${page.markdown}`;\n  }).join('\\n\\n');\n  \n  // Return only the first item with aggregated markdown\n  return [{\n    json: {\n      content: aggregatedMarkdown\n    }\n  }];\n} else {\n  // Handle case where pages don't exist or aren't an array\n  return [{\n    json: {\n      content: firstItem.json.content || ''\n    }\n  }];\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        1360
+      ],
+      "id": "df89368f-fd21-498a-83d4-82b5f9e0716e",
+      "name": "Aggregate Markdown with Page Numbers"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        4576,
+        1680
+      ],
+      "id": "ee2e8736-396d-4eef-8cd7-105175e12789",
+      "name": "Continue"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 712,
+        "width": 664,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        3040
+      ],
+      "id": "7e733676-4935-4076-bbf2-0ba40688874c",
+      "name": "Sticky Note24"
+    },
+    {
+      "parameters": {
+        "content": "# Context Expansion\n# > RAG Agents",
+        "height": 180,
+        "width": 580,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        3344
+      ],
+      "id": "8226b145-72a6-456c-a0ce-52f3d914f25b",
+      "name": "Sticky Note28"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 820,
+        "width": 592,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        528,
+        1904
+      ],
+      "id": "34d367dc-2732-40d7-80dc-989f75fc4816",
+      "name": "Sticky Note30"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a RAG agent\n\nAll answers must be grounded in retrieved information from the knowledgebase and documents\n\nStandard Operating Procedure\n\n1. Based on the users query, pass a relevant query to the vector store to narrow the search and retrieve candidate chunks - Only do this once\n2. Based on the most relevant chunk, using the child_range and parent_range, load the section and / or parent chunks into context using the Context Expansion tool. Do this for the most promising chunks to expand your insight into the document.\nThen answer the question, based on the info in context\n\nIf no relevant information is present, simply say \"Sorry, I don't know\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        2656,
+        3152
+      ],
+      "id": "4c65f92c-fd13-4542-8105-c5cd069d871a",
+      "name": "AI Agent1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-sonnet-4-20250514",
+          "mode": "list",
+          "cachedResultName": "Claude Sonnet 4"
+        },
+        "options": {
+          "thinking": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        2544,
+        3472
+      ],
+      "id": "f406eb41-8f4f-40e2-b10c-1b952bad993e",
+      "name": "Anthropic Chat Model1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Supabase vector store knowledgebase",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_v2",
+          "mode": "list",
+          "cachedResultName": "documents_v2"
+        },
+        "options": {
+          "queryName": "match_documents"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        2896,
+        3408
+      ],
+      "id": "8cccaae6-4f55-4188-b5bf-03d7f306e653",
+      "name": "Supabase Vector Store3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2912,
+        3600
+      ],
+      "id": "aa072502-bee0-4d56-8078-dd12f49b4a48",
+      "name": "Embeddings OpenAI3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Option 3 & 4: Section & Parent Expansion",
+        "height": 132,
+        "width": 856,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2336,
+        2880
+      ],
+      "id": "c4598a4d-dacd-4c8c-97fe-ed67c3052e96",
+      "name": "Sticky Note10",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## RAG Agent",
+        "height": 708,
+        "width": 856,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2336,
+        3040
+      ],
+      "id": "43f02eef-0e07-4e3e-894c-306d177f418a",
+      "name": "Sticky Note18",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "Based on the most promising chunks retrieved from the knowledgebase, use this tool to expand out the context by fetching neighbouring chunks, parent chunks etc\n\nThe body of this call must be in this format and the values you need are in the chunk metadata. You can retrieve chunks from one or multiple documents if you like\n[\n    {\n      doc_id: \"doc-id-12345-abcde\",\n      chunk_ranges: [[0, 5]]\n    },\n    {\n      doc_id: \"another-doc-id-12345\",\n      chunk_ranges: [[10, 15], [20, 25]]\n    }\n  ]\n",
+        "method": "POST",
+        "url": "https://iwcionhpeltdhfrtimtp.supabase.co/functions/v1/context-expansion",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('JSON', ``, 'json') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2720,
+        3472
+      ],
+      "id": "754ffc84-52bf-47dc-a0f4-c1b71bbd6447",
+      "name": "Context Expansion1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Option 5: Agentic Document Expansion",
+        "height": 132,
+        "width": 1000,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3264,
+        2880
+      ],
+      "id": "f444fc4c-f284-434a-b4a8-0a268c7a5b69",
+      "name": "Sticky Note31",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a RAG agent\n\nAll answers must be grounded in retrieved information from the knowledgebase and documents\n\nStandard Operating Procedure\n\n1. Based on the users query, pass a relevant query to the vector store to narrow the search and retrieve candidate chunks\n2. Choose the most relevant chunk\n3. Trigger the Fetch Document Hierarchy Tool to load the Documents Structure\n4. Based on this structure (which includes chunk ranges) along with any relevant child_ranges and parent_ranges from the retrieved chunks, trigger the Context Expansion tool to expand your insight into the document.\n\nThen answer the question, based on the info in context.\n\nPlease be as comprehensive as possible by fetching multiple document sections\n\nIf no relevant information is present, simply say \"Sorry, I don't know\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        3584,
+        3152
+      ],
+      "id": "9be7c209-6dd5-4bb9-82cd-baba1b6b94bc",
+      "name": "AI Agent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-sonnet-4-20250514",
+          "mode": "list",
+          "cachedResultName": "Claude Sonnet 4"
+        },
+        "options": {
+          "thinking": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        3392,
+        3472
+      ],
+      "id": "b26ef055-6d60-4efd-a451-09e488e7194a",
+      "name": "Anthropic Chat Model2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Supabase vector store knowledgebase",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_v2",
+          "mode": "list",
+          "cachedResultName": "documents_v2"
+        },
+        "options": {
+          "queryName": "match_documents"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        3952,
+        3408
+      ],
+      "id": "c01131f7-3ab1-40a1-91f8-5339030bd34b",
+      "name": "Supabase Vector Store",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        4000,
+        3584
+      ],
+      "id": "f69f1088-7633-4c9e-9dba-7577d99e353a",
+      "name": "Embeddings OpenAI",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## RAG Agent",
+        "height": 708,
+        "width": 1000,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3264,
+        3040
+      ],
+      "id": "49df16e8-61d8-4799-8cb0-0f36e593c13d",
+      "name": "Sticky Note32",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "record_manager_v2",
+        "limit": 1,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "doc_id",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', ``, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        3600,
+        3472
+      ],
+      "id": "be65a8df-92ad-44d9-9401-a92928b163be",
+      "name": "Fetch Document Hierarchy",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, content, metadata\nFROM documents \nWHERE metadata->>'doc_id' = $1\nORDER BY id ASC;",
+        "options": {
+          "queryReplacement": "=[{{ $fromAI('doc_id','Enter the exact doc ID as reference in the vector store chunk') }}]"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        896,
+        3472
+      ],
+      "id": "17e41df3-bb7e-4973-aedf-0bb7f21d1001",
+      "name": "Fetch Full Document",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Option 1: Load the Full Document",
+        "height": 132,
+        "width": 856,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        512,
+        2880
+      ],
+      "id": "b7c70a69-e58e-4a5b-a6c3-608b0a8bb9b1",
+      "name": "Sticky Note2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## RAG Agent",
+        "height": 708,
+        "width": 856,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        512,
+        3040
+      ],
+      "id": "49e97bc0-f6e3-417e-b830-5d2ece33d5ca",
+      "name": "Sticky Note3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, content, metadata \nFROM documents \nWHERE metadata->>'doc_id' = $1\n  AND (\n    (metadata->'loc'->'lines'->>'to')::int BETWEEN $2 - 2 AND $2 - 1  -- previous chunk\n    OR (metadata->'loc'->'lines'->>'from')::int BETWEEN $3 + 1 AND $3 + 2  -- next chunk\n  )\nORDER BY (metadata->'loc'->'lines'->>'from')::int;",
+        "options": {
+          "queryReplacement": "=[{{ $fromAI('doc_id','Enter the exact doc ID as referenced in your selected vector store chunk') }},{{ $fromAI('loc_lines_from','Enter the loc lines from of your selected chunk.') }},{{ $fromAI('loc_lines_to','Enter the loc lines to of your selected chunk.') }}]"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        1808,
+        3472
+      ],
+      "id": "1ff476b3-1b6e-4715-924d-f38b389a4e3b",
+      "name": "Get Neighbor Chunks",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a RAG agent\n\nAll answers must be grounded in retrieved information from the knowledgebase and documents\n\nStandard Operating Procedure\n\nBased on the users query, pass a relevant query to the vector store to narrow the search and retrieve candidate chunks\nBased on the most relevant chunk, load the full document into context\nThen answer the question, based on the full document\n\nIf no relevant information is present, simply say \"Sorry, I don't know\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        832,
+        3152
+      ],
+      "id": "34ecc34c-956a-4412-b06f-eaf7da6f4ba7",
+      "name": "AI Agent2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-sonnet-4-20250514",
+          "mode": "list",
+          "cachedResultName": "Claude Sonnet 4"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        720,
+        3472
+      ],
+      "id": "f4982ee5-ec91-4b42-8ad0-8b601f86cb7f",
+      "name": "Anthropic Chat Model3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Supabase vector store knowledgebase",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_v2",
+          "mode": "list",
+          "cachedResultName": "documents_v2"
+        },
+        "options": {
+          "queryName": "match_documents"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        1072,
+        3408
+      ],
+      "id": "d4fa618b-cb76-4f10-ab98-f80c749e03a4",
+      "name": "Supabase Vector Store2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1088,
+        3600
+      ],
+      "id": "54478cad-2b14-4b22-b6d1-ad57ba7f6bc8",
+      "name": "Embeddings OpenAI1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 196,
+        "width": 184,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        848,
+        3440
+      ],
+      "id": "0295780c-89b7-47c3-b56c-9f014378cb56",
+      "name": "Sticky Note36",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Option 2: Neighbour Expansion",
+        "height": 132,
+        "width": 856,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1424,
+        2880
+      ],
+      "id": "b2486328-782c-4917-8bff-7103369b3826",
+      "name": "Sticky Note37",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a RAG agent\n\nAll answers must be grounded in retrieved information from the knowledgebase and documents\n\nStandard Operating Procedure\n\nBased on the users query, pass a relevant query to the vector store to narrow the search and retrieve candidate chunks\nBased on the most relevant chunk, load the neighbour chunks into context. Do this for the most promising chunks to expand your insight into the document.\nThen answer the question, based on the info in context\n\nIf no relevant information is present, simply say \"Sorry, I don't know\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1744,
+        3152
+      ],
+      "id": "b8fbd216-7b66-433e-81c6-56e983a3fd93",
+      "name": "AI Agent3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-sonnet-4-20250514",
+          "mode": "list",
+          "cachedResultName": "Claude Sonnet 4"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1632,
+        3472
+      ],
+      "id": "db460452-dd55-4101-9ae0-f5547e6beac1",
+      "name": "Anthropic Chat Model4",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Supabase vector store knowledgebase",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_v2",
+          "mode": "list",
+          "cachedResultName": "documents_v2"
+        },
+        "options": {
+          "queryName": "match_documents"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        1984,
+        3408
+      ],
+      "id": "f957e7ec-af63-428b-a930-d098c8b8fdeb",
+      "name": "Supabase Vector Store4",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2000,
+        3600
+      ],
+      "id": "0dc3acfe-195e-4511-a0bb-069b462c5cad",
+      "name": "Embeddings OpenAI4",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## RAG Agent",
+        "height": 708,
+        "width": 856,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1424,
+        3040
+      ],
+      "id": "5020f282-54c9-468c-b060-da0b6f9aa685",
+      "name": "Sticky Note38",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 196,
+        "width": 184,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        3440
+      ],
+      "id": "e555cbd3-a20d-48bf-995c-c9df52adaaeb",
+      "name": "Sticky Note39",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 196,
+        "width": 184,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2672,
+        3440
+      ],
+      "id": "d17c476b-a78f-4893-b3fb-7dbc4860e2c8",
+      "name": "Sticky Note40",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 196,
+        "width": 376,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3552,
+        3440
+      ],
+      "id": "936a2a88-6b47-4bc7-b427-a70d09ba9114",
+      "name": "Sticky Note41",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 824,
+        "width": 664,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        992
+      ],
+      "id": "dbca7caa-d710-45a4-87fd-5c0f04e0292f",
+      "name": "Sticky Note34"
+    },
+    {
+      "parameters": {
+        "content": "# Context Expansion\n# > RAG Ingestion - Option 3-5: Section, Parent, Agentic",
+        "height": 180,
+        "width": 580,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        1312
+      ],
+      "id": "78ad1ff0-f277-46bd-8c63-cc153321a128",
+      "name": "Sticky Note42"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        3328,
+        3152
+      ],
+      "id": "df12257b-f985-4ddb-ba35-262cc1ee6358",
+      "name": "When chat message received",
+      "webhookId": "00c8cc4f-770d-4673-8f8b-e6d5c8447130",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "Based on the most promising chunks retrieved from the knowledgebase, use this tool to expand out the context by fetching neighbouring chunks, parent chunks etc\n\nThe body of this call must be in this format and the values you need are in the chunk metadata. You can retrieve chunks from one or multiple documents if you like\n[\n    {\n      doc_id: \"doc-id-12345-abcde\",\n      chunk_ranges: [[0, 5]]\n    },\n    {\n      doc_id: \"another-doc-id-12345\",\n      chunk_ranges: [[10, 15], [20, 25]]\n    }\n  ]\n",
+        "method": "POST",
+        "url": "https://iwcionhpeltdhfrtimtp.supabase.co/functions/v1/context-expansion",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('JSON', ``, 'json') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        3792,
+        3472
+      ],
+      "id": "c3572e1b-d989-4aef-be8f-baa1ed84e072",
+      "name": "Context Expansion",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "@[youtube](y72TrpffdSk)",
+        "height": 384,
+        "width": 656,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        1904
+      ],
+      "id": "45404200-bbbb-4322-a2dd-dc8192c9036e",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $('Aggregate Markdown with Page Numbers1').item.json.content }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -1744,
+        1696
+      ],
+      "id": "b76bacce-df74-44c7-ae37-8be13247379c",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 200,
+        "options": {
+          "splitCode": "markdown"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -1584,
+        1904
+      ],
+      "id": "e32afbec-8d3a-4170-9614-b2feac1aca20",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "purpose",
+              "value": "ocr"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3552,
+        1104
+      ],
+      "id": "91616a4c-1595-45dc-9195-5e99dbb22590",
+      "name": "Upload File1",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "=image_base64",
+        "options": {
+          "fileName": "={{ $('Set file name1').item.json.file_name }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -2096,
+        848
+      ],
+      "id": "ef9eadb8-e09d-4626-914a-f9c900d27f0a",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Supabase_account_details1').first().json.supabase_base_url }}/storage/v1/object/{{ $('Supabase_account_details1').first().json.supabase_storage_bucket_name }}/{{ $binary.data.fileName }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1872,
+        848
+      ],
+      "id": "93ac4db0-2866-4928-8d8b-9ed29ace5128",
+      "name": "Upload Image to Supabase1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -2768,
+        848
+      ],
+      "id": "8019fdf9-6e1e-4cde-b279-aa0da3a6aec5",
+      "name": "Split Out Images1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -2976,
+        848
+      ],
+      "id": "5de8593c-7723-4fcd-abf3-cc82a8e39ebf",
+      "name": "Split Out Pages2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dbd236e3-a9cb-4568-b781-086497021139",
+              "name": "file_name",
+              "value": "={{ $json.Key.split('/').slice(1).join('/') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1616,
+        848
+      ],
+      "id": "2d2a23f4-5c60-41ed-8cb3-a4204a02a1bb",
+      "name": "Get response file name1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "file_name",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1376,
+        992
+      ],
+      "id": "40fa9fb6-ab55-445b-9823-8ec7c56318f6",
+      "name": "Merge results1"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -992,
+        1248
+      ],
+      "id": "6abee0f0-9280-41cd-8d7f-b4133f28d6b6",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "94ab2435-fc15-4668-b6c7-542619abb5e3",
+              "name": "file_name",
+              "value": "={{ Array.from({ length: 6 }, () => Math.random().toString(36).slice(2, 10)).join('') }}",
+              "type": "string"
+            },
+            {
+              "id": "1ab3ad56-4086-4c23-9e44-ca33e8dadbb5",
+              "name": "original_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "aa2e372a-bcc7-4843-967c-b0ad9a0ebbfc",
+              "name": "image_annotation",
+              "value": "={{ $json.image_annotation }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2544,
+        848
+      ],
+      "id": "be2a7a82-bb61-40aa-8fea-e673e2814e15",
+      "name": "Set file name1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b1c9a844-7c93-4899-992e-75a2d1d651f9",
+              "name": "image_base64",
+              "value": "={{ $('Split Out Images1').item.json.image_base64.split(',')[1]; }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2320,
+        848
+      ],
+      "id": "d6bdacf9-487c-4eb6-85d7-81325a6ab5ff",
+      "name": "Prep base64 string1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -2640,
+        1472
+      ],
+      "id": "2414b5c4-8906-4191-bfa3-7489b61b15d1",
+      "name": "Split Out Pages3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ef0afdc6-34df-4509-9112-daeaa2e8dabd",
+              "name": "supabase_base_url",
+              "value": "https://ndpledmfbarfncswissl.supabase.co",
+              "type": "string"
+            },
+            {
+              "id": "c8116945-1d31-4e9b-a898-2fcfb5a2e347",
+              "name": "supabase_storage_bucket_name",
+              "value": "refrigerator",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4000,
+        880
+      ],
+      "id": "8feb33a0-c1ef-4363-8c57-f51938bbbf19",
+      "name": "Supabase_account_details1"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -3776,
+        1104
+      ],
+      "id": "7ceda24a-153f-4381-84a0-6f1c1fa4a2fe",
+      "name": "Merge3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Page-Aware Markdown Aggregation for n8n Code Node\n// Use a unique delimiter that won't appear in documents\nconst PAGE_MARKER_START = '<<<PAGE_START:';\nconst PAGE_MARKER_END = '>>>';\n\n// Get ALL items, not just the first one\nconst allItems = $input.all();\nconsole.log('Total items received:', allItems.length);\n\n// Create an array of markdown strings with page markers\nconst markdownArray = allItems.map((item, itemIndex) => {\n  // Each item.json should have index, markdown, images, dimensions\n  const pageNumber = item.json.index !== undefined ? item.json.index : itemIndex;\n  const pageMarker = `${PAGE_MARKER_START}${pageNumber}${PAGE_MARKER_END}`;\n  \n  console.log(`Processing page ${pageNumber}, has markdown:`, !!item.json.markdown);\n  \n  // Insert page marker at the beginning of each page's content\n  return `${pageMarker}\\n\\n${item.json.markdown}`;\n});\n\nconsole.log('Total pages processed:', markdownArray.length);\nconsole.log('First page preview:', markdownArray[0].substring(0, 100));\n\n// Join all markdown strings with newlines\nconst concatenatedMarkdown = markdownArray.join('\\n');\n\n// Return one item with markdown as a single string\nreturn [{\n  json: {\n    content: concatenatedMarkdown\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2080,
+        1472
+      ],
+      "id": "f11299cc-396e-4dcb-9b11-2ebb741492aa",
+      "name": "Aggregate Markdown with Page Numbers1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.mistral.ai/v1/files/{{ $json.id }}/url",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "expiry",
+              "value": "24"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3360,
+        1104
+      ],
+      "id": "231977dc-9fb3-417d-86a2-9847425fa229",
+      "name": "HTTP Request",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/ocr",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"model\": \"mistral-ocr-latest\",\n    \"document\": {\n        \"type\": \"document_url\",\n        \"document_url\": \"{{ $json.url }}\"\n    },\n    \"include_image_base64\": true,\n    \"bbox_annotation_format\": {\n        \"type\": \"text\",\n        \"json_schema\": {\n            \"name\": \"visual_descriptions_only\",\n            \"description\": \"Extract concise natural-language descriptions for each distinct visual element (image, chart, table, diagram, etc.) on the page. Focus on summarizing what each visual element contains or conveys.\",\n            \"schema\": {\n                \"type\": \"array\",\n                \"items\": {\n                    \"type\": \"string\",\n                    \"description\": \"A concise description of a single visual element.\"\n                }\n            },\n            \"strict\": false\n        }\n    }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3136,
+        1104
+      ],
+      "id": "86356f7b-4633-4e74-b6e8-307de5e920dc",
+      "name": "HTTP Request6",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "i9vjGKAIeEzKFAa6",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Safely access uploaded_images from Merge1\nconst mergeItem = $('Merge2').item;\nconst uploadedImages = mergeItem?.json?.uploaded_images;\n\nlet markdown = $json.markdown;\nconst supabaseBaseUrl = $('Supabase_account_details1').item.json.supabase_base_url;\nconst bucketName = $('Supabase_account_details1').item.json.supabase_storage_bucket_name;\nconst fullBaseUrl = `${supabaseBaseUrl}/storage/v1/object/public/${bucketName}/`;\n\n// Only run replacement if uploadedImages is a non-empty array\nif (Array.isArray(uploadedImages) && uploadedImages.length > 0) {\n  for (const image of uploadedImages) {\n    const originalId = image.original_id;\n    const fileName = image.file_name;\n    const annotation = image.image_annotation || '';\n\n    const localMarkdownPattern = `![${originalId}](${originalId})`;\n    const hostedMarkdownWithAnnotation = `![${originalId}](${fullBaseUrl}${fileName})\\n\\n${annotation}`;\n\n    if (markdown.includes(localMarkdownPattern)) {\n      markdown = markdown.replaceAll(localMarkdownPattern, hostedMarkdownWithAnnotation);\n    }\n  }\n}\n\nreturn {\n  json: {\n    ...$json,\n    markdown\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2352,
+        1472
+      ],
+      "id": "031d17ba-8d14-4664-bdc5-95e48ad9a641",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        -1808,
+        1472
+      ],
+      "id": "5facf8bf-22ed-44cb-82f1-bb60fa486ac5",
+      "name": "Supabase Vector Store5"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1968,
+        1696
+      ],
+      "id": "b8b2d565-347e-4dc7-bfe2-a2f029e3c92f",
+      "name": "Embeddings OpenAI5",
+      "credentials": {
+        "openAiApi": {
+          "id": "xenY6K4Lpy47eCcn",
+          "name": "OpenAi ApPollos"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "uploaded_images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1120,
+        992
+      ],
+      "id": "c81217c7-dd74-4e08-b173-b574e6dfab79",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1-QT3XdO0CQTY5Cybghw5vJc3Hf1FQBOi",
+          "mode": "list",
+          "cachedResultName": "owners-manual-W10439277-RevC.pdf",
+          "cachedResultUrl": "https://drive.google.com/file/d/1-QT3XdO0CQTY5Cybghw5vJc3Hf1FQBOi/view?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -4256,
+        1120
+      ],
+      "id": "59955148-0b46-4f22-b827-c2e552d67ab1",
+      "name": "Download file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BcBZ0GrlNhnoa3MJ",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
