@@ -1,0 +1,1152 @@
+{
+  "connections": {
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Filter Text Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Text Messages": {
+      "main": [
+        [
+          {
+            "node": "Set Conversation Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unsupported Message Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Conversation Data": {
+      "main": [
+        [
+          {
+            "node": "Get Lead Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Lead Session": {
+      "main": [
+        [
+          {
+            "node": "Check Lead Exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Lead Exists": {
+      "main": [
+        [
+          {
+            "node": "Merge Lead Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set New Lead Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set New Lead Data": {
+      "main": [
+        [
+          {
+            "node": "Create New Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New Lead": {
+      "main": [
+        [
+          {
+            "node": "Merge Lead Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Lead Data": {
+      "main": [
+        [
+          {
+            "node": "Route Conversation State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route Conversation State": {
+      "main": [
+        [
+          {
+            "node": "Gatekeeper Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Next Question",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Generate Timezone",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Completed Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gatekeeper Agent": {
+      "main": [
+        [
+          {
+            "node": "Check Qualify Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gatekeeper LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Gatekeeper Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gatekeeper Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Gatekeeper Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Qualify Intent": {
+      "main": [
+        [
+          {
+            "node": "Clean Gatekeeper Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Intent Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Gatekeeper Response": {
+      "main": [
+        [
+          {
+            "node": "Update State (Gatekeeper)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Intent Response": {
+      "main": [
+        [
+          {
+            "node": "Update State (Gatekeeper)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update State (Gatekeeper)": {
+      "main": [
+        [
+          {
+            "node": "Merge Responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Next Question": {
+      "main": [
+        [
+          {
+            "node": "Qualifier Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qualifier Agent": {
+      "main": [
+        [
+          {
+            "node": "Extract Qualifier Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qualifier LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Qualifier Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qualifier Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Qualifier Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Qualifier Data": {
+      "main": [
+        [
+          {
+            "node": "Update Lead Progress",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Lead Progress": {
+      "main": [
+        [
+          {
+            "node": "Merge Responses",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Generate Timezone": {
+      "main": [
+        [
+          {
+            "node": "Booking Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Booking Agent": {
+      "main": [
+        [
+          {
+            "node": "Extract Booking Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Booking LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Booking Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Booking Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Booking Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Booking Data": {
+      "main": [
+        [
+          {
+            "node": "Finalize Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Responses": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Milvus Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "Gatekeeper Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "WhatsApp Lead Qualification Agent - FIXED",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "id": "ef63c31c-0a3c-4b42-9ed9-ed01cdde54e2",
+      "name": "WhatsApp Trigger",
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2784,
+        1288
+      ],
+      "webhookId": "wa-trigger-001"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.messages[0].type }}",
+                    "rightValue": "text",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.messages[0].type }}",
+                    "rightValue": "text",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Other"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5d5719c7-679c-4776-a5f2-b6e4d8994b1d",
+      "name": "Filter Text Messages",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -2560,
+        1288
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "textBody": "Lo siento, solo puedo procesar mensajes de texto. Por favor, envía tu consulta como mensaje de texto. 📝",
+        "additionalFields": {}
+      },
+      "id": "40b8a292-1c4d-43c9-af83-cc8e3544324e",
+      "name": "Unsupported Message Reply",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        -2336,
+        1384
+      ],
+      "webhookId": "7a19f030-93f1-4c54-a5fa-d6850b307e0d"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "phoneNumber",
+              "value": "={{ $json.messages[0].from }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "userMessage",
+              "value": "={{ $json.messages[0].text.body }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "834afd1a-e443-424d-96fc-19dc70457919",
+      "name": "Set Conversation Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2336,
+        1192
+      ]
+    },
+    {
+      "parameters": {
+        "collection": "leads",
+        "options": {},
+        "query": "={ \"phoneNumber\": \"{{ $json.phoneNumber }}\" }"
+      },
+      "id": "41e08aea-ef3f-4943-bd17-b43f3ebead71",
+      "name": "Get Lead Session",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        -2112,
+        1192
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "caseSensitive": true,
+            "typeValidation": "loose"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "1",
+              "leftValue": "={{ $json._id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f7ca9802-7426-44d4-85c8-284a95549822",
+      "name": "Check Lead Exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1888,
+        1192
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "phoneNumber",
+              "value": "={{ $('Set Conversation Data').item.json.phoneNumber }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "conversationState",
+              "value": "gatekeeper",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "qualificationProgress",
+              "value": "={}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "createdAt",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ed49b2ab-ba58-4d09-a916-3ecfcb688e9d",
+      "name": "Set New Lead Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1664,
+        1264
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "leads",
+        "fields": "phoneNumber,conversationState,qualificationProgress,createdAt",
+        "options": {}
+      },
+      "id": "d2fd6859-359b-40b8-8739-0214325f54c8",
+      "name": "Create New Lead",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        -1440,
+        1264
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch",
+        "output": "input1"
+      },
+      "id": "8e8ba534-f093-4d07-aa5d-7c97186b9aa4",
+      "name": "Merge Lead Data",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        -1216,
+        1192
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.conversationState }}",
+                    "rightValue": "gatekeeper",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Gatekeeper"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.conversationState }}",
+                    "rightValue": "qualifying",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Qualifier"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.conversationState }}",
+                    "rightValue": "booking",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Booking"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.conversationState }}",
+                    "rightValue": "completed",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Completed"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "42d5d8e4-84f2-47b7-a151-283fb9e09ca0",
+      "name": "Route Conversation State",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -992,
+        1144
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Set Conversation Data').item.json.userMessage }}",
+        "options": {
+          "systemMessage": "Eres un asistente virtual amigable para [EMPRESA]. Tu rol es GATEKEEPER.\n\n## COMPORTAMIENTO\n- Respuestas cortas (2-3 oraciones)\n- Usa emojis con moderación\n- Bilingüe: español/inglés\n\n## FLUJO\n- Saludo → Da la bienvenida\n- Pregunta sobre servicios → Usa RAG para responder\n- Interés en demo/llamada → Responde: \"¡Excelente! Necesito hacerte algunas preguntas. [INTENT:QUALIFY]\"\n\n## REGLAS\n- NUNCA inventes información\n- Si detectas intención de compra, incluye [INTENT:QUALIFY]"
+        }
+      },
+      "id": "62cdd398-9579-486c-afb2-a83104d94c65",
+      "name": "Gatekeeper Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -712,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "maxTokens": 500,
+          "temperature": 0.7
+        }
+      },
+      "id": "d4ab2592-c752-4ee0-b13d-3cd11862e852",
+      "name": "Gatekeeper LLM",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -768,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "=gatekeeper-{{ $('Set Conversation Data').item.json.phoneNumber }}",
+        "contextWindowLength": 10
+      },
+      "id": "02d8d291-85ae-4c14-adb2-8f22a95681bc",
+      "name": "Gatekeeper Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        -640,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "caseSensitive": false,
+            "typeValidation": "loose"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "1",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "[INTENT:QUALIFY]",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8689865e-366c-4dba-a90c-e7df99bf617c",
+      "name": "Check Qualify Intent",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        488
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "agentResponse",
+              "value": "={{ $json.output.replace('[INTENT:QUALIFY]', '').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "nextState",
+              "value": "qualifying",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d4c5b392-1ea1-432b-941e-d879541b2f08",
+      "name": "Clean Gatekeeper Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        392
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "agentResponse",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "nextState",
+              "value": "gatekeeper",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b34c2bb2-f276-4078-8842-6f8ed237554a",
+      "name": "No Intent Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        644
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "findOneAndUpdate",
+        "collection": "leads",
+        "options": {}
+      },
+      "id": "56807469-610c-47e6-beb4-d5216f52b302",
+      "name": "Update State (Gatekeeper)",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        488
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const mandatoryFields = ['fullName', 'email', 'country'];\nconst optionalFields = ['jobType', 'businessName', 'role', 'businessModel', 'teamSize', 'aiKnowledge', 'mainChallenge'];\n\nconst leadData = $input.first().json;\nconst progress = leadData.qualificationProgress || {};\n\nlet currentField = null;\nlet isMandatory = true;\n\nfor (const field of mandatoryFields) {\n  if (!progress[field]) {\n    currentField = field;\n    break;\n  }\n}\n\nif (!currentField) {\n  isMandatory = false;\n  for (const field of optionalFields) {\n    if (!progress[field]) {\n      currentField = field;\n      break;\n    }\n  }\n}\n\nconst mandatoryComplete = mandatoryFields.every(field => progress[field]);\n\nreturn [{\n  json: {\n    ...leadData,\n    currentField,\n    isMandatory,\n    mandatoryComplete\n  }\n}];"
+      },
+      "id": "8ceb2faf-2308-4f4c-9b41-ad75a88c5e26",
+      "name": "Get Next Question",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -568,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Mensaje: {{ $('Set Conversation Data').item.json.userMessage }}\nDatos actuales: {{ JSON.stringify($json.qualificationProgress || {}) }}\nCampo actual: {{ $json.currentField }}",
+        "options": {
+          "systemMessage": "Eres un agente de cualificación. Recopila información de forma conversacional.\n\n## CAMPOS OBLIGATORIOS:\n1. fullName - Nombre completo\n2. email - Correo (validar formato)\n3. country - País\n\n## CAMPOS OPCIONALES:\n4. jobType, businessName, role, businessModel, teamSize, aiKnowledge, mainChallenge\n\n## COMPORTAMIENTO:\n- UNA pregunta a la vez\n- Valida respuestas\n- Cuando captures un dato: [DATA:campo=valor]\n- Cuando todos los obligatorios estén completos: [STATUS:READY_FOR_BOOKING]"
+        }
+      },
+      "id": "f6dc5105-61e5-43b5-9f31-35b57db25058",
+      "name": "Qualifier Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -144,
+        888
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "maxTokens": 400,
+          "temperature": 0.5
+        }
+      },
+      "id": "d7c88919-0581-4ead-9a31-2bb2cb615006",
+      "name": "Qualifier LLM",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -136,
+        1112
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "=qualifier-{{ $('Set Conversation Data').item.json.phoneNumber }}",
+        "contextWindowLength": 20
+      },
+      "id": "2294a5b8-447f-457d-a7f5-ebdb87add498",
+      "name": "Qualifier Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        -8,
+        1112
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json.output || '';\nconst leadData = $('Merge Lead Data').first().json;\nlet progress = JSON.parse(JSON.stringify(leadData.qualificationProgress || {}));\n\nconst dataPattern = /\\[DATA:(\\w+)=([^\\]]+)\\]/g;\nlet match;\nwhile ((match = dataPattern.exec(response)) !== null) {\n  progress[match[1]] = match[2].trim();\n}\n\nconst readyForBooking = response.includes('[STATUS:READY_FOR_BOOKING]');\n\nlet cleanResponse = response\n  .replace(/\\[DATA:\\w+=[^\\]]+\\]/g, '')\n  .replace('[STATUS:READY_FOR_BOOKING]', '')\n  .trim();\n\nreturn [{\n  json: {\n    agentResponse: cleanResponse,\n    qualificationProgress: progress,\n    nextState: readyForBooking ? 'booking' : 'qualifying',\n    readyForBooking\n  }\n}];"
+      },
+      "id": "1ec02f9c-27c3-481d-90bb-90561df7d2f6",
+      "name": "Extract Qualifier Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "findOneAndUpdate",
+        "collection": "leads",
+        "options": {}
+      },
+      "id": "00c09063-ab18-4895-a328-af7fd154ca40",
+      "name": "Update Lead Progress",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const timezoneMap = {\n  'mexico': 'America/Mexico_City',\n  'méxico': 'America/Mexico_City',\n  'argentina': 'America/Argentina/Buenos_Aires',\n  'chile': 'America/Santiago',\n  'colombia': 'America/Bogota',\n  'peru': 'America/Lima',\n  'spain': 'Europe/Madrid',\n  'españa': 'Europe/Madrid',\n  'usa': 'America/New_York',\n  'united states': 'America/New_York'\n};\n\nconst leadData = $input.first().json;\nconst country = (leadData.qualificationProgress?.country || '').toLowerCase();\n\nlet timezone = 'UTC';\nfor (const [key, tz] of Object.entries(timezoneMap)) {\n  if (country.includes(key)) {\n    timezone = tz;\n    break;\n  }\n}\n\nreturn [{ json: { ...leadData, timezone } }];"
+      },
+      "id": "4589b1e8-57b8-43ca-aa9e-7af81e1e25d0",
+      "name": "Generate Timezone",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -568,
+        1392
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Mensaje: {{ $('Set Conversation Data').item.json.userMessage }}\nDatos: {{ JSON.stringify($json.qualificationProgress) }}\nTimezone: {{ $json.timezone }}",
+        "options": {
+          "systemMessage": "Eres el agente de reservas. Genera el enlace de Cal.com.\n\n## FORMATO:\n\"¡Perfecto, [Nombre]! 🎉\nTus datos:\n📧 [email]\n🌍 [país]\n\nAgenda aquí: [ENLACE]\n\nUna vez agendada, recibirás confirmación. [STATUS:COMPLETED]\""
+        }
+      },
+      "id": "a9c19014-2980-4234-81f4-b874e4f7e5ee",
+      "name": "Booking Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -144,
+        1392
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "maxTokens": 500,
+          "temperature": 0.6
+        }
+      },
+      "id": "d57d53de-004e-408b-afd5-36dc9ea48daa",
+      "name": "Booking LLM",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -136,
+        1616
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "=booking-{{ $('Set Conversation Data').item.json.phoneNumber }}"
+      },
+      "id": "af168827-044b-4694-9f50-bc3123116ed0",
+      "name": "Booking Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        -8,
+        1616
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json.output || '';\nconst isCompleted = response.includes('[STATUS:COMPLETED]');\nconst cleanResponse = response.replace('[STATUS:COMPLETED]', '').trim();\n\nreturn [{\n  json: {\n    agentResponse: cleanResponse,\n    nextState: isCompleted ? 'completed' : 'booking',\n    isCompleted\n  }\n}];"
+      },
+      "id": "c9e9f510-3f8d-4819-a6bc-a0d556c597ba",
+      "name": "Extract Booking Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        1392
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "findOneAndUpdate",
+        "collection": "leads",
+        "options": {}
+      },
+      "id": "1f36c159-e7bb-4d59-9c22-622503ee263b",
+      "name": "Finalize Lead",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        1392
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "agentResponse",
+              "value": "¡Hola de nuevo! Ya tienes tu enlace de reserva. Si tienes dudas, escríbenos. 😊",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "81853317-4f21-4b66-9fe9-cb46297a3c6f",
+      "name": "Completed Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -568,
+        1584
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "a1b195b3-3e3d-4c20-9d96-ee110267f48c",
+      "name": "Merge Responses",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        656,
+        644
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "textBody": "={{ $json.agentResponse }}",
+        "additionalFields": {}
+      },
+      "id": "22f611f8-a4c1-4c86-b18f-0aa3d55637d7",
+      "name": "Send WhatsApp Reply",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        644
+      ],
+      "webhookId": "733a6f69-e1ca-45aa-9da3-8bb9ef8de084"
+    },
+    {
+      "parameters": {
+        "content": "## 🤖 WhatsApp Lead Qualification Agent\n\n**3 Agentes:**\n1. Gatekeeper (RAG)\n2. Qualifier\n3. Booking\n\n**Flujo:** WhatsApp → MongoDB → Agents → WhatsApp",
+        "height": 200,
+        "width": 300
+      },
+      "id": "93852eb8-088d-47f4-a064-0fbdcff9a475",
+      "name": "Overview",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2992,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "milvusCollection": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMilvus",
+      "typeVersion": 1.3,
+      "position": [
+        -368,
+        176
+      ],
+      "id": "ccfa2f06-56de-4b6e-938d-b9e56070fbe2",
+      "name": "Milvus Vector Store",
+      "credentials": {
+        "milvusApi": {
+          "id": "YbwPcrTxudipd6F0",
+          "name": "MilvusRag"
+        }
+      }
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
