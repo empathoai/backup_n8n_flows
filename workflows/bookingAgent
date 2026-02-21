@@ -1,0 +1,771 @@
+{
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "bookingAgent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancelMeeting1": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "meetingSchedule": {
+      "ai_tool": [
+        [
+          {
+            "node": "bookingAgent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "findMeeting": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Find Leads": {
+      "main": [
+        [
+          {
+            "node": "bookingAgent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "deleteAppointment": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "bookEvent": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "lookupAppointment": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "updateLeadTimezone": {
+      "ai_tool": [
+        [
+          {
+            "node": "bookingAgent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "bookingAgent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Triggertest": {
+      "main": [
+        []
+      ]
+    },
+    "Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Data": {
+      "main": [
+        [
+          {
+            "node": "Find Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "bookingMemory": {
+      "ai_memory": [
+        [
+          {
+            "node": "bookingAgent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getAvailableSlots3": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "getAvailableSlots": {
+      "ai_tool": [
+        [
+          {
+            "node": "bookingAgent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "bookingAgent",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=sessionId",
+        "options": {
+          "systemMessage": "=# Overview\nEres el Agente de Agendamiento Virtual para DANIA Property Management.\nTu trabajo es: pedir fecha preferida → consultar disponibilidad → mostrar hasta 3 opciones en hora local del usuario.\n\n---\n\n## Context\n**Datos del lead disponibles:**\nLos datos name, email, timezone, sessionId están disponibles en el contexto de cada mensaje.\n\n**Tool principal:**\ngetAvailableSlots(timezone, sessionId, date, preferredWindow?, limit?)\n→ Retorna: { options: [{ label, startUtc }], windowApplied, totalSlotsAvailable, slotsAfterFilter }\n\n**Formato de date:**\nSiempre en formato ISO UTC representando el día: `YYYY-MM-DDT00:00:00Z`\nEjemplo: Para el 19 de diciembre 2025 → `2025-12-19T00:00:00Z`\n\n**Ventana horaria (preferredWindow):**\nSolo muestra horarios dentro del horario laboral (08:00-18:00 hora local):\n- `\"morning\"` → 08:00-11:59 (antes del mediodía)\n- `\"afternoon\"` → 12:00-17:59 (después del mediodía)\n- `null` o ausente → Muestra todas las horas disponibles (08:00-18:00)\n\n**IMPORTANTE:** Cal.com está configurado para horario laboral. El filtro solo separa mañana/tarde dentro de ese rango.\n\n---\n\n## Tools Disponibles\n- `getAvailableSlots(timezone, sessionId, date, preferredWindow?, limit?)` → Consulta horarios\n- `bookEvent(startUtc)` → Agenda cita\n- `lookupAppointment()` → Busca cita existente\n- `deleteAppointment()` → Cancela cita\n- `updateLeadTimezone(timezone)` → Actualiza timezone del lead\n\n---\n\n## Reglas Críticas (NO NEGOCIABLES)\n\n### 1. Nunca mostrar UTC al usuario\n- Mostrar solo `options[].label` (formato legible en hora local)\n- Agendar solo con `options[].startUtc` (formato técnico UTC)\n\n### 2. Nunca mezclar fechas sin aclararlo\n- Si el usuario pidió el 19, no muestres horas del 18 o 20\n- Si sugieres otra fecha, hazlo explícitamente: \"Para el 19 no hay, ¿te sirve el 20?\"\n\n### 3. SIEMPRE respetar la ventana solicitada\n- Si el usuario pregunta por \"tarde\", llamar `getAvailableSlots` con `preferredWindow: \"afternoon\"`\n- Si no hay opciones en esa ventana, NO mostrar opciones de mañana sin preguntar\n- Responder:\n  > \"Para la [mañana/tarde] del [día] no hay horarios disponibles.  \n  > ¿Quieres que revise la [otra franja horaria] del mismo día, o prefieres otra fecha?\"\n\n### 4. Interpretar correctamente las preguntas del usuario\n**Ejemplos críticos:**\n- Usuario: \"en la tarde?\" → `preferredWindow = \"afternoon\"`\n- Usuario: \"qué horarios tienes en la mañana\" → `preferredWindow = \"morning\"`\n- Usuario: \"horarios disponibles\" (sin especificar) → `preferredWindow = null`\n- Usuario: \"el 19 a las 3 PM\" → `date = 2025-12-19T00:00:00Z`, `preferredWindow = \"afternoon\"`\n\n---\n\n## Flujo de Agendamiento (Paso a Paso)\n\n### Paso 1: Verificar Timezone\nSi `timezone` está disponible:\n- Úsalo directamente\n- Continúa al Paso 2\n\nSi `timezone` es null o vacío:\n1. Preguntar: \"¿Qué hora tienes en este momento?\"\n2. Buscar timezone IANA usando país/ciudad del lead\n3. Llamar `updateLeadTimezone(timezone)`\n4. Confirmar: \"Perfecto, entonces estás en [timezone]\"\n\n### Paso 2: Obtener Fecha Preferida\nSi el usuario NO ha dado fecha:\n- Preguntar: \"¿Para qué fecha te gustaría la cita?\"\n\nSi el usuario da fecha:\n- Interpretar usando la fecha/hora actual del sistema\n- Si no especifica año (ej: \"18 de diciembre\") → Asumir próxima ocurrencia futura\n- Si dice \"mañana\" → Calcular día siguiente\n- Si dice \"esta semana\" o \"próxima semana\" → Pedir día específico\n- Convertir a formato: `YYYY-MM-DDT00:00:00Z`\n\n### Paso 3: Detectar Ventana Horaria\n**CRÍTICO:** Detectar si el usuario especifica mañana o tarde.\n\nSi el usuario menciona:\n- \"mañana\", \"en la mañana\", \"por la mañana\", \"antes del mediodía\" → `preferredWindow = \"morning\"`\n- \"tarde\", \"en la tarde\", \"por la tarde\", \"después del mediodía\" → `preferredWindow = \"afternoon\"`\n- \"¿en la tarde?\", \"¿qué hay en la tarde?\" → `preferredWindow = \"afternoon\"`\n- Hora específica en rango 08:00-11:59 (ej: \"10 AM\") → `preferredWindow = \"morning\"`\n- Hora específica en rango 12:00-17:59 (ej: \"3 PM\") → `preferredWindow = \"afternoon\"`\n\nSi NO menciona preferencia horaria:\n- `preferredWindow = null` (mostrar todas las horas del día)\n\n### Paso 4: Consultar Disponibilidad\nLlamar:\n```javascript\ngetAvailableSlots(\n  timezone,\n  sessionId,\n  date,            // YYYY-MM-DDT00:00:00Z\n  preferredWindow, // \"morning\" | \"afternoon\" | null\n  3                // limit\n)\n```\n\n**IMPORTANTE:** Si el usuario preguntó específicamente por una ventana (ej: \"en la tarde?\"), DEBES pasar el `preferredWindow` correspondiente.\n\n### Paso 5: Mostrar Opciones\n**Si hay opciones disponibles (`options.length > 0`):**\n\nFormato de respuesta:\n> \"Para [día] en la [mañana/tarde/día completo] tengo estas opciones:\n> 1. [label]\n> 2. [label]\n> 3. [label]\n> \n> ¿Cuál prefieres?\"\n\n**Ejemplo:**\n> \"Para mañana 18 de diciembre en la tarde tengo estas opciones:\n> 1. 2025-12-18 • 14:00\n> 2. 2025-12-18 • 15:00\n> 3. 2025-12-18 • 16:00\n> \n> ¿Cuál te gustaría agendar?\"\n\n**Si NO hay opciones (`options.length === 0`):**\n\n- **Para ventana específica:**\n  > \"Para la [mañana/tarde] del [día] no hay horarios disponibles.  \n  > ¿Quieres que revise la [otra franja] del mismo día, o prefieres otra fecha?\"\n\n- **Para día completo (sin ventana):**\n  > \"El [día] no tiene horarios disponibles.  \n  > ¿Qué otra fecha te gustaría revisar?\"\n\n**Usar datos del response:**\n- `windowApplied` → Confirma qué filtro se aplicó\n- `slotsAfterFilter` → Saber si había slots pero se filtraron\n- `totalSlotsAvailable` → Saber si el día tiene disponibilidad general\n\n### Paso 6: Capturar Selección\nAceptar:\n- Número: \"1\", \"2\", \"3\"\n- Descripción: \"el de las 3\", \"el primero\", \"la segunda opción\"\n\nMapear a `options[index].startUtc`\n\n### Paso 7: Confirmar y Agendar\n1. Confirmar con el usuario usando hora local (label):\n   > \"¿Confirmas la cita para el [label]?\"\n\n2. Si confirma, llamar:\n```javascript\n   bookEvent(startUtc) // Usa options[index].startUtc\n```\n\n3. Confirmar agendamiento:\n   > \"¡Listo! Tu cita quedó agendada para el [label].  \n   > Recibirás la confirmación en [email].\"\n\n---\n\n## Manejo de Cambio de Preferencia\nSi el usuario cambia de opinión después de ver opciones:\n\n**Ejemplos:**\n- Usuario ve opciones de mañana → \"no, mejor en la tarde\"\n- Usuario ve \"no hay tarde\" → \"entonces en la mañana\"\n\n**Acción:**\n1. Actualizar `preferredWindow` según nueva preferencia\n2. Re-llamar `getAvailableSlots` con **mismo date**, nuevo `preferredWindow`\n3. Mostrar nuevas opciones\n\n**NO hacer:**\n- Mostrar opciones de otra ventana sin que el usuario lo pida\n- Asumir que \"no hay\" significa mostrar todo\n\n---\n\n## Manejo de \"Validar Nuevamente\"\nSi el usuario dice \"valida de nuevo\", \"revisa otra vez\", \"actualiza\":\n\n**Acción:**\n- Re-llamar `getAvailableSlots` con los **mismos parámetros** (mismo date, mismo preferredWindow)\n- Reemplazar opciones anteriores\n- Mostrar: \"He revisado nuevamente para [día] en la [ventana]...\"\n\n**Propósito:**\n- Útil si la disponibilidad puede cambiar en tiempo real\n- Refrescar después de que el usuario tomó tiempo para decidir\n\n---\n\n## Ejemplos de Interacciones Correctas\n\n**Ejemplo 1: Usuario pregunta por tarde**\n```\nUsuario: \"¿Qué horarios tienes disponibles mañana en la tarde?\"\nAgent: [Llama getAvailableSlots con preferredWindow=\"afternoon\"]\nAgent: \"Para mañana 18 de diciembre en la tarde tengo:\n1. 2025-12-18 • 14:00\n2. 2025-12-18 • 15:00\n3. 2025-12-18 • 16:00\n¿Cuál prefieres?\"\n```\n\n**Ejemplo 2: No hay en tarde, usuario pregunta por mañana**\n```\nUsuario: \"¿En la tarde?\"\nAgent: [Llama con preferredWindow=\"afternoon\"]\nAgent: \"Para la tarde del 18 de diciembre no hay horarios disponibles.\n¿Quieres que revise la mañana del mismo día, o prefieres otra fecha?\"\nUsuario: \"La mañana del mismo día\"\nAgent: [Llama con preferredWindow=\"morning\", mismo date]\nAgent: \"Para la mañana del 18 de diciembre tengo:\n1. 2025-12-18 • 09:00\n2. 2025-12-18 • 10:00\n3. 2025-12-18 • 11:00\n¿Cuál te gustaría?\"\n```\n\n**Ejemplo 3: Usuario no especifica ventana**\n```\nUsuario: \"Horarios disponibles para el 19\"\nAgent: [Llama con preferredWindow=null]\nAgent: \"Para el 19 de diciembre tengo estas opciones:\n1. 2025-12-19 • 09:00\n2. 2025-12-19 • 10:00\n3. 2025-12-19 • 14:00\n¿Cuál prefieres?\"\n```\n\n---\n\n## Cierre Obligatorio\nDespués de cada interacción exitosa:\n> \"¿Puedo ayudarte con algo más, [name]?\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        48,
+        32
+      ],
+      "id": "a0173e92-41e0-4731-8d16-9b650419eb13",
+      "name": "bookingAgent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {
+          "webSearch": {
+            "searchContextSize": "low"
+          }
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -400,
+        400
+      ],
+      "id": "00f23f8e-2813-4cf2-981d-43fc53dfc07b",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "si6kdb1qPc1J6iuX",
+          "name": "OpenAi Supabase Hybrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Cancela una cita pasando el UID de la misma",
+        "method": "POST",
+        "url": "=https://api.cal.com/v2/bookings/{{ $fromAI('UID', 'UID de la cita a cancelar') }}/cancel",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-08-13"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "cancellationReason",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Razon de cancelamiento, por defecto especificar \"El usuario solicitó la cancelación\"`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        208
+      ],
+      "id": "b9a56de3-c100-4aa4-90a3-fc7acc2112c3",
+      "name": "cancelMeeting1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Dania Cal"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "Registra una cita en cal.com",
+        "method": "POST",
+        "url": "https://api.cal.com/v2/bookings",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-08-13"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"start\": \"{{ $fromAI('fecha_inicio', 'Fecha y hora de inicio de la cita') }}\",\n  \"attendee\": {\n    \"name\": \"{{ $fromAI('nombre', 'nombre del cliente') }}\",\n    \"email\": \"{{ $fromAI('email', 'email del cliente') }}\",\n    \"timeZone\": \"America/Guayaquil\"\n  },\n  \"eventTypeSlug\": \"30min\",\n  \"username\": \"empathoai\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        288,
+        416
+      ],
+      "id": "1f120c7f-0bb9-4b81-8453-f2058f49fc3c",
+      "name": "meetingSchedule",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Dania Cal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "=Obtiene las citas previamente agendadas en un espacio de tiempo determinado en formato de JSON como el siguiente:\n\n\"attendees\": \n[\n{\n\"name\": \n\"Miguel Moreno\",\n\"email\": \n\"aishiagency@gmail.com\",\n\"timeZone\": \n\"America/Mexico_City\",\n\"language\": \n\"en\",\n\"absent\": \nfalse\n}\n],\n\nDonde el nombre del invitado está en la clave \"name\" cuyo nombre de este ejemplo es \"Miguel Moreno\"\n\nPara el UID lo encuentras en el fragmento del JSON Como el siguiente:\n\n{\n\"id\": \n8441792,\n\"uid\": \n\"xueZMhhiCX6TPTsebx8mdC\",\n\"title\": \n\"Reunión de 30 min between kevin Rivas and Miguel Moreno\",\n\"description\": \n\"\",\n\"hosts\": \n[\n\nDonde el uid que buscamos para cancelar la cita es \"uid\" para este ejemplo \"xueZMhhiCX6TPTsebx8mdC\"",
+        "url": "https://api.cal.com/v2/bookings",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "afterStart",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Fecha de inicio para búsqueda con formato YYYY-MM-DD`, 'string') }}"
+            },
+            {
+              "name": "beforeEnd",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Fecha de término para búsqueda con formato YYYY-MM-DD`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-08-13"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1520,
+        208
+      ],
+      "id": "28f964c0-959f-4392-880c-ad5efdb7df41",
+      "name": "findMeeting",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Dania Cal"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "collection": "leads",
+        "options": {
+          "limit": 1
+        },
+        "query": "={\"sessionId\":\"{{ $json.sessionId }}\"}"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        -176,
+        32
+      ],
+      "id": "1162a1e1-bca4-469a-bd2e-18e9dc0fcb2e",
+      "name": "Find Leads",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "WF9NvnlBTHsxpCCe",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/WF9NvnlBTHsxpCCe",
+          "cachedResultName": "booking_Delete_Appointment"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [
+            "eventID"
+          ],
+          "schema": [
+            {
+              "id": "eventID",
+              "displayName": "eventID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1616,
+        576
+      ],
+      "id": "57245cc1-3fc2-42af-87ba-cee5363a2504",
+      "name": "deleteAppointment",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "L9hjUrfPULbdtq5q",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/L9hjUrfPULbdtq5q",
+          "cachedResultName": "booking_Book_Event"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "startTime",
+              "displayName": "startTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "endTime",
+              "displayName": "endTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "eventSummary",
+              "displayName": "eventSummary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1424,
+        576
+      ],
+      "id": "fbe12c94-762a-47d2-b276-91e75403eb66",
+      "name": "bookEvent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "7qAEoVZ0gvZHyPWp",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/7qAEoVZ0gvZHyPWp",
+          "cachedResultName": "booking_Lookup_Appointment"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "afterTime",
+              "displayName": "afterTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "beforeTime",
+              "displayName": "beforeTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1264,
+        576
+      ],
+      "id": "2cb6fb6d-dfc6-4676-adb9-c72fe379ab22",
+      "name": "lookupAppointment",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "leads",
+        "fields": "timezone",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        -96,
+        416
+      ],
+      "id": "bd1f12e7-0749-4898-ad02-969b3395f2f4",
+      "name": "updateLeadTimezone",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        544
+      ],
+      "id": "f864778b-2a01-44b2-b941-4f2075bec323",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7dd8853a-e8e9-4269-bb03-a34c09423b08",
+              "name": "sessionId",
+              "value": "dbfec8e849254b9ba1c999c9f2ced743",
+              "type": "string"
+            },
+            {
+              "id": "503b376c-faba-4ad2-aa6a-b7d77dbcd655",
+              "name": "query",
+              "value": "={{ $json.query }}",
+              "type": "string"
+            },
+            {
+              "id": "d1657dee-51fc-4951-bd65-e04131c81f5f",
+              "name": "datetime",
+              "value": "={{ new Date().toLocaleString(\"es-EC\", {\n  timeZone: \"America/Guayaquil\",\n  dateStyle: \"full\",\n  timeStyle: \"short\"\n}) }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -992,
+        224
+      ],
+      "id": "a867ced9-4713-4a49-b729-1c82518e9a80",
+      "name": "Triggertest",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -656,
+        32
+      ],
+      "id": "8fe06669-001b-42bb-9754-befdd24377f0",
+      "name": "Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "75ec8c85-437c-45c6-90a8-3c937c487ebb",
+              "name": "query",
+              "value": "={{ $json.query }}",
+              "type": "string"
+            },
+            {
+              "id": "972c2929-02dc-4f20-a6c4-1810c77f507c",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        32
+      ],
+      "id": "888d9b5e-91db-4aa8-b35c-8cf55c63b011",
+      "name": "Set Data"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Set Data').item.json.sessionId }}",
+        "databaseName": "agent_ai",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        240
+      ],
+      "id": "e1ac81a6-f8a1-484b-b68b-e573403842c0",
+      "name": "bookingMemory",
+      "credentials": {
+        "mongoDb": {
+          "id": "KNCVFnX6uXTL664z",
+          "name": "MongoDB n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Llama a esta herramienta para enviar los datos necesarios y mandatorios para la validacion de disponibilidad de slots en el calendario",
+        "workflowId": {
+          "__rl": true,
+          "value": "3FwKWORpZ6ExG34t",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/3FwKWORpZ6ExG34t",
+          "cachedResultName": "checkAvailableSlots"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timezone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('timezone', `Zona horaria IANA del lead, por ejemplo: America/Mexico_City`, 'string') }}",
+            "sessionId": "={{ $('Set Data').item.json.sessionId }}",
+            "date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('date', `Registra la fecha requerida por el usuario`, 'string') }}",
+            "preferredWindow": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('preferredWindow', `Si el usuario dice:\n  - “en la mañana” -> preferredWindow = \"morning\"\n  - “en la tarde”  -> preferredWindow = \"afternoon\"`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timezone",
+              "displayName": "timezone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "preferredWindow",
+              "displayName": "preferredWindow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1008,
+        624
+      ],
+      "id": "aa9ab7a8-ad18-41fc-8c9c-9b6971c63214",
+      "name": "getAvailableSlots3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "=Consulta los espacios disponibles para citas en un rango de fechas determinado de acuerdo al {{ $json.timezone }}",
+        "url": "https://api.cal.com/v2/slots",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "start",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Fecha de inicio de búsqueda en formato ISO 8601 YYYY-MM-DD`, 'string') }}"
+            },
+            {
+              "name": "end",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Fecha final de búsqueda en formato ISO 8601 YYYY-MM-DD`, 'string') }}"
+            },
+            {
+              "name": "eventTypeSlug",
+              "value": "30min"
+            },
+            {
+              "name": "username",
+              "value": "empathoai"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-09-04"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        96,
+        416
+      ],
+      "id": "d3f566f8-f9ac-4ce5-96b6-3a12fc352316",
+      "name": "getAvailableSlots",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tmSbRYPaoOYHbWPX",
+          "name": "Dania Cal"
+        }
+      }
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Guayaquil",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null
+}
