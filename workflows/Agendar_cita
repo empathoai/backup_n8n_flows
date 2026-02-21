@@ -1,0 +1,174 @@
+{
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Agendar Cita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agendar Cita": {
+      "main": [
+        [
+          {
+            "node": "Cita agendada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Cita no agendad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "Agendar_cita",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "5af937e3-e30e-4df0-b24e-ae6f289d6cf9",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        320,
+        224
+      ],
+      "id": "ea8f8c67-f716-4098-867a-24030ff5af44",
+      "name": "Webhook",
+      "webhookId": "5af937e3-e30e-4df0-b24e-ae6f289d6cf9"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3cc3905e-076e-498a-8754-51dffe884129",
+              "name": "username",
+              "value": "AQUI_TU_USERNAME",
+              "type": "string"
+            },
+            {
+              "id": "1ae20059-91b8-48c8-a556-e18a3940da35",
+              "name": "eventTypeSlug",
+              "value": "AQUI_TU_ID_CALENDARIO",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        224
+      ],
+      "id": "01ecb05f-90b7-47c1-b26e-58b2c372945a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cal.com/v2/bookings",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-08-13"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer cal_live_d3ec6a37d43f8b5c4653e6c78d3d8b2d"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"attendee\": {\n    \"language\": \"es\",\n    \"name\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.nombre }}\",\n    \"timeZone\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.zonaHoraria }}\",\n    \"email\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.correo }}\"\n  },\n  \"start\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].function.arguments.citaSolicitada }}\",\n  \"eventTypeSlug\": \"{{ $json.eventTypeSlug }}\",\n  \"username\": \"{{ $json.username }}\"\n}\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        224
+      ],
+      "id": "ae603e73-d96e-410d-a203-34b8843e016d",
+      "name": "Agendar Cita",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"La cita ha sido agendada con éxito.\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1088,
+        96
+      ],
+      "id": "a62385bc-9834-4752-a682-589ca9d83e22",
+      "name": "Cita agendada"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"La cita no ha podido ser agendada.\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1072,
+        352
+      ],
+      "id": "203f927d-bbe7-496e-8af6-b3f9990be1ee",
+      "name": "Cita no agendad"
+    },
+    {
+      "parameters": {
+        "content": "## Aquí tienes la herramienta que tienes que conectar para agendar cita. Un abrazo :)\n\n## - Víctor\n",
+        "height": 192,
+        "width": 416
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -48,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "01883de6-a06f-4e56-a4cc-ce94cbb95b94",
+      "name": "Sticky Note"
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
