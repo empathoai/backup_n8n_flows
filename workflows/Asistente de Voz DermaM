@@ -1,0 +1,77 @@
+{
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "name": "Asistente de Voz DermaM",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "4c3d123f-fbb1-4bd1-a79b-dc19af68801d",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -64,
+        32
+      ],
+      "id": "a1f08921-f6d2-41d5-b64f-40d63190f4d3",
+      "name": "Webhook",
+      "webhookId": "4c3d123f-fbb1-4bd1-a79b-dc19af68801d"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        32
+      ],
+      "id": "b9582526-8e63-4a5d-b24f-e6a66b6e1f83",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        352,
+        32
+      ],
+      "id": "adbf9227-fd44-472a-bf96-bea53fde5326",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null
+}
