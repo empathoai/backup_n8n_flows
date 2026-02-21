@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-21T15:59:51.083Z",
-    "createdAt": "2026-02-21T15:59:51.083Z",
-    "versionId": "a5929353-e9ac-41b9-9d9b-865e12366ead",
+    "updatedAt": "2026-02-21T16:09:56.343Z",
+    "createdAt": "2026-02-21T16:09:56.343Z",
+    "versionId": "5853d601-9a15-452e-9ea4-9a871ac5bd6c",
     "workflowId": "A4XkthjIzY7a4QtE",
     "nodes": [
       {
@@ -20,10 +20,18 @@
       {
         "parameters": {
           "asBinaryProperty": false,
-          "filePath": "={{$node[\"Variables\"].json[\"repo\"][\"path\"]}}{{$json[\"name\"]}}.json",
+          "filePath": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"path\\\"]}}{{$json[\\\"name\\\"]}}.json",
           "operation": "get",
-          "owner": "={{$node[\"Variables\"].json[\"repo\"][\"owner\"]}}",
-          "repository": "={{$node[\"Variables\"].json[\"repo\"][\"name\"]}}",
+          "owner": {
+            "__rl": true,
+            "mode": "name",
+            "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"owner\\\"]}}"
+          },
+          "repository": {
+            "__rl": true,
+            "mode": "name",
+            "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"name\\\"]}}"
+          },
           "resource": "file"
         },
         "id": "dc649b20-d71d-4be1-824d-c7ba2a0ad150",
@@ -46,11 +54,22 @@
       },
       {
         "parameters": {
-          "fileContent": "={{$json[\"n8n_data_stringy\"]}}",
-          "filePath": "={{$node[\"Variables\"].json[\"repo\"][\"path\"]}}{{$json[\"name\"]}}.json",
-          "owner": "={{$node[\"Variables\"].json[\"repo\"][\"owner\"]}}",
-          "repository": "={{$node[\"Variables\"].json[\"repo\"][\"name\"]}}",
-          "sha": "={{$json[\"sha\"]}}"
+          "commitMessage": "=[N8N Backup] {{$json[\\\"name\\\"]}}.json ({{$json[\\\"github_status\\\"]}})",
+          "fileContent": "={{$json[\\\"n8n_data_stringy\\\"]}}",
+          "filePath": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"path\\\"]}}{{$json[\\\"name\\\"]}}.json",
+          "operation": "edit",
+          "owner": {
+            "__rl": true,
+            "mode": "name",
+            "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"owner\\\"]}}"
+          },
+          "repository": {
+            "__rl": true,
+            "mode": "name",
+            "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"name\\\"]}}"
+          },
+          "resource": "file",
+          "sha": "={{$json[\\\"sha\\\"]}}"
         },
         "id": "90906ae6-c1e9-412a-b94e-ffd33e41f4b9",
         "name": "GitHub Edit",
@@ -70,18 +89,18 @@
       },
       {
         "parameters": {
-          "commitMessage": "=[N8N Backup] {{$json[\"name\"]}}.json ({{$json[\"github_status\"]}})",
-          "fileContent": "={{$json[\"n8n_data_stringy\"]}}",
-          "filePath": "={{$node[\"Variables\"].json[\"repo\"][\"path\"]}}{{$json[\"name\"]}}.json",
+          "commitMessage": "=[N8N Backup] {{$json[\\\"name\\\"]}}.json ({{$json[\\\"github_status\\\"]}})",
+          "fileContent": "={{$json[\\\"n8n_data_stringy\\\"]}}",
+          "filePath": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"path\\\"]}}{{$json[\\\"name\\\"]}}.json",
           "owner": {
             "__rl": true,
             "mode": "name",
-            "value": "={{$node[\"Variables\"].json[\"repo\"][\"owner\"]}}"
+            "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"owner\\\"]}}"
           },
           "repository": {
             "__rl": true,
             "mode": "name",
-            "value": "={{$node[\"Variables\"].json[\"repo\"][\"name\"]}}"
+            "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"name\\\"]}}"
           },
           "resource": "file"
         },
@@ -141,7 +160,10 @@
         }
       },
       {
-        "parameters": {},
+        "parameters": {
+          "combineBy": "combineByPosition",
+          "mode": "combine"
+        },
         "id": "cb3daf90-ae50-416c-9098-263a81ab1afe",
         "name": "Merge",
         "type": "n8n-nodes-base.merge",
@@ -226,7 +248,8 @@
       },
       {
         "parameters": {
-          "jsCode": "\nfunction orderObject(obj) {\n  if (!obj || typeof obj !== 'object') return obj;\n  const ordered = {};\n  Object.keys(obj).sort().forEach(key => {\n    ordered[key] = obj[key];\n  });\n  return ordered;\n}\n\nconst githubData = $input.all()[0]?.json || {};\nconst n8nWorkflow = $input.all()[1]?.json || {};\nconst orderedActual = orderObject(n8nWorkflow);\n\nconst fileExists = !!(githubData.sha || githubData.path);\nlet status = \"new\";\nlet n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n\nif (fileExists) {\n  try {\n    const decodedContent = githubData.content ? Buffer.from(githubData.content, 'base64').toString('utf8').trim() : \"\";\n    if (decodedContent) {\n      const origWorkflow = JSON.parse(decodedContent);\n      const orderedOriginal = orderObject(origWorkflow);\n      status = (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) ? \"same\" : \"different\";\n    } else {\n      status = \"different\";\n    }\n  } catch (error) {\n    status = \"different\";\n  }\n}\n\n// Return a single combined item to prevent duplication in downstream switch\nreturn [{\n  json: {\n    ...githubData,\n    github_status: status,\n    n8n_data_stringy: n8n_data_stringy,\n    name: n8nWorkflow.name || githubData.name\n  }\n}];\n"
+          "jsCode": "function orderObject(obj) {\\n  if (!obj || typeof obj !== 'object') return obj;\\n  const ordered = {};\\n  Object.keys(obj).sort().forEach(key => {\\n    ordered[key] = obj[key];\\n  });\\n  return ordered;\\n}\\n\\nconst item = $json;\\nconst workflowName = item.name;\\nconst githubSha = item.sha;\\nconst githubContent = item.content;\\n\\n// Clearer workflow data structure for comparison\\nconst actualWorkflow = {\\n  nodes: item.nodes,\\n  connections: item.connections,\\n  name: item.name,\\n  settings: item.settings,\\n  staticData: item.staticData\\n};\\nconst orderedActual = orderObject(actualWorkflow);\\nlet n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\\n\\nlet status = \\\"new\\\";\\nconst fileExists = !!githubSha;\\n\\nif (fileExists) {\\n  try {\\n    const decodedContent = githubContent ? Buffer.from(githubContent, 'base64').toString('utf8').trim() : \\\"\\\";\\n    if (decodedContent) {\\n      const origWorkflow = JSON.parse(decodedContent);\\n      const orderedOriginal = orderObject(origWorkflow);\\n      status = (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) ? \\\"same\\\" : \\\"different\\\";\\n    } else {\\n      status = \\\"different\\\";\\n    }\\n  } catch (error) {\\n    status = \\\"different\\\";\\n  }\\n}\\n\\nreturn {\\n  github_status: status,\\n  n8n_data_stringy: n8n_data_stringy,\\n  name: workflowName,\\n  sha: githubSha\\n};\\n",
+          "mode": "runOnceForEachItem"
         },
         "id": "673aadcd-d910-41b3-b88e-f2286c143ff3",
         "name": "¿Hay Cambios?",
@@ -467,7 +490,7 @@
     "description": null,
     "autosaved": false
   },
-  "activeVersionId": "a5929353-e9ac-41b9-9d9b-865e12366ead",
+  "activeVersionId": "5853d601-9a15-452e-9ea4-9a871ac5bd6c",
   "connections": {
     "n8n": {
       "main": [
@@ -672,10 +695,18 @@
     {
       "parameters": {
         "asBinaryProperty": false,
-        "filePath": "={{$node[\"Variables\"].json[\"repo\"][\"path\"]}}{{$json[\"name\"]}}.json",
+        "filePath": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"path\\\"]}}{{$json[\\\"name\\\"]}}.json",
         "operation": "get",
-        "owner": "={{$node[\"Variables\"].json[\"repo\"][\"owner\"]}}",
-        "repository": "={{$node[\"Variables\"].json[\"repo\"][\"name\"]}}",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"owner\\\"]}}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"name\\\"]}}"
+        },
         "resource": "file"
       },
       "id": "dc649b20-d71d-4be1-824d-c7ba2a0ad150",
@@ -698,11 +729,22 @@
     },
     {
       "parameters": {
-        "fileContent": "={{$json[\"n8n_data_stringy\"]}}",
-        "filePath": "={{$node[\"Variables\"].json[\"repo\"][\"path\"]}}{{$json[\"name\"]}}.json",
-        "owner": "={{$node[\"Variables\"].json[\"repo\"][\"owner\"]}}",
-        "repository": "={{$node[\"Variables\"].json[\"repo\"][\"name\"]}}",
-        "sha": "={{$json[\"sha\"]}}"
+        "commitMessage": "=[N8N Backup] {{$json[\\\"name\\\"]}}.json ({{$json[\\\"github_status\\\"]}})",
+        "fileContent": "={{$json[\\\"n8n_data_stringy\\\"]}}",
+        "filePath": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"path\\\"]}}{{$json[\\\"name\\\"]}}.json",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"owner\\\"]}}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"name\\\"]}}"
+        },
+        "resource": "file",
+        "sha": "={{$json[\\\"sha\\\"]}}"
       },
       "id": "90906ae6-c1e9-412a-b94e-ffd33e41f4b9",
       "name": "GitHub Edit",
@@ -722,18 +764,18 @@
     },
     {
       "parameters": {
-        "commitMessage": "=[N8N Backup] {{$json[\"name\"]}}.json ({{$json[\"github_status\"]}})",
-        "fileContent": "={{$json[\"n8n_data_stringy\"]}}",
-        "filePath": "={{$node[\"Variables\"].json[\"repo\"][\"path\"]}}{{$json[\"name\"]}}.json",
+        "commitMessage": "=[N8N Backup] {{$json[\\\"name\\\"]}}.json ({{$json[\\\"github_status\\\"]}})",
+        "fileContent": "={{$json[\\\"n8n_data_stringy\\\"]}}",
+        "filePath": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"path\\\"]}}{{$json[\\\"name\\\"]}}.json",
         "owner": {
           "__rl": true,
           "mode": "name",
-          "value": "={{$node[\"Variables\"].json[\"repo\"][\"owner\"]}}"
+          "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"owner\\\"]}}"
         },
         "repository": {
           "__rl": true,
           "mode": "name",
-          "value": "={{$node[\"Variables\"].json[\"repo\"][\"name\"]}}"
+          "value": "={{$node[\\\"Variables\\\"].json[\\\"repo\\\"][\\\"name\\\"]}}"
         },
         "resource": "file"
       },
@@ -793,7 +835,10 @@
       }
     },
     {
-      "parameters": {},
+      "parameters": {
+        "combineBy": "combineByPosition",
+        "mode": "combine"
+      },
       "id": "cb3daf90-ae50-416c-9098-263a81ab1afe",
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
@@ -878,7 +923,8 @@
     },
     {
       "parameters": {
-        "jsCode": "\nfunction orderObject(obj) {\n  if (!obj || typeof obj !== 'object') return obj;\n  const ordered = {};\n  Object.keys(obj).sort().forEach(key => {\n    ordered[key] = obj[key];\n  });\n  return ordered;\n}\n\nconst githubData = $input.all()[0]?.json || {};\nconst n8nWorkflow = $input.all()[1]?.json || {};\nconst orderedActual = orderObject(n8nWorkflow);\n\nconst fileExists = !!(githubData.sha || githubData.path);\nlet status = \"new\";\nlet n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n\nif (fileExists) {\n  try {\n    const decodedContent = githubData.content ? Buffer.from(githubData.content, 'base64').toString('utf8').trim() : \"\";\n    if (decodedContent) {\n      const origWorkflow = JSON.parse(decodedContent);\n      const orderedOriginal = orderObject(origWorkflow);\n      status = (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) ? \"same\" : \"different\";\n    } else {\n      status = \"different\";\n    }\n  } catch (error) {\n    status = \"different\";\n  }\n}\n\n// Return a single combined item to prevent duplication in downstream switch\nreturn [{\n  json: {\n    ...githubData,\n    github_status: status,\n    n8n_data_stringy: n8n_data_stringy,\n    name: n8nWorkflow.name || githubData.name\n  }\n}];\n"
+        "jsCode": "function orderObject(obj) {\\n  if (!obj || typeof obj !== 'object') return obj;\\n  const ordered = {};\\n  Object.keys(obj).sort().forEach(key => {\\n    ordered[key] = obj[key];\\n  });\\n  return ordered;\\n}\\n\\nconst item = $json;\\nconst workflowName = item.name;\\nconst githubSha = item.sha;\\nconst githubContent = item.content;\\n\\n// Clearer workflow data structure for comparison\\nconst actualWorkflow = {\\n  nodes: item.nodes,\\n  connections: item.connections,\\n  name: item.name,\\n  settings: item.settings,\\n  staticData: item.staticData\\n};\\nconst orderedActual = orderObject(actualWorkflow);\\nlet n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\\n\\nlet status = \\\"new\\\";\\nconst fileExists = !!githubSha;\\n\\nif (fileExists) {\\n  try {\\n    const decodedContent = githubContent ? Buffer.from(githubContent, 'base64').toString('utf8').trim() : \\\"\\\";\\n    if (decodedContent) {\\n      const origWorkflow = JSON.parse(decodedContent);\\n      const orderedOriginal = orderObject(origWorkflow);\\n      status = (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) ? \\\"same\\\" : \\\"different\\\";\\n    } else {\\n      status = \\\"different\\\";\\n    }\\n  } catch (error) {\\n    status = \\\"different\\\";\\n  }\\n}\\n\\nreturn {\\n  github_status: status,\\n  n8n_data_stringy: n8n_data_stringy,\\n  name: workflowName,\\n  sha: githubSha\\n};\\n",
+        "mode": "runOnceForEachItem"
       },
       "id": "673aadcd-d910-41b3-b88e-f2286c143ff3",
       "name": "¿Hay Cambios?",
@@ -958,6 +1004,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2026-02-21T15:59:51.082Z",
-  "versionId": "a5929353-e9ac-41b9-9d9b-865e12366ead"
+  "updatedAt": "2026-02-21T16:09:56.343Z",
+  "versionId": "5853d601-9a15-452e-9ea4-9a871ac5bd6c"
 }
